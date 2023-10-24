@@ -25,7 +25,7 @@ public class DebugDisplay extends Entity {
     }
 
     public void draw(Graphics2D g2) {
-        if (Boolean.parseBoolean(PropertiesManager.getSettings().getProperty("game2d.core.showDebugScreen"))) {
+        if (/*Boolean.parseBoolean(PropertiesManager.getSettings().getProperty("game2d.core.showDebugScreen"))*/ true) {
             g2.setColor(Color.RED);
 
             g2.drawString("FPS: " + this.fps, 20, 20);
