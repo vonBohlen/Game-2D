@@ -27,6 +27,28 @@ public class Player extends Entity {
         if (keyHandler.keyPressed_D) {
             this.box.x += 1;
         }
+        ScreenSaver();
+    }
+
+    private int MoveX = 2;
+    private int MoveY = 2;
+    public void ScreenSaver(){
+        if(this.box.getX() + MoveX <= 0){
+            this.MoveX = 2;
+        }
+        else if(this.box.getX() + MoveX >= 1000){
+            this.MoveX = -2;
+        }
+
+        if(this.box.getY() + MoveY <= 0){
+            this.MoveY = 2;
+        }
+        if(this.box.getY() + MoveY >= 750){
+            this.MoveY = -2;
+        }
+
+        this.box.x += MoveX;
+        this.box.y += MoveY;
     }
 
     public void draw(Graphics2D g2) {
