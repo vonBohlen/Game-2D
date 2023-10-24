@@ -43,6 +43,14 @@ public class Entity {
 
     }
 
+    public void move(int xShift, int yShift) {
+        Rectangle shift = new Rectangle(this.box.x += (xShift), this.box.y += (yShift), 48, 48);
+        if (!actionManager.checkCollisionForEntity(this)) {
+            this.box.x += (xShift);
+            this.box.y += (yShift);
+        }
+    }
+
     public void update() {}
     public void draw(Graphics2D g2) {}
 }
