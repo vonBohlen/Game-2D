@@ -1,5 +1,6 @@
 package de.Alienlive.games.Game2D.debug;
 
+import de.Alienlive.games.Game2D.core.KeyHandler;
 import de.Alienlive.games.Game2D.core.manager.ActionManager;
 import de.Alienlive.games.Game2D.core.manager.RenderManager;
 import de.Alienlive.games.Game2D.entities.entity.Entity;

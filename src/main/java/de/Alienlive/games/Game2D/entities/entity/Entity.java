@@ -1,5 +1,6 @@
 package de.Alienlive.games.Game2D.entities.entity;
 
+import de.Alienlive.games.Game2D.core.KeyHandler;
 import de.Alienlive.games.Game2D.core.manager.ActionManager;
 import de.Alienlive.games.Game2D.core.manager.RenderManager;
 
