@@ -3,6 +3,7 @@ package de.Alienlive.games.Game2D.core;
 import de.Alienlive.games.Game2D.core.manager.ActionManager;
 import de.Alienlive.games.Game2D.core.manager.RenderManager;
 import de.Alienlive.games.Game2D.debug.DebugDisplay;
+import de.Alienlive.games.Game2D.entities.Player;
 
 import javax.swing.*;
 
@@ -35,7 +36,7 @@ public class Main {
 
         debugDisplay = new DebugDisplay(renderManager, actionManager);
 
-        //Player player = new Player(renderManager.getWidth(), renderManager.getHeight(), 48, 48, renderManager, actionManager, keyHandler);
+        Player player = new Player(renderManager.getWidth(), renderManager.getHeight(), 48, 48, renderManager, actionManager, keyHandler);
         //Square square = new Square(200, 200, 48, 48, renderManager, actionManager, keyHandler);
 
         renderManager.startRenderThread();
