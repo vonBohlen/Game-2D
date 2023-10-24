@@ -45,7 +45,7 @@ public class Entity {
 
     public void move(int xShift, int yShift) {
         Rectangle shift = new Rectangle(this.box.x + (xShift), this.box.y + (yShift), 48, 48);
-        if (!actionManager.checkCollisionForEntity(shift,this)) {
+        if (!actionManager.checkCollisionForEntity(this, shift)) {
             this.box.x += (xShift);
             this.box.y += (yShift);
         }
