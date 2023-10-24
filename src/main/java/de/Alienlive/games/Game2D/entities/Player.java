@@ -16,39 +16,44 @@ public class Player extends Entity {
 
     public void update() {
         if (keyHandler.keyPressed_W) {
-            this.box.y -= 1;
+            move(-1,0);
         }
         if (keyHandler.keyPressed_S) {
-            this.box.y += 1;
+            move(1,0);
         }
         if (keyHandler.keyPressed_A) {
-            this.box.x -= 1;
+            move(0,-1);
         }
         if (keyHandler.keyPressed_D) {
-            this.box.x += 1;
+            move(0,1);
         }
-        ScreenSaver();
+        //ScreenSaver();
     }
 
-    private int MoveX = 2;
-    private int MoveY = 2;
+    private int MoveX = 5;
+    private int MoveY = 4;
     public void ScreenSaver(){
-        if(this.box.getX() + MoveX <= 0){
-            this.MoveX = 2;
-        }
-        else if(this.box.getX() + MoveX >= 1000){
-            this.MoveX = -2;
-        }
-
-        if(this.box.getY() + MoveY <= 0){
-            this.MoveY = 2;
-        }
-        if(this.box.getY() + MoveY >= 750){
-            this.MoveY = -2;
+        if(this.box.getX() + MoveX <= 0 || this.box.getX() + MoveX >= 1850){
+            this.MoveX = this.MoveX * -1;
+            if(this.MoveX <0){
+                this.MoveX--;
+            }
+            else{
+                this.MoveX++;
+            }
         }
 
-        this.box.x += MoveX;
-        this.box.y += MoveY;
+        if(this.box.getY() + MoveY <= 0 || this.box.getY() + MoveY >= 1100) {
+            this.MoveY = this.MoveY * -1;
+            if(this.MoveY <0){
+                this.MoveY--;
+            }
+            else{
+                this.MoveY++;
+            }
+        }
+
+        move(MoveX, MoveY);
     }
 
     public void draw(Graphics2D g2) {

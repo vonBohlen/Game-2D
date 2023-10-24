@@ -3,6 +3,7 @@ package de.Alienlive.games.Game2D.core.manager;
 import de.Alienlive.games.Game2D.core.Main;
 import de.Alienlive.games.Game2D.entities.entity.Entity;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,9 +62,12 @@ public class ActionManager implements Runnable {
         }
     }
 
-    public boolean checkCollisionForEntity(Entity e) {
+    public boolean checkCollisionForEntity(Rectangle r, Entity e) {
         for (Entity current : entities) {
-            if (current != e && e.box.intersects(current.box)) return true;
+            if (!current.equals(e)) {
+                if(r.intersects(current.box)){ return true;}
+            }
+
         }
         return false;
     }
