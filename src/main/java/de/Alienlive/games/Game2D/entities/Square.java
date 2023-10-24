@@ -2,9 +2,7 @@ package de.Alienlive.games.Game2D.entities;
 
 import de.Alienlive.games.Game2D.core.manager.ActionManager;
 import de.Alienlive.games.Game2D.core.manager.RenderManager;
-import de.Alienlive.games.Game2D.entities.entity.Edge;
 import de.Alienlive.games.Game2D.entities.entity.Entity;
-import de.Alienlive.games.Game2D.entities.entity.HitBox;
 
 import java.awt.*;
 
