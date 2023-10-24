@@ -16,13 +16,6 @@ public class DebugDisplay extends Entity {
         super(pRender, pAction);
     }
 
-    public void setDefaultValues() {
-
-        speed = 0;
-
-    }
-
-
     public void updateFPS(int fps) {
         this.fps = fps;
     }
