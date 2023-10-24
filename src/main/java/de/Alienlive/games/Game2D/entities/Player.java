@@ -14,7 +14,20 @@ public class Player extends Entity {
     }
 
 
-    public void update() {}
+    public void update() {
+        if (keyHandler.keyPressed_W) {
+            this.box.y -= 1;
+        }
+        if (keyHandler.keyPressed_S) {
+            this.box.y += 1;
+        }
+        if (keyHandler.keyPressed_A) {
+            this.box.x -= 1;
+        }
+        if (keyHandler.keyPressed_D) {
+            this.box.x += 1;
+        }
+    }
 
     public void draw(Graphics2D g2) {
 

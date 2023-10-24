@@ -36,8 +36,7 @@ public class Main {
 
         debugDisplay = new DebugDisplay(renderManager, actionManager);
 
-        Player player = new Player(renderManager.getWidth(), renderManager.getHeight(), 48, 48, renderManager, actionManager, keyHandler);
-        //Square square = new Square(200, 200, 48, 48, renderManager, actionManager, keyHandler);
+        Player player = new Player(200, 200, 48, 48, renderManager, actionManager, keyHandler);
 
         renderManager.startRenderThread();
         actionManager.startActionThread();
