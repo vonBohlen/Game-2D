@@ -4,6 +4,7 @@ import de.Alienlive.games.Game2D.core.manager.ActionManager;
 import de.Alienlive.games.Game2D.core.manager.RenderManager;
 import de.Alienlive.games.Game2D.debug.DebugDisplay;
 import de.Alienlive.games.Game2D.entities.Ball;
+import de.Alienlive.games.Game2D.entities.BallwP;
 import de.Alienlive.games.Game2D.entities.Player;
 import de.Alienlive.games.Game2D.entities.Square;
 
@@ -43,7 +44,7 @@ public class Main {
         Square square2 = new Square(700, 225, 48, 48, renderManager, actionManager, keyHandler);
         Square square3 = new Square(1200, 800, 48, 48, renderManager, actionManager, keyHandler);
         Square square4 = new Square(1000, 600, 48, 48, renderManager, actionManager, keyHandler);
-        Ball ball = new Ball(500, 1000, 48, 48, renderManager, actionManager, keyHandler);
+        BallwP ball = new BallwP(0, 0, 48, 48, renderManager, actionManager, keyHandler);
 
         renderManager.startRenderThread();
         actionManager.startActionThread();
