@@ -8,16 +8,20 @@ import java.awt.*;
 
 public class Entity {
 
+    //region Gamelogic
     public Rectangle box;
     public int speed;
+    //endregion
 
+    //region Handlers
     public RenderManager renderManager;
     public KeyHandler keyHandler;
     public ActionManager actionManager;
+    //endregion
 
     public Entity(int pX, int pY, int pHeight, int pWidth, RenderManager pRender, ActionManager pAction, KeyHandler pKey){
 
-        //region Other Objects
+        //region Handlers
         this.renderManager = pRender;
         this.actionManager = pAction;
         this.keyHandler = pKey;
@@ -41,21 +45,4 @@ public class Entity {
 
     public void update() {}
     public void draw(Graphics2D g2) {}
-
-    enum Direction{
-        up,
-        left,
-        down,
-        right
-    }
-    public void move(Direction direction, int units){
-        switch(direction){
-            case up ->{this.box.TopLeft.y -= units;}
-            case left ->{this.box.TopLeft.x -= units;}
-            case down ->{this.box.TopLeft.y += units;}
-            case right ->{this.box.TopLeft.x += units;}
-        }
-
-        //todo Event OnMove
-    }
 }
