@@ -61,6 +61,13 @@ public class ActionManager implements Runnable {
         }
     }
 
+    public boolean checkCollisionForEntity(Entity e) {
+        for (Entity current : entities) {
+            if (current != e && e.box.intersects(current.box)) return true;
+        }
+        return false;
+    }
+
     private void updateUI() {
 
     }
