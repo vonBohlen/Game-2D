@@ -44,10 +44,26 @@ public class Entity {
     }
 
     public void move(int xShift, int yShift) {
-        Rectangle shift = new Rectangle(this.box.x + (xShift), this.box.y + (yShift), 48, 48);
+        Rectangle shift = new Rectangle(this.box.x + (xShift), this.box.y + (yShift), this.box.width, this.box.height);
         if (!actionManager.checkCollisionForEntity(this, shift)) {
             this.box.x += (xShift);
             this.box.y += (yShift);
+        }
+    }
+
+    public void setPosition(int newX, int newY) {
+        Rectangle newPosition = new Rectangle(newX, newY, this.box.width, this.box.height);
+        if (!actionManager.checkCollisionForEntity(this, newPosition)) {
+            this.box.x = newX;
+            this.box.y = newY;
+        }
+    }
+
+    public void changeEntitySize(int newWidth, int newHeight) {
+        Rectangle newSize = new Rectangle(this.box.x, this.box.y, newWidth, newHeight);
+        if (!actionManager.checkCollisionForEntity(this, newSize)) {
+            this.box.width = newWidth;
+            this.box.height = newHeight;
         }
     }
 
