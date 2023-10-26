@@ -1,12 +1,9 @@
 package de.Alienlive.games.Game2D.core;
 
-import de.Alienlive.games.Game2D.core.manager.ActionManager;
-import de.Alienlive.games.Game2D.core.manager.RenderManager;
 import de.Alienlive.games.Game2D.debug.DebugDisplay;
-import de.Alienlive.games.Game2D.entities.Ball;
-import de.Alienlive.games.Game2D.entities.BallwP;
-import de.Alienlive.games.Game2D.entities.Player;
-import de.Alienlive.games.Game2D.entities.Square;
+import de.Alienlive.games.Game2D.objects.entities.BallwP;
+import de.Alienlive.games.Game2D.objects.entities.Player;
+import de.Alienlive.games.Game2D.objects.entities.Square;
 
 import javax.swing.*;
 

@@ -1,7 +1,8 @@
-package de.Alienlive.games.Game2D.core.manager;
+package de.Alienlive.games.Game2D.core;
 
 import de.Alienlive.games.Game2D.core.Main;
-import de.Alienlive.games.Game2D.entities.entity.Entity;
+import de.Alienlive.games.Game2D.core.PropertiesManager;
+import de.Alienlive.games.Game2D.objects.entities.entity.Entity;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,7 +19,7 @@ public class RenderManager extends JPanel implements Runnable {
         this.setFocusable(true);
     }
 
-    public void startRenderThread() {
+    protected void startRenderThread() {
         renderThread = new Thread(this);
         renderThread.start();
     }

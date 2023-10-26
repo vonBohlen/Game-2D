@@ -1,7 +1,7 @@
-package de.Alienlive.games.Game2D.core.manager;
+package de.Alienlive.games.Game2D.core;
 
-import de.Alienlive.games.Game2D.core.Main;
-import de.Alienlive.games.Game2D.entities.entity.Entity;
+import de.Alienlive.games.Game2D.objects.entities.entity.Entity;
+import de.Alienlive.games.Game2D.objects.objects.Object;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -11,12 +11,13 @@ public class ActionManager implements Runnable {
 
 
     private final List<Entity> entities = new ArrayList<>();
+    private final List<Object> objects = new ArrayList<>();
 
     private boolean updateUI = false;
 
     Thread actionThread;
 
-    public void startActionThread() {
+    protected void startActionThread() {
         actionThread = new Thread(this);
         actionThread.start();
     }
@@ -75,6 +76,10 @@ public class ActionManager implements Runnable {
 
     public void registerEntity(Entity e) {
         entities.add(e);
+    }
+
+    public void registerObject(Object o) {
+        objects.add(o);
     }
 
     public void removeEntity(Entity e) {

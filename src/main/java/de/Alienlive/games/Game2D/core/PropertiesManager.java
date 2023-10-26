@@ -1,4 +1,4 @@
-package de.Alienlive.games.Game2D.core.manager;
+package de.Alienlive.games.Game2D.core;
 
 import java.io.*;
 import java.util.Properties;

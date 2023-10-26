@@ -1,8 +1,8 @@
-package de.Alienlive.games.Game2D.entities.entity;
+package de.Alienlive.games.Game2D.objects.entities.entity;
 
 import de.Alienlive.games.Game2D.core.KeyHandler;
-import de.Alienlive.games.Game2D.core.manager.ActionManager;
-import de.Alienlive.games.Game2D.core.manager.RenderManager;
+import de.Alienlive.games.Game2D.core.ActionManager;
+import de.Alienlive.games.Game2D.core.RenderManager;
 
 import java.awt.*;
 
