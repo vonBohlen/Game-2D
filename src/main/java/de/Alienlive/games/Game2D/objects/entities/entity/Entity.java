@@ -11,7 +11,7 @@ public class Entity {
 
     //region GameLogic
     public Rectangle box;
-    public int speed;
+    private Entity lastEntityCollision = null;
     //endregion
 
     //region Handlers
@@ -46,32 +46,46 @@ public class Entity {
 
     public boolean move(int xShift, int yShift) {
         Rectangle shift = new Rectangle(this.box.x + (xShift), this.box.y + (yShift), this.box.width, this.box.height);
-        if (!actionManager.checkCollisionForEntity(this, shift)) {
+        Entity entityCache = actionManager.checkCollisionForEntity(this, shift);
+        if (entityCache != null) {
             this.box.x += (xShift);
             this.box.y += (yShift);
             return true;
         }
+        lastEntityCollision = entityCache;
         return false;
     }
 
     public boolean setPosition(int newX, int newY) {
         Rectangle newPosition = new Rectangle(newX, newY, this.box.width, this.box.height);
-        if (!actionManager.checkCollisionForEntity(this, newPosition)) {
+        Entity entityCache = actionManager.checkCollisionForEntity(this, newPosition);
+        if (entityCache != null) {
             this.box.x = newX;
             this.box.y = newY;
             return true;
         }
+        lastEntityCollision = entityCache;
         return false;
     }
 
     public boolean changeEntitySize(int newWidth, int newHeight) {
         Rectangle newSize = new Rectangle(this.box.x, this.box.y, newWidth, newHeight);
-        if (!actionManager.checkCollisionForEntity(this, newSize)) {
+        Entity entityCache = actionManager.checkCollisionForEntity(this, newSize);
+        if (entityCache != null) {
             this.box.width = newWidth;
             this.box.height = newHeight;
             return true;
         }
+        lastEntityCollision = entityCache;
         return false;
+    }
+
+    public Entity getLastEntityCollision() {
+        return lastEntityCollision;
+    }
+
+    public void resetLastEntityCollision() {
+        lastEntityCollision = null;
     }
 
     public void update() {}
