@@ -13,8 +13,8 @@ public class Instance {
 
     public Instance() {
         keyHandler = new KeyHandler();
-        renderManager = new RenderManager();
-        actionManager = new ActionManager();
+        renderManager = new RenderManager(this);
+        actionManager = new ActionManager(this);
         debugDisplay = new DebugDisplay(renderManager, actionManager);
     }
 
@@ -40,6 +40,22 @@ public class Instance {
 
         window.setLocationRelativeTo(null);
         window.setVisible(true);
+    }
+
+    public KeyHandler getKeyHandler() {
+        return keyHandler;
+    }
+
+    public RenderManager getRenderManager() {
+        return renderManager;
+    }
+
+    public ActionManager getActionManager() {
+        return actionManager;
+    }
+
+    public DebugDisplay getDebugDisplay() {
+        return debugDisplay;
     }
 
 }

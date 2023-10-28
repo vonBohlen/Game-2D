@@ -1,5 +1,6 @@
 package de.Alienlive.games.Game2D.objects.entities;
 
+import de.Alienlive.games.Game2D.core.Instance;
 import de.Alienlive.games.Game2D.core.KeyHandler;
 import de.Alienlive.games.Game2D.core.ActionManager;
 import de.Alienlive.games.Game2D.core.RenderManager;
@@ -9,8 +10,8 @@ import java.awt.*;
 
 public class Player extends Entity {
 
-    public Player(int pX, int pY, int pHeight, int pWidth, RenderManager pRender, ActionManager pAction, KeyHandler pKey) {
-        super(pX, pY, pHeight, pWidth, pRender, pAction, pKey);
+    public Player(int pX, int pY, int pHeight, int pWidth, Instance i) {
+        super(pX, pY, pHeight, pWidth, i);
     }
 
 

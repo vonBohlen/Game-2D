@@ -1,7 +1,6 @@
 package de.Alienlive.games.Game2D.core;
 
-import de.Alienlive.games.Game2D.core.Main;
-import de.Alienlive.games.Game2D.core.PropertiesManager;
+import de.Alienlive.games.Game2D.test.Main;
 import de.Alienlive.games.Game2D.objects.entities.entity.Entity;
 
 import javax.swing.*;
@@ -11,11 +10,14 @@ public class RenderManager extends JPanel implements Runnable {
     
     Thread renderThread;
 
-    public RenderManager() {
+    private final Instance instance;
+
+    public RenderManager(Instance i) {
+        instance = i;
         this.setPreferredSize(Toolkit.getDefaultToolkit().getScreenSize());
         this.setBackground(Color.BLACK);
         this.setDoubleBuffered(true);
-        this.addKeyListener(Main.getKeyHandler());
+        this.addKeyListener(instance.getKeyHandler());
         this.setFocusable(true);
     }
 
@@ -49,7 +51,7 @@ public class RenderManager extends JPanel implements Runnable {
             }
 
             if (timer >= 1000000000) {
-                Main.getDebugDisplay().updateFPS(drawCount);
+                instance.getDebugDisplay().updateFPS(drawCount);
                 drawCount = 0;
                 timer = 0;
             }
@@ -61,11 +63,11 @@ public class RenderManager extends JPanel implements Runnable {
 
         Graphics2D g2 = (Graphics2D)g;
 
-        for (Entity ce: Main.getActionManager().getEntities()) {
+        for (Entity ce: instance.getActionManager().getEntities()) {
             ce.draw(g2);
         }
 
-        Main.getDebugDisplay().draw(g2);
+        instance.getDebugDisplay().draw(g2);
 
         g2.dispose();
     }

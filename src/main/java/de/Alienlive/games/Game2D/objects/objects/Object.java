@@ -1,6 +1,5 @@
 package de.Alienlive.games.Game2D.objects.objects;
 
-import de.Alienlive.games.Game2D.core.Main;
 import de.Alienlive.games.Game2D.objects.Direction;
 
 public class Object {

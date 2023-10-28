@@ -1,5 +1,6 @@
 package de.Alienlive.games.Game2D.objects.entities.entity;
 
+import de.Alienlive.games.Game2D.core.Instance;
 import de.Alienlive.games.Game2D.core.KeyHandler;
 import de.Alienlive.games.Game2D.core.ActionManager;
 import de.Alienlive.games.Game2D.core.RenderManager;
@@ -8,7 +9,7 @@ import java.awt.*;
 
 public class Entity {
 
-    //region Gamelogic
+    //region GameLogic
     public Rectangle box;
     public int speed;
     //endregion
@@ -19,12 +20,12 @@ public class Entity {
     public ActionManager actionManager;
     //endregion
 
-    public Entity(int pX, int pY, int pHeight, int pWidth, RenderManager pRender, ActionManager pAction, KeyHandler pKey){
+    public Entity(int pX, int pY, int pHeight, int pWidth, Instance i){
 
         //region Handlers
-        this.renderManager = pRender;
-        this.actionManager = pAction;
-        this.keyHandler = pKey;
+        this.renderManager = i.getRenderManager();
+        this.actionManager = i.getActionManager();
+        this.keyHandler = i.getKeyHandler();
 
         actionManager.registerEntity(this);
         //endregion

@@ -2,6 +2,7 @@ package de.Alienlive.games.Game2D.core;
 
 import de.Alienlive.games.Game2D.objects.entities.entity.Entity;
 import de.Alienlive.games.Game2D.objects.objects.Object;
+import de.Alienlive.games.Game2D.test.Main;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -16,6 +17,12 @@ public class ActionManager implements Runnable {
     private boolean updateUI = false;
 
     Thread actionThread;
+
+    private final Instance instance;
+
+    public ActionManager(Instance i) {
+        instance = i;
+    }
 
     protected void startActionThread() {
         actionThread = new Thread(this);
@@ -49,7 +56,7 @@ public class ActionManager implements Runnable {
                 }
 
                 if (timer >= 1000000000) {
-                    Main.getDebugDisplay().updateTPS(drawCount);
+                    instance.getDebugDisplay().updateTPS(drawCount);
                     drawCount = 0;
                     timer = 0;
                 }
