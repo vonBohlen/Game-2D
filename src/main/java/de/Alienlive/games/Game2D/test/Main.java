@@ -18,6 +18,8 @@ public class Main {
         instance.start("Test");
 
         new Player(200, 200, 48, 48, instance);
+        new Square(400, 400, 48, 48, instance);
+        new BallwP(0, 0, 48, 48, instance);
     }
 
 }
