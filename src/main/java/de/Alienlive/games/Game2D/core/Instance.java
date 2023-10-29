@@ -26,8 +26,10 @@ public class Instance {
         actionManager.startActionThread();
     }
 
+    JFrame window;
+
     private void loadWindow(String windowTitle) {
-        JFrame window = new JFrame();
+        window = new JFrame();
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setExtendedState(window.MAXIMIZED_BOTH);
         window.setUndecorated(true);
@@ -40,6 +42,14 @@ public class Instance {
 
         window.setLocationRelativeTo(null);
         window.setVisible(true);
+    }
+
+    public int getWidth() {
+        return window.getWidth();
+    }
+
+    public int getHeight() {
+        return window.getHeight();
     }
 
     public KeyHandler getKeyHandler() {

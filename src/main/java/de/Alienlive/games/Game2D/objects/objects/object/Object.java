@@ -55,6 +55,11 @@ public class Object {
         coordinates = coordinates1;
 
         actionManager.registerObject(this);
+
+        for (int[] coordinate : coordinates) {
+            for (int i : coordinate) System.out.println(i);
+        }
+        System.out.println("test");
     }
 
     public int[][] getCoordinates() {
