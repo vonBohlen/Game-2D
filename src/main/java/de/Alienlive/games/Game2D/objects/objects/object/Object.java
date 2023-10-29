@@ -5,7 +5,10 @@ import de.Alienlive.games.Game2D.core.Instance;
 import de.Alienlive.games.Game2D.core.RenderManager;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class Object {
 
@@ -44,22 +47,31 @@ public class Object {
             }
         }
 
+        List<int[]> toRemove = new ArrayList<>();
+
         for (Cavity cavity : cavities) {
+            List<int[]> cavityList = Arrays.stream(cavity.getCoordinates()).toList();
+            for (int[] subarray : coordinates1) {
+                if (cavityList.contains(subarray)) {
+                    toRemove.add(subarray);
+                }
+            }
+        }
+
+        coordinates = Arrays.stream(coordinates1)
+                .filter(subarray -> !toRemove.contains(subarray))
+                .toArray(int[][]::new);
+
+       /* for (Cavity cavity : cavities) {
             int[][] cavityCoordinates = cavity.getCoordinates();
             for (int[] cavityCoordinate : cavityCoordinates) {
                 coordinates1 = Arrays.stream(coordinates1)
                         .filter(coordinate -> coordinate[0] != cavityCoordinate[0] || coordinate[1] != cavityCoordinate[1])
                         .toArray(int[][]::new);
             }
-        }
-        coordinates = coordinates1;
+        }*/
 
         actionManager.registerObject(this);
-
-        for (int[] coordinate : coordinates) {
-            for (int i : coordinate) System.out.println(i);
-        }
-        System.out.println("test");
     }
 
     public int[][] getCoordinates() {
