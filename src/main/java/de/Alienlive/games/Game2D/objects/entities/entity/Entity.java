@@ -79,7 +79,7 @@ public class Entity {
             shift.y = newY;
 
             entityCache = actionManager.checkCollisionForEntity(this, shift);
-            objectCache = actionManager.checkCollisionForObject(this);
+            objectCache = actionManager.checkCollisionForObject(shift);
 
             if (entityCache != null) {
                 entityCollisions.push(entityCache);
@@ -105,7 +105,7 @@ public class Entity {
             return false;
         }
 
-        Object objectCache = actionManager.checkCollisionForObject(this);
+        Object objectCache = actionManager.checkCollisionForObject(newPosition);
         if (objectCache != null) {
             objectCollisions.push(objectCache);
             return false;
@@ -124,7 +124,7 @@ public class Entity {
             return false;
         }
 
-        Object objectCache = actionManager.checkCollisionForObject(this);
+        Object objectCache = actionManager.checkCollisionForObject(newSize);
         if (objectCache != null) {
             objectCollisions.push(objectCache);
             return false;

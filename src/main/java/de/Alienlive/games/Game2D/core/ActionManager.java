@@ -79,13 +79,13 @@ public class ActionManager implements Runnable {
         return null;
     }
 
-    public Object checkCollisionForObject(Entity e) {
+    public Object checkCollisionForObject(Rectangle r) {
         for (Object object : objects) {
             int[][] objectCoordinates = object.getCoordinates();
             for (int i = 0; i < objectCoordinates.length; i++) {
                 int objectX = objectCoordinates[i][0];
                 int objectY = objectCoordinates[i][1];
-                if (e.box.contains(objectX, objectY)) {
+                if (r.contains(objectX, objectY)) {
                     return object;
                 }
             }
