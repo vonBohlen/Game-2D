@@ -47,13 +47,12 @@ public class Entity {
     }
 
     public boolean move(int xShift, int yShift) {
-
         Rectangle shift = new Rectangle(this.box.x, this.box.y, this.box.width, this.box.height);
         Entity entityCache;
 
-        while (xShift != 0 && yShift != 0) {
-            int newX = 0;
-            int newY = 0;
+        while (xShift != 0 || yShift != 0) {
+            int newX = box.x;
+            int newY = box.y;
 
             if (xShift < 0) {
                 newX = box.x - 1;
@@ -87,62 +86,6 @@ public class Entity {
             this.box.y = newY;
         }
         return true;
-
-        /*boolean directionX = true;
-        boolean directionY = true;
-
-        if (xShift < 0) {
-            directionX = false;
-            xShift *= (-1);
-        }
-        if (yShift < 0) {
-            directionY = false;
-            yShift *= (-1);
-        }
-
-        Rectangle shift = new Rectangle(this.box.x, this.box.y, this.box.width, this.box.height);
-        Entity entityCache;
-
-        while (xShift != 0 && yShift != 0) {
-            int newX = 0;
-            int newY = 0;
-
-            if (!directionX && xShift != 0) newX = box.x - 1;
-            else if (xShift != 0) newX = box.x + 1;
-
-            if (!directionY && yShift != 0) newY = box.y - 1;
-            else if (yShift != 0) newY = box.y + 1;
-
-            shift.x = newX;
-            shift.y = newY;
-
-            entityCache = actionManager.checkCollisionForEntity(this, shift);
-
-            if (entityCache != null) {
-                entityCollisions.push(entityCache);
-                return false;
-            }
-
-            this.box.x = newX;
-            this.box.y = newY;
-
-            if (xShift != 0) xShift--;
-            if (yShift != 0) yShift--;
-
-            System.out.println("test");
-        }
-
-        return true;
-
-        /*Rectangle shift = new Rectangle(this.box.x + (xShift), this.box.y + (yShift), this.box.width, this.box.height);
-        Entity entityCache = actionManager.checkCollisionForEntity(this, shift);
-        if (entityCache == null) {
-            this.box.x += (xShift);
-            this.box.y += (yShift);
-            return true;
-        }
-        entityCollisions.push(entityCache);
-        return false;*/
     }
 
     public boolean setPosition(int newX, int newY) {
