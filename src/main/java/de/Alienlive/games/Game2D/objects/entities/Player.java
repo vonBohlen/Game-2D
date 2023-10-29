@@ -16,19 +16,27 @@ public class Player extends Entity {
 
 
     public void update() {
+
+        int moveA = 0;
+        int moveD = 0;
+
+        int moveW = 0;
+        int moveS = 0;
+
         if (keyHandler.keyPressed_W) {
-            move(0,-5);
+            moveW = -5;
         }
         if (keyHandler.keyPressed_S) {
-            move(0,5);
+            moveS = 5;
         }
         if (keyHandler.keyPressed_A) {
-            move(-5,0);
+            moveA = -5;
         }
         if (keyHandler.keyPressed_D) {
-            move(5, 0);
+            moveD = 5;
         }
 
+        move(moveA + moveD, moveW + moveS);
     }
 
     private int MoveX = 5;
