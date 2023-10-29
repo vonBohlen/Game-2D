@@ -25,7 +25,7 @@ public class Main {
         new BallwP(0, 0, 48, 48, instance);
 
         Cavity[] cavities = new Cavity[0];
-        new TestObject(400, 400, 48, 200, cavities, instance);
+        new TestObject(600, 600, 48, 200, cavities, instance);
     }
 
 }
