@@ -1,6 +1,6 @@
 package de.Alienlive.games.Game2D.core;
 
-import de.Alienlive.games.Game2D.test.Main;
+import de.Alienlive.games.Game2D.objects.objects.object.Object;
 import de.Alienlive.games.Game2D.objects.entities.entity.Entity;
 
 import javax.swing.*;
@@ -65,6 +65,10 @@ public class RenderManager extends JPanel implements Runnable {
 
         for (Entity ce: instance.getActionManager().getEntities()) {
             ce.draw(g2);
+        }
+
+        for (Object o : instance.getActionManager().getObjects()) {
+            o.draw(g2);
         }
 
         instance.getDebugDisplay().draw(g2);

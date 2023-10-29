@@ -1,8 +1,7 @@
 package de.Alienlive.games.Game2D.core;
 
 import de.Alienlive.games.Game2D.objects.entities.entity.Entity;
-import de.Alienlive.games.Game2D.objects.objects.Object;
-import de.Alienlive.games.Game2D.test.Main;
+import de.Alienlive.games.Game2D.objects.objects.object.Object;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -68,11 +67,28 @@ public class ActionManager implements Runnable {
         for (Entity ce : entities) {
             ce.update();
         }
+        for (Object o : objects) {
+            o.update();
+        }
     }
 
     public Entity checkCollisionForEntity(Entity e, Rectangle r) {
         for (Entity current : entities) {
             if (!current.equals(e) && r.intersects(current.box)) return current;
+        }
+        return null;
+    }
+
+    public Object checkCollisionForObject(Entity e) {
+        for (Object object : objects) {
+            int[][] objectCoordinates = object.getCoordinates();
+            for (int i = 0; i < objectCoordinates.length; i++) {
+                int objectX = objectCoordinates[i][0];
+                int objectY = objectCoordinates[i][1];
+                if (e.box.contains(objectX, objectY)) {
+                    return object;
+                }
+            }
         }
         return null;
     }
@@ -85,10 +101,6 @@ public class ActionManager implements Runnable {
         entities.add(e);
     }
 
-    public void registerObject(Object o) {
-        objects.add(o);
-    }
-
     public void removeEntity(Entity e) {
         entities.removeIf(entity -> entity == e);
     }
@@ -97,8 +109,17 @@ public class ActionManager implements Runnable {
         return entities;
     }
 
-    public void setUpdateUI(boolean updateUI) {
-        this.updateUI = updateUI;
+
+    public void registerObject(Object o) {
+        objects.add(o);
+    }
+
+    public void removeObject(Object o) {
+        objects.removeIf(object -> object == o);
+    }
+
+    public List<Object> getObjects() {
+        return objects;
     }
 
 }
