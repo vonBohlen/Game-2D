@@ -13,6 +13,8 @@ public class ActionManager implements Runnable {
     private final List<Entity> entities = new ArrayList<>();
     private final List<Object> objects = new ArrayList<>();
 
+    private int gameTick = 0;
+
     private boolean updateUI = false;
 
     Thread actionThread;
@@ -31,8 +33,8 @@ public class ActionManager implements Runnable {
     @Override
     public void run() {
         while (actionThread != null) {
-
-            double drawInterval = 1000000000 / Integer.parseInt(PropertiesManager.getSettings().getProperty("game2d.core.tps"));
+            int tps = Integer.parseInt(PropertiesManager.getSettings().getProperty("game2d.core.tps"));
+            double drawInterval = 1000000000 / tps;
             double delta = 0;
             long lastTime = System.nanoTime();
             long currentTime;
@@ -48,6 +50,7 @@ public class ActionManager implements Runnable {
                 lastTime = currentTime;
 
                 if (delta >= 1) {
+                    gameTick++;
                     if (!updateUI) update();
                     else updateUI();
                     delta--;
@@ -59,6 +62,8 @@ public class ActionManager implements Runnable {
                     drawCount = 0;
                     timer = 0;
                 }
+
+                if (gameTick >= tps) gameTick = 0;
             }
         }
     }
@@ -120,6 +125,11 @@ public class ActionManager implements Runnable {
 
     public List<Object> getObjects() {
         return objects;
+    }
+
+
+    public int getGameTick() {
+        return gameTick;
     }
 
 }

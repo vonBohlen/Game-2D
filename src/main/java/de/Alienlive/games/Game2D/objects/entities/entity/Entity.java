@@ -22,6 +22,7 @@ public class Entity {
     public RenderManager renderManager;
     public KeyHandler keyHandler;
     public ActionManager actionManager;
+    public Instance instance;
     //endregion
 
     public Entity(int pX, int pY, int pHeight, int pWidth, Instance i){
@@ -30,6 +31,8 @@ public class Entity {
         this.renderManager = i.getRenderManager();
         this.actionManager = i.getActionManager();
         this.keyHandler = i.getKeyHandler();
+
+        this.instance = i;
 
         actionManager.registerEntity(this);
         //endregion

@@ -18,10 +18,22 @@ public class BallwP extends Entity {
 
     private int MoveY = -10;
 
+    int tickBottomReached = 0;
+
     private boolean lastMoveX = true;
     private boolean lastMoveY = true;
 
     public void update(){
+
+        if (tickBottomReached != 0 && box.y == 1050 && tickBottomReached == actionManager.getGameTick()) {
+            box.x = 0;
+            box.y = 0;
+            tickBottomReached = 0;
+        }
+
+        if (tickBottomReached == 0 && box.y == 1050) {
+            tickBottomReached = actionManager.getGameTick();
+        }
 
         if(this.box.getX() + MoveX <= 0 || this.box.getX() + MoveX >= 1850 || !lastMoveX){
             this.MoveX = this.MoveX * -1;
