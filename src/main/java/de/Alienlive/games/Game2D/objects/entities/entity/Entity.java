@@ -25,6 +25,14 @@ public class Entity {
     public Instance instance;
     //endregion
 
+    /**
+     *
+     * @param pX the x position of the entity
+     * @param pY the y position of the entity
+     * @param pHeight the height of the entity
+     * @param pWidth the width of the entity
+     * @param i the game instance
+     */
     public Entity(int pX, int pY, int pHeight, int pWidth, Instance i){
 
         //region Handlers
@@ -51,6 +59,12 @@ public class Entity {
 
     }
 
+    /**
+     * Moves the entity from its current position for the provided x and y shift values.
+     * @param xShift shift on the x-axis
+     * @param yShift shift on the y-axis
+     * @return true if the move was successful, else false
+     */
     public boolean move(int xShift, int yShift) {
         Rectangle shift = new Rectangle(this.box.x, this.box.y, this.box.width, this.box.height);
         Entity entityCache;
@@ -100,6 +114,12 @@ public class Entity {
         return true;
     }
 
+    /**
+     *Changes the position of the entity, by setting new x and y values.
+     * @param newX new x-position for the entity
+     * @param newY new y-position fot the entity
+     * @return true if the position change successful, else false
+     */
     public boolean setPosition(int newX, int newY) {
         Rectangle newPosition = new Rectangle(newX, newY, this.box.width, this.box.height);
         Entity entityCache = actionManager.checkCollisionForEntity(this, newPosition);
@@ -119,6 +139,12 @@ public class Entity {
         return true;
     }
 
+    /**
+     *Changes the size of the entity, by setting new width height values.
+     * @param newWidth new width value for the entity
+     * @param newHeight new height value for the entity
+     * @return true if the resize was successful, else false
+     */
     public boolean changeEntitySize(int newWidth, int newHeight) {
         Rectangle newSize = new Rectangle(this.box.x, this.box.y, newWidth, newHeight);
         Entity entityCache = actionManager.checkCollisionForEntity(this, newSize);
@@ -138,10 +164,16 @@ public class Entity {
         return true;
     }
 
+    /**
+     * @return the last entity, the entity collided with
+     */
     public Entity getEntityCollision() {
         return entityCollisions.pop();
     }
 
+    /**
+     * @return the last object, the entity collided with
+     */
     public Object getObjectCollision() {
         return objectCollisions.pop();
     }

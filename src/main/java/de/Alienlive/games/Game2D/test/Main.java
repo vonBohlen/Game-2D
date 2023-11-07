@@ -30,7 +30,6 @@ public class Main {
         borderCavities[0] = new Cavity(0, 0 , instance.getHeight(), instance.getWidth());
         new Border(-1, -1, instance.getHeight() + 1, instance.getWidth() + 1, borderCavities, instance);*/
 
-        System.out.println("test");
     }
 
 }
