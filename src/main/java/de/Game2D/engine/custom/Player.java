@@ -1,14 +1,14 @@
 package de.Game2D.engine.custom;
 
 import de.Game2D.engine.core.Instance;
-import de.Game2D.engine.old.entities.entity.Entity;
+import de.Game2D.engine.objects.Entity;
 
 import java.awt.*;
 
 public class Player extends Entity {
 
     public Player(int pX, int pY, int pHeight, int pWidth, Instance i) {
-        super(pX, pY, pHeight, pWidth, i);
+        super(i, new Rectangle(pX, pY, pWidth, pHeight));
     }
 
 
@@ -42,7 +42,7 @@ public class Player extends Entity {
     private boolean lastMoveX = true;
     private boolean lastMoveY = true;
     public void ScreenSaver(){
-        if(this.box.getX() + MoveX <= 0 || this.box.getX() + MoveX >= 1850 || !lastMoveX){
+        if(hitBox.x + MoveX <= 0 || hitBox.x + MoveX >= 1850 || !lastMoveX){
             this.MoveX = this.MoveX * -1;
             if(this.MoveX <0){
                 this.MoveX--;
@@ -52,7 +52,7 @@ public class Player extends Entity {
             }
         }
 
-        if(this.box.getY() + MoveY <= 0 || this.box.getY() + MoveY >= 1100 || !lastMoveY) {
+        if(hitBox.y + MoveY <= 0 || hitBox.y + MoveY >= 1100 || !lastMoveY) {
             this.MoveY = this.MoveY * -1;
             if(this.MoveY <0){
                 this.MoveY--;
@@ -72,7 +72,7 @@ public class Player extends Entity {
 
         g2.setColor(Color.WHITE);
 
-        g2.fillRect(this.box.x, this.box.y, 48, 48);
+        g2.fillRect(hitBox.x, hitBox.y, 48, 48);
 
     }
 
