@@ -1,6 +1,7 @@
 package de.Game2D.engine.objects;
 
 import de.Game2D.engine.core.Instance;
+import de.Game2D.engine.core.KeyHandler;
 
 import java.awt.*;
 import java.util.ArrayDeque;
@@ -8,10 +9,14 @@ import java.util.Deque;
 
 public abstract class Entity extends GameObject {
 
+    protected KeyHandler keyHandler;
+
     private final Deque<GameObject> collisions = new ArrayDeque<>();
 
     public Entity(Instance i, Rectangle hitBox) {
         super(i, hitBox);
+
+        keyHandler = i.getKeyHandler();
     }
 
     /**
