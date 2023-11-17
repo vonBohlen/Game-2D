@@ -1,8 +1,6 @@
 package de.Game2D.engine.core;
 
 import de.Game2D.engine.objects.GameObject;
-import de.Game2D.engine.old.objects.object.Object;
-import de.Game2D.engine.old.entities.entity.Entity;
 
 import javax.swing.*;
 import java.awt.*;

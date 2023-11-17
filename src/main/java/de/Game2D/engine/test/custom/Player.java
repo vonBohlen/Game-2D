@@ -1,4 +1,4 @@
-package de.Game2D.engine.custom;
+package de.Game2D.engine.test.custom;
 
 import de.Game2D.engine.core.Instance;
 import de.Game2D.engine.core.KeyHandler;
@@ -71,8 +71,6 @@ public class Player extends Entity {
         lastMoveY = move(0, MoveY);
     }
 
-
-
     public void draw(Graphics2D g2) {
 
         g2.setColor(Color.WHITE);
@@ -80,6 +78,5 @@ public class Player extends Entity {
         g2.fillRect(hitBox.x, hitBox.y, 48, 48);
 
     }
-
 
 }

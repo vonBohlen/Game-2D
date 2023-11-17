@@ -69,7 +69,7 @@ public class ActionManager implements Runnable {
 
     public GameObject checkCollision(GameObject go, Rectangle position) {
         for (GameObject current : gameObjects) {
-            if (current.hitBox != null && !current.equals(go) && position.intersects(current.hitBox)) return current;
+            if (current.getCollisionActivated() && !current.equals(go) && position.intersects(current.hitBox)) return current;
         }
         return null;
     }

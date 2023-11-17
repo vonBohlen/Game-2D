@@ -1,4 +1,4 @@
-package de.Game2D.engine.old.objects.object;
+package de.Game2D.engine.test.old.objects.object;
 
 import de.Game2D.engine.core.ActionManager;
 import de.Game2D.engine.core.Instance;

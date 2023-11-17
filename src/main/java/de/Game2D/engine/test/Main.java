@@ -1,10 +1,10 @@
 package de.Game2D.engine.test;
 
 import de.Game2D.engine.core.Instance;
-import de.Game2D.engine.custom.BallwP;
-import de.Game2D.engine.custom.Player;
-import de.Game2D.engine.custom.Square;
-import de.Game2D.engine.custom.TpSquare;
+import de.Game2D.engine.test.custom.BallwP;
+import de.Game2D.engine.test.custom.Player;
+import de.Game2D.engine.test.custom.Square;
+import de.Game2D.engine.test.custom.TpSquare;
 
 public class Main {
 

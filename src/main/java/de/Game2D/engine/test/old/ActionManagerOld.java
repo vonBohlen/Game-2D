@@ -1,13 +1,4 @@
-package de.Game2D.engine.old;
-
-import de.Game2D.engine.core.Instance;
-import de.Game2D.engine.core.PropertiesManager;
-import de.Game2D.engine.old.entities.entity.Entity;
-import de.Game2D.engine.old.objects.object.Object;
-
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
+package de.Game2D.engine.test.old;
 
 public class ActionManagerOld {
 

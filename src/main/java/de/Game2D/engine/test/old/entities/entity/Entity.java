@@ -1,12 +1,4 @@
-package de.Game2D.engine.old.entities.entity;
-
-import de.Game2D.engine.core.*;
-import de.Game2D.engine.old.objects.object.Object;
-import de.Game2D.engine.old.ActionManagerOld;
-
-import java.awt.*;
-import java.util.ArrayDeque;
-import java.util.Deque;
+package de.Game2D.engine.test.old.entities.entity;
 
 public class Entity {
 

@@ -1,10 +1,6 @@
-package de.Game2D.engine.old.objects;
+package de.Game2D.engine.test.old.objects;
 
-import de.Game2D.engine.core.Instance;
-import de.Game2D.engine.old.objects.object.Cavity;
-import de.Game2D.engine.old.objects.object.Object;
-
-import java.awt.*;
+import de.Game2D.engine.test.old.objects.object.Object;
 
 public class TestObject extends Object {
     /*public TestObject(int x, int y, int height, int width, Cavity[] cavities, Instance instance) {
