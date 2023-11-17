@@ -1,15 +1,15 @@
 package de.Game2D.engine.custom;
 
 import de.Game2D.engine.core.Instance;
-import de.Game2D.engine.old.entities.entity.Entity;
+import de.Game2D.engine.objects.Entity;
 
 import java.awt.*;
 import java.util.Random;
 
-public class TpSquare extends Entity{
+public class TpSquare extends Entity {
 
     public TpSquare(int pX, int pY, int pHeight, int pWidth, Instance i) {
-        super(pX, pY, pHeight, pWidth, i);
+        super(i, new Rectangle(pX, pY, pWidth, pHeight));
     }
 
     public void update() {
@@ -21,8 +21,8 @@ public class TpSquare extends Entity{
         int randomY;
 
         while (true) {
-            randomX = random.nextInt(instance.getWidth()-box.width);
-            randomY = random.nextInt(instance.getHeight()-box.height);
+            randomX = random.nextInt(instance.getWidth()-hitBox.width);
+            randomY = random.nextInt(instance.getHeight()-hitBox.height);
 
             if (setPosition(randomX, randomY)) break;
         }
@@ -32,7 +32,7 @@ public class TpSquare extends Entity{
 
         g2.setColor(Color.WHITE);
 
-        g2.fillRect(box.x, box.y, box.width, box.height);
+        g2.fillRect(hitBox.x, hitBox.y, hitBox.width, hitBox.height);
 
     }
 

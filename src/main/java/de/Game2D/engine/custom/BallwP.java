@@ -1,14 +1,14 @@
 package de.Game2D.engine.custom;
 
 import de.Game2D.engine.core.Instance;
-import de.Game2D.engine.old.entities.entity.Entity;
+import de.Game2D.engine.objects.Entity;
 
 import java.awt.*;
 
 public class BallwP extends Entity {
 
     public BallwP(int pX, int pY, int pHeight, int pWidth, Instance i) {
-        super(pX, pY, pHeight, pWidth, i);
+        super(i, new Rectangle(pX, pY, pWidth, pHeight));
     }
 
     private int MoveX = 6;
@@ -22,39 +22,39 @@ public class BallwP extends Entity {
 
     public void update(){
 
-        if (tickBottomReached != 0 && box.y == 1050 && tickBottomReached == actionManager.getGameTick()) {
-            box.x = 0;
-            box.y = 0;
+        if (tickBottomReached != 0 && hitBox.y == 1050 && tickBottomReached == actionManager.getGameTick()) {
+            hitBox.x = 0;
+            hitBox.y = 0;
             tickBottomReached = 0;
         }
 
-        if (tickBottomReached == 0 && box.y == 1050) {
+        if (tickBottomReached == 0 && hitBox.y == 1050) {
             tickBottomReached = actionManager.getGameTick();
         }
 
-        if(this.box.getX() + MoveX <= 0 || this.box.getX() + MoveX >= 1850 || !lastMoveX){
+        if(hitBox.x + MoveX <= 0 || hitBox.x + MoveX >= 1850 || !lastMoveX){
             this.MoveX = this.MoveX * -1;
         }
 
-        if(this.box.getY() + MoveY <= 0 || this.box.getY() + MoveY >= 1050 || !lastMoveY) {
+        if(hitBox.y + MoveY <= 0 || hitBox.y + MoveY >= 1050 || !lastMoveY) {
             this.MoveY = this.MoveY * -1;
         }
 
 
         MoveY += 2;
 
-        if(this.box.getX() <= 0){
-            setPosition(0, this.box.y);
+        if(hitBox.x <= 0){
+            setPosition(0, hitBox.y);
         }
-        if(this.box.getY() <= 0){
-            setPosition(this.box.x, 0);
+        if(hitBox.y <= 0){
+            setPosition(hitBox.x, 0);
         }
 
-        if(this.box.getX() >= 1850){
-            setPosition(1850, this.box.y);
+        if(hitBox.x >= 1850){
+            setPosition(1850, hitBox.y);
         }
-        if(this.box.getY() >= 1050){
-            setPosition(this.box.x, 1050);
+        if(hitBox.y >= 1050){
+            setPosition(hitBox.x, 1050);
             //this.MoveY = -10;
         }
 
@@ -66,7 +66,7 @@ public class BallwP extends Entity {
 
         g2.setColor(Color.WHITE);
 
-        g2.fillRect(this.box.x, this.box.y, 48, 48);
+        g2.fillRect(hitBox.x, hitBox.y, 48, 48);
 
     }
 }

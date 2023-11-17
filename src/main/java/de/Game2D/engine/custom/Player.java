@@ -1,14 +1,19 @@
 package de.Game2D.engine.custom;
 
 import de.Game2D.engine.core.Instance;
+import de.Game2D.engine.core.KeyHandler;
 import de.Game2D.engine.objects.Entity;
 
 import java.awt.*;
 
 public class Player extends Entity {
 
+    private final KeyHandler keyHandler;
+
     public Player(int pX, int pY, int pHeight, int pWidth, Instance i) {
         super(i, new Rectangle(pX, pY, pWidth, pHeight));
+
+        keyHandler = i.getKeyHandler();
     }
 
 

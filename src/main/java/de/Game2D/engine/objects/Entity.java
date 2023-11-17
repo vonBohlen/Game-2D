@@ -1,7 +1,6 @@
 package de.Game2D.engine.objects;
 
 import de.Game2D.engine.core.Instance;
-import de.Game2D.engine.core.KeyHandler;
 
 import java.awt.*;
 import java.util.ArrayDeque;
@@ -9,14 +8,10 @@ import java.util.Deque;
 
 public abstract class Entity extends GameObject {
 
-    protected KeyHandler keyHandler;
-
     private final Deque<GameObject> collisions = new ArrayDeque<>();
 
     public Entity(Instance i, Rectangle hitBox) {
         super(i, hitBox);
-
-        keyHandler = i.getKeyHandler();
     }
 
     /**
@@ -25,7 +20,8 @@ public abstract class Entity extends GameObject {
      * @param yShift shift on the y-axis
      * @return true if the move was successful, else false
      */
-    public boolean move(int xShift, int yShift) {
+    protected boolean move(int xShift, int yShift) {
+        if (hitBox == null) return false;
         Rectangle shift = new Rectangle(hitBox.x, hitBox.y, hitBox.width, hitBox.height);
         GameObject objectCache;
 
@@ -74,6 +70,7 @@ public abstract class Entity extends GameObject {
      * @return true if the position change successful, else false
      */
     public boolean setPosition(int newX, int newY) {
+        if (hitBox == null) return false;
         Rectangle newPosition = new Rectangle(newX, newY, hitBox.width, hitBox.height);
         GameObject objectCache = actionManager.checkCollision(this, newPosition);
         if (objectCache != null) {
@@ -93,6 +90,7 @@ public abstract class Entity extends GameObject {
      * @return true if the resize was successful, else false
      */
     public boolean changeEntitySize(int newWidth, int newHeight) {
+        if (hitBox == null) return false;
         Rectangle newSize = new Rectangle(hitBox.x, hitBox.y, newWidth, newHeight);
         GameObject objectCache = actionManager.checkCollision(this, newSize);
         if (objectCache != null) {
