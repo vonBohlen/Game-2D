@@ -1,9 +1,16 @@
 plugins {
     id("java")
+    id("java-library")
+    id("maven-publish")
 }
 
-group = "org.example"
-version = "1.0-SNAPSHOT"
+group = "de.Game2D.engine"
+version = "pre-alpha.0.1"
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
 
 repositories {
     mavenCentral()

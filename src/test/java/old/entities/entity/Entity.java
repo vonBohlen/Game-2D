@@ -1,4 +1,4 @@
-package de.Game2D.engine.test.old.entities.entity;
+package old.entities.entity;
 
 public class Entity {
 

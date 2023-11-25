@@ -1,4 +1,4 @@
-package de.Game2D.engine.test.custom;
+package custom;
 
 import de.Game2D.engine.core.Instance;
 import de.Game2D.engine.objects.Entity;

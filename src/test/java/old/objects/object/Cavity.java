@@ -1,4 +1,4 @@
-package de.Game2D.engine.test.old.objects.object;
+package old.objects.object;
 
 public class Cavity {
 

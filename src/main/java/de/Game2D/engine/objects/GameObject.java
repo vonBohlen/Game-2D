@@ -26,6 +26,10 @@ public abstract class GameObject {
         actionManager.registerGameObject(this);
     }
 
+    public void delete() {
+        actionManager.removeGameObject(this);
+    }
+
     public boolean getCollisionActivated() {
         return collisionActivated;
     }
