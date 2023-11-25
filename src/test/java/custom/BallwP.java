@@ -1,9 +1,12 @@
 package custom;
 
 import de.Game2D.engine.core.Instance;
+import de.Game2D.engine.objects.GameObject;
 import de.Game2D.engine.objects.advanced.Entity;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BallwP extends Entity {
 
@@ -17,8 +20,8 @@ public class BallwP extends Entity {
 
     int tickBottomReached = 0;
 
-    private boolean lastMoveX = true;
-    private boolean lastMoveY = true;
+    private List<GameObject> lastMoveX = new ArrayList<GameObject>();
+    private List<GameObject> lastMoveY = new ArrayList<GameObject>();
 
     public void update(){
 
@@ -32,11 +35,11 @@ public class BallwP extends Entity {
             tickBottomReached = actionManager.getGameTick();
         }
 
-        if(hitBox.x + MoveX <= 0 || hitBox.x + MoveX >= 1850 || !lastMoveX){
+        if(hitBox.x + MoveX <= 0 || hitBox.x + MoveX >= 1850){
             this.MoveX = this.MoveX * -1;
         }
 
-        if(hitBox.y + MoveY <= 0 || hitBox.y + MoveY >= 1050 || !lastMoveY) {
+        if(hitBox.y + MoveY <= 0 || hitBox.y + MoveY >= 1050) {
             this.MoveY = this.MoveY * -1;
         }
 

@@ -26,21 +26,22 @@ public class Player extends Entity {
         int moveS = 0;
 
         if (keyHandler.keyPressed_W) {
-            moveW = -5;
+            moveW = -7;
         }
         if (keyHandler.keyPressed_S) {
-            moveS = 5;
+            moveS = 7;
         }
         if (keyHandler.keyPressed_A) {
-            moveA = -5;
+            moveA = -7;
         }
         if (keyHandler.keyPressed_D) {
-            moveD = 5;
+            moveD = 7;
         }
 
         move(moveA + moveD, moveW + moveS);
     }
 
+    /*
     private int MoveX = 5;
     private int MoveY = 4;
 
@@ -70,6 +71,7 @@ public class Player extends Entity {
         lastMoveX = move(MoveX, 0);
         lastMoveY = move(0, MoveY);
     }
+    */
 
     public void draw(Graphics2D g2) {
 

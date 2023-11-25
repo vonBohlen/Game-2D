@@ -23,10 +23,10 @@ public abstract class Entity extends GameObject {
      * @param yShift shift on the y-axis
      * @return true if the move was successful, else false
      */
-    protected GameObject[] move(int xShift, int yShift) {
+    protected List<GameObject> move(int xShift, int yShift) {
         if (hitBox == null) return null;
-        Rectangle shift = new Rectangle(hitBox.x, hitBox.y, hitBox.width, hitBox.height);
-        GameObject objectCache;
+        GameObject objectCacheX;
+        GameObject objectCacheY;
 
         List<GameObject> retObj = new ArrayList<>();
 
@@ -52,20 +52,26 @@ public abstract class Entity extends GameObject {
                 yShift--;
             }
 
-            shift.x = newX;
-            shift.y = newY;
+            objectCacheX = actionManager.checkCollision(this, new Rectangle(newX, hitBox.y, hitBox.width, hitBox.height));
+            objectCacheY = actionManager.checkCollision(this, new Rectangle(hitBox.x, newY, hitBox.width, hitBox.height));
 
-            objectCache = actionManager.checkCollision(this, shift);
-
-            if (objectCache != null) {
-                collisions.push(objectCache);
-                ;
+            if (objectCacheX != null) {
+                collisions.push(objectCacheX);
+                retObj.add(objectCacheX);
+            }
+            else {
+                hitBox.x = newX;
             }
 
-            hitBox.x = newX;
-            hitBox.y = newY;
+            if (objectCacheY != null) {
+                collisions.push(objectCacheY);
+                retObj.add(objectCacheY);
+            }
+            else {
+                hitBox.y = newY;
+            }
         }
-        return true;
+        return retObj;
     }
 
     /**
