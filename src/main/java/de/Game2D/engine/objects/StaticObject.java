@@ -6,8 +6,8 @@ import java.awt.*;
 
 public abstract class StaticObject extends GameObject {
 
-    public StaticObject(Instance i, Rectangle hitbox) {
-        super(i, hitbox);
+    public StaticObject(Instance i, Rectangle hitBox) {
+        super(i, hitBox);
     }
 
 }
