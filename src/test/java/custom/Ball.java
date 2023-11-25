@@ -11,14 +11,23 @@ public class Ball extends Entity {
         super(i, new Rectangle(pX, pY, pWidth, pHeight));
     }
 
-    private int MoveX = 6;
+    /*private int MoveX = 6;
     private int MoveY = 6;
     private boolean lastMoveX = true;
-    private boolean lastMoveY = true;
+    private boolean lastMoveY = true;*/
 
+    @Override
     public void update(){
+        
+        if (actionManager.getGameTick() != 30) return;
+        if (hitBox.y >= instance.getHeight()) setPosition(0, 0);
 
-        if(hitBox.x + MoveX <= 0 || hitBox.x + MoveX >= 1850 || !lastMoveX){
+        int x = hitBox.x + 1;
+        int y = x*x*x;
+
+        move(1, y);
+
+        /*if(hitBox.x + MoveX <= 0 || hitBox.x + MoveX >= 1850 || !lastMoveX){
             this.MoveX = this.MoveX * -1;
         }
 
@@ -27,9 +36,10 @@ public class Ball extends Entity {
         }
 
         lastMoveX = move(MoveX, 0);
-        lastMoveY = move(0, MoveY);
+        lastMoveY = move(0, MoveY);*/
     }
 
+    @Override
     public void draw(Graphics2D g2) {
 
         g2.setColor(Color.WHITE);
