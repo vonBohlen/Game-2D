@@ -42,16 +42,16 @@ Replace the **VERSION** placeholder with the release or snapshot you want to use
 
 **Gradle**
 ```gradle
-dependencies {
-    implementation 'com.github.vonBohlen:Game-2D:VERSION'
-}
-```
-```gradle
 dependencyResolutionManagement { 
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
 	repositories {
         mavenCentral()
 		maven { url 'https://jitpack.io' }
     }
+}
+```
+```gradle
+dependencies {
+    implementation 'com.github.vonBohlen:Game-2D:VERSION'
 }
 ```
