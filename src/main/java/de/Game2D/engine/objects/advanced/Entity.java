@@ -1,4 +1,4 @@
-package de.Game2D.engine.objects;
+package de.Game2D.engine.objects.advanced;
 
 import de.Game2D.engine.core.Instance;
 

@@ -2,7 +2,7 @@ package de.Game2D.engine.debug;
 
 
 import de.Game2D.engine.core.Instance;
-import de.Game2D.engine.objects.Entity;
+import de.Game2D.engine.objects.advanced.Entity;
 
 
 import java.awt.*;
