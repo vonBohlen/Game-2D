@@ -22,10 +22,10 @@ public class Ball extends Entity {
         if (hitBox.y >= instance.getHeight()) setPosition(0, 0);
         if (actionManager.getGameTick() != 30 && actionManager.getGameTick() != 60) return;
 
-        int x = hitBox.x + 10;
-        int y = x*x*x - hitBox.y;
+        int x = hitBox.x + 50;
+        int y = x / 10;
 
-        move(10, y);
+        move(50, y);
 
         /*if(hitBox.x + MoveX <= 0 || hitBox.x + MoveX >= 1850 || !lastMoveX){
             this.MoveX = this.MoveX * -1;
