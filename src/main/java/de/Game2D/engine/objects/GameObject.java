@@ -1,4 +1,4 @@
-package de.Game2D.engine.objects.advanced;
+package de.Game2D.engine.objects;
 
 import de.Game2D.engine.core.ActionManager;
 import de.Game2D.engine.core.Instance;

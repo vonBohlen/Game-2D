@@ -1,6 +1,6 @@
 package de.Game2D.engine.core;
 
-import de.Game2D.engine.objects.advanced.GameObject;
+import de.Game2D.engine.objects.GameObject;
 
 import java.awt.*;
 import java.util.ArrayList;
