@@ -4,6 +4,7 @@ import de.Game2D.engine.core.Instance;
 import de.Game2D.engine.objects.GameObject;
 
 import java.awt.*;
+import java.sql.Array;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
@@ -21,10 +22,12 @@ public abstract class Entity extends GameObject {
      * @param yShift shift on the y-axis
      * @return true if the move was successful, else false
      */
-    protected boolean move(int xShift, int yShift) {
-        if (hitBox == null) return false;
+    protected GameObject[] move(int xShift, int yShift) {
+        if (hitBox == null) return null;
         Rectangle shift = new Rectangle(hitBox.x, hitBox.y, hitBox.width, hitBox.height);
         GameObject objectCache;
+
+        GameObject[] retObj = new Array();
 
         while (xShift != 0 || yShift != 0) {
             int newX = hitBox.x;
@@ -55,7 +58,7 @@ public abstract class Entity extends GameObject {
 
             if (objectCache != null) {
                 collisions.push(objectCache);
-                return false;
+                ;
             }
 
             hitBox.x = newX;
