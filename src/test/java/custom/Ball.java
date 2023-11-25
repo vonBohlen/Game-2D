@@ -18,14 +18,14 @@ public class Ball extends Entity {
 
     @Override
     public void update(){
-        
-        if (actionManager.getGameTick() != 30) return;
+
         if (hitBox.y >= instance.getHeight()) setPosition(0, 0);
+        if (actionManager.getGameTick() != 30 && actionManager.getGameTick() != 60) return;
 
-        int x = hitBox.x + 1;
-        int y = x*x*x;
+        int x = hitBox.x + 10;
+        int y = x*x*x - hitBox.y;
 
-        move(1, y);
+        move(10, y);
 
         /*if(hitBox.x + MoveX <= 0 || hitBox.x + MoveX >= 1850 || !lastMoveX){
             this.MoveX = this.MoveX * -1;
@@ -44,7 +44,7 @@ public class Ball extends Entity {
 
         g2.setColor(Color.WHITE);
 
-        g2.fillRect(hitBox.x, hitBox.y, 48, 48);
+        g2.fillRect(hitBox.x, hitBox.y, hitBox.width, hitBox.height);
 
     }
 }
