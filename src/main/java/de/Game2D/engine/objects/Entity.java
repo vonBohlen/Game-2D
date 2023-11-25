@@ -104,7 +104,10 @@ public abstract class Entity extends GameObject {
     }
 
     public GameObject getCollision() {
-        return collisions.pop();
+        if(!collisions.isEmpty()) {
+            return collisions.pop();
+        }
+        return null;
     }
 
 }
