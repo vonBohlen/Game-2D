@@ -4,8 +4,9 @@ import de.Game2D.engine.core.Instance;
 import de.Game2D.engine.objects.GameObject;
 
 import java.awt.*;
-import java.sql.Array;
+import java.lang.reflect.Array;
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Deque;
 
 public abstract class Entity extends GameObject {
@@ -27,7 +28,7 @@ public abstract class Entity extends GameObject {
         Rectangle shift = new Rectangle(hitBox.x, hitBox.y, hitBox.width, hitBox.height);
         GameObject objectCache;
 
-        GameObject[] retObj = new Array();
+        GameObject[] retObj = new GameObject[0];
 
         while (xShift != 0 || yShift != 0) {
             int newX = hitBox.x;
