@@ -4,9 +4,7 @@ import de.Game2D.engine.core.Instance;
 import de.Game2D.engine.objects.GameObject;
 
 import java.awt.*;
-import java.lang.reflect.Array;
 import java.util.ArrayDeque;
-import java.util.ArrayList;
 import java.util.Deque;
 
 public abstract class Entity extends GameObject {
