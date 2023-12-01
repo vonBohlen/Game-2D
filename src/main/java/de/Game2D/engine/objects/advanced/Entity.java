@@ -4,17 +4,13 @@ import de.Game2D.engine.core.Instance;
 import de.Game2D.engine.objects.GameObject;
 
 import java.awt.*;
-import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Deque;
 import java.util.List;
 
 public abstract class Entity extends GameObject {
 
-    private final Deque<GameObject> collisions = new ArrayDeque<>();
-
-    public Entity(Instance i, Rectangle hitBox) {
-        super(i, hitBox);
+    public Entity(Instance i, Rectangle hitBox, boolean collision) {
+        super(i, hitBox, collision);
     }
 
     /**
@@ -25,8 +21,7 @@ public abstract class Entity extends GameObject {
      */
     protected List<GameObject> move(int xShift, int yShift) {
         if (hitBox == null) return null;
-        GameObject objectCacheX;
-        GameObject objectCacheY;
+        GameObject objectCacheX, objectCacheY;
 
         List<GameObject> retObj = new ArrayList<>();
 
@@ -56,7 +51,6 @@ public abstract class Entity extends GameObject {
             objectCacheY = actionManager.checkCollision(this, new Rectangle(hitBox.x, newY, hitBox.width, hitBox.height));
 
             if (objectCacheX != null) {
-                collisions.push(objectCacheX);
                 retObj.add(objectCacheX);
             }
             else {
@@ -64,7 +58,6 @@ public abstract class Entity extends GameObject {
             }
 
             if (objectCacheY != null) {
-                collisions.push(objectCacheY);
                 retObj.add(objectCacheY);
             }
             else {
@@ -80,18 +73,17 @@ public abstract class Entity extends GameObject {
      * @param newY new y-position fot the entity
      * @return true if the position change successful, else false
      */
-    public boolean setPosition(int newX, int newY) {
-        if (hitBox == null) return false;
+    public GameObject setPosition(int newX, int newY) {
+        if (hitBox == null) return null;
         Rectangle newPosition = new Rectangle(newX, newY, hitBox.width, hitBox.height);
         GameObject objectCache = actionManager.checkCollision(this, newPosition);
         if (objectCache != null) {
-            collisions.push(objectCache);
-            return false;
+            return objectCache;
         }
 
         hitBox.x = newX;
         hitBox.y = newY;
-        return true;
+        return null;
     }
 
     /**
@@ -100,24 +92,16 @@ public abstract class Entity extends GameObject {
      * @param newHeight new height value for the entity
      * @return true if the resize was successful, else false
      */
-    public boolean changeEntitySize(int newWidth, int newHeight) {
-        if (hitBox == null) return false;
+    public GameObject changeEntitySize(int newWidth, int newHeight) {
+        if (hitBox == null) return null;
         Rectangle newSize = new Rectangle(hitBox.x, hitBox.y, newWidth, newHeight);
         GameObject objectCache = actionManager.checkCollision(this, newSize);
         if (objectCache != null) {
-            collisions.push(objectCache);
-            return false;
+            return objectCache;
         }
 
         hitBox.width = newWidth;
         hitBox.height = newHeight;
-        return true;
-    }
-
-    public GameObject getCollision() {
-        if(!collisions.isEmpty()) {
-            return collisions.pop();
-        }
         return null;
     }
 

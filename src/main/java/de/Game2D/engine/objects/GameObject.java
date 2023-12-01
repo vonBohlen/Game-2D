@@ -12,26 +12,34 @@ public abstract class GameObject {
     protected ActionManager actionManager;
     protected RenderManager renderManager;
 
-    private boolean collisionActivated = true;
+    private boolean collisionActivated = false;
     public final Rectangle hitBox;
 
-    public GameObject(Instance i, Rectangle hb) {
+    public GameObject(Instance i, Rectangle hb, boolean collision) {
         instance = i;
         actionManager = i.getActionManager();
         renderManager = i.getRenderManager();
 
-        if (hb == null) collisionActivated = false;
+        if (hb != null && collision) collisionActivated = true;
         hitBox = hb;
 
         actionManager.registerGameObject(this);
     }
 
-    public void delete() {
-        actionManager.removeGameObject(this);
+    protected void activateCollision() {
+        if (hitBox != null) collisionActivated = true;
+    }
+
+    protected void deactivateCollision() {
+        collisionActivated = false;
     }
 
     public boolean getCollisionActivated() {
         return collisionActivated;
+    }
+
+    public void destroy() {
+        actionManager.removeGameObject(this);
     }
 
     public abstract void update();

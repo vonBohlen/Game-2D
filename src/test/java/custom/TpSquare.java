@@ -17,14 +17,13 @@ public class TpSquare extends Entity {
         if (!(actionManager.getGameTick() == 30)) return;
 
         Random random = new Random();
-        int randomX;
-        int randomY;
+        int randomX, randomY;
 
         while (true) {
             randomX = random.nextInt(instance.getWidth()-hitBox.width);
             randomY = random.nextInt(instance.getHeight()-hitBox.height);
 
-            if (setPosition(randomX, randomY)) break;
+            if (setPosition(randomX, randomY) == null) break;
         }
     }
 
