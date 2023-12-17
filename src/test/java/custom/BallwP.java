@@ -11,7 +11,7 @@ import java.util.List;
 public class BallwP extends Entity {
 
     public BallwP(int pX, int pY, int pHeight, int pWidth, Instance i) {
-        super(i, new Rectangle(pX, pY, pWidth, pHeight));
+        super(i, new Rectangle(pX, pY, pWidth, pHeight), true);
     }
 
     private int MoveX = 6;

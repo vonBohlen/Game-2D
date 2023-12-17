@@ -11,4 +11,7 @@ public abstract class StaticObject extends GameObject {
         super(i, hitBox, collision);
     }
 
+    @Override
+    public void update() {}
+
 }

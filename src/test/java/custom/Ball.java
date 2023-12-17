@@ -8,7 +8,7 @@ import java.awt.*;
 public class Ball extends Entity {
 
     public Ball(int pX, int pY, int pHeight, int pWidth, Instance i) {
-        super(i, new Rectangle(pX, pY, pWidth, pHeight));
+        super(i, new Rectangle(pX, pY, pWidth, pHeight), true);
     }
 
     /*private int MoveX = 6;

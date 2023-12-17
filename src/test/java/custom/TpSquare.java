@@ -9,7 +9,7 @@ import java.util.Random;
 public class TpSquare extends Entity {
 
     public TpSquare(int pX, int pY, int pHeight, int pWidth, Instance i) {
-        super(i, new Rectangle(pX, pY, pWidth, pHeight));
+        super(i, new Rectangle(pX, pY, pWidth, pHeight), true);
     }
 
     public void update() {

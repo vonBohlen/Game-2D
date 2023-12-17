@@ -2,18 +2,18 @@ package de.Game2D.engine.debug;
 
 
 import de.Game2D.engine.core.Instance;
-import de.Game2D.engine.objects.advanced.Entity;
+import de.Game2D.engine.objects.advanced.StaticObject;
 
 
 import java.awt.*;
 
-public class DebugDisplay extends Entity {
+public class DebugDisplay extends StaticObject {
 
     int fps;
     int tps;
 
     public DebugDisplay(Instance i) {
-        super(i, null);
+        super(i, null, false);
     }
 
     public void updateFPS(int fps) {

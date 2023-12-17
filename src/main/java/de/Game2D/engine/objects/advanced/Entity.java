@@ -33,7 +33,7 @@ public abstract class Entity extends GameObject {
                 newX = hitBox.x - 1;
                 xShift++;
             }
-            else if (xShift > 0){
+            else if (xShift > 0) {
                 newX = hitBox.x + 1;
                 xShift--;
             }
@@ -42,7 +42,7 @@ public abstract class Entity extends GameObject {
                 newY = hitBox.y - 1;
                 yShift++;
             }
-            else if (yShift > 0){
+            else if (yShift > 0) {
                 newY = hitBox.y + 1;
                 yShift--;
             }
@@ -50,20 +50,13 @@ public abstract class Entity extends GameObject {
             objectCacheX = actionManager.checkCollision(this, new Rectangle(newX, hitBox.y, hitBox.width, hitBox.height));
             objectCacheY = actionManager.checkCollision(this, new Rectangle(hitBox.x, newY, hitBox.width, hitBox.height));
 
-            if (objectCacheX != null) {
-                retObj.add(objectCacheX);
-            }
-            else {
-                hitBox.x = newX;
-            }
+            if (objectCacheX != null) retObj.add(objectCacheX);
+            else hitBox.x = newX;
 
-            if (objectCacheY != null) {
-                retObj.add(objectCacheY);
-            }
-            else {
-                hitBox.y = newY;
-            }
+            if (objectCacheY != null) retObj.add(objectCacheY);
+            else hitBox.y = newY;
         }
+        if (retObj.isEmpty()) return null;
         return retObj;
     }
 
@@ -77,9 +70,7 @@ public abstract class Entity extends GameObject {
         if (hitBox == null) return null;
         Rectangle newPosition = new Rectangle(newX, newY, hitBox.width, hitBox.height);
         GameObject objectCache = actionManager.checkCollision(this, newPosition);
-        if (objectCache != null) {
-            return objectCache;
-        }
+        if (objectCache != null) return objectCache;
 
         hitBox.x = newX;
         hitBox.y = newY;
@@ -96,9 +87,7 @@ public abstract class Entity extends GameObject {
         if (hitBox == null) return null;
         Rectangle newSize = new Rectangle(hitBox.x, hitBox.y, newWidth, newHeight);
         GameObject objectCache = actionManager.checkCollision(this, newSize);
-        if (objectCache != null) {
-            return objectCache;
-        }
+        if (objectCache != null) return objectCache;
 
         hitBox.width = newWidth;
         hitBox.height = newHeight;
