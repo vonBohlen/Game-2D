@@ -1,7 +1,8 @@
-package custom;
+package test_objs;
 
 import de.Game2D.engine.core.Instance;
 import de.Game2D.engine.objects.GameObject;
+import de.Game2D.engine.objects.ObjectConfig;
 import de.Game2D.engine.objects.advanced.Entity;
 
 import java.awt.*;
@@ -10,8 +11,8 @@ import java.util.List;
 
 public class BallwP extends Entity {
 
-    public BallwP(int pX, int pY, int pHeight, int pWidth, Instance i) {
-        super(i, new Rectangle(pX, pY, pWidth, pHeight), true);
+    public BallwP(ObjectConfig config) {
+        super(config);
     }
 
     private int MoveX = 6;

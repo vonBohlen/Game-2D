@@ -1,6 +1,7 @@
 package de.Game2D.engine.core;
 
 import de.Game2D.engine.debug.DebugDisplay;
+import de.Game2D.engine.objects.ObjectConfig;
 
 import javax.swing.*;
 
@@ -15,7 +16,9 @@ public class Instance {
         keyHandler = new KeyHandler();
         renderManager = new RenderManager(this);
         actionManager = new ActionManager(this);
-        debugDisplay = new DebugDisplay(this);
+        //TODO: create UI elements
+        ObjectConfig debugDisplayConfig = new ObjectConfig(this);
+        debugDisplay = new DebugDisplay(debugDisplayConfig);
     }
 
     public void start(String windowTitle) {

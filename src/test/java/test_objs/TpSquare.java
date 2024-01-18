@@ -1,6 +1,7 @@
-package custom;
+package test_objs;
 
 import de.Game2D.engine.core.Instance;
+import de.Game2D.engine.objects.ObjectConfig;
 import de.Game2D.engine.objects.advanced.Entity;
 
 import java.awt.*;
@@ -8,8 +9,8 @@ import java.util.Random;
 
 public class TpSquare extends Entity {
 
-    public TpSquare(int pX, int pY, int pHeight, int pWidth, Instance i) {
-        super(i, new Rectangle(pX, pY, pWidth, pHeight), true);
+    public TpSquare(ObjectConfig config) {
+        super(config);
     }
 
     public void update() {

@@ -1,8 +1,8 @@
-package custom;
+package test_objs;
 
-import de.Game2D.engine.core.Instance;
 import de.Game2D.engine.core.KeyHandler;
 import de.Game2D.engine.objects.advanced.Entity;
+import de.Game2D.engine.objects.ObjectConfig;
 
 import java.awt.*;
 
@@ -10,10 +10,10 @@ public class Player extends Entity {
 
     private final KeyHandler keyHandler;
 
-    public Player(int pX, int pY, int pHeight, int pWidth, Instance i) {
-        super(i, new Rectangle(pX, pY, pWidth, pHeight), true);
+    public Player(ObjectConfig config) {
+        super(config);
 
-        keyHandler = i.getKeyHandler();
+        keyHandler = config.getInstance().getKeyHandler();
     }
 
 

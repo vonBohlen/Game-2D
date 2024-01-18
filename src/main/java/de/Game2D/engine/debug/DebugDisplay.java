@@ -2,6 +2,7 @@ package de.Game2D.engine.debug;
 
 
 import de.Game2D.engine.core.Instance;
+import de.Game2D.engine.objects.ObjectConfig;
 import de.Game2D.engine.objects.advanced.StaticObject;
 
 
@@ -12,8 +13,8 @@ public class DebugDisplay extends StaticObject {
     int fps;
     int tps;
 
-    public DebugDisplay(Instance i) {
-        super(i, null, false);
+    public DebugDisplay(ObjectConfig config) {
+        super(config);
     }
 
     public void updateFPS(int fps) {

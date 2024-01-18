@@ -1,14 +1,15 @@
-package custom;
+package test_objs;
 
 import de.Game2D.engine.core.Instance;
+import de.Game2D.engine.objects.ObjectConfig;
 import de.Game2D.engine.objects.advanced.Entity;
 
 import java.awt.*;
 
 public class Ball extends Entity {
 
-    public Ball(int pX, int pY, int pHeight, int pWidth, Instance i) {
-        super(i, new Rectangle(pX, pY, pWidth, pHeight), true);
+    public Ball(ObjectConfig config) {
+        super(config);
     }
 
     /*private int MoveX = 6;

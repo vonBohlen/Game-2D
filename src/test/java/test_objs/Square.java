@@ -1,14 +1,15 @@
-package custom;
+package test_objs;
 
 import de.Game2D.engine.core.Instance;
+import de.Game2D.engine.objects.ObjectConfig;
 import de.Game2D.engine.objects.advanced.StaticObject;
 
 import java.awt.*;
 
 public class Square extends StaticObject {
 
-    public Square(int pX, int pY, int pHeight, int pWidth, Instance i) {
-        super(i, new Rectangle(pX, pY, pWidth, pHeight), true);
+    public Square(ObjectConfig config) {
+        super(config);
     }
 
     public void draw(Graphics2D g2) {
