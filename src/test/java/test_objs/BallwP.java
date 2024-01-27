@@ -70,7 +70,7 @@ public class BallwP extends Entity {
 
         g2.setColor(Color.WHITE);
 
-        g2.fillRect(hitBox.x, hitBox.y, 48, 48);
+        g2.drawImage(texture, hitBox.x, hitBox.y, hitBox.width, hitBox.height, null);
 
     }
 }

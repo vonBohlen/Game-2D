@@ -32,7 +32,7 @@ public class TpSquare extends Entity {
 
         g2.setColor(Color.WHITE);
 
-        g2.fillRect(hitBox.x, hitBox.y, hitBox.width, hitBox.height);
+        g2.drawImage(texture, hitBox.x, hitBox.y, hitBox.width, hitBox.height, null);
 
     }
 

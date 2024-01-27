@@ -9,7 +9,7 @@ import java.awt.*;
 public abstract class StaticObject extends GameObject {
 
     public StaticObject(ObjectConfig config) {
-        super(config.getInstance(), new Rectangle(config.positionX, config.positionY, config.hitBoxWith, config.hitBoxHeight), config.collision);
+        super(config.getInstance(), new Rectangle(config.positionX, config.positionY, config.hitBoxWith, config.hitBoxHeight), config.collision, config.texture);
     }
 
     @Override

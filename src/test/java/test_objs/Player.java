@@ -1,10 +1,14 @@
 package test_objs;
 
+import com.sun.tools.javac.Main;
 import de.Game2D.engine.core.KeyHandler;
 import de.Game2D.engine.objects.advanced.Entity;
 import de.Game2D.engine.objects.ObjectConfig;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.io.*;
+import java.util.Objects;
 
 public class Player extends Entity {
 
@@ -14,6 +18,7 @@ public class Player extends Entity {
         super(config);
 
         keyHandler = config.getInstance().getKeyHandler();
+
     }
 
 
@@ -77,7 +82,7 @@ public class Player extends Entity {
 
         g2.setColor(Color.WHITE);
 
-        g2.fillRect(hitBox.x, hitBox.y, 48, 48);
+        g2.drawImage(texture, hitBox.x, hitBox.y, hitBox.width, hitBox.height, null);
 
     }
 

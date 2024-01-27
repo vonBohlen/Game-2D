@@ -10,7 +10,7 @@ import java.util.List;
 public abstract class Entity extends GameObject {
 
     public Entity(ObjectConfig config) {
-        super(config.getInstance(), new Rectangle(config.positionX, config.positionY, config.hitBoxWith, config.hitBoxHeight), config.collision);
+        super(config.getInstance(), new Rectangle(config.positionX, config.positionY, config.hitBoxWith, config.hitBoxHeight), config.collision, config.texture);
     }
 
     /**

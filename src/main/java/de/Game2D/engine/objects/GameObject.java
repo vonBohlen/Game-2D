@@ -15,13 +15,17 @@ public abstract class GameObject {
     private boolean collisionActivated = false;
     public final Rectangle hitBox;
 
-    public GameObject(Instance i, Rectangle hb, boolean collision) {
+    protected Image texture;
+
+    public GameObject(Instance i, Rectangle hb, boolean collision, Image txt) {
         instance = i;
         actionManager = i.getActionManager();
         renderManager = i.getRenderManager();
 
         if (hb != null && collision) collisionActivated = true;
         hitBox = hb;
+
+        texture = txt;
 
         actionManager.registerGameObject(this);
     }
