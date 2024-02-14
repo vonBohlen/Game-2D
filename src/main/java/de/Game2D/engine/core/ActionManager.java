@@ -11,6 +11,8 @@ public class ActionManager implements Runnable {
     private Thread actionThread;
     private final Instance instance;
 
+    private boolean run = true;
+
     private final List<GameObject> gameObjects = new ArrayList<>();
     private int gameTick = 0;
 
@@ -27,18 +29,18 @@ public class ActionManager implements Runnable {
     public void run() {
         while (actionThread != null) {
             int tps = Integer.parseInt(PropertiesManager.getSettings().getProperty("game2d.core.tps"));
-            double drawInterval = 1000000000 / tps;
+            double updateInterval = 1000000000 / tps;
             double delta = 0;
             long lastTime = System.nanoTime();
             long currentTime;
             long timer = 0;
-            int drawCount = 0;
+            int updateCount = 0;
 
-            while (actionThread != null) {
+            while (run) {
 
                 currentTime = System.nanoTime();
 
-                delta += (currentTime - lastTime) / drawInterval;
+                delta += (currentTime - lastTime) / updateInterval;
                 timer += (currentTime - lastTime);
                 lastTime = currentTime;
 
@@ -46,18 +48,18 @@ public class ActionManager implements Runnable {
                     gameTick++;
                     update();
                     delta--;
-                    drawCount++;
+                    updateCount++;
                 }
 
                 if (timer >= 1000000000) {
-                    instance.getDebugDisplay().updateTPS(drawCount);
-                    drawCount = 0;
+                    instance.getDebugDisplay().updateTPS(updateCount);
+                    updateCount = 0;
                     timer = 0;
                 }
 
                 if (gameTick >= tps) gameTick = 0;
             }
-        }
+       	}
     }
 
     private void update() {
@@ -66,6 +68,13 @@ public class ActionManager implements Runnable {
         }
     }
 
+    protected void freeze() {
+        run = false;
+    }
+
+    protected void resume() {
+        run = true;
+    }
 
     public GameObject checkCollision(GameObject go, Rectangle position) {
         for (GameObject current : gameObjects) {

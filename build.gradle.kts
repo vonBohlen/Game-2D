@@ -23,6 +23,13 @@ dependencies {
     implementation("org.lwjgl:lwjgl:3.2.3")
 }
 
+
+tasks.withType<Jar> {
+    manifest {
+        attributes["Main-Class"] = "de.Game2D.engine.Main"
+    }
+}
+
 tasks.test {
     useJUnitPlatform()
 }

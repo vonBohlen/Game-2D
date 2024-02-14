@@ -1,6 +1,6 @@
-import test_objs.*;
 import de.Game2D.engine.core.Instance;
 import de.Game2D.engine.objects.ObjectConfig;
+import test_objs.*;
 
 public class Main {
 
