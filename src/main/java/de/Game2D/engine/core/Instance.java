@@ -43,15 +43,13 @@ public class Instance {
 
     private void setConfPath(Path confPath) {
 
-        File file = new File(String.valueOf(confPath));
-
         if (confPath != null) this.confPath = confPath;
 
-        generateConf(confPath);
+        generateConf();
 
     }
 
-    private void generateConf(Path confPath) {
+    private void generateConf() {
 
         File conf = new File(String.valueOf(confPath));
 
