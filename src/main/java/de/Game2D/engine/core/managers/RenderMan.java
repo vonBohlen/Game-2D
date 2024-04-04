@@ -48,7 +48,7 @@ public class RenderMan extends JPanel implements Runnable {
     @Override
     public void run() {
 
-        double drawInterval = 1000000000 / Integer.parseInt(ConfProvider.getConf(instance.path, false).getProperty("game2d.core.fps"));
+        double drawInterval = 1000000000 / Integer.parseInt(ConfProvider.getConf(instance.confPath).getProperty("game2d.core.fps"));
         double delta = 0;
         long lastTime = System.nanoTime();
         long currentTime;

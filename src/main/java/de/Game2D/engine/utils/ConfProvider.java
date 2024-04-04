@@ -6,9 +6,11 @@ import java.util.Properties;
 
 public class ConfProvider {
 
-    public  static Properties getConf(Path confPath, boolean generate) {
+    public  static Properties getConf(Path confPath) {
 
-        if (!checkConfExists(confPath, generate)) return null;
+        File file = new File(String.valueOf(confPath));
+
+        if (!file.exists()) return null;
 
         InputStream input = null;
 
@@ -32,26 +34,6 @@ public class ConfProvider {
 
     public static void writeConf(Properties properties, Path confPath, String tMod, boolean generate) {
 
-        if (!checkConfExists(confPath, generate) && !generate) return;
-
-        OutputStream outputStream = null;
-
-        try {
-            outputStream = new FileOutputStream(String.valueOf(confPath));
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-
-        try {
-            properties.store(outputStream, tMod);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-    }
-
-    public static boolean checkConfExists(Path confPath, boolean generate) {
-
         File file = new File(String.valueOf(confPath));
 
         boolean exists = file.exists();
@@ -66,7 +48,19 @@ public class ConfProvider {
 
         }
 
-        return exists;
+        OutputStream outputStream = null;
+
+        try {
+            outputStream = new FileOutputStream(String.valueOf(confPath));
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        try {
+            properties.store(outputStream, tMod);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 
