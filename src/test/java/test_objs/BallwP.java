@@ -1,9 +1,8 @@
 package test_objs;
 
-import de.Game2D.engine.core.Instance;
-import de.Game2D.engine.objects.GameObject;
-import de.Game2D.engine.objects.ObjectConfig;
-import de.Game2D.engine.objects.advanced.Entity;
+import de.Game2D.engine_old.objects.GameObject;
+import de.Game2D.engine_old.objects.ObjectConfig;
+import de.Game2D.engine_old.objects.advanced.Entity;
 
 import java.awt.*;
 import java.util.ArrayList;

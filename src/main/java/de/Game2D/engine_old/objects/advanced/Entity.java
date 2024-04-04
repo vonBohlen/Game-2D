@@ -1,7 +1,7 @@
-package de.Game2D.engine.objects.advanced;
+package de.Game2D.engine_old.objects.advanced;
 
-import de.Game2D.engine.objects.GameObject;
-import de.Game2D.engine.objects.ObjectConfig;
+import de.Game2D.engine_old.objects.GameObject;
+import de.Game2D.engine_old.objects.ObjectConfig;
 
 import java.awt.*;
 import java.util.ArrayList;

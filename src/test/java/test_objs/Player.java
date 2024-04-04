@@ -1,14 +1,10 @@
 package test_objs;
 
-import com.sun.tools.javac.Main;
-import de.Game2D.engine.core.KeyHandler;
-import de.Game2D.engine.objects.advanced.Entity;
-import de.Game2D.engine.objects.ObjectConfig;
+import de.Game2D.engine_old.core.KeyHandler;
+import de.Game2D.engine_old.objects.advanced.Entity;
+import de.Game2D.engine_old.objects.ObjectConfig;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
-import java.io.*;
-import java.util.Objects;
 
 public class Player extends Entity {
 

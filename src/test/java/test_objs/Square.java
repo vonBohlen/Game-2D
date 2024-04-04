@@ -1,8 +1,7 @@
 package test_objs;
 
-import de.Game2D.engine.core.Instance;
-import de.Game2D.engine.objects.ObjectConfig;
-import de.Game2D.engine.objects.advanced.StaticObject;
+import de.Game2D.engine_old.objects.ObjectConfig;
+import de.Game2D.engine_old.objects.advanced.StaticObject;
 
 import java.awt.*;
 

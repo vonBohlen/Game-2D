@@ -1,7 +1,7 @@
-package de.Game2D.engine.objects;
+package de.Game2D.engine_old.objects;
 
-import de.Game2D.engine.core.Instance;
-import de.Game2D.engine.core.RenderManager;
+import de.Game2D.engine_old.core.Instance;
+import de.Game2D.engine_old.core.RenderManager;
 
 import javax.imageio.ImageIO;
 import java.awt.*;

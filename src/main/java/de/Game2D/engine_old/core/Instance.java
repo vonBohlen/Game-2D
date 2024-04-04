@@ -1,7 +1,7 @@
-package de.Game2D.engine.core;
+package de.Game2D.engine_old.core;
 
-import de.Game2D.engine.debug.DebugDisplay;
-import de.Game2D.engine.objects.ObjectConfig;
+import de.Game2D.engine_old.debug.DebugDisplay;
+import de.Game2D.engine_old.objects.ObjectConfig;
 
 import javax.swing.*;
 

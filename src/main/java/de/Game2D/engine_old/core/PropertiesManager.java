@@ -1,4 +1,4 @@
-package de.Game2D.engine.core;
+package de.Game2D.engine_old.core;
 
 import java.io.*;
 import java.util.Properties;
