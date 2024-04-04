@@ -21,6 +21,7 @@ public class ConfProvider {
         }
 
         InputStream input = null;
+
         try {
             input = new FileInputStream(String.valueOf(confPath));
         } catch (FileNotFoundException e) {
