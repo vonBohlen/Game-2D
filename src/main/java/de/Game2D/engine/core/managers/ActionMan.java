@@ -6,7 +6,7 @@ import de.Game2D.engine.core.Instance;
 
 import java.awt.*;
 
-public class ActMan implements Runnable {
+public class ActionMan implements Runnable {
 
     private Thread actionThread;
     private Instance instance;
@@ -14,19 +14,27 @@ public class ActMan implements Runnable {
     private boolean run = true;
     private int gameTick = 0;
 
-    public ActMan(Instance i){
+    public ActionMan(Instance i){
+
         this.instance = i;
+
+        startActionThread();
     }
 
 
     protected void startActionThread() {
+
         actionThread = new Thread(this);
+
         actionThread.start();
+
     }
 
     @Override
     public void run() {
+
         while (actionThread != null) {
+
             int tps = Integer.parseInt(PropertiesManager.getSettings().getProperty("game2d.core.tps"));
             double updateInterval = 1000000000 / tps;
             double delta = 0;
@@ -44,21 +52,29 @@ public class ActMan implements Runnable {
                 lastTime = currentTime;
 
                 if (delta >= 1) {
+
                     gameTick++;
+
                     update();
                     delta--;
                     updateCount++;
+
                 }
 
                 if (timer >= 1000000000) {
+
                     //instance.getDebugDisplay().updateTPS(updateCount);
+
                     updateCount = 0;
                     timer = 0;
                 }
 
                 if (gameTick >= tps) gameTick = 0;
+
             }
+
         }
+
     }
 
     private void update() {
@@ -68,9 +84,13 @@ public class ActMan implements Runnable {
     }
 
     public GameObject checkCollision(GameObject go, Rectangle position) {
+
         for (GameObject current : gameObjects) {
+
             if (current.getCollisionActivated() && !current.equals(go) && position.intersects(current.hitBox)) return current;
+
         }
+
         return null;
     }
 

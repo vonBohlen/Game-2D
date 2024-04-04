@@ -1,21 +1,24 @@
 package de.Game2D.engine.core;
 
-import de.Game2D.engine.core.managers.ActMan;
-import de.Game2D.engine.core.managers.RndMan;
-import de.Game2D.engine.utils.Keyhand;
-import de.Game2D.engine.utils.PrtProv;
+import de.Game2D.engine.core.managers.ActionMan;
+import de.Game2D.engine.core.managers.RenderMan;
+
+import de.Game2D.engine.core.handlers.Keyhand;
 
 import javax.swing.*;
+import java.nio.file.Path;
 
 public class Instance {
 
-    //Manager
-    private final ActMan actMan;
-    private final RndMan rndMan;
+    public final Path path;
 
-    //Utils
-    private final Keyhand keyHandler;
-    private final PrtProv PrtManager;
+    //Manager
+    public final ActionMan actMan;
+    public final RenderMan rndMan;
+
+    //Handlers
+    public final Keyhand keyHandler;
+
 
     //Window
     JFrame window;
@@ -23,14 +26,16 @@ public class Instance {
     //Gamelogicelements
     
 
-    public Instance(){
+    public Instance(Path confPath) {
+
+        path = confPath;
 
         //Initialisatioin
-        actMan = new ActMan(this);
-        rndMan = new RndMan(this);
+        actMan = new ActionMan(this);
+
+        rndMan = new RenderMan(this);
 
         keyHandler = new Keyhand();
-        PrtManager = new PrtProv();
     }
 
     public void Start(){
@@ -39,9 +44,11 @@ public class Instance {
         LoadWindow();
 
         //Starting Managerloops
+
     }
 
     private void LoadWindow(){
 
     }
+
 }

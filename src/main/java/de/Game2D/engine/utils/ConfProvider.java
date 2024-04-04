@@ -13,11 +13,19 @@ public class ConfProvider {
         boolean exists = file.exists();
 
         if (generate && !exists) {
+
             try {
                 file.createNewFile();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
+
+            return null;
+
+        } else if (!exists) {
+
+            return null;
+
         }
 
         InputStream input = null;
@@ -39,4 +47,37 @@ public class ConfProvider {
         return properties;
 
     }
+
+    public static void writeConf(Properties properties, Path confPath, String tMod, boolean generate) {
+
+        File file = new File(String.valueOf(confPath));
+
+        boolean exists = file.exists();
+
+        if (generate && !exists) {
+
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+        }
+
+        OutputStream outputStream = null;
+
+        try {
+            outputStream = new FileOutputStream(String.valueOf(confPath));
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        try {
+            properties.store(outputStream, tMod);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
 }
