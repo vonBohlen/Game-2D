@@ -8,7 +8,7 @@ public class ConfProvider {
 
     public  static Properties getConf(Path confPath, boolean generate) {
 
-        if (!confExists(confPath, generate)) return null;
+        if (!checkConfExists(confPath, generate)) return null;
 
         InputStream input = null;
 
@@ -32,7 +32,7 @@ public class ConfProvider {
 
     public static void writeConf(Properties properties, Path confPath, String tMod, boolean generate) {
 
-        if (!confExists(confPath, generate) && !generate) return;
+        if (!checkConfExists(confPath, generate) && !generate) return;
 
         OutputStream outputStream = null;
 
@@ -50,7 +50,7 @@ public class ConfProvider {
 
     }
 
-    public static boolean confExists(Path confPath, boolean generate) {
+    public static boolean checkConfExists(Path confPath, boolean generate) {
 
         File file = new File(String.valueOf(confPath));
 
