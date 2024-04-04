@@ -11,8 +11,6 @@ public class ActMan implements Runnable {
 
     private Thread actionThread;
 
-    private final List<GameObject> gameObjects = new ArrayList<>();
-
     private boolean run = true;
     private int gameTick = 0;
     @Override
@@ -65,6 +63,17 @@ public class ActMan implements Runnable {
         return null;
     }
 
+    protected void freeze() {
+        run = false;
+    }
 
+    protected void resume() {
+        run = true;
+    }
+
+
+    public int getGameTick() {
+        return gameTick;
+    }
 
 }
