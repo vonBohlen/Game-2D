@@ -78,18 +78,18 @@ public class ActionMan implements Runnable {
     }
 
     private void update() {
-        for (GameObject go : gameObjects) {
+        /*for (GameObject go : gameObjects) {
             go.update();
-        }
+        }*/
     }
 
     public GameObject checkCollision(GameObject go, Rectangle position) {
 
-        for (GameObject current : gameObjects) {
+        /*for (GameObject current : gameObjects) {
 
             if (current.getCollisionActivated() && !current.equals(go) && position.intersects(current.hitBox)) return current;
 
-        }
+        }*/
 
         return null;
     }

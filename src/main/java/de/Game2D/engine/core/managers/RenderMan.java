@@ -89,11 +89,11 @@ public class RenderMan extends JPanel implements Runnable {
 
         Graphics2D g2 = (Graphics2D)g;
 
-        for (GameObject go : instance.getActionManager().getGameObjects()) {
+        /*for (GameObject go : instance.getActionManager().getGameObjects()) {
 
             go.draw(g2);
 
-        }
+        }*/
 
         //instance.getDebugDisplay().draw(g2);
 
