@@ -2,15 +2,21 @@ package de.Game2D.engine.core.managers;
 
 import de.Game2D.engine_old.core.PropertiesManager;
 import de.Game2D.engine_old.objects.GameObject;
+import de.Game2D.engine.core.Instance;
 
 import java.awt.*;
 
 public class ActMan implements Runnable {
 
     private Thread actionThread;
+    private Instance instance;
 
     private boolean run = true;
     private int gameTick = 0;
+
+    public ActMan(Instance i){
+        this.instance = i;
+    }
 
 
     protected void startActionThread() {
