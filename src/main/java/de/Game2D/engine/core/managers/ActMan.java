@@ -4,8 +4,6 @@ import de.Game2D.engine_old.core.PropertiesManager;
 import de.Game2D.engine_old.objects.GameObject;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ActMan implements Runnable {
 
