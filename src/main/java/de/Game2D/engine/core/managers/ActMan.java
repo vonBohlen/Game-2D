@@ -11,6 +11,13 @@ public class ActMan implements Runnable {
 
     private boolean run = true;
     private int gameTick = 0;
+
+
+    protected void startActionThread() {
+        actionThread = new Thread(this);
+        actionThread.start();
+    }
+
     @Override
     public void run() {
         while (actionThread != null) {
