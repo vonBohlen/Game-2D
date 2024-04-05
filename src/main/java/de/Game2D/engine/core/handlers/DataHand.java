@@ -1,6 +1,5 @@
 package de.Game2D.engine.core.handlers;
 
-import de.Game2D.engine.core.Instance;
 import de.Game2D.engine.core.managers.ActionMan;
 import de.Game2D.engine.core.managers.RenderMan;
 

@@ -6,12 +6,9 @@ import de.Game2D.engine.core.managers.ActionMan;
 import de.Game2D.engine.core.managers.RenderMan;
 
 import de.Game2D.engine.core.handlers.Keyhand;
-import de.Game2D.engine.utils.ConfProvider;
 
 import javax.swing.*;
-import java.io.File;
 import java.nio.file.Path;
-import java.util.Properties;
 
 public class Instance {
 
