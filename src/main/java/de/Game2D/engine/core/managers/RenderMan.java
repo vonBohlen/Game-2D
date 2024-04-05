@@ -1,6 +1,7 @@
 package de.Game2D.engine.core.managers;
 
 import de.Game2D.engine.core.Instance;
+import de.Game2D.engine.core.handlers.DataHand;
 import de.Game2D.engine.utils.ConfProvider;
 //import de.Game2D.engine.objects.GameObject;
 
@@ -31,7 +32,7 @@ public class RenderMan extends JPanel implements Runnable {
 
         this.setDoubleBuffered(true);
 
-        this.addKeyListener(instance.keyHandler);
+        this.addKeyListener(DataHand.keyHand);
 
         this.setFocusable(true);
 
@@ -48,7 +49,7 @@ public class RenderMan extends JPanel implements Runnable {
     @Override
     public void run() {
 
-        double drawInterval = 1000000000 / Integer.parseInt(ConfProvider.getConf(instance.confPath).getProperty("game2d.core.fps"));
+        double drawInterval = 1000000000 / Integer.parseInt(ConfProvider.getConf(DataHand.confPath).getProperty("game2d.core.fps"));
         double delta = 0;
         long lastTime = System.nanoTime();
         long currentTime;

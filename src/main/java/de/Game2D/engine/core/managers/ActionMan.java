@@ -1,5 +1,6 @@
 package de.Game2D.engine.core.managers;
 
+import de.Game2D.engine.core.handlers.DataHand;
 import de.Game2D.engine.utils.ConfProvider;
 import de.Game2D.engine_old.objects.GameObject;
 import de.Game2D.engine.core.Instance;
@@ -35,7 +36,7 @@ public class ActionMan implements Runnable {
 
         while (actionThread != null) {
 
-            int tps = Integer.parseInt(ConfProvider.getConf(instance.confPath).getProperty("game2d.core.tps"));
+            int tps = Integer.parseInt(ConfProvider.getConf(DataHand.confPath).getProperty("game2d.core.tps"));
             double updateInterval = 1000000000 / tps;
             double delta = 0;
             long lastTime = System.nanoTime();
