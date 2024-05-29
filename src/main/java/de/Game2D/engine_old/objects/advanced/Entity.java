@@ -17,7 +17,7 @@ public abstract class Entity extends GameObject {
      * Moves the entity from its current position for the provided x and y shift values.
      * @param xShift shift on the x-axis
      * @param yShift shift on the y-axis
-     * @return true if the move was successful, else false
+     * @return null if the move was successful, else the collided gameObj
      */
     protected List<GameObject> move(int xShift, int yShift) {
         if (hitBox == null) return null;

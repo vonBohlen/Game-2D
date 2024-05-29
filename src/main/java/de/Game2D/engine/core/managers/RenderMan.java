@@ -1,26 +1,20 @@
 package de.Game2D.engine.core.managers;
 
-import de.Game2D.engine.core.Instance;
 import de.Game2D.engine.core.handlers.DataHand;
+import de.Game2D.engine.objects.GameObject;
 import de.Game2D.engine.utils.ConfProvider;
-//import de.Game2D.engine.objects.GameObject;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 
 public class RenderMan extends JPanel implements Runnable {
 
     Thread renderThread;
 
-    private final Instance instance;
-
-    public RenderMan(Instance i) {
-
-        this.instance = i;
+    public RenderMan() {
 
         confPanel();
-
-        startRenderThread();
 
     }
 
@@ -38,7 +32,7 @@ public class RenderMan extends JPanel implements Runnable {
 
     }
 
-    protected void startRenderThread() {
+    public void startRenderLoop() {
 
         renderThread = new Thread(this);
 
@@ -86,15 +80,17 @@ public class RenderMan extends JPanel implements Runnable {
 
     public void paintComponent(Graphics g) {
 
+        List<GameObject> gameObjects = DataHand.getGameObjs();
+
         super.paintComponent(g);
 
         Graphics2D g2 = (Graphics2D)g;
 
-        /*for (GameObject go : instance.getActionManager().getGameObjects()) {
+        for (GameObject go : gameObjects) {
 
             go.draw(g2);
 
-        }*/
+        }
 
         //instance.getDebugDisplay().draw(g2);
 

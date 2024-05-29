@@ -38,13 +38,18 @@ public class ConfProvider {
 
         boolean exists = file.exists();
 
-        if (generate && !exists) {
+        if (!exists) {
 
-            try {
-                file.createNewFile();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+            if (generate) {
+
+                try {
+                    file.createNewFile();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+
             }
+            else return;
 
         }
 

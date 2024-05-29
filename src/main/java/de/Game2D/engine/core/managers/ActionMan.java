@@ -1,29 +1,20 @@
 package de.Game2D.engine.core.managers;
 
 import de.Game2D.engine.core.handlers.DataHand;
+import de.Game2D.engine.objects.GameObject;
 import de.Game2D.engine.utils.ConfProvider;
-import de.Game2D.engine_old.objects.GameObject;
-import de.Game2D.engine.core.Instance;
 
 import java.awt.*;
+import java.util.List;
 
 public class ActionMan implements Runnable {
 
     private Thread actionThread;
-    private Instance instance;
 
     private boolean run = true;
     private int gameTick = 0;
 
-    public ActionMan(Instance i){
-
-        this.instance = i;
-
-        startActionThread();
-    }
-
-
-    protected void startActionThread() {
+    public void startGameLoop() {
 
         actionThread = new Thread(this);
 
@@ -68,6 +59,7 @@ public class ActionMan implements Runnable {
 
                     updateCount = 0;
                     timer = 0;
+
                 }
 
                 if (gameTick >= tps) gameTick = 0;
@@ -79,20 +71,27 @@ public class ActionMan implements Runnable {
     }
 
     private void update() {
-        /*for (GameObject go : gameObjects) {
+
+        List<GameObject> gameObjects = DataHand.getGameObjs();
+
+        for (GameObject go : gameObjects) {
             go.update();
-        }*/
+        }
+
     }
 
     public GameObject checkCollision(GameObject go, Rectangle position) {
 
-        /*for (GameObject current : gameObjects) {
+        List<GameObject> gameObjects = DataHand.getGameObjs();
+
+        for (GameObject current : gameObjects) {
 
             if (current.getCollisionActivated() && !current.equals(go) && position.intersects(current.hitBox)) return current;
 
-        }*/
+        }
 
         return null;
+
     }
 
     protected void freeze() {

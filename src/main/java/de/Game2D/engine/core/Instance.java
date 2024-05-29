@@ -25,11 +25,11 @@ public class Instance {
         ConfHand.setConfPath(confPath);
         ConfHand.generateConf();
 
-        DataHand.renderMan = new RenderMan(this);
+        DataHand.renderMan = new RenderMan();
 
         DataHand.keyHand = new Keyhand();
 
-        DataHand.actionMan = new ActionMan(this);
+        DataHand.actionMan = new ActionMan();
 
     }
 
@@ -39,6 +39,9 @@ public class Instance {
         loadWindow(windowTitle);
 
         //Starting Managerloops
+        DataHand.renderMan.startRenderLoop();
+
+        DataHand.actionMan.startGameLoop();
 
     }
 
