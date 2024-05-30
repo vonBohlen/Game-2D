@@ -1,7 +1,6 @@
 package de.Game2D.engine.objects;
 
 import de.Game2D.engine.core.handlers.DataHand;
-import de.Game2D.engine_old.core.Instance;
 
 import java.awt.*;
 

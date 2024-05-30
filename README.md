@@ -13,7 +13,14 @@
 THIS DOCUMENT WILL BE UPDATED IF THEY ARE ANY REALISES AVAILABLE.
 
 ## Summary
+* [Roadmap](#roadmap)
 * [Download](#download)
+
+## Roadmap
+* Engine restructuring _(in progress)_
+* **SAT** collision _(planed)_
+* **OpenGl** based graphics engine _(planed)_
+* **Chunk** based processing _(planed)_ 
 
 ## Download
 [ ![release][] ](https://jitpack.io/#vonBohlen/Game-2D)

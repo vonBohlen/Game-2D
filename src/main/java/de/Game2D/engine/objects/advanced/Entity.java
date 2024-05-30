@@ -1,5 +1,6 @@
 package de.Game2D.engine.objects.advanced;
 
+import de.Game2D.engine.core.handlers.DataHand;
 import de.Game2D.engine.objects.GameObject;
 
 import java.awt.*;
@@ -40,11 +41,8 @@ public abstract class Entity extends GameObject {
                 yShift--;
             }
 
-            objectCacheX = null;
-            objectCacheY = null;
-
-            //objectCacheX = actionManager.checkCollision(this, new Rectangle(newX, hitBox.y, hitBox.width, hitBox.height));
-            //objectCacheY = actionManager.checkCollision(this, new Rectangle(hitBox.x, newY, hitBox.width, hitBox.height));
+            objectCacheX = DataHand.actionMan.checkCollision(this, new Rectangle(newX, hitBox.y, hitBox.width, hitBox.height));
+            objectCacheY = DataHand.actionMan.checkCollision(this, new Rectangle(hitBox.x, newY, hitBox.width, hitBox.height));
 
             if (newX != hitBox.x) {
                 if (objectCacheX.equals(null)) hitBox.x = newX;
@@ -63,8 +61,43 @@ public abstract class Entity extends GameObject {
             }
 
         }
+
         if (objectCache[0].equals(null) && objectCache[1].equals(null)) return null;
+
         return objectCache;
+
+    }
+
+    public GameObject setPosition(int newX, int newY) {
+
+        if (hitBox == null) return null;
+
+        Rectangle newPosition = new Rectangle(newX, newY, hitBox.width, hitBox.height);
+        GameObject objectCache = DataHand.actionMan.checkCollision(this, newPosition);
+
+        if (objectCache != null) return objectCache;
+
+        hitBox.x = newX;
+        hitBox.y = newY;
+
+        return null;
+
+    }
+
+    public GameObject changeEntitySize(int newWidth, int newHeight) {
+
+        if (hitBox == null) return null;
+
+        Rectangle newSize = new Rectangle(hitBox.x, hitBox.y, newWidth, newHeight);
+        GameObject objectCache = DataHand.actionMan.checkCollision(this, newSize);
+
+        if (objectCache != null) return objectCache;
+
+        hitBox.width = newWidth;
+        hitBox.height = newHeight;
+
+        return null;
+
     }
 
 }
