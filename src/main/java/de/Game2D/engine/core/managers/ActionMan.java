@@ -3,6 +3,7 @@ package de.Game2D.engine.core.managers;
 import de.Game2D.engine.core.handlers.DataHand;
 import de.Game2D.engine.objects.GameObject;
 import de.Game2D.engine.utils.ConfProvider;
+import de.Game2D.engine.utils.DebugScreen;
 
 import java.awt.*;
 import java.util.List;
@@ -55,7 +56,7 @@ public class ActionMan implements Runnable {
 
                 if (timer >= 1000000000) {
 
-                    //instance.getDebugDisplay().updateTPS(updateCount);
+                    DebugScreen.updateTPS(updateCount);
 
                     updateCount = 0;
                     timer = 0;

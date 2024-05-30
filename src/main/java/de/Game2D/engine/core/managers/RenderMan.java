@@ -3,6 +3,7 @@ package de.Game2D.engine.core.managers;
 import de.Game2D.engine.core.handlers.DataHand;
 import de.Game2D.engine.objects.GameObject;
 import de.Game2D.engine.utils.ConfProvider;
+import de.Game2D.engine.utils.DebugScreen;
 
 import javax.swing.*;
 import java.awt.*;
@@ -68,7 +69,7 @@ public class RenderMan extends JPanel implements Runnable {
 
             if (timer >= 1000000000) {
 
-                //instance.getDebugDisplay().updateFPS(drawCount);
+                DebugScreen.updateFPS(drawCount);
 
                 drawCount = 0;
                 timer = 0;
@@ -92,7 +93,7 @@ public class RenderMan extends JPanel implements Runnable {
 
         }
 
-        //instance.getDebugDisplay().draw(g2);
+        DebugScreen.draw(g2);
 
         g2.dispose();
     }

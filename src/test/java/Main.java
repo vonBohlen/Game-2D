@@ -1,3 +1,4 @@
+import de.Game2D.demo.entities.Ball;
 import de.Game2D.engine_old.core.Instance;
 import de.Game2D.engine_old.objects.ObjectConfig;
 import test_objs.*;

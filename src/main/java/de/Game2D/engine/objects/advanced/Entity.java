@@ -2,13 +2,18 @@ package de.Game2D.engine.objects.advanced;
 
 import de.Game2D.engine.core.handlers.DataHand;
 import de.Game2D.engine.objects.GameObject;
+import de.Game2D.engine_old.objects.ObjectConfig;
 
 import java.awt.*;
 
 public abstract class Entity extends GameObject {
 
     public Entity(Rectangle hb, boolean collision, Image txt) {
+
         super(hb, collision, txt);
+
+        DataHand.regGameObj(this);
+
     }
 
     protected GameObject[] move(int xShift, int yShift) {
@@ -45,7 +50,7 @@ public abstract class Entity extends GameObject {
             objectCacheY = DataHand.actionMan.checkCollision(this, new Rectangle(hitBox.x, newY, hitBox.width, hitBox.height));
 
             if (newX != hitBox.x) {
-                if (objectCacheX.equals(null)) hitBox.x = newX;
+                if (objectCacheX == null) hitBox.x = newX;
                 else {
                     xShift = 0;
                     objectCache[0] = objectCacheX;
@@ -53,7 +58,7 @@ public abstract class Entity extends GameObject {
             }
 
             if (newY != hitBox.y) {
-                if (objectCacheY.equals(null)) hitBox.y = newY;
+                if (objectCacheY == null) hitBox.y = newY;
                 else {
                     yShift = 0;
                     objectCache[1] = objectCacheY;
@@ -62,7 +67,7 @@ public abstract class Entity extends GameObject {
 
         }
 
-        if (objectCache[0].equals(null) && objectCache[1].equals(null)) return null;
+        if (objectCache[0] == null && objectCache[1] == null) return null;
 
         return objectCache;
 

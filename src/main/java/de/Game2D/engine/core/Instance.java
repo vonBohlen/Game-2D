@@ -25,9 +25,9 @@ public class Instance {
         ConfHand.setConfPath(confPath);
         ConfHand.generateConf();
 
-        DataHand.renderMan = new RenderMan();
-
         DataHand.keyHand = new Keyhand();
+
+        DataHand.renderMan = new RenderMan();
 
         DataHand.actionMan = new ActionMan();
 
