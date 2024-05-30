@@ -10,10 +10,12 @@ public class DebugScreen {
     private static int TPS = 0;
 
     public static void updateFPS(int fps) {
+        if (fps == FPS) return;
         FPS = fps;
     }
 
     public static void updateTPS(int tps) {
+        if (tps == TPS) return;
         TPS = tps;
     }
 
