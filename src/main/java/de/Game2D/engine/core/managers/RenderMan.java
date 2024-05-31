@@ -87,6 +87,9 @@ public class RenderMan extends JPanel implements Runnable {
 
         Graphics2D g2 = (Graphics2D)g;
 
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g2.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+
         for (GameObject go : gameObjects) {
 
             go.draw(g2);
