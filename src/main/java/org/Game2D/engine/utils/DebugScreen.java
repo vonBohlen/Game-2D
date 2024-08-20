@@ -20,7 +20,7 @@ public class DebugScreen {
     }
 
     public static void draw(Graphics2D g2) {
-        if (Boolean.parseBoolean(ConfProvider.getConf(DataHand.confPath).getProperty("game2d.core.showDebugScreen"))) {
+        if (/*Boolean.parseBoolean(ConfProvider.getConf(DataHand.confPath).getProperty("game2d.core.showDebugScreen"))*/ true) {
             g2.setColor(Color.RED);
 
             g2.drawString("FPS: " + FPS, 20, 20);
