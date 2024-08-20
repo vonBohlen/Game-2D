@@ -1,4 +1,4 @@
-package de.Game2D.engine.utils;
+package org.Game2D.engine.utils;
 
 import java.io.*;
 import java.nio.file.Path;

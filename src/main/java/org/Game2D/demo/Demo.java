@@ -1,11 +1,11 @@
-package de.Game2D.demo;
+package org.Game2D.demo;
 
-import de.Game2D.demo.entities.Ball;
-import de.Game2D.demo.entities.BallwP;
-import de.Game2D.demo.entities.TpSquare;
-import de.Game2D.demo.objects.Square;
-import de.Game2D.engine.core.Instance;
-import de.Game2D.engine.core.managers.RenderMan;
+import org.Game2D.demo.entities.Ball;
+import org.Game2D.demo.entities.BallwP;
+import org.Game2D.demo.entities.TpSquare;
+import org.Game2D.demo.objects.Square;
+import org.Game2D.engine.core.Instance;
+import org.Game2D.engine.core.managers.RenderMan;
 
 import javax.imageio.ImageIO;
 import java.awt.*;

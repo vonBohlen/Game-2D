@@ -1,7 +1,7 @@
-package de.Game2D.demo;
+package org.Game2D.demo;
 
-import de.Game2D.engine.core.handlers.DataHand;
-import de.Game2D.engine.objects.advanced.Entity;
+import org.Game2D.engine.core.handlers.DataHand;
+import org.Game2D.engine.objects.advanced.Entity;
 
 import java.awt.*;
 

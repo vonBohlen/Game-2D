@@ -1,6 +1,6 @@
-package de.Game2D.demo.objects;
+package org.Game2D.demo.objects;
 
-import de.Game2D.engine.objects.advanced.StaticObject;
+import org.Game2D.engine.objects.advanced.StaticObject;
 
 import java.awt.*;
 

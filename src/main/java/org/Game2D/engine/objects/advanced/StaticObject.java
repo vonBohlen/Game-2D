@@ -1,6 +1,6 @@
-package de.Game2D.engine.objects.advanced;
+package org.Game2D.engine.objects.advanced;
 
-import de.Game2D.engine.objects.GameObject;
+import org.Game2D.engine.objects.GameObject;
 
 import java.awt.*;
 

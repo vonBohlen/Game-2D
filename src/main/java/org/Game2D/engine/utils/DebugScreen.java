@@ -1,6 +1,6 @@
-package de.Game2D.engine.utils;
+package org.Game2D.engine.utils;
 
-import de.Game2D.engine.core.handlers.DataHand;
+import org.Game2D.engine.core.handlers.DataHand;
 
 import java.awt.*;
 

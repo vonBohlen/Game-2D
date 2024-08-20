@@ -1,6 +1,6 @@
-package de.Game2D.engine.core.handlers;
+package org.Game2D.engine.core.handlers;
 
-import de.Game2D.engine.utils.ConfProvider;
+import org.Game2D.engine.utils.ConfProvider;
 
 import java.io.File;
 import java.nio.file.Path;

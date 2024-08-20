@@ -1,9 +1,9 @@
-package de.Game2D.engine.core.managers;
+package org.Game2D.engine.core.managers;
 
-import de.Game2D.engine.core.handlers.DataHand;
-import de.Game2D.engine.objects.GameObject;
-import de.Game2D.engine.utils.ConfProvider;
-import de.Game2D.engine.utils.DebugScreen;
+import org.Game2D.engine.core.handlers.DataHand;
+import org.Game2D.engine.objects.GameObject;
+import org.Game2D.engine.utils.ConfProvider;
+import org.Game2D.engine.utils.DebugScreen;
 
 import javax.swing.*;
 import java.awt.*;

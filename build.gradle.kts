@@ -1,15 +1,20 @@
 plugins {
+
     id("java")
     id("java-library")
     id("maven-publish")
+    id("com.github.johnrengelman.shadow") version("7.1.2")
+
 }
 
-group = "de.Game2D.engine"
-version = "pre-alpha.0.1"
+group = "org.Game2D"
+version = "1.0.0"
 
 java {
+
     sourceCompatibility = JavaVersion.VERSION_17
     targetCompatibility = JavaVersion.VERSION_17
+
 }
 
 repositories {
@@ -17,10 +22,13 @@ repositories {
 }
 
 dependencies {
-    testImplementation(platform("org.junit:junit-bom:5.9.1"))
-    testImplementation("org.junit.jupiter:junit-jupiter")
 
-    implementation("org.lwjgl:lwjgl:3.2.3")
+    compileOnly("org.projectlombok:lombok:1.18.32")
+    annotationProcessor("org.projectlombok:lombok:1.18.32")
+
+    implementation("org.jetbrains:annotations:24.1.0")
+    implementation("org.reflections:reflections:0.10.2")
+
 }
 
 
@@ -30,6 +38,3 @@ tasks.withType<Jar> {
     }
 }
 
-tasks.test {
-    useJUnitPlatform()
-}

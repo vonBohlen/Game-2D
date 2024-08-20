@@ -1,11 +1,11 @@
-package de.Game2D.engine.core;
+package org.Game2D.engine.core;
 
-import de.Game2D.engine.core.handlers.ConfHand;
-import de.Game2D.engine.core.handlers.DataHand;
-import de.Game2D.engine.core.managers.ActionMan;
-import de.Game2D.engine.core.managers.RenderMan;
+import org.Game2D.engine.core.handlers.ConfHand;
+import org.Game2D.engine.core.handlers.DataHand;
+import org.Game2D.engine.core.managers.ActionMan;
+import org.Game2D.engine.core.managers.RenderMan;
 
-import de.Game2D.engine.core.handlers.Keyhand;
+import org.Game2D.engine.core.handlers.Keyhand;
 
 import javax.swing.*;
 import java.nio.file.Path;
