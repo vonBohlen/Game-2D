@@ -24,11 +24,6 @@ public class Physicsobject extends Entity {
     @Override
     public void update() {
 
-        //Calculating the velocity towards the ground
-        // v = a * t
-        this.veloY += this.gravityConst * this.passedTime;
-
-
         //If W or S is pressed there are jumpboosts
         if(DataHand.keyHand.keyPressed_W){
             this.veloY -= 0.1;
@@ -47,27 +42,39 @@ public class Physicsobject extends Entity {
             this.veloX += 0.1;
         }
 
+        boolean acceleration = true;
+
         //Calculating what to use as Move Parameters
         int moveX = (int) this.veloX;
         int moveY = (int) this.veloY;
 
         //Wall logic -> if it hits wall it goes the opposite direction
-        if(this.hitBox.x <= 0 || this.hitBox.x >= 1850){
+        if(this.hitBox.x + moveX <= 0 || this.hitBox.x + moveX >= 1850){
             this.veloX = this.veloX*-1;
             moveX *= -1;
         }
 
         //Bottom and Top logic -> if it hits bottom or top it goes the opposite direction
-        if(this.hitBox.y <= 0 || this.hitBox.y >= 1050){
+        if(this.hitBox.y + moveY <= 0 || this.hitBox.y + moveY >= 1050){
             this.veloY = this.veloY*-1;
             moveY *= -1;
+            acceleration = false;
         }
+
+
+        //if a wall got hit the ball gets not accelerated
+        if(acceleration) {
+            //Calculating the velocity towards the ground
+            // v = a * t
+            this.veloY += this.gravityConst * this.passedTime;
+        }
+
+        //the new accelerated move variable
+        moveY = (int) this.veloY;
 
         //moving the object at last
         move(moveX, 0);
         move(0, moveY);
-
-        System.out.println(this.veloX);
     }
 
     @Override
