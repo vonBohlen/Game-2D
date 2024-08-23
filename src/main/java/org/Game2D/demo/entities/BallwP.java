@@ -11,9 +11,9 @@ public class BallwP extends Entity {
         super(hb, true, txt);
     }
 
-    private int MoveX = 6;
+    private int MoveX = 0;
 
-    private int MoveY = -10;
+    private int MoveY = 0;
 
     int tickBottomReached = 0;
 
@@ -29,10 +29,12 @@ public class BallwP extends Entity {
             tickBottomReached = DataHand.actionMan.getGameTick();
         }
 
+        //Wenn Wände getroffen an den Seiten bewegungsrichtung verändern
         if(hitBox.x + MoveX <= 0 || hitBox.x + MoveX >= 1850){
             this.MoveX = this.MoveX * -1;
         }
 
+        //Wenn Boden oder Decke getroffen bewegungsrichtung verändern
         if(hitBox.y + MoveY <= 0 || hitBox.y + MoveY >= 1050) {
             this.MoveY = this.MoveY * -1;
         }
@@ -40,6 +42,7 @@ public class BallwP extends Entity {
 
         MoveY += 2;
 
+        //Teleportierlogik -> Wenn es aus den Rändern des Fensters ist wird es zurück rein teleportiert
         if(hitBox.x <= 0){
             setPosition(0, hitBox.y);
         }
