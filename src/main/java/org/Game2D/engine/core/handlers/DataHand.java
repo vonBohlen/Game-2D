@@ -19,7 +19,7 @@ public class  DataHand {
     public static Keyhand keyHand = null;
 
 
-    private static List<GameObject> gameObjects = new ArrayList<>();
+    private static final List<GameObject> gameObjects = new ArrayList<>();
 
     public static void regGameObj(GameObject go) {
         gameObjects.add(go);

@@ -13,7 +13,7 @@ public class ActionMan implements Runnable {
     private Thread actionThread;
 
     private boolean run = true;
-    private int gameTick = 0;
+    private static int gameTick = 0;
 
     public void startGameLoop() {
 
@@ -81,7 +81,7 @@ public class ActionMan implements Runnable {
 
     }
 
-    public GameObject checkCollision(GameObject go, Rectangle position) {
+    public static GameObject checkCollision(GameObject go, Rectangle position) {
 
         List<GameObject> gameObjects = DataHand.getGameObjs();
 
@@ -104,7 +104,7 @@ public class ActionMan implements Runnable {
     }
 
 
-    public int getGameTick() {
+    public static int getGameTick() {
         return gameTick;
     }
 

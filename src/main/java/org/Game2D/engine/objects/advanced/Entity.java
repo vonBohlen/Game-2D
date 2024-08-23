@@ -1,6 +1,7 @@
 package org.Game2D.engine.objects.advanced;
 
 import org.Game2D.engine.core.handlers.DataHand;
+import org.Game2D.engine.core.managers.ActionMan;
 import org.Game2D.engine.objects.GameObject;
 
 import java.awt.*;
@@ -45,8 +46,8 @@ public abstract class Entity extends GameObject {
                 yShift--;
             }
 
-            objectCacheX = DataHand.actionMan.checkCollision(this, new Rectangle(newX, hitBox.y, hitBox.width, hitBox.height));
-            objectCacheY = DataHand.actionMan.checkCollision(this, new Rectangle(hitBox.x, newY, hitBox.width, hitBox.height));
+            objectCacheX = ActionMan.checkCollision(this, new Rectangle(newX, hitBox.y, hitBox.width, hitBox.height));
+            objectCacheY = ActionMan.checkCollision(this, new Rectangle(hitBox.x, newY, hitBox.width, hitBox.height));
 
             if (newX != hitBox.x) {
                 if (objectCacheX == null) hitBox.x = newX;
@@ -77,7 +78,7 @@ public abstract class Entity extends GameObject {
         if (hitBox == null) return null;
 
         Rectangle newPosition = new Rectangle(newX, newY, hitBox.width, hitBox.height);
-        GameObject objectCache = DataHand.actionMan.checkCollision(this, newPosition);
+        GameObject objectCache = ActionMan.checkCollision(this, newPosition);
 
         if (objectCache != null) return objectCache;
 
@@ -93,7 +94,7 @@ public abstract class Entity extends GameObject {
         if (hitBox == null) return null;
 
         Rectangle newSize = new Rectangle(hitBox.x, hitBox.y, newWidth, newHeight);
-        GameObject objectCache = DataHand.actionMan.checkCollision(this, newSize);
+        GameObject objectCache = ActionMan.checkCollision(this, newSize);
 
         if (objectCache != null) return objectCache;
 
