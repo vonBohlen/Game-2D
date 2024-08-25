@@ -17,10 +17,9 @@ THIS DOCUMENT WILL BE UPDATED IF THEY ARE ANY REALISES AVAILABLE.
 * [Download](#download)
 
 ## Roadmap
-* Engine restructuring _(in progress)_
-* **SAT** collision _(planed)_
-* **OpenGl** based graphics engine _(planed)_
-* **Chunk** based processing _(planed)_ 
+* **Vulcan** based graphics engine _(in progress)_
+* **Chunk** based processing _(in progress)_ 
+* **AABB** collision _(planed)_
 
 ## Download
 [ ![release][] ](https://jitpack.io/#vonBohlen/Game-2D)
