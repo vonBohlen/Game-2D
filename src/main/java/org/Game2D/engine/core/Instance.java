@@ -52,7 +52,7 @@ public class Instance {
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setExtendedState(window.MAXIMIZED_BOTH);
         window.setUndecorated(true);
-        window.setResizable(false);
+        window.setResizable(true);
         window.setTitle(windowTitle);
 
         window.add(DataHand.renderMan);
