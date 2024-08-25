@@ -79,10 +79,16 @@ public class NewActionMan implements Runnable {
 
     private void update() {
 
-        List<GameObject> gameObjects = DataHand.getGameObjs();
+        for (Chunk chunk : loadedChunks ) {
+            for (GameObject gameObject : chunk.getGameObjects()) {
+                gameObject.update();
+            }
+        }
 
-        for (GameObject go : gameObjects) {
-            go.update();
+        for (Chunk chunk : forceLoadedChunks ) {
+            for (GameObject gameObject : chunk.getGameObjects()) {
+                gameObject.update();
+            }
         }
 
     }
