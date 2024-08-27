@@ -1,5 +1,6 @@
 package org.Game2D.demo.flappy;
 
+import org.Game2D.demo.flappy.entities.Bird;
 import org.Game2D.demo.flappy.objects.BackgroundObject;
 import org.Game2D.demo.flappy.objects.BaseObject;
 import org.Game2D.engine.core.Instance;
@@ -24,29 +25,32 @@ public class FlappyBird {
         Image texture;
         Image backgroundTxt;
         Image baseTxt;
+        Image birdTxt;
 
         try {
             texture = ImageIO.read(Objects.requireNonNull(RenderMan.class.getClassLoader().getResource("default.png")));
             backgroundTxt = ImageIO.read(Objects.requireNonNull(RenderMan.class.getClassLoader().getResource("flappy_assets/background/background-day.png")));
             baseTxt = ImageIO.read(Objects.requireNonNull(RenderMan.class.getClassLoader().getResource("flappy_assets/background/base.png")));
+            birdTxt = ImageIO.read(Objects.requireNonNull(RenderMan.class.getClassLoader().getResource("flappy_assets/bird/yellowbird-midflap.png")));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
+
         //Init background
-        for (int i = 0; i <= screenWidth;) {
+        for (int i = 0; i <= screenWidth; i++) {
             new BackgroundObject(new Rectangle(i * 288, 0, 288, screenHeight - 112), false, backgroundTxt);
-            i += 288;
         }
 
+
         //Init bird
+        new Bird(birdTxt, 60);
 
         //Init pipes
 
         //Init base
-        for (int i = 0; i <= screenWidth;) {
-            new BaseObject(new Rectangle(i * 336, screenHeight - 112, 112, 336), true, baseTxt);
-            i += 336;
+        for (int i = 0; i <= screenWidth; i++) {
+            new BaseObject(new Rectangle(i * 336, screenHeight - 112, 336, 112), true, baseTxt);
         }
 
         //Init counter

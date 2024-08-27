@@ -1,6 +1,7 @@
 package org.Game2D.demo;
 
 import org.Game2D.demo.controlable.Physicsobject;
+import org.Game2D.demo.flappy.entities.Bird;
 import org.Game2D.demo.objects.Square;
 import org.Game2D.engine.core.Instance;
 import org.Game2D.engine.core.managers.RenderMan;
@@ -27,7 +28,7 @@ public class Demo {
 
         //new Player(new Rectangle(200, 200, 48, 48), texture);
 
-        new Square(new Rectangle(100, 52, 48, 48), texture);
+        //new Square(new Rectangle(100, 52, 48, 48), texture);
 
         //new BallwP(new Rectangle(600, 0, 48, 48), texture);
 
@@ -35,7 +36,9 @@ public class Demo {
 
         //new Ball(new Rectangle(0, 0, 48, 48), texture);
 
-        new Physicsobject(true, texture, 60);
+        //new Physicsobject(true, texture, 60);
+
+        new Bird(texture, 60);
 
     }
 
