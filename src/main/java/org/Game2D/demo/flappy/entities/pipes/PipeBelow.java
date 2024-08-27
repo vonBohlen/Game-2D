@@ -1,18 +1,20 @@
-package org.Game2D.demo.flappy.entities;
+package org.Game2D.demo.flappy.entities.pipes;
 
 import org.Game2D.engine.objects.advanced.Entity;
 
 import java.awt.*;
 
-public class Pipe extends Entity {
+public class PipeBelow extends Entity {
 
-    public Pipe(int x, int y, boolean collision, Image txt) {
-        super(new Rectangle(x, y, 52, 314), collision, txt);
+    int speed = 5;
+
+    public PipeBelow(int x, int y, Image txt) {
+        super(new Rectangle(x, y, 104, 628), true, txt);
     }
 
     @Override
     public void update() {
-
+        move(-speed, 0);
     }
 
     @Override

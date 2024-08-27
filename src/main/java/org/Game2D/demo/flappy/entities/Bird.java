@@ -49,8 +49,8 @@ public class Bird extends Entity {
             this.velo = this.veloOnPress;
         }
 
-        //checks if the top is reached there is no check for bottom needed because the floor is an object
-        if(this.hitBox.y <= 0){
+        //checks if the top or bottom is reached
+        if(this.hitBox.y <= 0 || this.hitBox.y + this.hitBox.getHeight() >= DataHand.renderMan.getHeight() - 112){
             this.gameOver = true;
         }
 
