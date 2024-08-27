@@ -40,8 +40,8 @@ public class FlappyBird {
 
         //Init background
         for (int i = 0; i <= screenWidth; i++) {
-            new BackgroundObject(new Rectangle(i * 288, 0, 288, screenHeight - 122 - 512), false, blueTxt);
-            new BackgroundObject(new Rectangle(i * 288, screenHeight - 122 - 512, 288, 512), false, backgroundTxt);
+            new BackgroundObject(new Rectangle(i * 288, 0, 288, screenHeight - 122 - 500), false, blueTxt);
+            new BackgroundObject(new Rectangle(i * 288, screenHeight - 122 - 500, 288, 512), false, backgroundTxt);
         }
 
 
