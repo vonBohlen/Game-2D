@@ -23,12 +23,14 @@ public class FlappyBird {
         int screenWidth = DataHand.renderMan.getWidth();
 
         Image texture;
+        Image blueTxt;
         Image backgroundTxt;
         Image baseTxt;
         Image birdTxt;
 
         try {
             texture = ImageIO.read(Objects.requireNonNull(RenderMan.class.getClassLoader().getResource("default.png")));
+            blueTxt = ImageIO.read(Objects.requireNonNull(RenderMan.class.getClassLoader().getResource("flappy_assets/background/blue.png")));
             backgroundTxt = ImageIO.read(Objects.requireNonNull(RenderMan.class.getClassLoader().getResource("flappy_assets/background/background-day.png")));
             baseTxt = ImageIO.read(Objects.requireNonNull(RenderMan.class.getClassLoader().getResource("flappy_assets/background/base.png")));
         } catch (IOException e) {
@@ -38,7 +40,8 @@ public class FlappyBird {
 
         //Init background
         for (int i = 0; i <= screenWidth; i++) {
-            new BackgroundObject(new Rectangle(i * 288, 0, 288, screenHeight - 112), false, backgroundTxt);
+            new BackgroundObject(new Rectangle(i * 288, 0, 288, screenHeight - 122 - 512), false, blueTxt);
+            new BackgroundObject(new Rectangle(i * 288, screenHeight - 122 - 512, 288, 512), false, backgroundTxt);
         }
 
 
