@@ -11,12 +11,12 @@ public class ChunkMan {
         return chunks;
     }
 
-    public static Chunk getChunkById(int id) {
-        for (Chunk chunk : chunks) {
-            if (chunk.ID == id) return chunk;
-        }
-        return null;
-    }
+//    public static Chunk getChunkById(int id) {
+//        for (Chunk chunk : chunks) {
+//            if (chunk.ID == id) return chunk;
+//        }
+//        return null;
+//    }
 
     public static void addChunk(Chunk chunk) {
         if (!chunks.contains(chunk)) chunks.add(chunk);
@@ -26,8 +26,8 @@ public class ChunkMan {
         chunks.removeIf(current -> current == chunk);
     }
 
-    public static void removeChunkById(int id) {
-        chunks.removeIf(chunk -> chunk.ID == id);
-    }
+//    public static void removeChunkById(int chunkX, int chunkY) {
+//        chunks.removeIf(chunk -> chunk.chunkX + chunk.chunkY == chunkX + chunkY);
+//    }
 
 }

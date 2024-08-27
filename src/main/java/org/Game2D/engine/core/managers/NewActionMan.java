@@ -80,15 +80,11 @@ public class NewActionMan implements Runnable {
     private void update() {
 
         for (Chunk chunk : loadedChunks ) {
-            for (GameObject gameObject : chunk.getGameObjects()) {
-                gameObject.update();
-            }
+            chunk.update();
         }
 
         for (Chunk chunk : forceLoadedChunks ) {
-            for (GameObject gameObject : chunk.getGameObjects()) {
-                gameObject.update();
-            }
+            chunk.update();
         }
 
     }

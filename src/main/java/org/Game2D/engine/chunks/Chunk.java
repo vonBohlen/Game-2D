@@ -7,10 +7,16 @@ import java.util.List;
 
 public class Chunk {
 
-    public final int ID;
+    public final int chunkX, chunkY;
 
-    public Chunk(int id) {
-        ID = id;
+    public final int posX, posY;
+
+    public Chunk(int chunkX, int chunkY, int posX, int posY) {
+        this.chunkX = chunkX;
+        this.chunkY = chunkY;
+
+        this.posX = posX;
+        this.posY = posY;
     }
 
     private final List<GameObject> gameObjects = new ArrayList<>();
@@ -25,6 +31,12 @@ public class Chunk {
 
     public void removeGameObject(GameObject gameObject) {
         gameObjects.removeIf(current -> current == gameObject);
+    }
+
+    public void update() {
+        for (GameObject gameObject : gameObjects) {
+            gameObject.update();
+        }
     }
 
 }

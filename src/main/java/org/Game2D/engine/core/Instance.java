@@ -8,6 +8,7 @@ import org.Game2D.engine.core.managers.RenderMan;
 import org.Game2D.engine.core.handlers.Keyhand;
 
 import javax.swing.*;
+import java.awt.*;
 import java.nio.file.Path;
 
 public class Instance {
@@ -50,7 +51,7 @@ public class Instance {
         window = new JFrame();
 
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.setExtendedState(window.MAXIMIZED_BOTH);
+        window.setExtendedState(Frame.MAXIMIZED_BOTH);
         window.setUndecorated(true);
         window.setResizable(true);
         window.setTitle(windowTitle);
