@@ -27,7 +27,7 @@ public class Bird extends Entity {
     public Bird(Image txt) {
 
         //bird gets placed at one half of the height and one third of the width
-        super(new Rectangle(DataHand.renderMan.getWidth() / 5, DataHand.renderMan.getHeight() / 2, 48, 48), true, txt);
+        super(new Rectangle(DataHand.renderMan.getWidth() / 5, DataHand.renderMan.getHeight() / 2, 34 * 2, 24 * 2), true, txt);
 
         try {
             txtMid = ImageIO.read(Objects.requireNonNull(RenderMan.class.getClassLoader().getResource("flappy_assets/bird/yellowbird-midflap.png")));
@@ -62,20 +62,20 @@ public class Bird extends Entity {
 
         //setting the midflap texture
         if(this.velo <= 2 && this.velo >= -2){
-            this.texture = txtMid;
+            this.texture = this.txtMid;
         }
 
         if(this.velo > 2){
-            texture = txtUp;
+            this.texture = this.txtUp;
         }
 
         if(this.velo < -2){
-            texture = txtDown;
+            this.texture = this.txtDown;
         }
 
         //if null is returned the bird moved without touching an object
         //the if branche is to determine whether or whether game over was true before
-        if(!gameOver) {
+        if(!this.gameOver) {
             this.gameOver = move(0, moving) != null;
         }
     }
@@ -89,7 +89,6 @@ public class Bird extends Entity {
 
     @Override
     public void draw(Graphics2D g2) {
-        g2.setColor(Color.WHITE);
         g2.drawImage(texture, hitBox.x, hitBox.y, hitBox.width, hitBox.height, null);
     }
 }
