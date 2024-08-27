@@ -1,9 +1,14 @@
 package org.Game2D.demo.flappy.entities;
 
 import org.Game2D.engine.core.handlers.DataHand;
+import org.Game2D.engine.core.managers.RenderMan;
 import org.Game2D.engine.objects.advanced.Entity;
+import org.Game2D.engine.utils.ConfProvider;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.io.IOException;
+import java.util.Objects;
 
 public class Bird extends Entity {
 
@@ -13,14 +18,28 @@ public class Bird extends Entity {
 
     double passedTime; //at 60 tps it is around 1.6
 
+    Image txtMid;
+    Image txtUp;
+    Image txtDown;
+
     boolean gameOver = false;
 
-    public Bird(Image txt, int tps) {
+    public Bird(Image txt) {
+
         //bird gets placed at one half of the height and one third of the width
         super(new Rectangle(DataHand.renderMan.getWidth() / 5, DataHand.renderMan.getHeight() / 2, 48, 48), true, txt);
 
+        try {
+            txtMid = ImageIO.read(Objects.requireNonNull(RenderMan.class.getClassLoader().getResource("flappy_assets/bird/yellowbird-midflap.png")));
+            txtUp = ImageIO.read(Objects.requireNonNull(RenderMan.class.getClassLoader().getResource("flappy_assets/bird/yellowbird-upflap.png")));
+            txtDown = ImageIO.read(Objects.requireNonNull(RenderMan.class.getClassLoader().getResource("flappy_assets/bird/yellowbird-downflap.png")));
+        }
+        catch (IOException e){
+            throw new RuntimeException();
+        }
+
         //die Zeit die idealerweise zwischen zwei ticks vergeht
-        this.passedTime = 1 / (double) tps;
+        this.passedTime = 1 / (double) Integer.parseInt(ConfProvider.getConf(DataHand.confPath).getProperty("game2d.core.tps"));
     }
 
     private void updatePosition() {
@@ -40,6 +59,19 @@ public class Bird extends Entity {
 
         //converting the velocity into the needed datatype for the move method
         int moving = (int) this.velo;
+
+        //setting the midflap texture
+        if(this.velo <= 2 && this.velo >= -2){
+            this.texture = txtMid;
+        }
+
+        if(this.velo > 2){
+            texture = txtUp;
+        }
+
+        if(this.velo < -2){
+            texture = txtDown;
+        }
 
         //if null is returned the bird moved without touching an object
         //the if branche is to determine whether or whether game over was true before

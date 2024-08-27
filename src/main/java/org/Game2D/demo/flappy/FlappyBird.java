@@ -31,7 +31,6 @@ public class FlappyBird {
             texture = ImageIO.read(Objects.requireNonNull(RenderMan.class.getClassLoader().getResource("default.png")));
             backgroundTxt = ImageIO.read(Objects.requireNonNull(RenderMan.class.getClassLoader().getResource("flappy_assets/background/background-day.png")));
             baseTxt = ImageIO.read(Objects.requireNonNull(RenderMan.class.getClassLoader().getResource("flappy_assets/background/base.png")));
-            birdTxt = ImageIO.read(Objects.requireNonNull(RenderMan.class.getClassLoader().getResource("flappy_assets/bird/yellowbird-midflap.png")));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -44,7 +43,7 @@ public class FlappyBird {
 
 
         //Init bird
-        new Bird(birdTxt, 60);
+        new Bird(texture);
 
         //Init pipes
 

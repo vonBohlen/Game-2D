@@ -38,7 +38,7 @@ public class Demo {
 
         //new Physicsobject(true, texture, 60);
 
-        new Bird(texture, 60);
+        new Bird(texture);
 
     }
 
