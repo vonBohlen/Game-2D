@@ -1,4 +1,4 @@
-package org.Game2D.demo;
+package org.Game2D.demo.controlable;
 
 import org.Game2D.engine.core.handlers.DataHand;
 import org.Game2D.engine.objects.advanced.Entity;

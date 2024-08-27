@@ -1,4 +1,4 @@
-package org.Game2D.demo.objects;
+package org.Game2D.demo.controlable;
 
 import org.Game2D.engine.core.handlers.DataHand;
 import org.Game2D.engine.objects.advanced.Entity;
@@ -10,13 +10,12 @@ public class Physicsobject extends Entity {
     double veloX = 0;
     double veloY = 0;
 
-    double passedTime;
+    double passedTime; //at 60 tps it is around 1.6
 
-    double gravityConst = 9.81;
-    double dragConst = 0.0;
-    double boost = 10;
-
-    double speedLossAtCollisionPercent = 1.25;
+    double gravityConst = 9.81; //earths gravity is 9.81
+    double dragConst = 0.75; //best is 0.75 and 0 for no energy loss
+    double boost = 6; //best is 6 and should not be more than gravConst
+    double speedLossAtCollisionPercent = 2.0; //best is 1.25 and 0 for no energy loss
 
     public Physicsobject(boolean collision, Image txt, int tps) {
         super(new Rectangle(100,100,48,48), collision, txt);
@@ -62,7 +61,7 @@ public class Physicsobject extends Entity {
         }
 
         //Bottom and Top logic -> if it hits bottom or top it goes the opposite direction
-        if(this.hitBox.y + moveY <= 0 || this.hitBox.y + moveY >= 1050){
+        if(this.hitBox.y + moveY <= -1000 || this.hitBox.y + moveY >= 1050){
             this.veloY = this.veloY*-1;
             moveY *= -1;
             acceleration = false;
