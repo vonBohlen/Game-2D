@@ -41,7 +41,7 @@ public class PipeManager extends Entity {
 
         try {
             txtTop = ImageIO.read(Objects.requireNonNull(RenderMan.class.getClassLoader().getResource("flappy_assets/pipe/pipe-green.png")));
-            txtBelow = ImageIO.read(Objects.requireNonNull(RenderMan.class.getClassLoader().getResource("flappy_assets/pipe/pipe-green.png")));
+            txtBelow = ImageIO.read(Objects.requireNonNull(RenderMan.class.getClassLoader().getResource("flappy_assets/pipe/pipe-green-upside-down.png")));
         }
         catch (IOException e){
             throw new RuntimeException();
