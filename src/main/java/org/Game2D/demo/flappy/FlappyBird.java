@@ -64,7 +64,8 @@ public class FlappyBird {
         infoDisplay.showMessage();
 
         //Init counter
-
+        ScoreDisplay.init();
+        ScoreDisplay.start();
     }
 
 }
