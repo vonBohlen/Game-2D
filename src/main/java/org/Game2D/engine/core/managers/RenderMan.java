@@ -92,7 +92,7 @@ public class RenderMan extends JPanel implements Runnable {
 
         for (GameObject go : gameObjects) {
 
-            go.draw(g2);
+            if (go.getTexture() != null) go.draw(g2);
 
         }
 

@@ -1,6 +1,7 @@
 package org.Game2D.demo.flappy;
 
 import org.Game2D.demo.flappy.entities.Bird;
+import org.Game2D.demo.flappy.entities.InfoDisplay;
 import org.Game2D.demo.flappy.entities.pipes.PipeManager;
 import org.Game2D.demo.flappy.objects.BackgroundObject;
 import org.Game2D.demo.flappy.objects.BaseObject;
@@ -15,6 +16,8 @@ import java.util.Objects;
 
 public class FlappyBird {
 
+    public static InfoDisplay infoDisplay;
+
     public static void main(String[] args) {
 
         Instance instance = new Instance(null);
@@ -27,7 +30,6 @@ public class FlappyBird {
         Image blueTxt;
         Image backgroundTxt;
         Image baseTxt;
-        Image birdTxt;
 
         try {
             texture = ImageIO.read(Objects.requireNonNull(RenderMan.class.getClassLoader().getResource("default.png")));
@@ -56,6 +58,10 @@ public class FlappyBird {
         for (int i = 0; i <= screenWidth; i++) {
             new BaseObject(new Rectangle(i * 336, screenHeight - 112, 336, 112), false, baseTxt);
         }
+
+        //Init InfoDisplay
+        infoDisplay = new InfoDisplay();
+        infoDisplay.showMessage();
 
         //Init counter
 

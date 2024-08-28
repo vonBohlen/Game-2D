@@ -33,6 +33,10 @@ public abstract class GameObject {
         return collisionActivated;
     }
 
+    public Image getTexture() {
+        return texture;
+    }
+
     public void destroy() {
         DataHand.remGameObj(this);
     }
