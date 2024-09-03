@@ -49,13 +49,13 @@ public class ScoreDisplay {
             int posX = DataHand.renderMan.getWidth() / 2 - 12;
             for (int i = half; i >= 0;) {
                 scoreDigits.get(i).setPositionX(posX);
-                posX -= 24;
+                posX -= 26;
                 i--;
             }
             posX = DataHand.renderMan.getWidth() / 2 + 12;
             for (int i = scoreDigits.size() - 1; i > half - 1;) {
                 scoreDigits.get(i).setPositionX(posX);
-                posX += 24;
+                posX += 26;
                 i--;
             }
         }

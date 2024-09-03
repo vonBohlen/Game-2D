@@ -27,7 +27,7 @@ public class Bird extends Entity {
     public Bird(Image txt) {
 
         //bird gets placed at one half of the height and one third of the width
-        super(new Rectangle(DataHand.renderMan.getWidth() / 5, DataHand.renderMan.getHeight() / 2, 34 * 2, 24 * 2), true, txt);
+        super(new Rectangle(DataHand.renderMan.getWidth() / 5, DataHand.renderMan.getHeight() / 2, 68, 48), true, txt);
 
         try {
             txtMid = ImageIO.read(Objects.requireNonNull(RenderMan.class.getClassLoader().getResource("flappy_assets/bird/yellowbird-midflap.png")));
