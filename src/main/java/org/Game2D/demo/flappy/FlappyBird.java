@@ -60,8 +60,8 @@ public class FlappyBird {
         }
 
         //Init InfoDisplay
-        infoDisplay = new InfoDisplay();
-        infoDisplay.showMessage();
+        //infoDisplay = new InfoDisplay();
+        //infoDisplay.showMessage();
 
         //Init counter
         //ScoreDisplay.init();
