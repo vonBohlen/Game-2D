@@ -15,7 +15,7 @@ public class ScoreDisplay {
 
     private static int score = 0;
 
-    public static Image one, two, three, four, five, six, seven, eight, nine, zero = null;
+    public static Image one, two, three, four, five, six, seven, eight, nine, zero;
 
     private static final List<ScoreDigit> scoreDigits = new ArrayList<>();
 

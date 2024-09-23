@@ -19,7 +19,7 @@ public class  DataHand {
     public static Keyhand keyHand = null;
 
 
-    private static final List<GameObject> gameObjects = new ArrayList<>();
+    private static final ArrayList<GameObject> gameObjects = new ArrayList<>();
 
     public static void regGameObj(GameObject go) {
         gameObjects.add(go);
@@ -30,6 +30,10 @@ public class  DataHand {
     }
 
     public static List<GameObject> getGameObjs() {
+        return (List<GameObject>) gameObjects.clone();
+    }
+
+    protected static List<GameObject> getOriginalsGameObjs() {
         return gameObjects;
     }
 
