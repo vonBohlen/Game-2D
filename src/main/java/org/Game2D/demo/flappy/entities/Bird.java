@@ -1,5 +1,6 @@
 package org.Game2D.demo.flappy.entities;
 
+import org.Game2D.demo.flappy.FlappyBird;
 import org.Game2D.engine.core.handlers.DataHand;
 import org.Game2D.engine.core.managers.RenderMan;
 import org.Game2D.engine.objects.advanced.Entity;
@@ -13,7 +14,7 @@ import java.util.Objects;
 public class Bird extends Entity {
 
     double velo = 0.0; //only one velocity because the bird stays in position on x-axis
-    double veloOnPress = -7.5;
+    double veloOnPress = -5.5;
     double gravityConst = 9.81; //earths gravity is 9.81
 
     double passedTime; //at 60 tps it is around 1.6
@@ -78,6 +79,10 @@ public class Bird extends Entity {
         if(!this.gameOver) {
             this.gameOver = move(0, moving) != null;
         }
+
+        if(gameOver){
+            FlappyBird.infoDisplay.showGameover();
+        }
     }
 
     @Override
@@ -85,10 +90,17 @@ public class Bird extends Entity {
         if(!this.gameOver) {
             updatePosition();
         }
+        if (gameOver && DataHand.keyHand.keyPressed_SPACE){
+            setDefault();
+        }
     }
 
     @Override
     public void draw(Graphics2D g2) {
         g2.drawImage(texture, hitBox.x, hitBox.y, hitBox.width, hitBox.height, null);
+    }
+
+    private void setDefault(){
+        setPosition(DataHand.renderMan.getWidth() / 5, DataHand.renderMan.getHeight() / 2);
     }
 }

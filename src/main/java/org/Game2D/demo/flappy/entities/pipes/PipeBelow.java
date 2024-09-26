@@ -1,5 +1,6 @@
 package org.Game2D.demo.flappy.entities.pipes;
 
+import org.Game2D.demo.flappy.entities.Bird;
 import org.Game2D.engine.objects.advanced.Entity;
 
 import java.awt.*;
@@ -14,6 +15,9 @@ public class PipeBelow extends Entity {
 
     @Override
     public void update() {
+
+        //if(Bird.gameOver) return;
+
         move(-speed, 0);
     }
 

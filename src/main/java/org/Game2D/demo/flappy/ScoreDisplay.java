@@ -47,16 +47,16 @@ public class ScoreDisplay {
         if (scoreDigits.size() % 2 != 0) {
             int half = scoreDigits.size() / 2;
             int posX = DataHand.renderMan.getWidth() / 2 - 12;
-            for (int i = half; i >= 0;) {
+            for (int i = half + 1; i >= 0;) {
                 scoreDigits.get(i).setPositionX(posX);
                 posX -= 26;
                 i--;
             }
             posX = DataHand.renderMan.getWidth() / 2 + 12;
-            for (int i = scoreDigits.size() - 1; i > half - 1;) {
+            for (int i = half + 2; i < scoreDigits.size();) {
                 scoreDigits.get(i).setPositionX(posX);
                 posX += 26;
-                i--;
+                i++;
             }
         }
         else {
@@ -68,10 +68,10 @@ public class ScoreDisplay {
                 i--;
             }
             posX = DataHand.renderMan.getWidth() / 2;
-            for (int i = scoreDigits.size() - 1; i > half;) {
+            for (int i = half + 1; i < scoreDigits.size();) {
                 scoreDigits.get(i).setPositionX(posX);
                 posX += 24;
-                i--;
+                i++;
             }
         }
 
