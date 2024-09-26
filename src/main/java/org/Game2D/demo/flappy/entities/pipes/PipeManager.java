@@ -1,5 +1,6 @@
 package org.Game2D.demo.flappy.entities.pipes;
 
+import org.Game2D.demo.flappy.entities.Bird;
 import org.Game2D.engine.core.handlers.DataHand;
 import org.Game2D.engine.core.managers.RenderMan;
 import org.Game2D.engine.objects.advanced.Entity;
@@ -91,10 +92,42 @@ public class PipeManager extends Entity {
                 belows.get(index).setPosition(newX, newY - distanceTopBelow - 612);
             }
         }
+
+        /*if(Bird.gameOver && DataHand.keyHand.keyPressed_SPACE){
+            setDefault();
+            Bird.gameOver = false;
+        }*/
     }
 
     @Override
     public void draw(Graphics2D g2) {
 
+    }
+
+    private void setDefault(){
+
+        for(PipeTop top : tops){
+            top.setPosition(top.hitBox.x, top.hitBox.y + 1000);
+        }
+        for(PipeBelow below : belows){
+            below.setPosition(below.hitBox.x, below.hitBox.y + 1000);
+        }
+
+        this.posX = DataHand.renderMan.getWidth() / 2;
+        this.posY = DataHand.renderMan.getHeight() / 2 + this.distanceTopBelow / 2;
+
+        for(int i = 0; i < this.neededPipes; i++){
+
+            this.random = getRnd(-200, 200);
+            //112 because it's the base height and the 20 is so that there is a bit distance between top/bottom and the pipeend
+            if(this.posY + this.random < distancePipes + 20 || this.posY + this.random > DataHand.renderMan.getHeight() - 112 - 20){
+                this.random *= -1;
+            }
+
+            tops.get(i).setPosition(posX + i*distancePipes, posY + this.random);
+            belows.get(i).setPosition(posX + i*distancePipes, posY + this.random - this.distanceTopBelow - 612);
+
+            this.posY += this.random;
+        }
     }
 }
