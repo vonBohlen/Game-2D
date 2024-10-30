@@ -28,6 +28,9 @@ public class DebugScreen {
 
             g2.drawString("TPS: " + TPS, 20, 30);
 
+
+            g2.setColor(Color.YELLOW);
+
             g2.drawString("Objects:" + DataHand.getGameObjs().size(), 20, 50);
         }
     }
