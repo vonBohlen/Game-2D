@@ -16,26 +16,20 @@ public class ScoreDisplay {
 
     private static int score = 0;
 
-    public static List<Image> numbers = new ArrayList<>();
+    public static List<Image> numbers = AssetMan.loadAssets(new String[]{
+            "flappy_assets/numbers/1.png",
+            "flappy_assets/numbers/2.png",
+            "flappy_assets/numbers/3.png",
+            "flappy_assets/numbers/4.png",
+            "flappy_assets/numbers/5.png",
+            "flappy_assets/numbers/6.png",
+            "flappy_assets/numbers/7.png",
+            "flappy_assets/numbers/8.png",
+            "flappy_assets/numbers/9.png",
+            "flappy_assets/numbers/0.png"
+    });
 
     private static final List<ScoreDigit> scoreDigits = new ArrayList<>();
-
-    public static void init() {
-
-        numbers = AssetMan.loadAssets(new String[]{
-                "flappy_assets/numbers/1.png",
-                "flappy_assets/numbers/2.png",
-                "flappy_assets/numbers/3.png",
-                "flappy_assets/numbers/4.png",
-                "flappy_assets/numbers/5.png",
-                "flappy_assets/numbers/6.png",
-                "flappy_assets/numbers/7.png",
-                "flappy_assets/numbers/8.png",
-                "flappy_assets/numbers/9.png",
-                "flappy_assets/numbers/0.png"
-        });
-
-    }
 
     public static void start() {
         scoreDigits.add(new ScoreDigit(new Rectangle(DataHand.renderMan.getWidth() / 2 - 12, 10, 24, 36)));

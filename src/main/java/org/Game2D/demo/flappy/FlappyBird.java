@@ -51,7 +51,6 @@ public class FlappyBird {
         infoDisplay.showMessage();
 
         //Init counter
-        ScoreDisplay.init();
         ScoreDisplay.start();
 
         int in = 1234567890;
