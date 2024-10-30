@@ -1,14 +1,10 @@
 package org.Game2D.demo.flappy.entities;
 
 import org.Game2D.engine.core.handlers.DataHand;
-import org.Game2D.engine.core.managers.RenderMan;
 import org.Game2D.engine.objects.advanced.Entity;
 import org.Game2D.engine.utils.AssetMan;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
-import java.io.IOException;
-import java.util.Objects;
 
 public class InfoDisplay extends Entity {
 
