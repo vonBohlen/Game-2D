@@ -1,6 +1,5 @@
 package org.Game2D.engine.objects.advanced;
 
-import org.Game2D.engine.core.handlers.DataHand;
 import org.Game2D.engine.core.managers.ActionMan;
 import org.Game2D.engine.objects.GameObject;
 
@@ -11,8 +10,6 @@ public abstract class Entity extends GameObject {
     public Entity(Rectangle hb, boolean collision, Image txt) {
 
         super(hb, collision, txt);
-
-        DataHand.regGameObj(this);
 
     }
 

@@ -50,6 +50,7 @@ public class RenderMan extends JPanel implements Runnable {
         long currentTime;
         long timer = 0;
         int drawCount = 0;
+        long lastFrameTime = System.nanoTime();
 
         while (renderThread != null) {
 
@@ -62,6 +63,11 @@ public class RenderMan extends JPanel implements Runnable {
             if (delta >= 1) {
 
                 repaint();
+
+                long frameTime = System.nanoTime() - lastFrameTime;
+                lastFrameTime = System.nanoTime();
+
+                DebugScreen.updateFrameTime(frameTime);
 
                 delta--;
                 drawCount++;

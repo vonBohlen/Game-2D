@@ -7,7 +7,7 @@ import java.awt.*;
 
 public class PipeBelow extends Entity {
 
-    int speed = 5;
+    int speed = 10;
 
     public PipeBelow(int x, int y, Image txt) {
         super(new Rectangle(x, y, 104, 628), true, txt);

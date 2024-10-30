@@ -22,7 +22,7 @@ public class  DataHand {
     private static final ArrayList<GameObject> gameObjects = new ArrayList<>();
 
     public static void regGameObj(GameObject go) {
-        gameObjects.add(go);
+        if (!gameObjects.contains(go)) gameObjects.add(go);
     }
 
     public static void remGameObj(GameObject go) {

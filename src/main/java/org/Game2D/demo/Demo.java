@@ -8,7 +8,9 @@ import org.Game2D.demo.entities.TpSquare;
 import org.Game2D.demo.flappy.entities.Bird;
 import org.Game2D.demo.objects.Square;
 import org.Game2D.engine.core.Instance;
+import org.Game2D.engine.core.handlers.DataHand;
 import org.Game2D.engine.core.managers.RenderMan;
+import org.Game2D.engine.objects.GameObject;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -41,6 +43,10 @@ public class Demo {
         new Ball(new Rectangle(0, 0, 48, 48), texture);
 
         new Physicsobject(true, texture, 60);
+
+        for(GameObject go : DataHand.getGameObjs()){
+            System.out.println(go.getClass().getName());
+        }
 
     }
 
