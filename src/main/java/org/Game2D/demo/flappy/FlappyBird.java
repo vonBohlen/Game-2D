@@ -7,6 +7,7 @@ import org.Game2D.demo.flappy.objects.BackgroundObject;
 import org.Game2D.demo.flappy.objects.BaseObject;
 import org.Game2D.engine.core.Instance;
 import org.Game2D.engine.core.handlers.DataHand;
+import org.Game2D.engine.objects.GameObject;
 import org.Game2D.engine.utils.AssetMan;
 
 import java.awt.*;
@@ -29,7 +30,7 @@ public class FlappyBird {
         Image baseTxt = AssetMan.loadAsset("flappy_assets/background/base.png");
 
         //Init background
-        for (int i = 0; i <= screenWidth; i++) {
+        for (int i = 0; i <= screenWidth / 288; i++) {
             new BackgroundObject(new Rectangle(i * 288, 0, 288, screenHeight - 122 - 500), false, blueTxt);
             new BackgroundObject(new Rectangle(i * 288, screenHeight - 122 - 500, 288, 512), false, backgroundTxt);
         }
@@ -42,7 +43,7 @@ public class FlappyBird {
         new PipeManager();
 
         //Init base
-        for (int i = 0; i <= screenWidth; i++) {
+        for (int i = 0; i <= screenWidth/336; i++) {
             new BaseObject(new Rectangle(i * 336, screenHeight - 112, 336, 112), false, baseTxt);
         }
 
@@ -59,6 +60,9 @@ public class FlappyBird {
             i--;
         }
 
+        for(GameObject go : DataHand.getGameObjs()){
+            System.out.println(go.getClass().getName());
+        }
     }
 
 }

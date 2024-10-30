@@ -17,21 +17,20 @@ public class Bird extends Entity {
     double velo = 0.0; //only one velocity because the bird stays in position on x-axis
     double veloOnPress = -5.5;
     double gravityConst = 9.81; //earths gravity is 9.81
-
     double passedTime; //at 60 tps it is around 1.6
 
     Image txtMid = AssetMan.loadAsset("flappy_assets/bird/yellowbird-midflap.png");
     Image txtUp = AssetMan.loadAsset("flappy_assets/bird/yellowbird-upflap.png");
     Image txtDown = AssetMan.loadAsset("flappy_assets/bird/yellowbird-downflap.png");
 
-    boolean gameOver = false;
+    public static boolean gameOver = false;
 
     public Bird(Image txt) {
 
         //bird gets placed at one half of the height and one third of the width
         super(new Rectangle(DataHand.renderMan.getWidth() / 5, DataHand.renderMan.getHeight() / 2, 68, 48), true, txt);
 
-        //die Zeit die idealerweise zwischen zwei ticks vergeht
+        //ideal time between two ticks
         this.passedTime = 1 / (double) Integer.parseInt(ConfProvider.getConf(DataHand.confPath).getProperty("game2d.core.tps"));
     }
 
@@ -41,14 +40,14 @@ public class Bird extends Entity {
         if(DataHand.keyHand.keyPressed_SPACE){
             this.velo = this.veloOnPress;
         }
+        //velocity towards the ground that the bird gains per tick
+        //v(t) = a * t
+        this.velo += this.gravityConst * this.passedTime;
 
         //checks if the top or bottom is reached
         if(this.hitBox.y <= 0 || this.hitBox.y + this.hitBox.getHeight() >= DataHand.renderMan.getHeight() - 112){
             this.gameOver = true;
         }
-
-        //calculating the speed that is added after the passed time
-        this.velo += this.gravityConst * this.passedTime;
 
         //converting the velocity into the needed datatype for the move method
         int moving = (int) this.velo;
@@ -65,10 +64,7 @@ public class Bird extends Entity {
         if(this.velo < -2){
             this.texture = this.txtDown;
         }
-
-        //if null is returned the bird moved without touching an object
-        //the if branche is to determine whether or whether game over was true before
-        if(!this.gameOver) {
+        if(!gameOver) {
             this.gameOver = move(0, moving) != null;
         }
 
@@ -82,7 +78,7 @@ public class Bird extends Entity {
         if(!this.gameOver) {
             updatePosition();
         }
-        if (gameOver && DataHand.keyHand.keyPressed_SPACE){
+        else if (gameOver && DataHand.keyHand.keyPressed_SPACE){
             setDefault();
         }
     }

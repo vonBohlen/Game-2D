@@ -16,7 +16,7 @@ public class PipeTop extends Entity {
     @Override
     public void update() {
 
-        //if(Bird.gameOver) return;
+        if(Bird.gameOver) return;
 
         move(-speed, 0);
     }
