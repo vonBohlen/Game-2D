@@ -7,12 +7,9 @@ import org.Game2D.demo.flappy.objects.BackgroundObject;
 import org.Game2D.demo.flappy.objects.BaseObject;
 import org.Game2D.engine.core.Instance;
 import org.Game2D.engine.core.handlers.DataHand;
-import org.Game2D.engine.core.managers.RenderMan;
+import org.Game2D.engine.utils.AssetMan;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
-import java.io.IOException;
-import java.util.Objects;
 
 public class FlappyBird {
 
@@ -26,20 +23,10 @@ public class FlappyBird {
         int screenHeight = DataHand.renderMan.getHeight();
         int screenWidth = DataHand.renderMan.getWidth();
 
-        Image texture;
-        Image blueTxt;
-        Image backgroundTxt;
-        Image baseTxt;
-
-        try {
-            texture = ImageIO.read(Objects.requireNonNull(RenderMan.class.getClassLoader().getResource("default.png")));
-            blueTxt = ImageIO.read(Objects.requireNonNull(RenderMan.class.getClassLoader().getResource("flappy_assets/background/blue.png")));
-            backgroundTxt = ImageIO.read(Objects.requireNonNull(RenderMan.class.getClassLoader().getResource("flappy_assets/background/background-day.png")));
-            baseTxt = ImageIO.read(Objects.requireNonNull(RenderMan.class.getClassLoader().getResource("flappy_assets/background/base.png")));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
+        Image texture = AssetMan.loadAsset("default.png");
+        Image blueTxt = AssetMan.loadAsset("flappy_assets/background/blue.png");
+        Image backgroundTxt = AssetMan.loadAsset("flappy_assets/background/background-day.png");
+        Image baseTxt = AssetMan.loadAsset("flappy_assets/background/base.png");
 
         //Init background
         for (int i = 0; i <= screenWidth; i++) {

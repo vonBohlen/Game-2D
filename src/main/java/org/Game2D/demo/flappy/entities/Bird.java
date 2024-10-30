@@ -4,6 +4,7 @@ import org.Game2D.demo.flappy.FlappyBird;
 import org.Game2D.engine.core.handlers.DataHand;
 import org.Game2D.engine.core.managers.RenderMan;
 import org.Game2D.engine.objects.advanced.Entity;
+import org.Game2D.engine.utils.AssetMan;
 import org.Game2D.engine.utils.ConfProvider;
 
 import javax.imageio.ImageIO;
@@ -31,9 +32,9 @@ public class Bird extends Entity {
         super(new Rectangle(DataHand.renderMan.getWidth() / 5, DataHand.renderMan.getHeight() / 2, 68, 48), true, txt);
 
         try {
-            txtMid = ImageIO.read(Objects.requireNonNull(RenderMan.class.getClassLoader().getResource("flappy_assets/bird/yellowbird-midflap.png")));
-            txtUp = ImageIO.read(Objects.requireNonNull(RenderMan.class.getClassLoader().getResource("flappy_assets/bird/yellowbird-upflap.png")));
-            txtDown = ImageIO.read(Objects.requireNonNull(RenderMan.class.getClassLoader().getResource("flappy_assets/bird/yellowbird-downflap.png")));
+            txtMid = AssetMan.loadAsset("flappy_assets/bird/yellowbird-midflap.png");
+            txtUp = AssetMan.loadAsset("flappy_assets/bird/yellowbird-upflap.png");
+            txtDown = AssetMan.loadAsset("flappy_assets/bird/yellowbird-downflap.png");
         }
         catch (IOException e){
             throw new RuntimeException();

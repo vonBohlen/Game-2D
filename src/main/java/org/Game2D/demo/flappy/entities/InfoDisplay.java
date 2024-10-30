@@ -3,6 +3,7 @@ package org.Game2D.demo.flappy.entities;
 import org.Game2D.engine.core.handlers.DataHand;
 import org.Game2D.engine.core.managers.RenderMan;
 import org.Game2D.engine.objects.advanced.Entity;
+import org.Game2D.engine.utils.AssetMan;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -11,18 +12,12 @@ import java.util.Objects;
 
 public class InfoDisplay extends Entity {
 
-    Image messageTxt;
-    Image gameoverTxt;
+    Image messageTxt = AssetMan.loadAsset("flappy_assets/ui/message.png");
+    Image gameoverTxt = AssetMan.loadAsset("flappy_assets/ui/gameover.png");
 
     public InfoDisplay() {
-        super(new Rectangle(DataHand.renderMan.getWidth() / 2, DataHand.renderMan.getHeight() / 2, 0, 0), false, null);
 
-        try {
-            messageTxt = ImageIO.read(Objects.requireNonNull(RenderMan.class.getClassLoader().getResource("flappy_assets/ui/message.png")));
-            gameoverTxt = ImageIO.read(Objects.requireNonNull(RenderMan.class.getClassLoader().getResource("flappy_assets/ui/gameover.png")));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        super(new Rectangle(DataHand.renderMan.getWidth() / 2, DataHand.renderMan.getHeight() / 2, 0, 0), false, null);
 
     }
 

@@ -4,6 +4,7 @@ import org.Game2D.demo.flappy.entities.Bird;
 import org.Game2D.engine.core.handlers.DataHand;
 import org.Game2D.engine.core.managers.RenderMan;
 import org.Game2D.engine.objects.advanced.Entity;
+import org.Game2D.engine.utils.AssetMan;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -26,8 +27,8 @@ public class PipeManager extends Entity {
     List<PipeTop> tops = new ArrayList<>();
     List<PipeBelow> belows = new ArrayList<>();
 
-    Image txtTop;
-    Image txtBelow;
+    Image txtTop = AssetMan.loadAsset("flappy_assets/pipe/pipe-green.png");
+    Image txtBelow = AssetMan.loadAsset("flappy_assets/pipe/pipe-green-upside-down.png");
 
     public PipeManager(){
         super(new Rectangle(), false, null);
@@ -39,14 +40,6 @@ public class PipeManager extends Entity {
         //the first position for the pipes gets set
         this.posX = DataHand.renderMan.getWidth() / 2;
         this.posY = DataHand.renderMan.getHeight() / 2 + this.distanceTopBelow / 2;
-
-        try {
-            txtTop = ImageIO.read(Objects.requireNonNull(RenderMan.class.getClassLoader().getResource("flappy_assets/pipe/pipe-green.png")));
-            txtBelow = ImageIO.read(Objects.requireNonNull(RenderMan.class.getClassLoader().getResource("flappy_assets/pipe/pipe-green-upside-down.png")));
-        }
-        catch (IOException e){
-            throw new RuntimeException();
-        }
 
         CreatePipes();
     }
