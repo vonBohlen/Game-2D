@@ -3,6 +3,7 @@ package org.Game2D.demo.flappy;
 import org.Game2D.demo.flappy.entities.ScoreDigit;
 import org.Game2D.engine.core.handlers.DataHand;
 import org.Game2D.engine.core.managers.RenderMan;
+import org.Game2D.engine.utils.AssetMan;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -15,26 +16,25 @@ public class ScoreDisplay {
 
     private static int score = 0;
 
-    public static Image one, two, three, four, five, six, seven, eight, nine, zero;
+    public static List<Image> numbers = new ArrayList<>();
 
     private static final List<ScoreDigit> scoreDigits = new ArrayList<>();
 
     public static void init() {
 
-        try {
-            one = ImageIO.read(Objects.requireNonNull(RenderMan.class.getClassLoader().getResource("flappy_assets/numbers/1.png")));
-            two = ImageIO.read(Objects.requireNonNull(RenderMan.class.getClassLoader().getResource("flappy_assets/numbers/2.png")));
-            three = ImageIO.read(Objects.requireNonNull(RenderMan.class.getClassLoader().getResource("flappy_assets/numbers/3.png")));
-            four = ImageIO.read(Objects.requireNonNull(RenderMan.class.getClassLoader().getResource("flappy_assets/numbers/4.png")));
-            five = ImageIO.read(Objects.requireNonNull(RenderMan.class.getClassLoader().getResource("flappy_assets/numbers/5.png")));
-            six = ImageIO.read(Objects.requireNonNull(RenderMan.class.getClassLoader().getResource("flappy_assets/numbers/6.png")));
-            seven = ImageIO.read(Objects.requireNonNull(RenderMan.class.getClassLoader().getResource("flappy_assets/numbers/7.png")));
-            eight = ImageIO.read(Objects.requireNonNull(RenderMan.class.getClassLoader().getResource("flappy_assets/numbers/8.png")));
-            nine = ImageIO.read(Objects.requireNonNull(RenderMan.class.getClassLoader().getResource("flappy_assets/numbers/9.png")));
-            zero = ImageIO.read(Objects.requireNonNull(RenderMan.class.getClassLoader().getResource("flappy_assets/numbers/0.png")));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        numbers = AssetMan.loadAssets(new String[]{
+                "flappy_assets/numbers/1.png",
+                "flappy_assets/numbers/2.png",
+                "flappy_assets/numbers/3.png",
+                "flappy_assets/numbers/4.png",
+                "flappy_assets/numbers/5.png",
+                "flappy_assets/numbers/6.png",
+                "flappy_assets/numbers/7.png",
+                "flappy_assets/numbers/8.png",
+                "flappy_assets/numbers/9.png",
+                "flappy_assets/numbers/0.png"
+        });
+
     }
 
     public static void start() {

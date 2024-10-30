@@ -67,6 +67,12 @@ public class FlappyBird {
         ScoreDisplay.init();
         ScoreDisplay.start();
 
+        int in = 1234567890;
+        for (int i = in; i > 0;) {
+            ScoreDisplay.upScore();
+            i--;
+        }
+
     }
 
 }

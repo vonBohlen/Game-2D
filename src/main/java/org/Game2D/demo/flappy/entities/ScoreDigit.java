@@ -10,7 +10,7 @@ public class ScoreDigit extends Entity {
     private int number;
 
     public ScoreDigit(Rectangle hb) {
-        super(hb, false, ScoreDisplay.zero);
+        super(hb, false, ScoreDisplay.numbers.get(1));
     }
 
     @Override
@@ -21,16 +21,16 @@ public class ScoreDigit extends Entity {
         this.number = number;
 
         switch (number) {
-            case 1 -> texture = ScoreDisplay.one;
-            case 2 -> texture = ScoreDisplay.two;
-            case 3 -> texture = ScoreDisplay.three;
-            case 4 -> texture = ScoreDisplay.four;
-            case 5 -> texture = ScoreDisplay.five;
-            case 6 -> texture = ScoreDisplay.six;
-            case 7 -> texture = ScoreDisplay.seven;
-            case 8 -> texture = ScoreDisplay.eight;
-            case 9 -> texture = ScoreDisplay.nine;
-            case 0 -> texture = ScoreDisplay.zero;
+            case 1 -> texture = ScoreDisplay.numbers.get(9);
+            case 2 -> texture = ScoreDisplay.numbers.get(8);
+            case 3 -> texture = ScoreDisplay.numbers.get(7);
+            case 4 -> texture = ScoreDisplay.numbers.get(6);
+            case 5 -> texture = ScoreDisplay.numbers.get(5);
+            case 6 -> texture = ScoreDisplay.numbers.get(4);
+            case 7 -> texture = ScoreDisplay.numbers.get(3);
+            case 8 -> texture = ScoreDisplay.numbers.get(2);
+            case 9 -> texture = ScoreDisplay.numbers.get(1);
+            case 0 -> texture = ScoreDisplay.numbers.get(0);
         }
     }
 

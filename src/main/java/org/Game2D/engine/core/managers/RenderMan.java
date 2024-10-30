@@ -18,7 +18,7 @@ public class RenderMan extends JPanel implements Runnable {
         confPanel();
 
     }
-
+     
     private void confPanel() {
 
         this.setPreferredSize(Toolkit.getDefaultToolkit().getScreenSize());
