@@ -20,9 +20,9 @@ public class Bird extends Entity {
 
     double passedTime; //at 60 tps it is around 1.6
 
-    Image txtMid;
-    Image txtUp;
-    Image txtDown;
+    Image txtMid = AssetMan.loadAsset("flappy_assets/bird/yellowbird-midflap.png");
+    Image txtUp = AssetMan.loadAsset("flappy_assets/bird/yellowbird-upflap.png");
+    Image txtDown = AssetMan.loadAsset("flappy_assets/bird/yellowbird-downflap.png");
 
     boolean gameOver = false;
 
@@ -30,15 +30,6 @@ public class Bird extends Entity {
 
         //bird gets placed at one half of the height and one third of the width
         super(new Rectangle(DataHand.renderMan.getWidth() / 5, DataHand.renderMan.getHeight() / 2, 68, 48), true, txt);
-
-        try {
-            txtMid = AssetMan.loadAsset("flappy_assets/bird/yellowbird-midflap.png");
-            txtUp = AssetMan.loadAsset("flappy_assets/bird/yellowbird-upflap.png");
-            txtDown = AssetMan.loadAsset("flappy_assets/bird/yellowbird-downflap.png");
-        }
-        catch (IOException e){
-            throw new RuntimeException();
-        }
 
         //die Zeit die idealerweise zwischen zwei ticks vergeht
         this.passedTime = 1 / (double) Integer.parseInt(ConfProvider.getConf(DataHand.confPath).getProperty("game2d.core.tps"));
