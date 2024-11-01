@@ -18,7 +18,7 @@ public class RenderMan extends JPanel implements Runnable {
         confPanel();
 
     }
-     
+
     private void confPanel() {
 
         this.setPreferredSize(Toolkit.getDefaultToolkit().getScreenSize());
@@ -50,7 +50,8 @@ public class RenderMan extends JPanel implements Runnable {
         long currentTime;
         long timer = 0;
         int drawCount = 0;
-        long lastFrameTime = System.nanoTime();
+        long startTime;
+        long frameTime;
 
         while (renderThread != null) {
 
@@ -62,10 +63,11 @@ public class RenderMan extends JPanel implements Runnable {
 
             if (delta >= 1) {
 
+                startTime = System.nanoTime();
+
                 repaint();
 
-                long frameTime = System.nanoTime() - lastFrameTime;
-                lastFrameTime = System.nanoTime();
+                frameTime = System.nanoTime() - startTime;
 
                 DebugScreen.updateFrameTime(frameTime);
 

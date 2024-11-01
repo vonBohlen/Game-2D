@@ -35,7 +35,8 @@ public class ActionMan implements Runnable {
             long currentTime;
             long timer = 0;
             int updateCount = 0;
-            long lastTickTime = System.nanoTime();
+            long startTime;
+            long tickTime;
 
             while (run) {
 
@@ -49,10 +50,11 @@ public class ActionMan implements Runnable {
 
                     gameTick++;
 
+                    startTime = System.nanoTime();
+
                     update();
 
-                    long tickTime = System.nanoTime() - lastTickTime;
-                    lastTickTime = System.nanoTime();
+                    tickTime = System.nanoTime() - startTime;
 
                     DebugScreen.updateTickTime(tickTime);
 
