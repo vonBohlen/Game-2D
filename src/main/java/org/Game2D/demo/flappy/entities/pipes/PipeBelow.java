@@ -2,15 +2,14 @@ package org.Game2D.demo.flappy.entities.pipes;
 
 import org.Game2D.demo.flappy.entities.Bird;
 import org.Game2D.engine.objects.advanced.Entity;
+import org.Game2D.engine.utils.AssetMan;
 
 import java.awt.*;
 
 public class PipeBelow extends Entity {
 
-    int speed = 10;
-
-    public PipeBelow(int x, int y, Image txt) {
-        super(new Rectangle(x, y, 104, 628), true, txt);
+    public PipeBelow(int x, int y) {
+        super(new Rectangle(x, y, 104, 628), true, AssetMan.loadAsset("flappy_assets/pipe/pipe-green-upside-down.png"));
     }
 
     @Override
@@ -18,7 +17,8 @@ public class PipeBelow extends Entity {
 
         if(Bird.gameOver) return;
 
-        move(-speed, 0);
+        move(-Bird.speed, 0);
+
     }
 
     @Override

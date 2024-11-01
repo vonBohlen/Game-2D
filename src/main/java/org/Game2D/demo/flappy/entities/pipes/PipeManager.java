@@ -28,9 +28,6 @@ public class PipeManager extends Entity {
     List<PipeTop> tops = new ArrayList<>();
     List<PipeBelow> belows = new ArrayList<>();
 
-    Image txtTop = AssetMan.loadAsset("flappy_assets/pipe/pipe-green.png");
-    Image txtBelow = AssetMan.loadAsset("flappy_assets/pipe/pipe-green-upside-down.png");
-
     public PipeManager(){
         super(new Rectangle(), false, null);
 
@@ -54,9 +51,9 @@ public class PipeManager extends Entity {
                 this.random *= -1;
             }
 
-            tops.add(new PipeTop(posX + i*distancePipes, posY + this.random, this.txtTop));
+            tops.add(new PipeTop(posX + i*distancePipes, posY + this.random));
             //612 is used because the pipe is 612 pixels high
-            belows.add(new PipeBelow(posX + i*distancePipes, posY + this.random - this.distanceTopBelow - 612, this.txtBelow));
+            belows.add(new PipeBelow(posX + i*distancePipes, posY + this.random - this.distanceTopBelow - 612));
             System.out.println("New pair created");
 
             this.posY += this.random;

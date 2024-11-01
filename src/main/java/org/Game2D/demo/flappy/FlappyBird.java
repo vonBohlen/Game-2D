@@ -2,7 +2,9 @@ package org.Game2D.demo.flappy;
 
 import org.Game2D.demo.flappy.entities.Bird;
 import org.Game2D.demo.flappy.entities.InfoDisplay;
+import org.Game2D.demo.flappy.entities.pipes.PipeHandler;
 import org.Game2D.demo.flappy.entities.pipes.PipeManager;
+import org.Game2D.demo.flappy.entities.pipes.PipePair;
 import org.Game2D.demo.flappy.objects.BackgroundObject;
 import org.Game2D.demo.flappy.objects.BaseObject;
 import org.Game2D.engine.core.Instance;
@@ -40,7 +42,7 @@ public class FlappyBird {
         new Bird(texture);
 
         //Init pipes
-        new PipeManager();
+        new PipeHandler();
 
         //Init base
         for (int i = 0; i <= screenWidth/336; i++) {
