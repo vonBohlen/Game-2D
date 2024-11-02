@@ -83,7 +83,7 @@ public class ScoreDisplay {
             }
             else if (i == 0) {
                 scoreDigits.get(i).setNumber(1);
-                addDigit();
+                centerDigit();
                 break;
             }
             else {
