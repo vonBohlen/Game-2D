@@ -14,7 +14,7 @@ import java.util.Objects;
 
 public class ScoreDisplay {
 
-    private static int score = 0;
+    private  int score = 0;
 
     public static List<Image> numbers = AssetMan.loadAssets(new String[]{
             "flappy_assets/numbers/1.png",
@@ -29,15 +29,16 @@ public class ScoreDisplay {
             "flappy_assets/numbers/0.png"
     });
 
-    private static List<ScoreDigit> scoreDigits = new ArrayList<>();
+    private  List<ScoreDigit> scoreDigits = new ArrayList<>();
 
-    public static void start() {
-        scoreDigits.add(new ScoreDigit(new Rectangle(DataHand.renderMan.getWidth() / 2 - 12, 10, 24, 36)));
+    public ScoreDisplay() {
+        addDigit();
     }
 
-    private static void addDigit() {
+    private  void addDigit() {
 
-        start();
+        scoreDigits.add(new ScoreDigit(new Rectangle(DataHand.renderMan.getWidth() / 2 - 12, 10, 24, 36)));
+
         if (scoreDigits.size() % 2 != 0) {
             int half = scoreDigits.size() / 2;
             int posX = DataHand.renderMan.getWidth() / 2 - 12;
@@ -71,7 +72,7 @@ public class ScoreDisplay {
 
     }
 
-    public static void upScore() {
+    public  void upScore() {
         for (int i = scoreDigits.size() - 1; i >= 0;) {
             if (scoreDigits.get(i).getNumber() < 9) {
                 scoreDigits.get(i).setNumber(scoreDigits.get(i).getNumber() + 1);
@@ -90,17 +91,12 @@ public class ScoreDisplay {
         score++;
     }
 
-    public static int getScore() {
+    public  int getScore() {
         return score;
     }
 
-    public static void reset() {
-        for (int i = scoreDigits.size(); i > 0;) {
-            DataHand.remGameObj(scoreDigits.get(i-1));
-            i--;
-        }
-        scoreDigits.clear();
-        start();
+    public static void reset(ScoreDisplay scoreDisplay) {
+        scoreDisplay = new ScoreDisplay();
     }
 
 }
