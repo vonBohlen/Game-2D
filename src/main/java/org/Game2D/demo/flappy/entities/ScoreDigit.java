@@ -10,7 +10,7 @@ public class ScoreDigit extends Entity {
     private int number;
 
     public ScoreDigit(Rectangle hb) {
-        super(hb, false, ScoreDisplay.numbers.get(1));
+        super(hb, false, ScoreDisplay.numbers.get(0));
     }
 
     @Override
