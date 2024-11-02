@@ -14,7 +14,7 @@ public class PipePair extends Entity {
 
     int startX;
 
-    int space = 900;
+    int space = 300;
 
     boolean updatedScore = false;
 
@@ -41,10 +41,16 @@ public class PipePair extends Entity {
                 teleport();
                 updatedScore = false;
             }
-            if(top.hitBox.x + top.hitBox.width/2 < Bird.getBirdPosition() && !updatedScore){
+            /*if(top.hitBox.x + top.hitBox.width/2 < Bird.getBirdPosition() && !updatedScore){
                 updatedScore = true;
-                FlappyBird.scoreDisplay.upScore();
+                ScoreDisplay.upScore();
                 Bird.remainder += 0.2;
+            }*/
+            if (Bird.getBirdPosition() > top.hitBox.x + top.hitBox.width) {
+                if (!updatedScore) {
+                    ScoreDisplay.upScore();
+                    updatedScore = true;
+                }
             }
         }
         catch(Exception e){
