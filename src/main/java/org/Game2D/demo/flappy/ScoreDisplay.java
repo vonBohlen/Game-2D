@@ -29,7 +29,7 @@ public class ScoreDisplay {
             "flappy_assets/numbers/0.png"
     });
 
-    private static final List<ScoreDigit> scoreDigits = new ArrayList<>();
+    private static List<ScoreDigit> scoreDigits = new ArrayList<>();
 
     public static void start() {
         scoreDigits.add(new ScoreDigit(new Rectangle(DataHand.renderMan.getWidth() / 2 - 12, 10, 24, 36)));

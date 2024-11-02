@@ -1,5 +1,6 @@
 package org.Game2D.demo.flappy.entities.pipes;
 
+import org.Game2D.demo.flappy.ScoreDisplay;
 import org.Game2D.demo.flappy.entities.Bird;
 import org.Game2D.engine.core.handlers.DataHand;
 import org.Game2D.engine.objects.advanced.Entity;
@@ -14,7 +15,7 @@ public class PipeHandler extends Entity {
     int spaceTopBelow = 500;
     public static int distancePipes = 300;
 
-    int startX = DataHand.renderMan.getWidth() / 2;
+    int startX = DataHand.renderMan.getWidth() / 4 * 3;
 
     public static int pipesNum = DataHand.renderMan.getWidth() / distancePipes + 1;
 
@@ -58,6 +59,7 @@ public class PipeHandler extends Entity {
                 pairs.get(i).reset();
                 System.out.println("Pipe reset " + pairs.get(i).startX);
             }
+            ScoreDisplay.reset();
             Bird.gameOver = false;
         }
     }

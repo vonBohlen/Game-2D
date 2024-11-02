@@ -1,5 +1,7 @@
 package org.Game2D.demo.flappy.entities.pipes;
 
+import org.Game2D.demo.flappy.ScoreDisplay;
+import org.Game2D.demo.flappy.entities.Bird;
 import org.Game2D.engine.objects.advanced.Entity;
 
 import java.awt.*;
@@ -12,6 +14,8 @@ public class PipePair extends Entity {
     int startX;
 
     int space = 300;
+
+    boolean updatedScore = false;
 
     //Standard coordinates
     public PipePair(int x){
@@ -34,6 +38,11 @@ public class PipePair extends Entity {
         try {
             if (top.hitBox.x < 0 - top.hitBox.getWidth()) {
                 teleport();
+                updatedScore = false;
+            }
+            if(top.hitBox.x + top.hitBox.width/2 < Bird.getBirdPosition() && !updatedScore){
+                updatedScore = true;
+                ScoreDisplay.upScore();
             }
         }
         catch(Exception e){

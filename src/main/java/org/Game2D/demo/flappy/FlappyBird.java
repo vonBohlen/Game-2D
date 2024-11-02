@@ -56,12 +56,6 @@ public class FlappyBird {
         //Init counter
         ScoreDisplay.start();
 
-        int in = 1234567890;
-        for (int i = in; i > 0;) {
-            ScoreDisplay.upScore();
-            i--;
-        }
-
         for(GameObject go : DataHand.getGameObjs()){
             System.out.println(go.getClass().getName());
         }

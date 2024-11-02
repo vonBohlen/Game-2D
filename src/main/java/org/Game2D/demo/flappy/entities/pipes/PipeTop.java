@@ -17,7 +17,7 @@ public class PipeTop extends Entity {
 
         if(Bird.gameOver) return;
 
-        move(-Bird.speed, 0);
+        Bird.gameOver = move(-Bird.speed, 0) == null ? false : true;
     }
 
     @Override

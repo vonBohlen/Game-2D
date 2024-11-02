@@ -26,6 +26,9 @@ public class Bird extends Entity {
     public static boolean gameOver = false;
     public static int speed = 10;
 
+    //with more time the bird(the pipes) move faster but the movement speed is a int
+    double remainder = 0.0;
+
     public Bird(Image txt) {
 
         //bird gets placed at one half of the height and one third of the width
@@ -88,6 +91,10 @@ public class Bird extends Entity {
         else if (gameOver && DataHand.keyHand.keyPressed_SPACE){
             setDefault();
         }
+    }
+
+    public static int getBirdPosition(){
+        return DataHand.renderMan.getWidth() / 5;
     }
 
     @Override
