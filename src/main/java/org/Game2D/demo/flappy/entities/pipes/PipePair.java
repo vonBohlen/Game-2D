@@ -15,7 +15,7 @@ public class PipePair extends Entity {
 
     //Standard coordinates
     public PipePair(int x){
-        super(new Rectangle(0,0), false, null);
+        super(null, false, null);
         startX = x;
         int y = PipeHandler.getRndY();
         top = new PipeTop(x, y);
@@ -25,22 +25,27 @@ public class PipePair extends Entity {
 
     public void reset(){
         int y = PipeHandler.getRndY();
-        top.setPosition(startX, y);
-        below.setPosition(startX, y - space - 612);
+        top.setPosition(startX, y, true);
+        below.setPosition(startX, y - space - 612, true);
     }
 
     @Override
     public void update() {
-        if(top.hitBox.x < 0 - top.hitBox.getWidth()){
-            teleport();
+        try {
+            if (top.hitBox.x < 0 - top.hitBox.getWidth()) {
+                teleport();
+            }
+        }
+        catch(Exception e){
+            System.out.println("Methode called before object initialization");
         }
     }
 
     private void teleport(){
         int newX = top.hitBox.x + PipeHandler.pipesNum * PipeHandler.distancePipes;
         int y = PipeHandler.getRndY();
-        top.setPosition(newX, y);
-        below.setPosition(newX, y - space - 612);
+        top.setPosition(newX, y, true);
+        below.setPosition(newX, y - space - 612, true);
     }
 
     @Override

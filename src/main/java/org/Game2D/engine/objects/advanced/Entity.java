@@ -3,6 +3,7 @@ package org.Game2D.engine.objects.advanced;
 import org.Game2D.engine.core.managers.ActionMan;
 import org.Game2D.engine.objects.GameObject;
 
+import javax.annotation.Nullable;
 import java.awt.*;
 
 public abstract class Entity extends GameObject {
@@ -70,6 +71,21 @@ public abstract class Entity extends GameObject {
 
     }
 
+    public GameObject setPosition(int newX, int newY, boolean ignoreCollision) {
+
+        if (hitBox == null) return null;
+
+        Rectangle newPosition = new Rectangle(newX, newY, hitBox.width, hitBox.height);
+        GameObject objectCache = ActionMan.checkCollision(this, newPosition);
+
+        if (objectCache != null && !ignoreCollision) return objectCache;
+
+        hitBox.x = newX;
+        hitBox.y = newY;
+
+        return objectCache;
+
+    }
     public GameObject setPosition(int newX, int newY) {
 
         if (hitBox == null) return null;
@@ -85,6 +101,7 @@ public abstract class Entity extends GameObject {
         return null;
 
     }
+
 
     public GameObject changeEntitySize(int newWidth, int newHeight) {
 

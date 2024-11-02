@@ -14,7 +14,7 @@ public class Ball extends Entity {
     @Override
     public void update(){
 
-        if (hitBox.y >= DataHand.renderMan.getHeight()) setPosition(0, 0);
+        if (hitBox.y >= DataHand.renderMan.getHeight()) setPosition(0, 0, false);
         if (DataHand.actionMan.getGameTick() != 30 && DataHand.actionMan.getGameTick() != 60) return;
 
         int x = hitBox.x + 50;

@@ -52,9 +52,11 @@ public class PipeHandler extends Entity {
     @Override
     public void update() {
         //only used for reseting the game
+        random = DataHand.renderMan.getHeight() / 2 + 150;
         if(Bird.gameOver && DataHand.keyHand.keyPressed_SPACE){
-            for(PipePair pair : pairs){
-                pair.reset();
+            for(int i = pairs.size() - 1; i >= 0; i--){
+                pairs.get(i).reset();
+                System.out.println("Pipe reset " + pairs.get(i).startX);
             }
             Bird.gameOver = false;
         }

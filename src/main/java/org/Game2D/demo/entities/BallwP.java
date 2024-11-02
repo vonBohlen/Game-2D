@@ -44,17 +44,17 @@ public class BallwP extends Entity {
 
         //Teleportierlogik -> Wenn es aus den Rändern des Fensters ist wird es zurück rein teleportiert
         if(hitBox.x <= 0){
-            setPosition(0, hitBox.y);
+            setPosition(0, hitBox.y, false);
         }
         if(hitBox.y <= 0){
-            setPosition(hitBox.x, 0);
+            setPosition(hitBox.x, 0, false);
         }
 
         if(hitBox.x >= 1850){
-            setPosition(1850, hitBox.y);
+            setPosition(1850, hitBox.y, false);
         }
         if(hitBox.y >= 1050){
-            setPosition(hitBox.x, 1050);
+            setPosition(hitBox.x, 1050, false);
             //this.MoveY = -10;
         }
 
