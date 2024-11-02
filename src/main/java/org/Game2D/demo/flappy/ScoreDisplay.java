@@ -29,7 +29,7 @@ public class ScoreDisplay {
             "flappy_assets/numbers/0.png"
     });
 
-    private  List<ScoreDigit> scoreDigits = new ArrayList<>();
+    private  ArrayList<ScoreDigit> scoreDigits = new ArrayList<>();
 
     public ScoreDisplay() {
         addDigit();
@@ -98,8 +98,11 @@ public class ScoreDisplay {
         return score;
     }
 
-    public static void reset(ScoreDisplay scoreDisplay) {
-        scoreDisplay = new ScoreDisplay();
+    public  void reset() {
+       for (ScoreDigit scoreDigit : (List<ScoreDigit>) scoreDigits.clone()) {
+           scoreDigit.destroy();
+       }
+       addDigit();
     }
 
 }
