@@ -27,7 +27,7 @@ public class Bird extends Entity {
     public static int speed = 10;
 
     //with more time the bird(the pipes) move faster but the movement speed is a int
-    double remainder = 0.0;
+    public static double remainder = 0.0;
 
     public Bird(Image txt) {
 
@@ -43,12 +43,6 @@ public class Bird extends Entity {
         //if space bar is pressed the birds velocity is set to a fixed value
         if(DataHand.keyHand.keyPressed_SPACE){
             this.velo = this.veloOnPress;
-        }
-        if(DataHand.keyHand.keyPressed_W){
-            speed = 50;
-        }
-        else{
-            speed = 10;
         }
         //velocity towards the ground that the bird gains per tick
         //v(t) = a * t
@@ -79,7 +73,13 @@ public class Bird extends Entity {
         }
 
         if(gameOver){
-            FlappyBird.infoDisplay.showGameover();
+            //FlappyBird.infoDisplay.showGameover(); -> does the infodisplay by itself
+        }
+
+        if(remainder >= 1){
+            speed += remainder;
+            remainder--;
+            System.out.println(speed);
         }
     }
 
@@ -90,6 +90,7 @@ public class Bird extends Entity {
         }
         else if (gameOver && DataHand.keyHand.keyPressed_SPACE){
             setDefault();
+            speed = 10;
         }
     }
 

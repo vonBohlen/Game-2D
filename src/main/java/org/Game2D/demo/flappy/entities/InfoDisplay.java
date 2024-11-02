@@ -8,6 +8,8 @@ import java.awt.*;
 
 public class InfoDisplay extends Entity {
 
+    boolean lastOver = true;
+    int counter = 60;
     Image messageTxt = AssetMan.loadAsset("flappy_assets/ui/message.png");
     Image gameoverTxt = AssetMan.loadAsset("flappy_assets/ui/gameover.png");
 
@@ -18,7 +20,23 @@ public class InfoDisplay extends Entity {
     }
 
     @Override
-    public void update() {}
+    public void update() {
+        if(lastOver && !Bird.gameOver){
+            lastOver = false;
+            counter = 60;
+        }
+        if(Bird.gameOver){
+            lastOver = true;
+            showGameover();
+        }
+        else if(counter > 0){
+            counter--;
+            showMessage();
+        }
+        else{
+            clearDisplay();
+        }
+    }
 
     private void setPosition() {
         int posX = DataHand.renderMan.getWidth() / 2;

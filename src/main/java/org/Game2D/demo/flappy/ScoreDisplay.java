@@ -13,8 +13,8 @@ import java.util.List;
 import java.util.Objects;
 
 public class ScoreDisplay {
+    private int score = 0;
 
-    private  int score = 0;
 
     public static List<Image> numbers = AssetMan.loadAssets(new String[]{
             "flappy_assets/numbers/1.png",
@@ -35,9 +35,12 @@ public class ScoreDisplay {
         addDigit();
     }
 
-    private  void addDigit() {
-
+    private void addDigit() {
         scoreDigits.add(new ScoreDigit(new Rectangle(DataHand.renderMan.getWidth() / 2 - 12, 10, 24, 36)));
+    }
+
+    private void centerDigit() {
+        addDigit();
 
         if (scoreDigits.size() % 2 != 0) {
             int half = scoreDigits.size() / 2;

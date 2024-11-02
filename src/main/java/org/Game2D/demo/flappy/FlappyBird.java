@@ -17,6 +17,7 @@ import java.awt.*;
 public class FlappyBird {
 
     public static InfoDisplay infoDisplay;
+    public static ScoreDisplay scoreDisplay;
 
     public static void main(String[] args) {
 
@@ -52,9 +53,7 @@ public class FlappyBird {
         //Init InfoDisplay
         infoDisplay = new InfoDisplay();
         infoDisplay.showMessage();
-
-        //Init counter
-        ScoreDisplay.start();
+        scoreDisplay = new ScoreDisplay();
 
         for(GameObject go : DataHand.getGameObjs()){
             System.out.println(go.getClass().getName());

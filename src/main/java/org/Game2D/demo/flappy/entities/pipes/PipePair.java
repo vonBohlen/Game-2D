@@ -1,5 +1,6 @@
 package org.Game2D.demo.flappy.entities.pipes;
 
+import org.Game2D.demo.flappy.FlappyBird;
 import org.Game2D.demo.flappy.ScoreDisplay;
 import org.Game2D.demo.flappy.entities.Bird;
 import org.Game2D.engine.objects.advanced.Entity;
@@ -42,7 +43,8 @@ public class PipePair extends Entity {
             }
             if(top.hitBox.x + top.hitBox.width/2 < Bird.getBirdPosition() && !updatedScore){
                 updatedScore = true;
-                ScoreDisplay.upScore();
+                FlappyBird.scoreDisplay.upScore();
+                Bird.remainder += 0.2;
             }
         }
         catch(Exception e){
