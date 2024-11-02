@@ -13,6 +13,9 @@ import java.util.List;
 import java.util.Objects;
 
 public class ScoreDisplay {
+
+    private boolean toDestroy = false;
+
     private int score = 0;
 
 
@@ -37,6 +40,10 @@ public class ScoreDisplay {
 
     private void addDigit() {
         scoreDigits.add(new ScoreDigit(new Rectangle(DataHand.renderMan.getWidth() / 2 - 12, 10, 24, 36)));
+    }
+
+    private void destroyRemainingDigits() {
+        if (toDestroy) scoreDigits.get(1).destroy();
     }
 
     private void centerDigit() {
@@ -76,6 +83,9 @@ public class ScoreDisplay {
     }
 
     public  void upScore() {
+
+        destroyRemainingDigits();
+
         for (int i = scoreDigits.size() - 1; i >= 0;) {
             if (scoreDigits.get(i).getNumber() < 9) {
                 scoreDigits.get(i).setNumber(scoreDigits.get(i).getNumber() + 1);
@@ -102,6 +112,7 @@ public class ScoreDisplay {
        for (ScoreDigit scoreDigit : (List<ScoreDigit>) scoreDigits.clone()) {
            scoreDigit.destroy();
        }
+       if (!scoreDigits.isEmpty()) toDestroy = true;
        addDigit();
     }
 
