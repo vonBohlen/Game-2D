@@ -60,7 +60,7 @@ public class PipeHandler extends Entity {
                 pairs.get(i).reset();
                 System.out.println("Pipe reset " + pairs.get(i).startX);
             }
-            FlappyBird.scoreDisplay.resetGemini();
+            ScoreDisplay.reset();
             Bird.gameOver = false;
         }
     }

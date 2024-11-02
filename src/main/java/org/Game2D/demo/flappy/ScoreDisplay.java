@@ -14,9 +14,7 @@ import java.util.Objects;
 
 public class ScoreDisplay {
 
-    private boolean toDestroy = false;
-
-    private int score = 0;
+    private static int score = 0;
 
 
     public static List<Image> numbers = AssetMan.loadAssets(new String[]{
@@ -32,21 +30,17 @@ public class ScoreDisplay {
             "flappy_assets/numbers/0.png"
     });
 
-    private  ArrayList<ScoreDigit> scoreDigits = new ArrayList<>();
+    private static ArrayList<ScoreDigit> scoreDigits = new ArrayList<>();
 
     public ScoreDisplay() {
         addDigit();
     }
 
-    private void addDigit() {
+    private static void addDigit() {
         scoreDigits.add(new ScoreDigit(new Rectangle(DataHand.renderMan.getWidth() / 2 - 12, 10, 24, 36)));
     }
 
-    /*private void destroyRemainingDigits() {
-        if (toDestroy) scoreDigits.get(1).destroy();
-    }*/
-
-    private void centerDigit() {
+    private static void centerDigit() {
         addDigit();
 
         if (scoreDigits.size() % 2 != 0) {
@@ -82,10 +76,7 @@ public class ScoreDisplay {
 
     }
 
-    public  void upScore() {
-
-        //destroyRemainingDigits();
-
+    public static void upScore() {
         for (int i = scoreDigits.size() - 1; i >= 0;) {
             if (scoreDigits.get(i).getNumber() < 9) {
                 scoreDigits.get(i).setNumber(scoreDigits.get(i).getNumber() + 1);
@@ -104,35 +95,17 @@ public class ScoreDisplay {
         score++;
     }
 
-    public  int getScore() {
+    public static int getScore() {
         return score;
     }
 
-    public  void reset() {
-       for (ScoreDigit scoreDigit : (List<ScoreDigit>) scoreDigits.clone()) {
-           scoreDigit.destroy();
-       }
-       if (!scoreDigits.isEmpty()) toDestroy = true;
-       addDigit();
-
-       score = 0;
-    }
-
-    public void resetGemini() {
+    public static void reset() {
         for (int i = scoreDigits.size() - 1; i >= 0; i--) {
             scoreDigits.get(i).destroy();
-            scoreDigits.remove(i); // Remove the destroyed digit from the list
+            scoreDigits.remove(i);
         }
-        addDigit(); // Add a new digit for the initial score
-        score = 0;
-    }
-
-    public void restart(){
-        for(ScoreDigit scoreDigit : scoreDigits){
-            scoreDigit.destroy();
-        }
-        score = 0;
         addDigit();
+        score = 0;
     }
 
 }
