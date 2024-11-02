@@ -96,6 +96,7 @@ public class ScoreDisplay {
 
     public static void reset() {
         scoreDigits.clear();
+        start();
     }
 
 }
