@@ -95,7 +95,8 @@ public class ScoreDisplay {
     }
 
     public static void reset() {
-        for (ScoreDigit digit : scoreDigits) scoreDigits.remove(digit);
+        scoreDigits = new ArrayList<>();
+        start();
         score = 0;
     }
 
