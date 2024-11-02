@@ -14,7 +14,6 @@ import java.util.List;
 
 public class PipeHandler extends Entity {
 
-    int spaceTopBelow = 500;
     public static int distancePipes = 500;
 
     int startX = DataHand.renderMan.getWidth() / 4 * 3;
@@ -61,7 +60,7 @@ public class PipeHandler extends Entity {
                 pairs.get(i).reset();
                 System.out.println("Pipe reset " + pairs.get(i).startX);
             }
-            FlappyBird.scoreDisplay.reset();
+            FlappyBird.scoreDisplay.resetGemini();
             Bird.gameOver = false;
         }
     }

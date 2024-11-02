@@ -42,9 +42,9 @@ public class ScoreDisplay {
         scoreDigits.add(new ScoreDigit(new Rectangle(DataHand.renderMan.getWidth() / 2 - 12, 10, 24, 36)));
     }
 
-    private void destroyRemainingDigits() {
+    /*private void destroyRemainingDigits() {
         if (toDestroy) scoreDigits.get(1).destroy();
-    }
+    }*/
 
     private void centerDigit() {
         addDigit();
@@ -84,7 +84,7 @@ public class ScoreDisplay {
 
     public  void upScore() {
 
-        destroyRemainingDigits();
+        //destroyRemainingDigits();
 
         for (int i = scoreDigits.size() - 1; i >= 0;) {
             if (scoreDigits.get(i).getNumber() < 9) {
@@ -114,6 +114,25 @@ public class ScoreDisplay {
        }
        if (!scoreDigits.isEmpty()) toDestroy = true;
        addDigit();
+
+       score = 0;
+    }
+
+    public void resetGemini() {
+        for (int i = scoreDigits.size() - 1; i >= 0; i--) {
+            scoreDigits.get(i).destroy();
+            scoreDigits.remove(i); // Remove the destroyed digit from the list
+        }
+        addDigit(); // Add a new digit for the initial score
+        score = 0;
+    }
+
+    public void restart(){
+        for(ScoreDigit scoreDigit : scoreDigits){
+            scoreDigit.destroy();
+        }
+        score = 0;
+        addDigit();
     }
 
 }

@@ -14,7 +14,7 @@ public class PipePair extends Entity {
 
     int startX;
 
-    int space = 300;
+    int space = 900;
 
     boolean updatedScore = false;
 
