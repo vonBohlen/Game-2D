@@ -32,11 +32,7 @@ public class ScoreDisplay {
 
     private static ArrayList<ScoreDigit> scoreDigits = new ArrayList<>();
 
-    public ScoreDisplay() {
-        addDigit();
-    }
-
-    private static void addDigit() {
+    public static void addDigit() {
         scoreDigits.add(new ScoreDigit(new Rectangle(DataHand.renderMan.getWidth() / 2 - 12, 10, 24, 36)));
     }
 
