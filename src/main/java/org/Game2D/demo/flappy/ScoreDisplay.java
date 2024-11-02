@@ -95,6 +95,10 @@ public class ScoreDisplay {
     }
 
     public static void reset() {
+        for (int i = scoreDigits.size(); i > 0;) {
+            DataHand.remGameObj(scoreDigits.get(i-1));
+            i--;
+        }
         scoreDigits.clear();
         start();
     }
