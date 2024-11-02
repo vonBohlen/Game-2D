@@ -66,4 +66,13 @@ public class Instance {
 
     }
 
+    public int exit() {
+        DataHand.actionMan.freeze();
+        DataHand.renderMan.freeze();
+
+        window.dispose();
+
+        return 0;
+    }
+
 }

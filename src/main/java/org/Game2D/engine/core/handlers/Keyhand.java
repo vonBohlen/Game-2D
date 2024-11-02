@@ -10,6 +10,7 @@ public class Keyhand implements KeyListener {
     public boolean keyPressed_S = false;
     public boolean keyPressed_D = false;
     public boolean keyPressed_SPACE = false;
+    public boolean keyPressed_ESC = false;
 
     @Override
     public void keyTyped(KeyEvent e) {
@@ -24,6 +25,7 @@ public class Keyhand implements KeyListener {
             case KeyEvent.VK_S -> {keyPressed_S = true;}
             case KeyEvent.VK_D -> {keyPressed_D = true;}
             case KeyEvent.VK_SPACE -> {keyPressed_SPACE = true;}
+            case KeyEvent.VK_ESCAPE -> {keyPressed_ESC = true;}
         }
     }
 
@@ -36,6 +38,7 @@ public class Keyhand implements KeyListener {
             case KeyEvent.VK_S -> {keyPressed_S = false;}
             case KeyEvent.VK_D -> {keyPressed_D = false;}
             case KeyEvent.VK_SPACE -> {keyPressed_SPACE = false;}
+            case KeyEvent.VK_ESCAPE -> {keyPressed_ESC = false;}
         }
     }
 

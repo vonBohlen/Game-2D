@@ -16,11 +16,13 @@ import java.awt.*;
 
 public class FlappyBird {
 
+    public static Instance instance;
+
     public static InfoDisplay infoDisplay;
 
     public static void main(String[] args) {
 
-        Instance instance = new Instance(null);
+        instance = new Instance(null);
         instance.start("Flappy bird");
 
         int screenHeight = DataHand.renderMan.getHeight();

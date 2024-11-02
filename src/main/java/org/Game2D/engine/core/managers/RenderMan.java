@@ -13,6 +13,8 @@ public class RenderMan extends JPanel implements Runnable {
 
     Thread renderThread;
 
+    private boolean run = true;
+
     public RenderMan() {
 
         confPanel();
@@ -44,45 +46,48 @@ public class RenderMan extends JPanel implements Runnable {
     @Override
     public void run() {
 
-        double drawInterval = 1000000000 / Integer.parseInt(ConfProvider.getConf(DataHand.confPath).getProperty("game2d.core.fps"));
-        double delta = 0;
-        long lastTime = System.nanoTime();
-        long currentTime;
-        long timer = 0;
-        int drawCount = 0;
-        long startTime;
-        long frameTime;
-
         while (renderThread != null) {
 
-            currentTime = System.nanoTime();
+            double drawInterval = 1000000000 / Integer.parseInt(ConfProvider.getConf(DataHand.confPath).getProperty("game2d.core.fps"));
+            double delta = 0;
+            long lastTime = System.nanoTime();
+            long currentTime;
+            long timer = 0;
+            int drawCount = 0;
+            long startTime;
+            long frameTime;
 
-            delta += (currentTime - lastTime) / drawInterval;
-            timer += (currentTime - lastTime);
-            lastTime = currentTime;
+            while (run) {
 
-            if (delta >= 1) {
+                currentTime = System.nanoTime();
 
-                startTime = System.nanoTime();
+                delta += (currentTime - lastTime) / drawInterval;
+                timer += (currentTime - lastTime);
+                lastTime = currentTime;
 
-                repaint();
+                if (delta >= 1) {
 
-                frameTime = System.nanoTime() - startTime;
+                    startTime = System.nanoTime();
 
-                DebugScreen.updateFrameTime(frameTime);
+                    repaint();
 
-                delta--;
-                drawCount++;
+                    frameTime = System.nanoTime() - startTime;
+
+                    DebugScreen.updateFrameTime(frameTime);
+
+                    delta--;
+                    drawCount++;
+                }
+
+                if (timer >= 1000000000) {
+
+                    DebugScreen.updateFPS(drawCount);
+
+                    drawCount = 0;
+                    timer = 0;
+                }
+
             }
-
-            if (timer >= 1000000000) {
-
-                DebugScreen.updateFPS(drawCount);
-
-                drawCount = 0;
-                timer = 0;
-            }
-
         }
 
     }
@@ -107,6 +112,14 @@ public class RenderMan extends JPanel implements Runnable {
         DebugScreen.draw(g2);
 
         g2.dispose();
+    }
+
+    public void freeze() {
+        run = false;
+    }
+
+    public void resume() {
+        run = true;
     }
 
 }

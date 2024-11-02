@@ -104,11 +104,11 @@ public class ActionMan implements Runnable {
 
     }
 
-    protected void freeze() {
+    public void freeze() {
         run = false;
     }
 
-    protected void resume() {
+    public void resume() {
         run = true;
     }
 

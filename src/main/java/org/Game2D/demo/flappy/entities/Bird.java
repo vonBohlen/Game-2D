@@ -85,6 +85,7 @@ public class Bird extends Entity {
 
     @Override
     public void update() {
+        if (DataHand.keyHand.keyPressed_ESC) FlappyBird.instance.exit();
         if(!this.gameOver) {
             updatePosition();
         }
