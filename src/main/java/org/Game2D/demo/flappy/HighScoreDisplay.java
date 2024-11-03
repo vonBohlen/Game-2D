@@ -17,13 +17,13 @@ public class HighScoreDisplay {
     }
 
     private static void addDigit() {
-        scoreDigits.add(new ScoreDigit(new Rectangle(DataHand.renderMan.getWidth(), 10, 24, 36)));
+        scoreDigits.add(new ScoreDigit(new Rectangle(DataHand.renderMan.getWidth() - 44, 10, 24, 36)));
     }
 
     private static void positionNewDigit() {
         addDigit();
 
-        scoreDigits.get(scoreDigits.size() -1).setPositionX(DataHand.renderMan.getWidth() - 24 * scoreDigits.size() - 1);
+        scoreDigits.get(scoreDigits.size() -1).setPositionX(DataHand.renderMan.getWidth() - 24 * (scoreDigits.size() - 1));
     }
 
     private static void upScore() {
