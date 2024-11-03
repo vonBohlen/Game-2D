@@ -32,6 +32,8 @@ public class PipePair extends Entity {
         int y = PipeHandler.getRndY();
         top.setPosition(startX, y, true);
         below.setPosition(startX, y - space - 612, true);
+        top.adjustFiller();
+        below.adjustFiller();
     }
 
     @Override
@@ -63,6 +65,8 @@ public class PipePair extends Entity {
         int y = PipeHandler.getRndY();
         top.setPosition(newX, y, true);
         below.setPosition(newX, y - space - 612, true);
+        top.adjustFiller();
+        below.adjustFiller();
     }
 
     @Override

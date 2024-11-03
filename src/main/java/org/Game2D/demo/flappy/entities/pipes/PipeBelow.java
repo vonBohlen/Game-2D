@@ -8,8 +8,10 @@ import java.awt.*;
 
 public class PipeBelow extends Entity {
 
+    PipeFiller filler;
     public PipeBelow(int x, int y) {
         super(new Rectangle(x, y, 104, 628), true, AssetMan.loadAsset("flappy_assets/pipe/pipe-green-upside-down.png"));
+        filler = new PipeFiller(x, y, true);
     }
 
     @Override
@@ -19,6 +21,10 @@ public class PipeBelow extends Entity {
 
         Bird.gameOver = move(-Bird.speed, 0) == null ? false : true;
 
+    }
+
+    public void adjustFiller(){
+        filler.adjust(this.hitBox.x, this.hitBox.y, true);
     }
 
     @Override

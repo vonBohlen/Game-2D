@@ -122,4 +122,8 @@ public class RenderMan extends JPanel implements Runnable {
         run = true;
     }
 
+    public void exit() {
+        renderThread.stop();
+    }
+
 }
