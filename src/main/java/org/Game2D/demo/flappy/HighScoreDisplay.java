@@ -26,7 +26,7 @@ public class HighScoreDisplay {
         int posX = DataHand.renderMan.getWidth() - 44;
         for (int i = scoreDigits.size() -1; i >= 0;) {
             scoreDigits.get(i).setPositionX(posX);
-            posX -= 26;
+            posX -= 24;
             i--;
         }
     }

@@ -16,8 +16,9 @@ public class Bird extends Entity {
 
     double velo = 0.0; //only one velocity because the bird stays in position on x-axis
     double veloOnPress = -10;
-    double gravityConst = 30; //earths gravity is 9.81
+    double gravityConst = 40; //earths gravity is 9.81
     double passedTime; //at 60 tps it is around 1.6
+
 
     Image txtMid = AssetMan.loadAsset("flappy_assets/bird/yellowbird-midflap.png");
     Image txtUp = AssetMan.loadAsset("flappy_assets/bird/yellowbird-upflap.png");
@@ -44,6 +45,7 @@ public class Bird extends Entity {
         if(DataHand.keyHand.keyPressed_SPACE){
             this.velo = this.veloOnPress;
         }
+
         //velocity towards the ground that the bird gains per tick
         //v(t) = a * t
         this.velo += this.gravityConst * this.passedTime;
@@ -60,20 +62,15 @@ public class Bird extends Entity {
         if(this.velo <= 2 && this.velo >= -2){
             this.texture = this.txtMid;
         }
-
-        if(this.velo > 2){
+        else if(this.velo > 2){
             this.texture = this.txtUp;
         }
-
-        if(this.velo < -2){
+        else if(this.velo < -2){
             this.texture = this.txtDown;
         }
+
         if(!gameOver) {
             this.gameOver = move(0, moving) != null;
-        }
-
-        if(gameOver){
-            //FlappyBird.infoDisplay.showGameover(); -> does the infodisplay by itself
         }
 
         if(remainder >= 1){
