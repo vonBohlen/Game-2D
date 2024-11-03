@@ -23,7 +23,12 @@ public class HighScoreDisplay {
     private static void positionNewDigit() {
         addDigit();
 
-        scoreDigits.get(scoreDigits.size() -1).setPositionX(DataHand.renderMan.getWidth() - 24 * (scoreDigits.size() - 1) - 44);
+        for (int i = 0; i > scoreDigits.size();) {
+            scoreDigits.get(i).setPositionX(DataHand.renderMan.getWidth() - 24 * (i + 1) - 44);
+            i++;
+        }
+
+        //scoreDigits.get(scoreDigits.size() -1).setPositionX(DataHand.renderMan.getWidth() - 24 * (scoreDigits.size() - 1) - 44);
     }
 
     private static void upScore() {
@@ -32,7 +37,7 @@ public class HighScoreDisplay {
                 scoreDigits.get(i).setNumber(scoreDigits.get(i).getNumber() + 1);
                 break;
             }
-            else if (i == 0) {
+            else if (i == scoreDigits.size() - 1) {
                 scoreDigits.get(i).setNumber(1);
                 positionNewDigit();
                 break;
