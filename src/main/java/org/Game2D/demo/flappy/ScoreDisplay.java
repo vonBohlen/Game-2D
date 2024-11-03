@@ -32,7 +32,12 @@ public class ScoreDisplay {
 
     private static ArrayList<ScoreDigit> scoreDigits = new ArrayList<>();
 
-    public static void addDigit() {
+    public static void init() {
+        addDigit();
+        HighScoreDisplay.init();
+    }
+
+    private static void addDigit() {
         scoreDigits.add(new ScoreDigit(new Rectangle(DataHand.renderMan.getWidth() / 2 - 12, 10, 24, 36)));
     }
 
@@ -89,6 +94,8 @@ public class ScoreDisplay {
             i--;
         }
         score++;
+
+        HighScoreDisplay.checkHighScore(score);
     }
 
     public static int getScore() {
