@@ -67,8 +67,8 @@ public class Instance {
     }
 
     public int exit() {
-        DataHand.actionMan.freeze();
-        DataHand.renderMan.freeze();
+        DataHand.actionMan.exit();
+        DataHand.renderMan.exit();
 
         window.dispose();
 

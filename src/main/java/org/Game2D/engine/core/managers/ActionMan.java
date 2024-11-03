@@ -13,6 +13,8 @@ public class ActionMan implements Runnable {
     private Thread actionThread;
 
     private boolean run = true;
+    private boolean exit = false;
+
     private static int gameTick = 0;
 
     public void startGameLoop() {
@@ -26,7 +28,7 @@ public class ActionMan implements Runnable {
     @Override
     public void run() {
 
-        while (actionThread != null) {
+        while (actionThread != null  && !exit) {
 
             int tps = Integer.parseInt(ConfProvider.getConf(DataHand.confPath).getProperty("game2d.core.tps"));
             double updateInterval = 1000000000 / tps;
@@ -110,6 +112,11 @@ public class ActionMan implements Runnable {
 
     public void resume() {
         run = true;
+    }
+
+    public void exit() {
+        freeze();
+        exit = true;
     }
 
 

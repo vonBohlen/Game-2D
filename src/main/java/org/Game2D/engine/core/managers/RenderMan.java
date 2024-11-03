@@ -13,10 +13,12 @@ public class RenderMan extends JPanel implements Runnable {
 
     Thread renderThread;
 
+    private boolean exit = false;
     private boolean run = true;
 
     public RenderMan() {
 
+        confPanel();
         confPanel();
 
     }
@@ -46,7 +48,7 @@ public class RenderMan extends JPanel implements Runnable {
     @Override
     public void run() {
 
-        while (renderThread != null) {
+        while (renderThread != null && !exit) {
 
             double drawInterval = 1000000000 / Integer.parseInt(ConfProvider.getConf(DataHand.confPath).getProperty("game2d.core.fps"));
             double delta = 0;
@@ -123,7 +125,8 @@ public class RenderMan extends JPanel implements Runnable {
     }
 
     public void exit() {
-        renderThread.stop();
+        freeze();
+        exit = true;
     }
 
 }
