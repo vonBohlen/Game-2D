@@ -46,7 +46,7 @@ public class PipePair extends Entity {
             if(top.hitBox.x + top.hitBox.width/2 < Bird.getBirdPosition() && !updatedScore){
                 updatedScore = true;
                 ScoreDisplay.upScore();
-                Bird.remainder += 0.2;
+                Bird.remainder += 0.1;
             }
         }
         catch(Exception e){
