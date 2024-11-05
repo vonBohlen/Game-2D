@@ -62,7 +62,7 @@ public class Instance {
 
         window.setLocationRelativeTo(null);
         window.setVisible(true);
-        window.setAlwaysOnTop(true);
+        //window.setAlwaysOnTop(true);
 
     }
 
