@@ -23,6 +23,8 @@ public class Instance {
 
         //Initialisatioin
 
+        System.setProperty("sun.java2d.opengl", "true");
+
         ConfHand.setConfPath(confPath);
         ConfHand.generateConf();
 
