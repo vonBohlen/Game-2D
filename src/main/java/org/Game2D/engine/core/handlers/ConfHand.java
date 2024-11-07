@@ -27,7 +27,12 @@ public class ConfHand {
 
     public static void updateConf() {
 
-        //Conf update logic
+        Properties custom = ConfProvider.getConf(DataHand.confPath);
+        Properties standart =getDefaultConf();
+
+        for (int i = 0; i < standart.size(); i++) {
+            //if (custom.containsKey(standart.get))
+        }
 
     }
 
@@ -38,6 +43,7 @@ public class ConfHand {
         properties.setProperty("game2d.core.tps", "60");
         properties.setProperty("game2d.core.fps", "120");
         properties.setProperty("game2d.core.showDebugScreen", "false");
+        properties.setProperty("game2d.reder.hitboxes", "false");
 
         return properties;
 

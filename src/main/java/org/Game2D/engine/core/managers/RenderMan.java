@@ -179,6 +179,7 @@ public class RenderMan extends JPanel implements Runnable {
         for (GameObject go : gameObjects) {
 
             if (go.getTexture() != null) go.draw(g2);
+            if (go.hitBox != null && ConfProvider.getConf(DataHand.confPath).getProperty("game2d.reder.hitboxes").equals("true")) g2.draw3DRect(go.hitBox.x, go.hitBox.y, go.hitBox.width, go.hitBox.height, false);
 
         }
 
