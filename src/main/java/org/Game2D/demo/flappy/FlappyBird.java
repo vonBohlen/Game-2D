@@ -58,9 +58,6 @@ public class FlappyBird {
         //Init ScoreDisplay
         ScoreDisplay.init();
 
-        for(GameObject go : DataHand.getGameObjs()){
-            System.out.println(go.getClass().getName());
-        }
     }
 
 }

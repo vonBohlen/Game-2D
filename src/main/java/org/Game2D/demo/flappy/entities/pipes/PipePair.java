@@ -1,6 +1,5 @@
 package org.Game2D.demo.flappy.entities.pipes;
 
-import org.Game2D.demo.flappy.FlappyBird;
 import org.Game2D.demo.flappy.ScoreDisplay;
 import org.Game2D.demo.flappy.entities.Bird;
 import org.Game2D.engine.objects.advanced.Entity;
@@ -49,9 +48,7 @@ public class PipePair extends Entity {
                 Bird.remainder += 0.1;
             }
         }
-        catch(Exception e){
-            System.out.println("Methode called before object initialization");
-        }
+        catch(Exception ignored){}
     }
 
     private void teleport(){
