@@ -176,6 +176,8 @@ public class RenderMan extends JPanel implements Runnable {
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
 
+        g2.setColor(Color.magenta);
+
         for (GameObject go : gameObjects) {
 
             if (go.getTexture() != null) go.draw(g2);
