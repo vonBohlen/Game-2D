@@ -167,6 +167,9 @@ public class RenderMan extends JPanel implements Runnable {
 //    }
 
     public void paintComponent(Graphics g) {
+
+        boolean renderHitBoxes = false;
+
         List<GameObject> gameObjects = DataHand.getGameObjs();
 
         super.paintComponent(g);
@@ -178,10 +181,12 @@ public class RenderMan extends JPanel implements Runnable {
 
         g2.setColor(Color.magenta);
 
+        if (ConfProvider.getConf(DataHand.confPath).getProperty("game2d.render.hitboxes").equals("true")) renderHitBoxes = true;
+
         for (GameObject go : gameObjects) {
 
             if (go.getTexture() != null) go.draw(g2);
-            if (go.hitBox != null && ConfProvider.getConf(DataHand.confPath).getProperty("game2d.render.hitboxes").equals("true")) g2.draw3DRect(go.hitBox.x, go.hitBox.y, go.hitBox.width, go.hitBox.height, false);
+            if (go.hitBox != null && renderHitBoxes) g2.draw3DRect(go.hitBox.x, go.hitBox.y, go.hitBox.width, go.hitBox.height, false);
 
         }
 
