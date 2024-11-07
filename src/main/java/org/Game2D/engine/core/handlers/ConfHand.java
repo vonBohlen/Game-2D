@@ -33,7 +33,7 @@ public class ConfHand {
         Properties standart = getDefaultConf();
 
         for(Map.Entry<Object, Object> entry : standart.entrySet()){
-            if(!custom.containsValue(entry.getValue())){
+            if(!custom.containsKey(entry.getKey())){
                 custom.put(entry.getKey(), entry.getValue());
             }
         }
@@ -48,7 +48,7 @@ public class ConfHand {
         properties.setProperty("game2d.core.tps", "60");
         properties.setProperty("game2d.core.fps", "120");
         properties.setProperty("game2d.core.showDebugScreen", "false");
-        properties.setProperty("game2d.reder.hitboxes", "false");
+        properties.setProperty("game2d.render.hitboxes", "false");
 
         return properties;
 
