@@ -17,16 +17,18 @@ public class Instance {
     JFrame window;
 
     //Gamelogicelements
-    
 
     public Instance(Path confPath) {
 
-        //Initialisatioin
+        String os = System.getProperty("os.name").toLowerCase();
+        if (os.contains("nix") || os.contains("nux") || os.contains("aix")) System.setProperty("sun.java2d.opengl", "true");
+        System.out.println("OpenGL enabled: " + System.getProperty("sun.java2d.opengl"));
 
-        System.setProperty("sun.java2d.opengl", "true");
+        //Initialisatioin
 
         ConfHand.setConfPath(confPath);
         ConfHand.generateConf();
+        ConfHand.updateConf();
 
         DataHand.keyHand = new Keyhand();
 
