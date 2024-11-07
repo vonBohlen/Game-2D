@@ -21,6 +21,7 @@ public class PipeBelow extends Entity {
 
         Bird.gameOver = move(-Bird.speed, 0) == null ? false : true;
 
+        if(Bird.gameOver){filler.moveFiller();}
     }
 
     public void adjustFiller(){

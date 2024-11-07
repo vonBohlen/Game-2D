@@ -20,6 +20,8 @@ public class PipeTop extends Entity {
         if(Bird.gameOver) return;
 
         Bird.gameOver = move(-Bird.speed, 0) == null ? false : true;
+
+        if(Bird.gameOver){filler.moveFiller();}
     }
 
     public void adjustFiller(){

@@ -21,6 +21,10 @@ public class PipeFiller extends Entity {
         Bird.gameOver = move(-Bird.speed, 0) == null ? false : true;
     }
 
+    public void moveFiller(){
+        move(-Bird.speed, 0);
+    }
+
     public void adjust(int x, int y, boolean belowPipe){
         this.hitBox.x = x;
         this.hitBox.y = belowPipe ? 0 : y + 612;

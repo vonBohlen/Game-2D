@@ -40,6 +40,13 @@ public class PipeHandler extends Entity {
 
     public static int getRndY(){
         int adder = getRnd(-200, 200);
+        int twice = getRnd(-200, 200);
+
+        int differenceA = adder > 0 ? adder : -adder;
+        int differenceB = twice > 0 ? twice : -twice;
+
+        adder = differenceA > differenceB ? adder : twice;
+
         if(adder + random < 300 || adder + random > DataHand.renderMan.getHeight()){
             adder *= -1;
         }
