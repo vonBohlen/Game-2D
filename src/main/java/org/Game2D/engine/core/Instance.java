@@ -23,6 +23,8 @@ public class Instance {
 
         //Initialisatioin
 
+        System.setProperty("sun.java2d.opengl", "true");
+
         ConfHand.setConfPath(confPath);
         ConfHand.generateConf();
 
@@ -62,13 +64,13 @@ public class Instance {
 
         window.setLocationRelativeTo(null);
         window.setVisible(true);
-        window.setAlwaysOnTop(true);
+        //window.setAlwaysOnTop(true);
 
     }
 
     public int exit() {
-        DataHand.actionMan.freeze();
-        DataHand.renderMan.freeze();
+        DataHand.actionMan.exit();
+        DataHand.renderMan.exit();
 
         window.dispose();
 
