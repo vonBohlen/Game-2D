@@ -1,6 +1,7 @@
 package org.Game2D.demo.pingPong;
 
 import org.Game2D.demo.pingPong.entities.Ball;
+import org.Game2D.demo.pingPong.entities.ComputerBar;
 import org.Game2D.demo.pingPong.entities.PlayerBar;
 import org.Game2D.engine.core.Instance;
 import org.Game2D.engine.core.handlers.DataHand;
@@ -23,5 +24,6 @@ public class PingPong {
         screenWidth = DataHand.renderMan.getWidth();
         new Ball(false, texture);
         new PlayerBar(false, texture);
+        new ComputerBar(texture);
     }
 }
