@@ -14,10 +14,18 @@ public class PlayerBar extends Entity {
 
     @Override
     public void update() {
+        //movement
         if (DataHand.keyHand.keyPressed_W) {
             move(0, -10);
         } else if (DataHand.keyHand.keyPressed_S) {
             move(0, 10);
+        }
+        //boundaries
+        if(hitBox.y + hitBox.height > DataHand.renderMan.getHeight()){
+            setPosition(10, DataHand.renderMan.getHeight() - hitBox.height);
+        }
+        else if(hitBox.y < 0){
+            setPosition(10, 0);
         }
     }
 
