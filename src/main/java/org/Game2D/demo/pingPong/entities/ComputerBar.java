@@ -1,7 +1,6 @@
 package org.Game2D.demo.pingPong.entities;
 
 import org.Game2D.demo.pingPong.PingPong;
-import org.Game2D.engine.core.handlers.DataHand;
 import org.Game2D.engine.objects.advanced.Entity;
 
 import java.awt.*;

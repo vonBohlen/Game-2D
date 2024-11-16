@@ -8,8 +8,8 @@ import java.awt.*;
 
 public class PlayerBar extends Entity {
 
-    public PlayerBar(boolean collision, Image txt) {
-        super(new Rectangle(10, PingPong.screenHeight / 3, PingPong.screenWidth / 100, PingPong.screenHeight / 3), collision, txt);
+    public PlayerBar(Image txt) {
+        super(new Rectangle(PingPong.screenWidth / 100, PingPong.screenHeight / 3, PingPong.screenWidth / 100, PingPong.screenHeight / 3), true, txt);
     }
 
     @Override
@@ -22,10 +22,10 @@ public class PlayerBar extends Entity {
         }
         //boundaries
         if(hitBox.y + hitBox.height > DataHand.renderMan.getHeight()){
-            setPosition(10, DataHand.renderMan.getHeight() - hitBox.height);
+            setPosition(PingPong.screenWidth / 100, DataHand.renderMan.getHeight() - hitBox.height);
         }
         else if(hitBox.y < 0){
-            setPosition(10, 0);
+            setPosition(PingPong.screenWidth / 100, 0);
         }
     }
 

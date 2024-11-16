@@ -23,7 +23,7 @@ public class PingPong {
         screenHeight = DataHand.renderMan.getHeight();
         screenWidth = DataHand.renderMan.getWidth();
         new Ball(false, texture);
-        new PlayerBar(false, texture);
+        new PlayerBar(texture);
         new ComputerBar(texture);
     }
 }
