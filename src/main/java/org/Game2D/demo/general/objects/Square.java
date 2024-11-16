@@ -1,4 +1,4 @@
-package org.Game2D.demo.objects;
+package org.Game2D.demo.general.objects;
 
 import org.Game2D.engine.objects.advanced.StaticObject;
 

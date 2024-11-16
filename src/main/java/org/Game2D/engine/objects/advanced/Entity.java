@@ -14,62 +14,115 @@ public abstract class Entity extends GameObject {
 
     }
 
+//    protected GameObject[] move(int xShift, int yShift) {
+//
+//        if (hitBox == null) return null;
+//
+//        GameObject objectCacheX, objectCacheY;
+//
+//        GameObject[] objectCache = new GameObject[2];
+//    }
+
+//    protected GameObject[] move(int xShift, int yShift) {
+//
+//        if (hitBox == null) return null;
+//
+//        GameObject objectCacheX, objectCacheY;
+//
+//        GameObject[] objectCache = new GameObject[2];
+//
+//        while (xShift != 0 || yShift != 0) {
+//            int newX = hitBox.x;
+//            int newY = hitBox.y;
+//
+//            if (xShift < 0) {
+//                newX = hitBox.x - 1;
+//                xShift++;
+//            }
+//            else if (xShift > 0) {
+//                newX = hitBox.x + 1;
+//                xShift--;
+//            }
+//
+//            if (yShift < 0) {
+//                newY = hitBox.y - 1;
+//                yShift++;
+//            }
+//            else if (yShift > 0) {
+//                newY = hitBox.y + 1;
+//                yShift--;
+//            }
+//
+//            objectCacheX = ActionMan.checkCollision(this, new Rectangle(newX, hitBox.y, hitBox.width, hitBox.height));
+//            objectCacheY = ActionMan.checkCollision(this, new Rectangle(hitBox.x, newY, hitBox.width, hitBox.height));
+//
+//            if (newX != hitBox.x) {
+//                if (objectCacheX == null) hitBox.x = newX;
+//                else {
+//                    xShift = 0;
+//                    objectCache[0] = objectCacheX;
+//                }
+//            }
+//
+//            if (newY != hitBox.y) {
+//                if (objectCacheY == null) hitBox.y = newY;
+//                else {
+//                    yShift = 0;
+//                    objectCache[1] = objectCacheY;
+//                }
+//            }
+//
+//        }
+//
+//        if (objectCache[0] == null && objectCache[1] == null) return null;
+//
+//        return objectCache;
+//
+//    }
+
     protected GameObject[] move(int xShift, int yShift) {
 
         if (hitBox == null) return null;
 
         GameObject objectCacheX, objectCacheY;
-
         GameObject[] objectCache = new GameObject[2];
 
         while (xShift != 0 || yShift != 0) {
-            int newX = hitBox.x;
-            int newY = hitBox.y;
+            int stepX = xShift != 0 ? Math.min(Math.abs(xShift), 5) * Integer.signum(xShift) : 0;
+            int stepY = yShift != 0 ? Math.min(Math.abs(yShift), 5) * Integer.signum(yShift) : 0;
 
-            if (xShift < 0) {
-                newX = hitBox.x - 1;
-                xShift++;
-            }
-            else if (xShift > 0) {
-                newX = hitBox.x + 1;
-                xShift--;
-            }
-
-            if (yShift < 0) {
-                newY = hitBox.y - 1;
-                yShift++;
-            }
-            else if (yShift > 0) {
-                newY = hitBox.y + 1;
-                yShift--;
-            }
+            int newX = hitBox.x + stepX;
+            int newY = hitBox.y + stepY;
 
             objectCacheX = ActionMan.checkCollision(this, new Rectangle(newX, hitBox.y, hitBox.width, hitBox.height));
             objectCacheY = ActionMan.checkCollision(this, new Rectangle(hitBox.x, newY, hitBox.width, hitBox.height));
 
-            if (newX != hitBox.x) {
-                if (objectCacheX == null) hitBox.x = newX;
-                else {
+            if (stepX != 0) {
+                if (objectCacheX == null) {
+                    hitBox.x = newX;
+                    xShift -= stepX;
+                } else {
                     xShift = 0;
                     objectCache[0] = objectCacheX;
                 }
             }
 
-            if (newY != hitBox.y) {
-                if (objectCacheY == null) hitBox.y = newY;
-                else {
+            if (stepY != 0) {
+                if (objectCacheY == null) {
+                    hitBox.y = newY;
+                    yShift -= stepY;
+                } else {
                     yShift = 0;
                     objectCache[1] = objectCacheY;
                 }
             }
 
+            if (objectCache[0] != null && objectCache[1] != null) break;
         }
 
-        if (objectCache[0] == null && objectCache[1] == null) return null;
-
-        return objectCache;
-
+        return (objectCache[0] == null && objectCache[1] == null) ? null : objectCache;
     }
+
 
     public GameObject setPosition(int newX, int newY, boolean ignoreCollision) {
 
