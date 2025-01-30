@@ -98,7 +98,7 @@ public class ActionMan implements Runnable {
 
         for (GameObject current : gameObjects) {
 
-            if (current.getCollisionActivated() && !current.equals(go) && position.intersects(current.hitBox)) return current;
+            if (current.getCollisionActivated() && !current.equals(go) && go.objectLayer == current.objectLayer && position.intersects(current.hitBox)) return current;
 
         }
 

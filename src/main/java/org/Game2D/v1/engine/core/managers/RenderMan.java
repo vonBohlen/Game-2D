@@ -16,8 +16,6 @@ public class RenderMan extends JPanel implements Runnable {
     private boolean exit = false;
     private boolean run = true;
 
-    //private final Queue<BufferedImage> frameBuffer = new LinkedList<>();
-
     public RenderMan() {
 
         confPanel();
@@ -97,72 +95,6 @@ public class RenderMan extends JPanel implements Runnable {
 
     }
 
-//    private void renderFrame() {
-//
-//        BufferedImage frame = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_ARGB);
-//
-//        Graphics2D g2 = frame.createGraphics();
-//
-//        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-//        g2.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-//
-//        List<GameObject> gameObjects = DataHand.getGameObjs();
-//
-//        for (GameObject go : gameObjects) {
-//
-//            if (go.getTexture() != null) go.draw(g2);
-//
-//        }
-//
-//        DebugScreen.draw(g2);
-//
-//        g2.dispose();
-//
-//        frameBuffer.add(frame);
-//
-//    }
-
-//   public void paintComponent(Graphics g) {
-//
-//        super.paintComponent(g);
-//
-//        g.drawImage(frameBuffer.poll(), 0, 0, this);
-//
-//    }
-
-//    private BufferedImage renderFrame() {
-//
-//        BufferedImage frame = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_ARGB);
-//
-//        Graphics2D g2 = frame.createGraphics();
-//
-//        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-//        g2.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-//
-//        List<GameObject> gameObjects = DataHand.getGameObjs();
-//
-//        for (GameObject go : gameObjects) {
-//
-//            if (go.getTexture() != null) go.draw(g2);
-//
-//        }
-//
-//        DebugScreen.draw(g2);
-//
-//        g2.dispose();
-//
-//        return frame;
-//
-//    }
-//
-//       public void paintComponent(Graphics g) {
-//
-//        super.paintComponent(g);
-//
-//        g.drawImage(renderFrame(), 0, 0, this);
-//
-//    }
-
     public void paintComponent(Graphics g) {
 
         boolean renderHitBoxes = false;
@@ -183,7 +115,7 @@ public class RenderMan extends JPanel implements Runnable {
 
         for (GameObject go : gameObjects) {
 
-            if (ActionMan.getGameTick() == 0) System.out.println(go.getClass().getName() + " at " + go.objectLayer);
+            //if (ActionMan.getGameTick() == 0) System.out.println(go.getClass().getName() + " at " + go.objectLayer);
 
             if (go.getTexture() != null) go.draw(g2);
             if (go.hitBox != null && renderHitBoxes) g2.draw3DRect(go.hitBox.x, go.hitBox.y, go.hitBox.width, go.hitBox.height, true);
