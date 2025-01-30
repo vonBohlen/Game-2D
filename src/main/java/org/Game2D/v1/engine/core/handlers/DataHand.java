@@ -55,9 +55,9 @@ public class  DataHand {
         }
 
         //left elements
-        sortList(start, pivot - 1);
+        if (pivot > 0) sortList(start, pivot - 1);
         //right elements
-        sortList(pivot + 1, end);
+        if (pivot < gameObjects.size() - 1) sortList(pivot + 1, end);
     }
     private static void queueObjects(int origin, int target){
         GameObject storedObject = gameObjects.get(origin);
