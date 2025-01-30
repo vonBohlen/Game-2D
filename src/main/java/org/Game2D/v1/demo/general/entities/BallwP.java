@@ -8,7 +8,7 @@ import java.awt.*;
 public class BallwP extends Entity {
 
     public BallwP( Rectangle hb, Image txt) {
-        super(hb, true, txt);
+        super(hb, true, 0, txt);
     }
 
     private int MoveX = 0;

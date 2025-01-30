@@ -7,7 +7,7 @@ import java.awt.*;
 public class BackgroundObject extends StaticObject {
 
     public BackgroundObject(Rectangle hb, boolean collision, Image txt) {
-        super(hb, collision, txt);
+        super(hb, collision, 0, txt);
     }
 
     @Override

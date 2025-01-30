@@ -8,7 +8,7 @@ import java.awt.*;
 public class Ball extends Entity {
 
     public Ball(Rectangle hb, Image txt) {
-        super(hb, true, txt);
+        super(hb, true, 0, txt);
     }
 
     @Override

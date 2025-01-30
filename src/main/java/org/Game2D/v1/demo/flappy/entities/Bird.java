@@ -29,7 +29,7 @@ public class Bird extends Entity {
     public Bird(Image txt) {
 
         //bird gets placed at one half of the height and one third of the width
-        super(new Rectangle(DataHand.renderMan.getWidth() / 5, DataHand.renderMan.getHeight() / 2, 44, 24), true, txt);
+        super(new Rectangle(DataHand.renderMan.getWidth() / 5, DataHand.renderMan.getHeight() / 2, 44, 24), true, 1, txt);
 
         //ideal time between two ticks
         this.passedTime = 1 / (double) Integer.parseInt(ConfProvider.getConf(DataHand.confPath).getProperty("game2d.core.tps"));

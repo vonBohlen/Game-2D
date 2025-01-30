@@ -7,9 +7,9 @@ import java.awt.*;
 
 public abstract class Entity extends GameObject {
 
-    public Entity(Rectangle hb, boolean collision, Image txt) {
+    public Entity(Rectangle hb, boolean collision, int objectLayer, Image txt) {
 
-        super(hb, collision, txt);
+        super(hb, collision, objectLayer, txt);
 
     }
 
