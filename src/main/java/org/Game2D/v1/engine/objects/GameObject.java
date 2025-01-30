@@ -9,6 +9,8 @@ public abstract class GameObject {
     private boolean collisionActivated = false;
     public final Rectangle hitBox;
 
+    public int objectLayer = 0;
+
     protected Image texture;
 
     public GameObject(Rectangle hb, boolean collision, Image txt) {

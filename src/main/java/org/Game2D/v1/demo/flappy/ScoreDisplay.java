@@ -29,7 +29,8 @@ public class ScoreDisplay {
     private static ArrayList<ScoreDigit> scoreDigits = new ArrayList<>();
 
     public static void init() {
-        addDigit();
+        reset();
+        //addDigit();
         HighScoreDisplay.init();
     }
 

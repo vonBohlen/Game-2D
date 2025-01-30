@@ -72,7 +72,6 @@ public class Bird extends Entity {
         if(remainder >= 1){
             speed += remainder;
             remainder--;
-            System.out.println(speed);
         }
     }
 
