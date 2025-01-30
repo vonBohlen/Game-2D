@@ -24,13 +24,13 @@ public class  DataHand {
     public static void regGameObj(GameObject go) {
         if (!gameObjects.contains(go)){
             gameObjects.add(go);
-            sortList(0, gameObjects.size());
+            sortList(0, gameObjects.size() - 1);
         }
     }
 
     public static void remGameObj(GameObject go) {
         gameObjects.removeIf(gameObject -> gameObject == go);
-        sortList(0, gameObjects.size());
+        sortList(0, gameObjects.size() - 1);
     }
 
     public static List<GameObject> getGameObjs() {
@@ -42,7 +42,7 @@ public class  DataHand {
     }
 
     private static void sortList(int start, int end){
-        if(start == end){ return; }
+        if(start >= end){ return; }
 
         int pivot = end;
         int pointer = end - 1;

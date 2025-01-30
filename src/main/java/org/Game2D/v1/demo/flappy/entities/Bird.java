@@ -81,7 +81,7 @@ public class Bird extends Entity {
         if(!this.gameOver) {
             updatePosition();
         }
-        else if (gameOver && DataHand.keyHand.keyPressed_SPACE){
+        else if (DataHand.keyHand.keyPressed_SPACE){
             setDefault();
             speed = 10;
         }
