@@ -7,7 +7,7 @@ import java.awt.*;
 public class Square extends StaticObject {
 
     public Square(Rectangle hb, Image txt) {
-        super(hb, true, txt);
+        super(hb, true, 0, txt);
     }
 
     public void draw(Graphics2D g2) {

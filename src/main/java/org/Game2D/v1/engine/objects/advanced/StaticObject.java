@@ -6,8 +6,8 @@ import java.awt.*;
 
 public abstract class StaticObject extends GameObject {
 
-    public StaticObject(Rectangle hb, boolean collision, Image txt) {
-        super(hb, collision, txt);
+    public StaticObject(Rectangle hb, boolean collision, int objectLayer, Image txt) {
+        super(hb, collision, objectLayer, txt);
     }
 
     @Override

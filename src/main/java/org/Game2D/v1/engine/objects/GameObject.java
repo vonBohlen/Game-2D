@@ -13,10 +13,12 @@ public abstract class GameObject {
 
     protected Image texture;
 
-    public GameObject(Rectangle hb, boolean collision, Image txt) {
+    public GameObject(Rectangle hb, boolean collision, int objectLayer, Image txt) {
 
         if (hb != null && collision) collisionActivated = true;
         hitBox = hb;
+
+        this.objectLayer = objectLayer;
 
         texture = txt;
 

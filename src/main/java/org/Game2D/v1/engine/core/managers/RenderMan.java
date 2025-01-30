@@ -183,6 +183,8 @@ public class RenderMan extends JPanel implements Runnable {
 
         for (GameObject go : gameObjects) {
 
+            System.out.println(go.objectLayer + " " + go.getClass().getName());
+
             if (go.getTexture() != null) go.draw(g2);
             if (go.hitBox != null && renderHitBoxes) g2.draw3DRect(go.hitBox.x, go.hitBox.y, go.hitBox.width, go.hitBox.height, true);
 
