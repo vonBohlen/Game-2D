@@ -10,12 +10,11 @@ import java.util.Vector;
 public class Chunk {
 
     private volatile boolean lockAcquired = false;
+    private final ArrayList<Long> improQueue = new ArrayList<>();
 
     private final Vector<Integer> id;
 
     private final List<GameObject> gameObjects = new ArrayList<>();
-
-    private final ArrayList<Long> improQueue = new ArrayList<>();
 
     public Chunk(Vector<Integer> id, List<GameObject> initialObjects) {
         this.id = id;
@@ -25,6 +24,7 @@ public class Chunk {
 
 
     //Spin lock
+
     private void acquirerLock(long id) {
         addToQueue(id);
         while (lockAcquired && getFirstInQueue() == id) {
@@ -33,12 +33,15 @@ public class Chunk {
         removeFirstInQueue();
         lockAcquired = true;
     }
+
     private void addToQueue(Long id){
         improQueue.add(id);
     }
+
     private long getFirstInQueue(){
         return improQueue.get(0);
     }
+
     private void removeFirstInQueue(){
         improQueue.remove(0);
     }
@@ -49,6 +52,7 @@ public class Chunk {
 
 
     //Sorting
+
     void insertSort(GameObject object){
         int index = 0;
         for(GameObject currentObject : gameObjects){
@@ -99,6 +103,7 @@ public class Chunk {
 
 
     //List content management
+
     public void addGameObject(GameObject gameObject) {
         acquirerLock(Thread.currentThread().getId());
         insertSort(gameObject);
@@ -126,6 +131,7 @@ public class Chunk {
 
 
     //
+
     public void update() {
         acquirerLock(Thread.currentThread().getId());
         for (GameObject gameObject : gameObjects) {
@@ -144,6 +150,7 @@ public class Chunk {
 
 
     //
+
     public List<GameObject> getGameObjects() {
         return new ArrayList<>(gameObjects);
     }
