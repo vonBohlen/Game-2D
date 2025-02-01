@@ -59,4 +59,8 @@ public class Chunk {
         dropLock();
     }
 
+//    public List<GameObject> getGameObjs() {
+//        return (List<GameObject>) objects.clone();
+//    }
+
 }
