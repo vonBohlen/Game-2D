@@ -7,27 +7,30 @@ public class ChunkManager {
 
     private static final List<Chunk> chunks = new ArrayList<>();
 
+    //TODO: addChunk (chunk)
+
+    //TODO: removeChunk (chunk)
+
+    //TODO: TransferEntity (entity, origin, target)
+
+    //TODO: existById (index, value)
+
+    //TODO: existByPosition (posX, posY)
+
+    //TODO: getChunkById (index, value)
+
+    //TODO: getChunkByPosition (posX, posY)
+
+    //TODO: updateChunksById (index, value)
+
+    //TODO: updateChunksByPosition (posX, posY)
+
+    //TODO: drawChunksById (index, value)
+
+    //TODO: drawChunksByPosition (posX, posY)
+
     public static List<Chunk> getChunks() {
-        return chunks;
+        return new ArrayList<>(chunks);
     }
-
-//    public static Chunk getChunkById(int id) {
-//        for (Chunk chunk : chunks) {
-//            if (chunk.ID == id) return chunk;
-//        }
-//        return null;
-//    }
-
-    public static void addChunk(Chunk chunk) {
-        if (!chunks.contains(chunk)) chunks.add(chunk);
-    }
-
-    public static void removeChunk(Chunk chunk) {
-        chunks.removeIf(current -> current == chunk);
-    }
-
-//    public static void removeChunkById(int chunkX, int chunkY) {
-//        chunks.removeIf(chunk -> chunk.chunkX + chunk.chunkY == chunkX + chunkY);
-//    }
 
 }
