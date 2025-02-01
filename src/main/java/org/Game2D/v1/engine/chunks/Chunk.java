@@ -3,10 +3,8 @@ package org.Game2D.v1.engine.chunks;
 import org.Game2D.v1.engine.objects.GameObject;
 
 import java.awt.*;
-import java.lang.management.ThreadInfo;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Queue;
 import java.util.Vector;
 
 public class Chunk {
