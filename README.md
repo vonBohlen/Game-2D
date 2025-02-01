@@ -47,7 +47,7 @@ Replace the **VERSION** placeholder with the release or snapshot you want to use
 ```
 
 **Gradle**
-```gradle
+```groovy
 dependencyResolutionManagement { 
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
 	repositories {
@@ -56,7 +56,7 @@ dependencyResolutionManagement {
     }
 }
 ```
-```gradle
+```groovy
 dependencies {
     implementation 'com.github.vonBohlen:Game-2D:VERSION'
 }
