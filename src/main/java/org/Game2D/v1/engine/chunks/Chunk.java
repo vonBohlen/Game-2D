@@ -4,39 +4,59 @@ import org.Game2D.v1.engine.objects.GameObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 public class Chunk {
 
-    public final int chunkX, chunkY;
+    private volatile boolean lockAcquired = false;
 
-    public final int posX, posY;
+    private Vector<Integer> id = new Vector<>(3);
 
-    public Chunk(int chunkX, int chunkY, int posX, int posY) {
-        this.chunkX = chunkX;
-        this.chunkY = chunkY;
+    private final List<GameObject> objects = new ArrayList<>();
 
-        this.posX = posX;
-        this.posY = posY;
+    public Chunk(int chunkX, int chunkY, int size, List<GameObject> initialObjects) {
+        id.add(0, chunkX);
+        id.add(1, chunkY);
+        id.add(2, size);
+
+        addGameObject(initialObjects);
     }
 
-    private final List<GameObject> gameObjects = new ArrayList<>();
+    private void acquirerLock() {
+        while (lockAcquired) {
+            Thread.onSpinWait();
+        }
+        lockAcquired = true;
+    }
 
-    public List<GameObject> getGameObjects() {
-        return gameObjects;
+    private void dropLock() {
+        lockAcquired = false;
     }
 
     public void addGameObject(GameObject gameObject) {
-        if (!gameObjects.contains(gameObject)) gameObjects.add(gameObject);
+        acquirerLock();
+        objects.add(gameObject);
+        dropLock();
+    }
+
+    public void addGameObject(List<GameObject> gameObjects) {
+        acquirerLock();
+        objects.addAll(gameObjects);
+        dropLock();
     }
 
     public void removeGameObject(GameObject gameObject) {
-        gameObjects.removeIf(current -> current == gameObject);
+        acquirerLock();
+        objects.removeIf(current -> current == gameObject);
+        dropLock();
     }
 
     public void update() {
-        for (GameObject gameObject : gameObjects) {
+        acquirerLock();
+        for (GameObject gameObject : objects) {
             gameObject.update();
         }
+        dropLock();
     }
 
 }
