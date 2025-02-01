@@ -19,7 +19,7 @@ public class Chunk {
     public Chunk(Vector<Integer> id, List<GameObject> initialObjects) {
         this.id = id;
 
-        addGameObject(initialObjects);
+        addGameObjects(initialObjects);
     }
 
 
@@ -104,13 +104,13 @@ public class Chunk {
 
     //List content management
 
-    public void addGameObject(GameObject gameObject) {
+    public void addGameObjects(GameObject gameObject) {
         acquirerLock(Thread.currentThread().getId());
         insertSort(gameObject);
         dropLock();
     }
 
-    public void addGameObject(List<GameObject> gameObjects) {
+    public void addGameObjects(List<GameObject> gameObjects) {
         acquirerLock(Thread.currentThread().getId());
         this.gameObjects.addAll(gameObjects);
         quickSort(0, this.gameObjects.size()-1);

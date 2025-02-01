@@ -1,5 +1,8 @@
 package org.Game2D.v1.engine.chunks;
 
+import org.Game2D.v1.engine.objects.GameObject;
+import org.Game2D.v1.engine.objects.advanced.Entity;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,6 +63,16 @@ public class ChunkManager {
 
     //TODO: TransferEntity (entity, origin, target)
 
+    public static void transferEntity(Entity entity, Chunk origin, Chunk target) {
+        origin.removeGameObject(entity);
+        target.addGameObjects(entity);
+    }
+
+    public static void transferEntities(List<GameObject> entities, Chunk origin, Chunk target) {
+        origin.removeGameObjects(entities);
+        target.addGameObjects(entities);
+    }
+
     //TODO: existById (index, value)
 
     //TODO: existByPosition (posX, posY)
@@ -68,13 +81,13 @@ public class ChunkManager {
 
     //TODO: getChunkByPosition (posX, posY)
 
-    //TODO: updateChunksById (index, value)
+    //TODO: updateChunksById (index, value) /
 
-    //TODO: updateChunksByPosition (posX, posY)
+    //TODO: updateChunksByPosition (posX, posY) /
 
-    //TODO: drawChunksById (index, value)
+    //TODO: drawChunksById (index, value) /
 
-    //TODO: drawChunksByPosition (posX, posY)
+    //TODO: drawChunksByPosition (posX, posY) /
 
     public static List<Chunk> getChunks() {
         return new ArrayList<>(chunks);
