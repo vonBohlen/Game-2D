@@ -3,7 +3,7 @@ package org.Game2D.v1.engine.chunks;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChunkMan {
+public class ChunkManager {
 
     private static final List<Chunk> chunks = new ArrayList<>();
 
