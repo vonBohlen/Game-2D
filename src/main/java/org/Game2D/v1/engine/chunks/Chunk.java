@@ -72,14 +72,12 @@ public class Chunk {
         dropLock();
     }
 
-    //TODO: Gamobjects Liste so returnen, dass die GameObjjects Liste des Chunks nicht manipolierbar ist.
-//    public List<GameObject> getGameObjects() {
-//        return (List<GameObject>) gameObjects.clone();
-//    }
+    public List<GameObject> getGameObjects() {
+        return new ArrayList<>(gameObjects);
+    }
 
     public Vector<Integer> getId() {
-        //TODO: Id Vector so returnen, dass der Id Vector des Chunks nicht manipolierbar ist.
-        return new Vector<>();
+        return new Vector<>(id);
     }
 
 }
