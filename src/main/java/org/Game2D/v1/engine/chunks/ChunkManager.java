@@ -3,6 +3,7 @@ package org.Game2D.v1.engine.chunks;
 import org.Game2D.v1.engine.objects.GameObject;
 import org.Game2D.v1.engine.objects.advanced.Entity;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,6 +62,19 @@ public class ChunkManager {
 
     //TODO: removeChunk (chunk)
 
+    public void removeGameChunk(Chunk chunk) {
+        acquirerLock(Thread.currentThread().getId());
+        chunks.remove(chunk);
+        dropLock();
+    }
+
+    public void removeGameChunks(List<Chunk> oldChunks) {
+        acquirerLock(Thread.currentThread().getId());
+        chunks.removeAll(oldChunks);
+        dropLock();
+    }
+
+
     //TODO: TransferEntity (entity, origin, target)
 
     public static void transferEntity(Entity entity, Chunk origin, Chunk target) {
@@ -75,19 +89,143 @@ public class ChunkManager {
 
     //TODO: existById (index, value)
 
+    public static boolean existsById(int index, int value) {
+        acquirerLock(Thread.currentThread().getId());
+        for (Chunk chunk : chunks) {
+            if (chunk.getId().get(index) == value) {
+                dropLock();
+                return true;
+            }
+        }
+        dropLock();
+        return false;
+    }
+
+
     //TODO: existByPosition (posX, posY)
+
+    public static boolean existsByPosition(int posX, int posY) {
+        acquirerLock(Thread.currentThread().getId());
+        for (Chunk chunk : chunks) {
+            if (chunk.getId().get(0) == posX && chunk.getId().get(1) == posY) {
+                dropLock();
+                return true;
+            }
+        }
+        dropLock();
+        return false;
+    }
+
 
     //TODO: getChunkById (index, value)
 
+    public static Chunk getChunkById(int index, int value) {
+        acquirerLock(Thread.currentThread().getId());
+        for (Chunk chunk : chunks) {
+            if (chunk.getId().get(index) == value) {
+                dropLock();
+                return chunk;
+            }
+        }
+        dropLock();
+        return null;
+    }
+
+
     //TODO: getChunkByPosition (posX, posY)
 
-    //TODO: updateChunksById (index, value) /
+    public static Chunk getChunkByPosition(int posX, int posY) {
+        acquirerLock(Thread.currentThread().getId());
+        for (Chunk chunk : chunks) {
+            if (chunk.getId().get(0) == posX && chunk.getId().get(1) == posY) {
+                dropLock();
+                return chunk;
+            }
+        }
+        dropLock();
+        return null;
+    }
 
-    //TODO: updateChunksByPosition (posX, posY) /
 
-    //TODO: drawChunksById (index, value) /
+    //TODO: updateChunkById (index, value) /
 
-    //TODO: drawChunksByPosition (posX, posY) /
+    public static void updateChunkById(int index, int value) {
+        acquirerLock(Thread.currentThread().getId());
+        for (Chunk chunk : chunks) {
+            if (chunk.getId().get(index) == value) {
+                chunk.update();
+                dropLock();
+                return;
+            }
+        }
+        dropLock();
+    }
+
+    public static void updateChunksById(int index, int value) {
+        acquirerLock(Thread.currentThread().getId());
+        for (Chunk chunk : chunks) {
+            if (chunk.getId().get(index) == value) {
+                chunk.update();
+            }
+        }
+        dropLock();
+    }
+
+
+    //TODO: updateChunkByPosition (posX, posY) /
+
+    public static void updateChunkByPosition(int posX, int posY) {
+        acquirerLock(Thread.currentThread().getId());
+        for (Chunk chunk : chunks) {
+            if (chunk.getId().get(0) == posX && chunk.getId().get(1) == posY) {
+                chunk.update();
+                dropLock();
+                return;
+            }
+        }
+        dropLock();
+    }
+
+
+    //TODO: drawChunkById (index, value) /
+
+    public static void drawChunkById(int index, int value, Graphics2D g2) {
+        acquirerLock(Thread.currentThread().getId());
+        for (Chunk chunk : chunks) {
+            if (chunk.getId().get(index) == value) {
+                chunk.draw(g2);
+                dropLock();
+                return;
+            }
+        }
+        dropLock();
+    }
+
+    public static void drawChunksById(int index, int value, Graphics2D g2) {
+        acquirerLock(Thread.currentThread().getId());
+        for (Chunk chunk : chunks) {
+            if (chunk.getId().get(index) == value) {
+                chunk.draw(g2);
+            }
+        }
+        dropLock();
+    }
+
+
+    //TODO: drawChunkByPosition (posX, posY) /
+
+    public static void drawChunkByPosition(int posX, int posY, Graphics2D g2) {
+        acquirerLock(Thread.currentThread().getId());
+        for (Chunk chunk : chunks) {
+            if (chunk.getId().get(0) == posX && chunk.getId().get(1) == posY) {
+                chunk.draw(g2);
+                dropLock();
+                return;
+            }
+        }
+        dropLock();
+    }
+
 
     public static List<Chunk> getChunks() {
         return new ArrayList<>(chunks);
