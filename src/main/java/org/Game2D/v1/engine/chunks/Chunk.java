@@ -1,6 +1,7 @@
 package org.Game2D.v1.engine.chunks;
 
 import org.Game2D.v1.engine.objects.GameObject;
+import org.Game2D.v1.engine.utils.SpinLock;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -9,45 +10,18 @@ import java.util.Vector;
 
 public class Chunk {
 
-    private volatile boolean lockAcquired = false;
-    private final ArrayList<Long> improQueue = new ArrayList<>();
+    private final SpinLock lock = new SpinLock();
+
 
     private final Vector<Integer> id;
 
     private final List<GameObject> gameObjects = new ArrayList<>();
 
+
     public Chunk(Vector<Integer> id, List<GameObject> initialObjects) {
         this.id = id;
 
         addGameObjects(initialObjects);
-    }
-
-
-    //Spin lock
-
-    private void acquirerLock(long id) {
-        addToQueue(id);
-        while (lockAcquired && getFirstInQueue() == id) {
-            Thread.onSpinWait();
-        }
-        removeFirstInQueue();
-        lockAcquired = true;
-    }
-
-    private void addToQueue(Long id){
-        improQueue.add(id);
-    }
-
-    private long getFirstInQueue(){
-        return improQueue.get(0);
-    }
-
-    private void removeFirstInQueue(){
-        improQueue.remove(0);
-    }
-
-    private void dropLock() {
-        lockAcquired = false;
     }
 
 
@@ -105,47 +79,53 @@ public class Chunk {
     //List content management
 
     public void addGameObjects(GameObject gameObject) {
-        acquirerLock(Thread.currentThread().getId());
+        long threadId = Thread.currentThread().getId();
+        lock.acquirerLock(threadId);
         insertSort(gameObject);
-        dropLock();
+        lock.dropLock(threadId);
     }
 
     public void addGameObjects(List<GameObject> gameObjects) {
-        acquirerLock(Thread.currentThread().getId());
+        long threadId = Thread.currentThread().getId();
+        lock.acquirerLock(threadId);
         this.gameObjects.addAll(gameObjects);
         quickSort(0, this.gameObjects.size()-1);
-        dropLock();
+        lock.dropLock(threadId);
     }
 
     public void removeGameObject(GameObject gameObject) {
-        acquirerLock(Thread.currentThread().getId());
-        gameObjects.removeIf(current -> current == gameObject);
-        dropLock();
+        long threadId = Thread.currentThread().getId();
+        lock.acquirerLock(threadId);
+        gameObjects.remove(gameObject);
+        lock.dropLock(threadId);
     }
 
     public void removeGameObjects(List<GameObject> gameObjects) {
-        acquirerLock(Thread.currentThread().getId());
+        long threadId = Thread.currentThread().getId();
+        lock.acquirerLock(threadId);
         this.gameObjects.removeAll(gameObjects);
-        dropLock();
+        lock.dropLock(threadId);
     }
 
 
     //
 
     public void update() {
-        acquirerLock(Thread.currentThread().getId());
+        long threadId = Thread.currentThread().getId();
+        lock.acquirerLock(threadId);
         for (GameObject gameObject : gameObjects) {
             gameObject.update();
         }
-        dropLock();
+        lock.dropLock(threadId);
     }
 
     public void draw(Graphics2D g2) {
-        acquirerLock(Thread.currentThread().getId());
+        long threadId = Thread.currentThread().getId();
+        lock.acquirerLock(threadId);
         for (GameObject gameObject : gameObjects) {
             gameObject.draw(g2);
         }
-        dropLock();
+        lock.dropLock(threadId);
     }
 
 

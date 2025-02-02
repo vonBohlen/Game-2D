@@ -4,7 +4,7 @@ import org.Game2D.v1.engine.chunks.Chunk;
 import org.Game2D.v1.engine.core.handlers.DataHand;
 import org.Game2D.v1.engine.objects.GameObject;
 import org.Game2D.v1.engine.utils.ConfProvider;
-import org.Game2D.v1.engine.utils.DebugScreen;
+import org.Game2D.v1.engine.debug.DebugScreen;
 
 import java.awt.*;
 import java.util.ArrayList;
