@@ -12,7 +12,7 @@ import java.util.List;
 //TODO: calculate witch chunks need to be simulated / rendered
 //TODO: rework object rendering
 
-//TODO: ALL OTHER CHANGES -> v.1.1 NOTE: v.1.1 WILL BE A COMPLETE REWRITE
+//TODO: ALL OTHER CHANGES -> v.1.1 NOTE: v.1.1 WILL BE A COMPLETE REWRITE AND FULLY DOCUMENTED
 
 public class Camera {
 

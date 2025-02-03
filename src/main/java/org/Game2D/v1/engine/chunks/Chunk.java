@@ -123,7 +123,7 @@ public class Chunk {
         long threadId = Thread.currentThread().getId();
         lock.acquirerLock(threadId);
         for (GameObject gameObject : gameObjects) {
-            gameObject.render(g2);
+            gameObject.render(g2, offsetX, offsetY);
         }
         lock.dropLock(threadId);
     }
