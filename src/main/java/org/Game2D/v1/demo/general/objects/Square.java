@@ -10,7 +10,7 @@ public class Square extends StaticObject {
         super(hb, true, 0, txt);
     }
 
-    public void draw(Graphics2D g2) {
+    public void render(Graphics2D g2) {
 
         g2.setColor(Color.WHITE);
 

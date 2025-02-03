@@ -11,7 +11,7 @@ public abstract class GameObject {
 
     public int objectLayer = 0;
 
-    protected Image texture;
+    protected final Image texture;
 
     public GameObject(Rectangle hb, boolean collision, int objectLayer, Image txt) {
 
@@ -46,6 +46,6 @@ public abstract class GameObject {
     }
 
     public abstract void update();
-    public abstract void draw(Graphics2D g2);
+    public abstract void render(Graphics2D g2, int offsetX, int offsetY);
 
 }

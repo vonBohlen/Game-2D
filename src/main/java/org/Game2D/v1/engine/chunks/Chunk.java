@@ -119,11 +119,11 @@ public class Chunk {
         lock.dropLock(threadId);
     }
 
-    public void draw(Graphics2D g2) {
+    public void render(Graphics2D g2, int offsetX, int offsetY) {
         long threadId = Thread.currentThread().getId();
         lock.acquirerLock(threadId);
         for (GameObject gameObject : gameObjects) {
-            gameObject.draw(g2);
+            gameObject.render(g2);
         }
         lock.dropLock(threadId);
     }

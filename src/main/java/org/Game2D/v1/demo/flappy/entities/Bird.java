@@ -92,7 +92,7 @@ public class Bird extends Entity {
     }
 
     @Override
-    public void draw(Graphics2D g2) {
+    public void render(Graphics2D g2, int offsetX, int offsetY) {
         g2.drawImage(texture, hitBox.x - 12, hitBox.y - 6, 68, 48, null);
     }
 

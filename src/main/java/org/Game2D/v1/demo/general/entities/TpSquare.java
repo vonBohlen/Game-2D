@@ -27,7 +27,7 @@ public class TpSquare extends Entity {
         }
     }
 
-    public void draw(Graphics2D g2) {
+    public void render(Graphics2D g2) {
 
         g2.setColor(Color.WHITE);
 

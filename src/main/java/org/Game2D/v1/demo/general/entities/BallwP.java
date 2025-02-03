@@ -62,7 +62,7 @@ public class BallwP extends Entity {
         move(0, MoveY);
     }
 
-    public void draw(Graphics2D g2) {
+    public void render(Graphics2D g2) {
 
         g2.setColor(Color.WHITE);
 

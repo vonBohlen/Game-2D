@@ -177,12 +177,12 @@ public class ChunkManager {
 
     //
 
-    public static void drawChunkById(int index, int value, Graphics2D g2) {
+    public static void renderChunkById(int index, int value, Graphics2D g2) {
         long threadId = Thread.currentThread().getId();
         lock.acquirerLock(threadId);
         for (Chunk chunk : chunks) {
             if (chunk.getId().get(index) == value) {
-                chunk.draw(g2);
+                chunk.render(g2);
                 lock.dropLock(threadId);
                 return;
             }
@@ -190,12 +190,12 @@ public class ChunkManager {
         lock.dropLock(threadId);
     }
 
-    public static void drawChunksById(int index, int value, Graphics2D g2) {
+    public static void renderChunksById(int index, int value, Graphics2D g2) {
         long threadId = Thread.currentThread().getId();
         lock.acquirerLock(threadId);
         for (Chunk chunk : chunks) {
             if (chunk.getId().get(index) == value) {
-                chunk.draw(g2);
+                chunk.render(g2);
             }
         }
         lock.dropLock(threadId);
@@ -204,12 +204,12 @@ public class ChunkManager {
 
     //
 
-    public static void drawChunkByPosition(int posX, int posY, Graphics2D g2) {
+    public static void renderChunkByPosition(int posX, int posY, Graphics2D g2) {
         long threadId = Thread.currentThread().getId();
         lock.acquirerLock(threadId);
         for (Chunk chunk : chunks) {
             if (chunk.getId().get(0) == posX && chunk.getId().get(1) == posY) {
-                chunk.draw(g2);
+                chunk.render(g2);
                 lock.dropLock(threadId);
                 return;
             }

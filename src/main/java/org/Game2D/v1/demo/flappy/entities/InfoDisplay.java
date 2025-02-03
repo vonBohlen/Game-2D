@@ -73,7 +73,7 @@ public class InfoDisplay extends Entity {
     }
 
     @Override
-    public void draw(Graphics2D g2) {
+    public void render(Graphics2D g2) {
             g2.drawImage(texture, hitBox.x, hitBox.y, hitBox.width, hitBox.height, null);
     }
 
