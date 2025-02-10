@@ -1,4 +1,4 @@
-package org.Game2D.engine;
+package org.Game2D.engine.ui;
 
 public class PlaceHolder {
 }
