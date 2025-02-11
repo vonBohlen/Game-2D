@@ -1,12 +1,12 @@
 package org.Game2D.engine.objects;
 
-import org.Game2D.engine.physics.Hitbox;
+import org.Game2D.engine.physics.HitBox;
 
 public abstract class GameObject {
 
-    public final Hitbox hitbox;
+    public final HitBox hitbox;
 
-    public GameObject(Hitbox hitbox) {
+    public GameObject(HitBox hitbox) {
         this.hitbox = hitbox;
     }
 
