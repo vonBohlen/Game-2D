@@ -10,7 +10,7 @@ public class Physicsobject extends Entity {
     double veloX = 0;
     double veloY = 0;
 
-    double passedTime; //at 60 tps it is around 1.6
+    double passedTime; //at 60 targetTPS it is around 1.6
 
     double gravityConst = 9.81; //earths gravity is 9.81
     double dragConst = 0.75; //best is 0.75 and 0 for no energy loss

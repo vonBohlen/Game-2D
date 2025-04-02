@@ -13,7 +13,7 @@ public class Bird extends Entity {
     double velo = 0.0; //only one velocity because the bird stays in position on x-axis
     double veloOnPress = -10;
     double gravityConst = 40; //earths gravity is 9.81
-    double passedTime; //at 60 tps it is around 1.6
+    double passedTime; //at 60 targetTPS it is around 1.6
 
 
     Image txtMid = AssetMan.loadAsset("flappy_assets/bird/yellowbird-midflap.png");

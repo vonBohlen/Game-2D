@@ -1,5 +1,6 @@
 package org.Game2D.engine.rendering;
 
+import org.Game2D.engine.physics.HitBox;
 import org.Game2D.v0.engine.chunks.Chunk;
 import org.Game2D.v0.engine.core.handlers.DataHand;
 import org.Game2D.v0.engine.objects.GameObject;
@@ -16,7 +17,7 @@ public class Camera {
 
     private SpinLock lock = new SpinLock();
 
-    private Rectangle position;
+    private HitBox position;
 
     private int offsetX = DataHand.renderMan.getWidth() / 2;
     private int offsetY = DataHand.renderMan.getHeight() / 2;

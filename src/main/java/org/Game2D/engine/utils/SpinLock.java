@@ -17,8 +17,8 @@ public class SpinLock {
             Thread.onSpinWait();
         }
         current = queue.get(0);
-        queue.remove(0);
         lockAcquired = true;
+        queue.remove(0);
     }
 
     public void dropLock(long id) {

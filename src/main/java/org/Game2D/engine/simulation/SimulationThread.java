@@ -12,7 +12,7 @@ public class SimulationThread implements Runnable {
 
     @Getter
     @Setter
-    private int tps = 0;
+    private int targetTPS = 0;
 
     @Getter
     private int tick = 0;
@@ -34,7 +34,7 @@ public class SimulationThread implements Runnable {
 
             while (compute) {
 
-                updateInterval = 1000000000 / tps;
+                updateInterval = (double) 1000000000 / targetTPS;
 
                 currentTime = System.nanoTime();
                 delta += (currentTime - lastTime) / updateInterval;
@@ -69,9 +69,9 @@ public class SimulationThread implements Runnable {
         run = false;
     }
 
-    public void start(int tps) {
+    public void start(int targetTPS) {
 
-        this.tps = tps;
+        this.targetTPS = targetTPS;
 
         run = true;
 
