@@ -1,6 +1,5 @@
 package org.Game2D.engine.render;
 
-import org.Game2D.engine.chunks.Chunk;
 import org.Game2D.engine.core.handlers.DataHand;
 import org.Game2D.engine.objects.GameObject;
 import org.Game2D.engine.utils.SpinLock;

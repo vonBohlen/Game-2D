@@ -1,142 +1,49 @@
 package org.Game2D.engine.chunks;
 
+import org.Game2D.engine.core.handlers.DataHand;
 import org.Game2D.engine.objects.GameObject;
-import org.Game2D.engine.utils.SpinLock;
 
-import java.awt.*;
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
-import java.util.Vector;
 
 public class Chunk {
 
-    private final SpinLock lock = new SpinLock();
+    public int[] position = new int[2];
 
-
-    private final Vector<Integer> id;
-
-    private final List<GameObject> gameObjects = new ArrayList<>();
-
-
-    public Chunk(Vector<Integer> id, List<GameObject> initialObjects) {
-        this.id = id;
-
-        addGameObjects(initialObjects);
+    Chunk(int posX, int posY) {
+        position[0] = posX;
+        position[1] = posY;
     }
 
+    private final List<GameObject> objects = new LinkedList<>();
 
-    //Sorting
-
-    void insertSort(GameObject object){
-        int index = 0;
-        for(GameObject currentObject : gameObjects){
-            if(currentObject.objectLayer >= object.objectLayer){
-                gameObjects.add(object);
-                queueObjects(gameObjects.size()-1, index);
-            }
-            else{
-                index++;
-            }
+    public boolean addGameObject(GameObject object) {
+        if (DataHand.getGameObjs().contains(object)) {
+            objects.add(object);
+            return true;
         }
+        return false;
     }
 
-    private void quickSort(int start, int end){
-        if(start >= end){ return; }
-
-        int pivot = end;
-        int pointer = end - 1;
-        while(pointer >= start){
-            if(gameObjects.get(pointer).objectLayer > gameObjects.get(pivot).objectLayer){
-                queueObjects(pointer, end);
-                pivot--;
-            }
-            pointer--;
-        }
-
-        //left elements
-        if (pivot > 0) quickSort(start, pivot - 1);
-        //right elements
-        if (pivot < gameObjects.size() - 1) quickSort(pivot + 1, end);
-    }
-    private void queueObjects(int origin, int target){
-        if(origin < target){
-            GameObject storedObject = gameObjects.get(origin);
-            for(int i = origin + 1; i <= target; i++){
-                gameObjects.set(i-1, gameObjects.get(i));
-            }
-            gameObjects.set(target, storedObject);
-        }
-        else if(target < origin){
-            GameObject storedObject = gameObjects.get(target);
-            for(int i = target + 1; i <= origin; i++){
-                gameObjects.set(i-1, gameObjects.get(i));
-            }
-            gameObjects.set(origin, storedObject);
-        }
+    public void removeGameObject(GameObject object) {
+        objects.remove(object);
     }
 
-
-    //List content management
-
-    public void addGameObjects(GameObject gameObject) {
-        long threadId = Thread.currentThread().getId();
-        lock.acquirerLock(threadId);
-        insertSort(gameObject);
-        lock.dropLock(threadId);
+    private void cleanUP() {
+        List<GameObject> parrentList = DataHand.getGameObjs();
+        objects.removeIf(object -> !parrentList.contains(object));
     }
-
-    public void addGameObjects(List<GameObject> gameObjects) {
-        long threadId = Thread.currentThread().getId();
-        lock.acquirerLock(threadId);
-        this.gameObjects.addAll(gameObjects);
-        quickSort(0, this.gameObjects.size()-1);
-        lock.dropLock(threadId);
-    }
-
-    public void removeGameObject(GameObject gameObject) {
-        long threadId = Thread.currentThread().getId();
-        lock.acquirerLock(threadId);
-        gameObjects.remove(gameObject);
-        lock.dropLock(threadId);
-    }
-
-    public void removeGameObjects(List<GameObject> gameObjects) {
-        long threadId = Thread.currentThread().getId();
-        lock.acquirerLock(threadId);
-        this.gameObjects.removeAll(gameObjects);
-        lock.dropLock(threadId);
-    }
-
-
-    //
 
     public void update() {
-        long threadId = Thread.currentThread().getId();
-        lock.acquirerLock(threadId);
-        for (GameObject gameObject : gameObjects) {
-            gameObject.update();
+        cleanUP();
+        for (GameObject object : objects) {
+            object.update();
         }
-        lock.dropLock(threadId);
     }
 
-    public void render(Graphics2D g2) {
-        long threadId = Thread.currentThread().getId();
-        lock.acquirerLock(threadId);
-        for (GameObject gameObject : gameObjects) {
-            gameObject.render(g2);
-        }
-        lock.dropLock(threadId);
+    public void setRenderData() {
+        //Do stuff
     }
 
-
-    //
-
-    public List<GameObject> getGameObjects() {
-        return new ArrayList<>(gameObjects);
-    }
-
-    public Vector<Integer> getId() {
-        return new Vector<>(id);
-    }
 
 }
