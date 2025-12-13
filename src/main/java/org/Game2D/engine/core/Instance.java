@@ -20,9 +20,12 @@ public class Instance {
 
     public Instance(Path confPath) {
 
-        String os = System.getProperty("os.name").toLowerCase();
-        if (os.contains("nix") || os.contains("nux") || os.contains("aix")) System.setProperty("sun.java2d.opengl", "true");
-        System.out.println("[Linux only]" + " OpenGL enabled: " + System.getProperty("sun.java2d.opengl"));
+        //IMPORTANT
+        //Hardware acceleration is known to cause problems on wayland while using NVIDIA graphic cards
+
+        //String os = System.getProperty("os.name").toLowerCase();
+        //if (os.contains("nix") || os.contains("nux") || os.contains("aix")) System.setProperty("sun.java2d.opengl", "true");
+        //System.out.println("[Linux only]" + " OpenGL enabled: " + System.getProperty("sun.java2d.opengl"));
 
         //Initialisatioin
 
