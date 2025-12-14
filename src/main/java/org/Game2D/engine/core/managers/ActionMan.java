@@ -1,5 +1,8 @@
 package org.Game2D.engine.core.managers;
 
+import org.Game2D.engine.chunks.Chunk;
+import org.Game2D.engine.chunks.ChunkMan;
+import org.Game2D.engine.chunks.ObjectTransferMan;
 import org.Game2D.engine.core.handlers.DataHand;
 import org.Game2D.engine.objects.GameObject;
 import org.Game2D.engine.utils.ConfProvider;
@@ -83,16 +86,13 @@ public class ActionMan implements Runnable {
     }
 
     private void update() {
-
-        List<GameObject> gameObjects = DataHand.getGameObjs();
-
-        for (GameObject go : gameObjects) {
-            go.update();
-        }
-
+        Chunk target = ChunkMan.targetChunkByCoordinates(0, 0);
+        ChunkMan.updateByChunk(target);
     }
 
     public static GameObject checkCollision(GameObject go, Rectangle position) {
+
+        ObjectTransferMan.transferAbs(go, position.x, position.y);
 
         List<GameObject> gameObjects = DataHand.getGameObjs();
 
