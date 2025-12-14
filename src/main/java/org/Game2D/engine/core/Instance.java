@@ -1,5 +1,7 @@
 package org.Game2D.engine.core;
 
+import org.Game2D.engine.chunks.Chunk;
+import org.Game2D.engine.chunks.ChunkMan;
 import org.Game2D.engine.core.handlers.ConfHand;
 import org.Game2D.engine.core.handlers.DataHand;
 import org.Game2D.engine.core.managers.ActionMan;
@@ -45,6 +47,8 @@ public class Instance {
 
         //Loading Window
         loadWindow(windowTitle);
+
+        ChunkMan.addChunk(new Chunk(0, 0));
 
         //Starting Managerloops
         DataHand.renderMan.startRenderLoop();

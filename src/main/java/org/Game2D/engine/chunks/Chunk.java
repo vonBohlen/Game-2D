@@ -15,7 +15,7 @@ public class Chunk {
     public int posX;
     public int posY;
 
-    Chunk(int posX, int posY) {
+    public Chunk(int posX, int posY) {
         this.posX = posX;
         this.posY = posY;
 

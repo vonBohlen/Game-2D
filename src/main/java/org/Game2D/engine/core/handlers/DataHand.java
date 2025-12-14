@@ -49,8 +49,10 @@ public class  DataHand {
     public static void regGameObj(GameObject go) {
         if (!gameObjects.contains(go)){
             gameObjects.add(go);
-            Chunk currentChunk = ChunkMan.ChunkFromCoordinates(go.hitBox.x, go.hitBox.y);
-            currentChunk.addGameObject(go);
+            if (!(go.hitBox == null)) {
+                Chunk currentChunk = ChunkMan.ChunkFromCoordinates(go.hitBox.x, go.hitBox.y);
+                currentChunk.addGameObject(go);
+            }
             sortList(0, gameObjects.size() - 1);
         }
     }
