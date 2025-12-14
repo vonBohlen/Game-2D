@@ -8,10 +8,10 @@ import java.util.List;
 
 public class ChunkMan {
 
-    static int chunkSize = 2000;
+    public static int chunkSize = 2000;
 
-    static int updateDistance = 24;
-    static int renderDistance = 24;
+    public static int updateDistance = 24;
+    public static int renderDistance = 24;
 
     private static List<Chunk> chunks = new LinkedList<>();
 
@@ -75,7 +75,7 @@ public class ChunkMan {
         for (Chunk currentChunk : chunks) currentChunk.update();
     }
 
-    public static void renderByChunk(Chunk chunk) {
+    public static void setRenderDataByChunk(Chunk chunk) {
         List<Chunk> chunks = calcWantedChunks(chunk, renderDistance);
         for (Chunk currentChunk : chunks) currentChunk.setRenderData();
     }
