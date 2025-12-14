@@ -3,15 +3,14 @@ package org.Game2D.engine.chunks;
 import org.Game2D.engine.core.handlers.DataHand;
 import org.Game2D.engine.objects.GameObject;
 
-import java.util.HashMap;
-import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class Chunk {
 
     public final UUID uuid;
     //private final List<GameObject> objects = new LinkedList<>();
-    private final HashMap<UUID, GameObject> objects = new HashMap<>();
+    private final ConcurrentHashMap<UUID, GameObject> objects = new ConcurrentHashMap<>();
     public int posX;
     public int posY;
 
