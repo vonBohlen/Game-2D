@@ -35,7 +35,7 @@ public class Chunk {
     }
 
     public void update() {
-        cleanUP();
+        cleanUp();
         for (GameObject object : objects) {
             object.update();
         }
