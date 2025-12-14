@@ -29,7 +29,7 @@ public class Chunk {
         objects.remove(object);
     }
 
-    private void cleanUP() {
+    private void cleanUp() {
         List<GameObject> parrentList = DataHand.getGameObjs();
         objects.removeIf(object -> !parrentList.contains(object));
     }

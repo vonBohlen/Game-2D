@@ -3,7 +3,6 @@ package org.Game2D.engine.core.handlers;
 import org.Game2D.engine.core.managers.ActionMan;
 import org.Game2D.engine.core.managers.RenderMan;
 import org.Game2D.engine.objects.GameObject;
-import org.Game2D.engine.render.Camera;
 import org.Game2D.engine.utils.SpinLock;
 
 import java.nio.file.Path;
@@ -23,27 +22,27 @@ public class  DataHand {
     public static Keyhand keyHand = null;
 
 
-    private static final ArrayList<Camera> cameras = new ArrayList<>();
+//    private static final ArrayList<Camera> cameras = new ArrayList<>();
 
     private static final ArrayList<GameObject> gameObjects = new ArrayList<>();
 
-    public static void addCamera(Camera camera) {
-        long threadId = Thread.currentThread().getId();
-        lock.acquirerLock(threadId);
-        cameras.add(camera);
-        lock.dropLock(threadId);
-    }
-
-    public static void removeCamera(Camera camera) {
-        long threadId = Thread.currentThread().getId();
-        lock.acquirerLock(threadId);
-        cameras.remove(camera);
-        lock.dropLock(threadId);
-    }
-
-    public static List<Camera> getCameras() {
-        return new ArrayList<>(cameras);
-    }
+//    public static void addCamera(Camera camera) {
+//        long threadId = Thread.currentThread().getId();
+//        lock.acquirerLock(threadId);
+//        cameras.add(camera);
+//        lock.dropLock(threadId);
+//    }
+//
+//    public static void removeCamera(Camera camera) {
+//        long threadId = Thread.currentThread().getId();
+//        lock.acquirerLock(threadId);
+//        cameras.remove(camera);
+//        lock.dropLock(threadId);
+//    }
+//
+//    public static List<Camera> getCameras() {
+//        return new ArrayList<>(cameras);
+//    }
 
     public static void regGameObj(GameObject go) {
         if (!gameObjects.contains(go)){
