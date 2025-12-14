@@ -13,6 +13,8 @@ public class Player extends Entity {
 
     }
 
+    int speed = 1;
+
     public void update() {
 
         int moveA = 0;
@@ -22,16 +24,16 @@ public class Player extends Entity {
         int moveS = 0;
 
         if (DataHand.keyHand.keyPressed_W) {
-            moveW = -7;
+            moveW = -speed;
         }
         if (DataHand.keyHand.keyPressed_S) {
-            moveS = 7;
+            moveS = speed;
         }
         if (DataHand.keyHand.keyPressed_A) {
-            moveA = -7;
+            moveA = -speed;
         }
         if (DataHand.keyHand.keyPressed_D) {
-            moveD = 7;
+            moveD = speed;
         }
 
         move(moveA + moveD, moveW + moveS);

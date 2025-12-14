@@ -86,7 +86,7 @@ public class ActionMan implements Runnable {
     }
 
     private void update() {
-        Chunk target = ChunkMan.targetChunkByCoordinates(0, 0);
+        Chunk target = ChunkMan.ChunkFromCoordinates(0, 0);
         ChunkMan.updateByChunk(target);
     }
 
