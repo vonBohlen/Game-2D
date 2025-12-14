@@ -7,7 +7,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class ChunkMan {
 
-    public static int chunkSize = 200;
+    public static int chunkSize = 2000;
 
     public static int updateDistance = 24;
     public static int renderDistance = 24;
@@ -94,29 +94,57 @@ public class ChunkMan {
         throw new RuntimeException();
     }
 
+//    public static List<Chunk> calcWantedChunks(Chunk chunk, int calcDiam) {
+//        List<Chunk> chunks = new LinkedList<>();
+//        int scannerMaxX = chunk.posX + calcDiam / 2;
+//        int scannerMaxY = chunk.posY + calcDiam / 2;
+//        int scannerMinX = scannerMaxX - calcDiam;
+//        int scannerMinY = scannerMaxY - calcDiam;
+//        int scannerCurrentX = scannerMaxX;
+//        int scannerCurrentY = scannerMaxY;
+//        while (true) {
+//            for (UUID currentChunk_uuid : ChunkMan.chunks.keySet()) {
+//                if (chunk.posX == scannerCurrentX && chunk.posY == scannerCurrentY) {
+//                    chunks.add(ChunkMan.chunks.get(currentChunk_uuid));
+//                }
+//            }
+//            scannerCurrentX--;
+//            if (scannerCurrentX < scannerMinX) {
+//                scannerCurrentX = scannerMaxX;
+//                scannerCurrentY--;
+//            }
+//            if (scannerCurrentY < scannerMinY) {
+//                return chunks;
+//            }
+//        }
+//    }
+
+    //TODO: optimise => Performance problems caused by this methode
     public static List<Chunk> calcWantedChunks(Chunk chunk, int calcDiam) {
-        List<Chunk> chunks = new LinkedList<>();
+        List<int[]> wantedChunkCoordinates = new ArrayList<>();
         int scannerMaxX = chunk.posX + calcDiam / 2;
         int scannerMaxY = chunk.posY + calcDiam / 2;
         int scannerMinX = scannerMaxX - calcDiam;
         int scannerMinY = scannerMaxY - calcDiam;
         int scannerCurrentX = scannerMaxX;
         int scannerCurrentY = scannerMaxY;
-        while (true) {
-            for (UUID currentChunk_uuid : ChunkMan.chunks.keySet()) {
-                if (chunk.posX == scannerCurrentX && chunk.posY == scannerCurrentY) {
-                    chunks.add(ChunkMan.chunks.get(currentChunk_uuid));
+        while (scannerCurrentY >= scannerMinY) {
+            while (scannerCurrentX >= scannerMinX) {
+                wantedChunkCoordinates.add(new int[]{scannerCurrentX, scannerCurrentY});
+                scannerCurrentX--;
+            }
+            scannerCurrentX = scannerMaxX;
+            scannerCurrentY--;
+        }
+        List<Chunk> wantedChunks = new ArrayList<>();
+        for (Chunk currentChunk : chunks.values()) {
+            for (int[] coordinate : wantedChunkCoordinates) {
+                if (currentChunk.posX == coordinate[0] && currentChunk.posY == coordinate[1]) {
+                    wantedChunks.add(currentChunk);
                 }
             }
-            scannerCurrentX--;
-            if (scannerCurrentX < scannerMinX) {
-                scannerCurrentX = scannerMaxX;
-                scannerCurrentY--;
-            }
-            if (scannerCurrentY < scannerMinY) {
-                return chunks;
-            }
         }
+        return wantedChunks;
     }
 
     public static void updateByChunk(Chunk chunk) {

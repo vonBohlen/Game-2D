@@ -23,9 +23,10 @@ public abstract class GameObject {
 
         texture = txt;
 
+        uuid = UUID.randomUUID();
+
         DataHand.regGameObj(this);
 
-        uuid = UUID.randomUUID();
     }
 
     protected void activateCollision() {

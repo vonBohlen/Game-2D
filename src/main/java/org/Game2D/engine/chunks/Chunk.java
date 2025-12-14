@@ -47,18 +47,7 @@ public class Chunk {
         ChunkMan.unregisterObject(object);
     }
 
-    private void cleanUp() {
-        List<GameObject> parrentList = DataHand.getGameObjs();
-        //objects.removeIf(object -> !parrentList.contains(object));
-        for (GameObject i : parrentList) {
-            if (!parrentList.contains(i)) {
-                objects.remove(i.uuid);
-            }
-        }
-    }
-
     public void update() {
-        cleanUp();
         for (UUID object_uuid : objects.keySet()) {
             objects.get(object_uuid).update();
         }
