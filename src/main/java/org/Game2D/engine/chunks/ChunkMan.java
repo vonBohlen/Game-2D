@@ -2,9 +2,7 @@ package org.Game2D.engine.chunks;
 
 import org.Game2D.engine.objects.GameObject;
 
-import java.util.Collection;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class ChunkMan {
 
@@ -13,25 +11,41 @@ public class ChunkMan {
     public static int updateDistance = 24;
     public static int renderDistance = 24;
 
-    private static List<Chunk> chunks = new LinkedList<>();
+    //private static List<Chunk> chunks = new LinkedList<>();
+    private static HashMap<UUID, Chunk> chunks = new HashMap<>();
+    private static HashMap<UUID, UUID> objectStorage = new HashMap<>();
 
-    public static void addChunk(Chunk chunk) {
-        chunks.add(chunk);
+    public static Chunk getChunkFromObject(GameObject object) {
+        return chunks.get(objectStorage.get(object.uuid));
     }
 
-    public static void addChunks(Collection<Chunk> chunks) {
-        ChunkMan.chunks.addAll(chunks);
+    public static void registerObject(GameObject object, Chunk chunk) {
+        objectStorage.put(object.uuid, chunk.uuid);
+    }
+
+    public static void unregisterObject(GameObject object, Chunk chunk) {
+        objectStorage.remove(object.uuid);
+    }
+
+    public static void addChunk(Chunk chunk) {
+        chunks.put(chunk.uuid, chunk);
+    }
+
+    public static void addChunks(Collection<Chunk> new_chunks) {
+        for (Chunk i : new_chunks) {
+            chunks.put(i.uuid, i);
+        }
     }
 
     public void flushChunks() {
-        chunks = new LinkedList<>();
+        chunks = new HashMap<>();
     }
 
     public static Chunk targetChunkByPosition(GameObject object) {
         int posX = object.hitBox.x / chunkSize;
         int posY = object.hitBox.y / chunkSize;
-        for (Chunk chunk : chunks) {
-            if (chunk.position[0] == posX && chunk.position[1] == posY) return chunk;
+        for (UUID i : chunks.keySet()) {
+            if (chunks.get(i).posX == posX && chunks.get(i).posY == posY) return chunks.get(i);
         }
         throw new RuntimeException();
     }
@@ -39,24 +53,24 @@ public class ChunkMan {
     public static Chunk targetChunkByCoordinates(int x, int y) {
         int posX = x / chunkSize;
         int posY = y / chunkSize;
-        for (Chunk chunk : chunks) {
-            if (chunk.position[0] == posX && chunk.position[1] == posY) return chunk;
+        for (UUID i : chunks.keySet()) {
+            if (chunks.get(i).posX == posX && chunks.get(i).posY == posY) return chunks.get(i);
         }
         throw new RuntimeException();
     }
 
     public static List<Chunk> calcWantedChunks(Chunk chunk, int calcDiam) {
         List<Chunk> chunks = new LinkedList<>();
-        int scannerMaxX = chunk.position[0] + calcDiam / 2;
-        int scannerMaxY = chunk.position[1] + calcDiam / 2;
+        int scannerMaxX = chunk.posX + calcDiam / 2;
+        int scannerMaxY = chunk.posY + calcDiam / 2;
         int scannerMinX = scannerMaxX - calcDiam;
         int scannerMinY = scannerMaxY - calcDiam;
         int scannerCurrentX = scannerMaxX;
         int scannerCurrentY = scannerMaxY;
         while (true) {
-            for (Chunk currentChunk : ChunkMan.chunks) {
-                if (chunk.position[0] == scannerCurrentX && chunk.position[1] == scannerCurrentY) {
-                    chunks.add(currentChunk);
+            for (UUID currentChunk_uuid : ChunkMan.chunks.keySet()) {
+                if (chunk.posX == scannerCurrentX && chunk.posY == scannerCurrentY) {
+                    chunks.add(ChunkMan.chunks.get(currentChunk_uuid));
                 }
             }
             scannerCurrentX--;

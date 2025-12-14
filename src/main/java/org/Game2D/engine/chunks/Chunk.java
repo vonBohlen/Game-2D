@@ -2,6 +2,7 @@ package org.Game2D.engine.chunks;
 
 import org.Game2D.engine.core.handlers.DataHand;
 import org.Game2D.engine.objects.GameObject;
+import org.Game2D.engine.chunks.ChunkMan;
 
 import java.util.HashMap;
 import java.util.List;
@@ -9,11 +10,16 @@ import java.util.UUID;
 
 public class Chunk {
 
-    public int[] position = new int[2];
+    public int posX;
+    public int posY;
+
+    public final UUID uuid;
 
     Chunk(int posX, int posY) {
-        position[0] = posX;
-        position[1] = posY;
+        this.posX = posX;
+        this.posY = posY;
+
+        uuid = UUID.randomUUID();
     }
 
     //private final List<GameObject> objects = new LinkedList<>();
@@ -22,6 +28,7 @@ public class Chunk {
     public boolean addGameObject(GameObject object) {
         if (DataHand.getGameObjs().contains(object)) {
             objects.put(object.uuid, object);
+            ChunkMan.registerObject(object, this);
             return true;
         }
         return false;
@@ -29,6 +36,7 @@ public class Chunk {
 
     public void removeGameObject(GameObject object) {
         objects.remove(object.uuid);
+        ChunkMan.unregisterObject(object, this);
     }
 
     private void cleanUp() {
