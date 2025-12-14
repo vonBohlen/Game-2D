@@ -3,17 +3,18 @@ package org.Game2D.engine.chunks;
 import org.Game2D.engine.objects.GameObject;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class ChunkMan {
 
-    public static int chunkSize = 2000;
+    public static int chunkSize = 200;
 
     public static int updateDistance = 24;
     public static int renderDistance = 24;
 
     //private static List<Chunk> chunks = new LinkedList<>();
-    private static HashMap<UUID, Chunk> chunks = new HashMap<>();
-    private static final HashMap<UUID, UUID> objectStorage = new HashMap<>();
+    private static ConcurrentHashMap<UUID, Chunk> chunks = new ConcurrentHashMap<>();
+    private static HashMap<UUID, UUID> objectStorage = new HashMap<>();
 
     /**
      * Check if a Chunk with given global coordinates exists,
@@ -129,7 +130,7 @@ public class ChunkMan {
     }
 
     public void flushChunks() {
-        chunks = new HashMap<>();
+        chunks = new ConcurrentHashMap<>();
     }
 
 }
