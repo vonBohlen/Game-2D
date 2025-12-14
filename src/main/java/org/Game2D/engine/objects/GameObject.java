@@ -3,6 +3,7 @@ package org.Game2D.engine.objects;
 import org.Game2D.engine.core.handlers.DataHand;
 
 import java.awt.*;
+import java.util.UUID;
 
 public abstract class GameObject {
 
@@ -12,6 +13,8 @@ public abstract class GameObject {
     public int objectLayer = 0;
 
     protected Image texture;
+
+    public final UUID uuid;
 
     public GameObject(Rectangle hb, boolean collision, int objectLayer, Image txt) {
 
@@ -23,6 +26,8 @@ public abstract class GameObject {
         texture = txt;
 
         DataHand.regGameObj(this);
+
+        uuid = UUID.randomUUID();
     }
 
     protected void activateCollision() {
