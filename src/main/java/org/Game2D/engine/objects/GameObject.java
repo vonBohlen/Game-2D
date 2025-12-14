@@ -3,15 +3,16 @@ package org.Game2D.engine.objects;
 import org.Game2D.engine.core.handlers.DataHand;
 
 import java.awt.*;
+import java.util.UUID;
 
 public abstract class GameObject {
 
-    private boolean collisionActivated = false;
     public final Rectangle hitBox;
-
-    public int objectLayer = 0;
+    public final UUID uuid;
+    public int objectLayer;
 
     protected Image texture;
+    private boolean collisionActivated = false;
 
     public GameObject(Rectangle hb, boolean collision, int objectLayer, Image txt) {
 
@@ -23,6 +24,8 @@ public abstract class GameObject {
         texture = txt;
 
         DataHand.regGameObj(this);
+
+        uuid = UUID.randomUUID();
     }
 
     protected void activateCollision() {
@@ -46,6 +49,7 @@ public abstract class GameObject {
     }
 
     public abstract void update();
+
     public abstract void render(Graphics2D g2);
 
 }
