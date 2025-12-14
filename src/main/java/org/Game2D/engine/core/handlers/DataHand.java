@@ -1,5 +1,7 @@
 package org.Game2D.engine.core.handlers;
 
+import org.Game2D.engine.chunks.Chunk;
+import org.Game2D.engine.chunks.ChunkMan;
 import org.Game2D.engine.core.managers.ActionMan;
 import org.Game2D.engine.core.managers.RenderMan;
 import org.Game2D.engine.objects.GameObject;
@@ -47,6 +49,8 @@ public class  DataHand {
     public static void regGameObj(GameObject go) {
         if (!gameObjects.contains(go)){
             gameObjects.add(go);
+            Chunk currentChunk = ChunkMan.ChunkFromCoordinates(go.hitBox.x, go.hitBox.y);
+            currentChunk.addGameObject(go);
             sortList(0, gameObjects.size() - 1);
         }
     }
