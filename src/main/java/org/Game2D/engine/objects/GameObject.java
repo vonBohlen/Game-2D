@@ -7,14 +7,12 @@ import java.util.UUID;
 
 public abstract class GameObject {
 
-    private boolean collisionActivated = false;
     public final Rectangle hitBox;
-
-    public int objectLayer = 0;
+    public final UUID uuid;
+    public int objectLayer;
 
     protected Image texture;
-
-    public final UUID uuid;
+    private boolean collisionActivated = false;
 
     public GameObject(Rectangle hb, boolean collision, int objectLayer, Image txt) {
 
@@ -51,6 +49,7 @@ public abstract class GameObject {
     }
 
     public abstract void update();
+
     public abstract void render(Graphics2D g2);
 
 }

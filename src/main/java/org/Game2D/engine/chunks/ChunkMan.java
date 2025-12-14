@@ -13,17 +13,55 @@ public class ChunkMan {
 
     //private static List<Chunk> chunks = new LinkedList<>();
     private static HashMap<UUID, Chunk> chunks = new HashMap<>();
-    private static HashMap<UUID, UUID> objectStorage = new HashMap<>();
+    private static final HashMap<UUID, UUID> objectStorage = new HashMap<>();
 
+    /**
+     * Check if a Chunk with given global coordinates exists,
+     * and if not, create a new one at the given coordinates
+     *
+     * @param posX Global x-Coordinate
+     * @param posY Global y-Coordinate
+     * @return Chunk at the given coordinates
+     */
+    public static Chunk ChunkFromCoordinates(int posX, int posY) {
+        for (UUID chunk_uuid : chunks.keySet()) {
+            if (posX / chunkSize == chunks.get(chunk_uuid).posX && posY / chunkSize == chunks.get(chunk_uuid).posY) {
+                return chunks.get(chunk_uuid);
+            } else {
+                Chunk new_chunk = new Chunk(posX / chunkSize, posY / chunkSize);
+                ChunkMan.addChunk(new_chunk);
+                return new_chunk;
+            }
+        }
+        throw new RuntimeException("Could not find or create a new Chunk with specified coordinates");
+    }
+
+    /**
+     * Return the Chunk in which the given GameObject is in
+     *
+     * @param object GameObject to be searched for
+     * @return Chunk of the given GameObject
+     */
     public static Chunk getChunkFromObject(GameObject object) {
         return chunks.get(objectStorage.get(object.uuid));
     }
 
+    /**
+     * Register a new GameObject in the ChunkManager
+     *
+     * @param object GameObject to be registered
+     * @param chunk  Chunk in which the GameObject is to be stored
+     */
     public static void registerObject(GameObject object, Chunk chunk) {
         objectStorage.put(object.uuid, chunk.uuid);
     }
 
-    public static void unregisterObject(GameObject object, Chunk chunk) {
+    /**
+     * Unregister a GameObject from the ChunkManager
+     *
+     * @param object GameObject to be unregistered
+     */
+    public static void unregisterObject(GameObject object) {
         objectStorage.remove(object.uuid);
     }
 
@@ -35,10 +73,6 @@ public class ChunkMan {
         for (Chunk i : new_chunks) {
             chunks.put(i.uuid, i);
         }
-    }
-
-    public void flushChunks() {
-        chunks = new HashMap<>();
     }
 
     public static Chunk targetChunkByPosition(GameObject object) {
@@ -92,6 +126,10 @@ public class ChunkMan {
     public static void setRenderDataByChunk(Chunk chunk) {
         List<Chunk> chunks = calcWantedChunks(chunk, renderDistance);
         for (Chunk currentChunk : chunks) currentChunk.setRenderData();
+    }
+
+    public void flushChunks() {
+        chunks = new HashMap<>();
     }
 
 }
