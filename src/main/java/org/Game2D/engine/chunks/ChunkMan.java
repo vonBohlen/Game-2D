@@ -2,19 +2,20 @@ package org.Game2D.engine.chunks;
 
 import org.Game2D.engine.objects.GameObject;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class ChunkMan {
 
+    private static final HashMap<UUID, UUID> objectStorage = new HashMap<>();
     public static int chunkSize = 2000;
-
+    private static final FinderHash chunksByCo = new FinderHash(chunkSize);
     public static int updateDistance = 24;
     public static int renderDistance = 24;
-
     private static ConcurrentHashMap<UUID, Chunk> chunks = new ConcurrentHashMap<>();
-    private static final HashMap<UUID, UUID> objectStorage = new HashMap<>();
-    private static final FinderHash chunksByCo = new FinderHash(chunkSize);
 
     /**
      * Check if a Chunk with given global coordinates exists,
@@ -26,12 +27,12 @@ public class ChunkMan {
      */
     public static Chunk ChunkFromCoordinates(int posX, int posY) {
         Chunk target = chunksByCo.getChunkByCoordinate(posX, posY);
-        if(target == null){
+        if (target == null) {
             Chunk new_chunk = new Chunk(posX, posY);
             addChunk(new_chunk);
             target = new_chunk;
         }
-        if(target == null){
+        if (target == null) {
             System.out.println(target == null);
         }
 
@@ -67,11 +68,21 @@ public class ChunkMan {
         objectStorage.remove(object.uuid);
     }
 
+    /**
+     * Add a Chunk object with the ChunkManager
+     *
+     * @param chunk Chunk to be added
+     */
     public static void addChunk(Chunk chunk) {
         chunks.put(chunk.uuid, chunk);
         chunksByCo.addChunk(chunk);
     }
 
+    /**
+     * Add a Collection of Chunks to the ChunkManager
+     *
+     * @param new_chunks Collection of Chunks to be added
+     */
     public static void addChunks(Collection<Chunk> new_chunks) {
         for (Chunk i : new_chunks) {
             chunks.put(i.uuid, i);
@@ -79,6 +90,11 @@ public class ChunkMan {
         }
     }
 
+    /**
+     * Update all Chunks in range of the updateDistance from the specified Chunk
+     *
+     * @param chunk Origin Chunk
+     */
     public static void updateByChunk(Chunk chunk) {
         List<Chunk> chunks = chunksByCo.getChunksInReach(chunk, updateDistance);
         for (Chunk currentChunk : chunks) currentChunk.update();
@@ -89,6 +105,9 @@ public class ChunkMan {
         for (Chunk currentChunk : chunks) currentChunk.setRenderData();
     }
 
+    /**
+     * Flush all Chunk data in the ChunkManager
+     */
     public void flushChunks() {
         chunks = new ConcurrentHashMap<>();
     }

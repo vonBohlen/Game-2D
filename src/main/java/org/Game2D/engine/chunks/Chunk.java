@@ -13,6 +13,12 @@ public class Chunk {
     public int posX;
     public int posY;
 
+    /**
+     * Create a new Chunk with the specified coordinates
+     *
+     * @param posX x-Coordinate
+     * @param posY y-Coordinate
+     */
     public Chunk(int posX, int posY) {
         this.posX = posX;
         this.posY = posY;
@@ -26,8 +32,8 @@ public class Chunk {
      * @param object GameObject to be added
      */
     public void addGameObject(GameObject object) {
-            objects.put(object.uuid, object);
-            ChunkMan.registerObject(object, this);
+        objects.put(object.uuid, object);
+        ChunkMan.registerObject(object, this);
     }
 
     /**
@@ -40,8 +46,11 @@ public class Chunk {
         ChunkMan.unregisterObject(object);
     }
 
+    /**
+     * Update all GameObjects in the Chunk
+     */
     public void update() {
-        for(GameObject object : objects.values()) {
+        for (GameObject object : objects.values()) {
             object.update();
         }
     }

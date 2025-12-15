@@ -1,5 +1,8 @@
 package org.Game2D.engine.chunks;
 
+/**
+ * Enum of all possible cardinal directions + their linear combinations
+ */
 public enum Directions {
     TOP,
     TOP_RIGHT,
