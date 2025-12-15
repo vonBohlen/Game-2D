@@ -23,7 +23,7 @@ public class Instance {
      * Implements basic Window Logic
      * Hardware acceleration on Wayland with NVIDIA Graphics is
      * not working properly at this time
-     * To use hardware acceleration, umcomment the given section in
+     * To use hardware acceleration, uncomment the given section in
      * the class body
      *
      * @param confPath Path to the config file

@@ -8,7 +8,7 @@ import java.awt.*;
 
 public class PipeTop extends Entity {
 
-    public PipeFiller filler;
+    public final PipeFiller filler;
     public PipeTop(int x, int y) {
         super(new Rectangle(x, y, 104, 612), true, 2, AssetMan.loadAsset("flappy_assets/pipe/pipe-green.png"));
         filler = new PipeFiller(x, y, false);

@@ -50,7 +50,7 @@ public class RenderMan extends JPanel implements Runnable {
 
         while (renderThread != null && !exit) {
 
-            double drawInterval = 1000000000 / Integer.parseInt(ConfProvider.getConf(DataHand.confPath).getProperty("game2d.core.fps"));
+            double drawInterval = (double) 1000000000 / Integer.parseInt(ConfProvider.getConf(DataHand.confPath).getProperty("game2d.core.fps"));
             double delta = 0;
             long lastTime = System.nanoTime();
             long currentTime;

@@ -8,12 +8,12 @@ import java.awt.*;
 
 public class PipePair extends Entity {
 
-    PipeTop top;
-    PipeBelow below;
+    final PipeTop top;
+    final PipeBelow below;
 
-    int startX;
+    final int startX;
 
-    int space = 300;
+    final int space = 300;
 
     boolean updatedScore = false;
 

@@ -10,8 +10,8 @@ public class InfoDisplay extends Entity {
 
     boolean lastOver = true;
     int counter = 60;
-    Image messageTxt = AssetMan.loadAsset("flappy_assets/ui/message.png");
-    Image gameoverTxt = AssetMan.loadAsset("flappy_assets/ui/gameover.png");
+    final Image messageTxt = AssetMan.loadAsset("flappy_assets/ui/message.png");
+    final Image gameoverTxt = AssetMan.loadAsset("flappy_assets/ui/gameover.png");
 
     public InfoDisplay() {
 

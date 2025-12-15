@@ -16,9 +16,9 @@ public class FinderHash {
      */
     private ConcurrentHashMap<Integer, Chunk> chunkPos;
 
-    FinderHash(int chunkDim) {
+    FinderHash() {
         chunkPos = new ConcurrentHashMap<>();
-        chunkDimensions = chunkDim;
+        chunkDimensions = ChunkMan.chunkSize;
     }
 
     /**

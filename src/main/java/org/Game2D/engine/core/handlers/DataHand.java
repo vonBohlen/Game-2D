@@ -56,10 +56,12 @@ public class DataHand {
         sortList(0, gameObjects.size() - 1);
     }
 
+    @SuppressWarnings("SpellCheckingInspection")
     public static List<GameObject> getGameObjs() {
         return (List<GameObject>) gameObjects.clone();
     }
 
+    @SuppressWarnings("SpellCheckingInspection")
     protected static List<GameObject> getOriginalsGameObjs() {
         return gameObjects;
     }

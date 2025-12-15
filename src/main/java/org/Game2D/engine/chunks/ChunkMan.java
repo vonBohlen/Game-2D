@@ -8,10 +8,10 @@ import java.util.concurrent.ConcurrentHashMap;
 public class ChunkMan {
 
     private static final HashMap<UUID, UUID> objectStorage = new HashMap<>();
-    public static int chunkSize = 2000;
-    private static final FinderHash chunksByCo = new FinderHash(chunkSize);
-    public static int updateDistance = 24;
-    public static int renderDistance = 24;
+    public static final int chunkSize = 2000;
+    private static final FinderHash chunksByCo = new FinderHash();
+    public static final int updateDistance = 24;
+    public static final int renderDistance = 24;
     private static int storedUpdateDistance = updateDistance;
     private static int storedRenderDistance = renderDistance;
     private static Chunk storedChunk = null;
@@ -33,9 +33,6 @@ public class ChunkMan {
             Chunk new_chunk = new Chunk(posX, posY);
             addChunk(new_chunk);
             target = new_chunk;
-        }
-        if (target == null) {
-            System.out.println(target == null);
         }
 
         return target;

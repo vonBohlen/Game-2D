@@ -56,7 +56,7 @@ public class ActionMan implements Runnable {
     }
 
     /**
-     * Start the Gameloop in a seperate thread
+     * Start the Gameloop in a separate thread
      */
     public void startGameLoop() {
 
@@ -75,7 +75,7 @@ public class ActionMan implements Runnable {
         while (actionThread != null && !exit) {
 
             int tps = Integer.parseInt(ConfProvider.getConf(DataHand.confPath).getProperty("game2d.core.tps"));
-            double updateInterval = 1000000000 / tps;
+            double updateInterval = (double) 1000000000 / tps;
             double delta = 0;
             long lastTime = System.nanoTime();
             long currentTime;

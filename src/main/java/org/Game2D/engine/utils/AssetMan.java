@@ -27,7 +27,7 @@ public class AssetMan {
     }
 
     public static Image loadAsset(String path) {
-        Image asset = null;
+        Image asset;
 
         try {
             asset = ImageIO.read(Objects.requireNonNull(RenderMan.class.getClassLoader().getResource(path)));

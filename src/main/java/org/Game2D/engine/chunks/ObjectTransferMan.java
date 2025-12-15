@@ -23,7 +23,7 @@ public class ObjectTransferMan {
     /**
      * Transfer GameObject to new global coordinates
      *
-     * @param object GameObject to be transfered
+     * @param object GameObject to be transferred
      * @param newX   New x-Coordinate
      * @param newY   New y-Coordinate
      */

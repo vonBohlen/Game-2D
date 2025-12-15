@@ -40,7 +40,7 @@ public class SnakePlayer extends Entity {
         if (newX > sidelength) {
             gameOver();
         }
-        Block new_block = new Block(newX, last_block.posY);
+        Block new_block = new Block(newX, last_block.posY());
 
         blocks.add(new_block);
     }
@@ -53,7 +53,7 @@ public class SnakePlayer extends Entity {
         if (newX < sidelength) {
             gameOver();
         }
-        Block new_block = new Block(newX, last_block.posY);
+        Block new_block = new Block(newX, last_block.posY());
 
         blocks.add(new_block);
     }
@@ -66,7 +66,7 @@ public class SnakePlayer extends Entity {
         if (newY > sidelength) {
             gameOver();
         }
-        Block new_block = new Block(last_block.posX, newY);
+        Block new_block = new Block(last_block.posX(), newY);
 
         blocks.add(new_block);
     }
@@ -79,7 +79,7 @@ public class SnakePlayer extends Entity {
         if (newY > sidelength) {
             gameOver();
         }
-        Block new_block = new Block(last_block.posX, newY);
+        Block new_block = new Block(last_block.posX(), newY);
 
         blocks.add(new_block);
     }

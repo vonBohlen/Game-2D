@@ -12,7 +12,7 @@ public class ConfProvider {
 
         if (!file.exists()) return null;
 
-        InputStream input = null;
+        InputStream input;
 
         try {
             input = new FileInputStream(String.valueOf(confPath));
@@ -52,7 +52,7 @@ public class ConfProvider {
 
         }
 
-        OutputStream outputStream = null;
+        OutputStream outputStream;
 
         try {
             outputStream = new FileOutputStream(String.valueOf(confPath));

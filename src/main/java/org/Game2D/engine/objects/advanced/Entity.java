@@ -123,19 +123,17 @@ public abstract class Entity extends GameObject {
     }
 
 
-    public GameObject setPosition(int newX, int newY, boolean ignoreCollision) {
+    public void setPosition(int newX, int newY, boolean ignoreCollision) {
 
-        if (hitBox == null) return null;
+        if (hitBox == null) return;
 
         Rectangle newPosition = new Rectangle(newX, newY, hitBox.width, hitBox.height);
         GameObject objectCache = ActionMan.checkCollision(this, newPosition);
 
-        if (objectCache != null && !ignoreCollision) return objectCache;
+        if (objectCache != null && !ignoreCollision) return;
 
         hitBox.x = newX;
         hitBox.y = newY;
-
-        return objectCache;
 
     }
 

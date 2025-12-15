@@ -16,8 +16,8 @@ public class Chunk {
      * HashMap of GameObjects in this Chunk identified by their UUID
      */
     private final ConcurrentHashMap<UUID, GameObject> objects = new ConcurrentHashMap<>();
-    public int posX;
-    public int posY;
+    public final int posX;
+    public final int posY;
 
     /**
      * Create a new Chunk with the specified coordinates
