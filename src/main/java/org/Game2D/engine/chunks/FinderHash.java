@@ -48,6 +48,7 @@ public class FinderHash {
      */
     public void addChunk(Chunk chunk) {
         chunkPos.put(getIndex(chunk.posX, chunk.posY), chunk);
+        System.out.println("New Chunk got added to FinderHash: x: " + chunk.posX + " y: " + chunk.posY + " Größe jetzt" + chunkPos.size());
     }
 
     /**
@@ -84,7 +85,10 @@ public class FinderHash {
 
         for (int x = 0; x < 2 * radius; x++) {
             for (int y = 0; y < 2 * radius; y++) {
-                chunks.add(getChunkByCoordinate(target.posX - radius + x, target.posY - radius + y));
+                int chunkX = target.posX / chunkDimensions - radius + x;
+                int chunkY = target.posY / chunkDimensions - radius + y;
+                Chunk addition = chunkPos.get(getIndex(chunkX, chunkY));
+                if(addition != null) chunks.add(addition);
             }
         }
 

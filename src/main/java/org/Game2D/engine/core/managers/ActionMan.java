@@ -36,7 +36,7 @@ public class ActionMan implements Runnable {
      */
     public static GameObject checkCollision(GameObject go, Rectangle position) {
 
-        ObjectTransferMan.transferAbs(go, position.x, position.y);
+        //ObjectTransferMan.transferAbs(go, position.x, position.y);
 
         List<GameObject> gameObjects = DataHand.getGameObjs();
 

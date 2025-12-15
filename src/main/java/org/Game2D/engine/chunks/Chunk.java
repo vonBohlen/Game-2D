@@ -56,6 +56,7 @@ public class Chunk {
      * Update all GameObjects in the Chunk
      */
     public void update() {
+        //System.out.println("Chunk: x: " + posX + " y: " + posY + " has size " + objects.size());
         for (GameObject object : objects.values()) {
             object.update();
         }

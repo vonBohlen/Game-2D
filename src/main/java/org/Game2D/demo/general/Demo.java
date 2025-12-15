@@ -1,6 +1,11 @@
 package org.Game2D.demo.general;
 
+import org.Game2D.demo.general.controlable.Physicsobject;
 import org.Game2D.demo.general.controlable.Player;
+import org.Game2D.demo.general.entities.Ball;
+import org.Game2D.demo.general.entities.BallwP;
+import org.Game2D.demo.general.entities.TpSquare;
+import org.Game2D.demo.general.objects.Square;
 import org.Game2D.engine.core.Instance;
 import org.Game2D.engine.core.handlers.DataHand;
 import org.Game2D.engine.core.managers.RenderMan;
@@ -28,15 +33,15 @@ public class Demo {
 
         new Player(new Rectangle(200, 200, 48, 48), texture);
 
-        /*new Square(new Rectangle(100, 52, 48, 48), texture);
+        //new Square(new Rectangle(100, 52, 48, 48), texture);
 
         new BallwP(new Rectangle(600, 0, 48, 48), texture);
 
-        new TpSquare(new Rectangle(800, 800, 48, 48), texture);
+        //new TpSquare(new Rectangle(800, 800, 48, 48), texture);
 
-        new Ball(new Rectangle(0, 0, 48, 48), texture);
+        //new Ball(new Rectangle(0, 0, 48, 48), texture);
 
-        new Physicsobject(true, texture, 60);*/
+        //new Physicsobject(true, texture, 60);
 
         for(GameObject go : DataHand.getGameObjs()){
             System.out.println(go.getClass().getName());

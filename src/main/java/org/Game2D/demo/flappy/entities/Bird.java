@@ -13,7 +13,8 @@ public class Bird extends Entity {
     double velo = 0.0; //only one velocity because the bird stays in position on x-axis
     final double veloOnPress = -10;
     final double gravityConst = 40; //earths gravity is 9.81
-    final double passedTime; //at 60 targetTPS it is around 1.6
+    double passedTime; //at 60 targetTPS it is around 1.6
+    long lastTime;
 
 
     final Image txtMid = AssetMan.loadAsset("flappy_assets/bird/yellowbird-midflap.png");
@@ -33,9 +34,18 @@ public class Bird extends Entity {
 
         //ideal time between two ticks
         this.passedTime = 1 / (double) Integer.parseInt(ConfProvider.getConf(DataHand.confPath).getProperty("game2d.core.tps"));
+
+        lastTime = System.nanoTime();
+    }
+
+    void updatePassedTime(){
+        long nanosSinceLast = System.nanoTime() - lastTime;
+        passedTime = (double)nanosSinceLast / 1000000000.0;
     }
 
     private void updatePosition() {
+
+        updatePassedTime();
 
         //if space bar is pressed the birds velocity is set to a fixed value
         if(DataHand.keyHand.keyPressed_SPACE){

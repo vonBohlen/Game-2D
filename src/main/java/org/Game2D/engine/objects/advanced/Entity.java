@@ -1,5 +1,6 @@
 package org.Game2D.engine.objects.advanced;
 
+import org.Game2D.engine.chunks.ObjectTransferMan;
 import org.Game2D.engine.core.managers.ActionMan;
 import org.Game2D.engine.objects.GameObject;
 
@@ -118,6 +119,8 @@ public abstract class Entity extends GameObject {
 
             if (objectCache[0] != null && objectCache[1] != null) break;
         }
+
+        ObjectTransferMan.transferAbs(this, this.hitBox.x, this.hitBox.y);
 
         return (objectCache[0] == null && objectCache[1] == null) ? null : objectCache;
     }

@@ -17,7 +17,9 @@ public class ObjectTransferMan {
      * @return chunkTransferIsNecessary
      */
     private static boolean chunkTransferIsNecessary(GameObject object, int newX, int newY) {
-        return ChunkMan.ChunkFromCoordinates(object.hitBox.x, object.hitBox.y) != ChunkMan.ChunkFromCoordinates(newX, newY);
+        //return ChunkMan.ChunkFromCoordinates(object.hitBox.x, object.hitBox.y) != ChunkMan.ChunkFromCoordinates(newX, newY);
+        int size = ChunkMan.chunkSize;
+        return !(object.hitBox.x / size == newX / size && object.hitBox.y / size == newY / size);
     }
 
     /**

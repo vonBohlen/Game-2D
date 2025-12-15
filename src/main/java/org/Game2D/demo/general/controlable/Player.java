@@ -13,7 +13,7 @@ public class Player extends Entity {
 
     }
 
-    final int speed = 1;
+    final int speed = 10;
 
     public void update() {
 
