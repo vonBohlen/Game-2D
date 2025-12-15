@@ -11,12 +11,10 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
-public class  DataHand {
+public class DataHand {
 
+    private static final ArrayList<GameObject> gameObjects = new ArrayList<>();
     public static Path confPath = null;
-
-    private static SpinLock lock = new SpinLock();
-
     public static ActionMan actionMan = null;
     public static RenderMan renderMan = null;
 
@@ -25,8 +23,7 @@ public class  DataHand {
 
 
 //    private static final ArrayList<Camera> cameras = new ArrayList<>();
-
-    private static final ArrayList<GameObject> gameObjects = new ArrayList<>();
+    private static final SpinLock lock = new SpinLock();
 
 //    public static void addCamera(Camera camera) {
 //        long threadId = Thread.currentThread().getId();
@@ -47,7 +44,7 @@ public class  DataHand {
 //    }
 
     public static void regGameObj(GameObject go) {
-        if (!gameObjects.contains(go)){
+        if (!gameObjects.contains(go)) {
             gameObjects.add(go);
             if (!(go.hitBox == null)) {
                 Chunk currentChunk = ChunkMan.ChunkFromCoordinates(go.hitBox.x, go.hitBox.y);
@@ -70,13 +67,15 @@ public class  DataHand {
         return gameObjects;
     }
 
-    private static void sortList(int start, int end){
-        if(start >= end){ return; }
+    private static void sortList(int start, int end) {
+        if (start >= end) {
+            return;
+        }
 
         int pivot = end;
         int pointer = end - 1;
-        while(pointer >= start){
-            if(gameObjects.get(pointer).objectLayer > gameObjects.get(pivot).objectLayer){
+        while (pointer >= start) {
+            if (gameObjects.get(pointer).objectLayer > gameObjects.get(pivot).objectLayer) {
                 queueObjects(pointer, end);
                 pivot--;
             }
@@ -88,10 +87,11 @@ public class  DataHand {
         //right elements
         if (pivot < gameObjects.size() - 1) sortList(pivot + 1, end);
     }
-    private static void queueObjects(int origin, int target){
+
+    private static void queueObjects(int origin, int target) {
         GameObject storedObject = gameObjects.get(origin);
-        for(int i = origin + 1; i <= target; i++){
-            gameObjects.set(i-1, gameObjects.get(i));
+        for (int i = origin + 1; i <= target; i++) {
+            gameObjects.set(i - 1, gameObjects.get(i));
         }
         gameObjects.set(target, storedObject);
     }

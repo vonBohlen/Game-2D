@@ -14,7 +14,9 @@ public abstract class GameObject {
     protected Image texture;
     private boolean collisionActivated = false;
 
-    public GameObject(Rectangle hb, boolean collision, int objectLayer, Image txt) {
+    public boolean render_enabled;
+
+    public GameObject(Rectangle hb, boolean collision, int objectLayer, boolean render_enabled, Image txt) {
 
         if (hb != null && collision) collisionActivated = true;
         hitBox = hb;
@@ -24,6 +26,8 @@ public abstract class GameObject {
         texture = txt;
 
         uuid = UUID.randomUUID();
+
+        this.render_enabled = render_enabled;
 
         DataHand.regGameObj(this);
 

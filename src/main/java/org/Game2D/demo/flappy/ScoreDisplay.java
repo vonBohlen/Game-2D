@@ -26,7 +26,7 @@ public class ScoreDisplay {
             "flappy_assets/numbers/0.png"
     });
 
-    private static ArrayList<ScoreDigit> scoreDigits = new ArrayList<>();
+    private static final ArrayList<ScoreDigit> scoreDigits = new ArrayList<>();
 
     public static void init() {
         reset();

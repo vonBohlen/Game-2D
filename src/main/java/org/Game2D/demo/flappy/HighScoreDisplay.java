@@ -10,7 +10,7 @@ public class HighScoreDisplay {
 
     private static int highScore = 0;
 
-    private static ArrayList<ScoreDigit> scoreDigits = new ArrayList<>();
+    private static final ArrayList<ScoreDigit> scoreDigits = new ArrayList<>();
 
     public static void init() {
         addDigit();
