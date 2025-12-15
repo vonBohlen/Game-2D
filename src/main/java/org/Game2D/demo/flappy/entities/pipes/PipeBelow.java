@@ -19,7 +19,7 @@ public class PipeBelow extends Entity {
 
         if(Bird.gameOver) return;
 
-        Bird.gameOver = move(-Bird.speed, 0) == null ? false : true;
+        Bird.gameOver = move(-Bird.speed, 0) != null;
 
         if(Bird.gameOver){filler.moveFiller();}
     }

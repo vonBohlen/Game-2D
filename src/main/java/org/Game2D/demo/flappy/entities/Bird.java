@@ -48,7 +48,7 @@ public class Bird extends Entity {
 
         //checks if the top or bottom is reached
         if(this.hitBox.y <= 0 || this.hitBox.y + this.hitBox.getHeight() >= DataHand.renderMan.getHeight() - 112){
-            this.gameOver = true;
+            gameOver = true;
         }
 
         //converting the velocity into the needed datatype for the move method
@@ -66,7 +66,7 @@ public class Bird extends Entity {
         }
 
         if(!gameOver) {
-            this.gameOver = move(0, moving) != null;
+            gameOver = move(0, moving) != null;
         }
 
         if(remainder >= 1){
@@ -78,7 +78,7 @@ public class Bird extends Entity {
     @Override
     public void update() {
         if (DataHand.keyHand.keyPressed_ESC) FlappyBird.instance.exit();
-        if(!this.gameOver) {
+        if(!gameOver) {
             updatePosition();
         }
         else if (DataHand.keyHand.keyPressed_SPACE){
