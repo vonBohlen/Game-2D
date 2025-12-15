@@ -1,5 +1,6 @@
 package org.Game2D.demo.Snake;
 
+import org.Game2D.demo.Snake.controllable.SnakePlayer;
 import org.Game2D.engine.core.Instance;
 import org.Game2D.engine.core.handlers.DataHand;
 import org.Game2D.engine.utils.AssetMan;
@@ -23,6 +24,7 @@ public class Snake {
 
         playingField = new PlayingField(20);
         playingField.calcScalingFactor(screenWidth, screenHeight);
+
         for (int i = 0; i < playingField.size; i++) {
             for (int j = 0; j < playingField.size; j++) {
                 playingField.setColor(i, j, white);
@@ -31,6 +33,6 @@ public class Snake {
         playingField.printPlayingField();
         playingField.render();
 
-
+        //SnakePlayer snake = new SnakePlayer(false, 0, white, playingField.size);
     }
 }
