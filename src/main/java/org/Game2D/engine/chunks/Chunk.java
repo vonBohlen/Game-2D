@@ -1,6 +1,5 @@
 package org.Game2D.engine.chunks;
 
-import org.Game2D.engine.core.handlers.DataHand;
 import org.Game2D.engine.objects.GameObject;
 
 import java.util.UUID;
@@ -25,15 +24,10 @@ public class Chunk {
      * Add a GameObject to this Chunk
      *
      * @param object GameObject to be added
-     * @return true if possible, false if not possible
      */
-    public boolean addGameObject(GameObject object) {
-        if (DataHand.getGameObjs().contains(object)) {
+    public void addGameObject(GameObject object) {
             objects.put(object.uuid, object);
             ChunkMan.registerObject(object, this);
-            return true;
-        }
-        return false;
     }
 
     /**
