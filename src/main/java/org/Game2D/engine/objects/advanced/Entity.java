@@ -9,7 +9,7 @@ public abstract class Entity extends GameObject {
 
     public Entity(Rectangle hb, boolean collision, int objectLayer, Image txt) {
 
-        super(hb, collision, objectLayer, txt);
+        super(hb, collision, objectLayer, true, txt);
 
     }
 

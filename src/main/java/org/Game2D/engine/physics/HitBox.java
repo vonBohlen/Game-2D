@@ -8,7 +8,7 @@ public class HitBox {
         Right,
         Left,
         Front,
-        Back;
+        Back
     }
 
 }

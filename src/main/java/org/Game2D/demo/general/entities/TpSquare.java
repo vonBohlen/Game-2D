@@ -1,6 +1,7 @@
 package org.Game2D.demo.general.entities;
 
 import org.Game2D.engine.core.handlers.DataHand;
+import org.Game2D.engine.core.managers.ActionMan;
 import org.Game2D.engine.objects.advanced.Entity;
 
 import java.awt.*;
@@ -14,7 +15,7 @@ public class TpSquare extends Entity {
 
     public void update() {
 
-        if (!(DataHand.actionMan.getGameTick() == 30)) return;
+        if (!(ActionMan.getGameTick() == 30)) return;
 
         Random random = new Random();
         int randomX, randomY;

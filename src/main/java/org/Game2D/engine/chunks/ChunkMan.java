@@ -20,8 +20,8 @@ public class ChunkMan {
     private static List<Chunk> storedRenderChunks = new ArrayList<>();
 
     private static ConcurrentHashMap<UUID, Chunk> chunks = new ConcurrentHashMap<>();
-    private static HashMap<UUID, UUID> objectStorage = new HashMap<>();
-    private static FinderHash chunksByCo = new FinderHash(chunkSize);
+    private static final HashMap<UUID, UUID> objectStorage = new HashMap<>();
+    private static final FinderHash chunksByCo = new FinderHash(chunkSize);
 
     /**
      * Check if a Chunk with given global coordinates exists,

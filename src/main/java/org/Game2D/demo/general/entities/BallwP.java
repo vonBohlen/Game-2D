@@ -1,6 +1,7 @@
 package org.Game2D.demo.general.entities;
 
 import org.Game2D.engine.core.handlers.DataHand;
+import org.Game2D.engine.core.managers.ActionMan;
 import org.Game2D.engine.objects.advanced.Entity;
 
 import java.awt.*;
@@ -19,14 +20,14 @@ public class BallwP extends Entity {
 
     public void update(){
 
-        if (tickBottomReached != 0 && hitBox.y == 1050 && tickBottomReached == DataHand.actionMan.getGameTick()) {
+        if (tickBottomReached != 0 && hitBox.y == 1050 && tickBottomReached == ActionMan.getGameTick()) {
             hitBox.x = 0;
             hitBox.y = 0;
             tickBottomReached = 0;
         }
 
         if (tickBottomReached == 0 && hitBox.y == 1050) {
-            tickBottomReached = DataHand.actionMan.getGameTick();
+            tickBottomReached = ActionMan.getGameTick();
         }
 
         //Wenn Wände getroffen an den Seiten bewegungsrichtung verändern
