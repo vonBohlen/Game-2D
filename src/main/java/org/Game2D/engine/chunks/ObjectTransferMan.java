@@ -42,6 +42,13 @@ public class ObjectTransferMan {
             object.hitBox.y = newY;
         }
     }
+    public static void transferAbsAfterMove(GameObject object, int oldX, int oldY) {
+        if (!chunkTransferIsNecessary(object, oldX, oldY)) return;
+
+        Chunk new_chunk = ChunkMan.ChunkFromCoordinates(object.hitBox.x, object.hitBox.y);
+        Chunk old_chunk = ChunkMan.ChunkFromCoordinates(oldX, oldY);
+        moveObjectsInChunks(object, old_chunk, new_chunk);
+    }
 
     /**
      * Transfer GameObject relative to its current coordinates
@@ -62,8 +69,10 @@ public class ObjectTransferMan {
      * @param new_chunk New Chunk
      */
     private static void moveObjectsInChunks(GameObject object, Chunk old_chunk, Chunk new_chunk) {
-        new_chunk.addGameObject(object);
+        //first remove then add because if you add first the relation between chunk and object gets set to a new value but after that the object gets removed
         old_chunk.removeGameObject(object);
+        new_chunk.addGameObject(object);
+        //System.out.println("Moved GameObject " + object.uuid + " from Chunk x" + old_chunk.posX + " y" + old_chunk.posY + " to " + "Chunk x" + new_chunk.posX + " y" + new_chunk.posY + ". New Chunk gets update: " + ChunkMan.storedUpdateChunks.contains(new_chunk));
     }
 
 }

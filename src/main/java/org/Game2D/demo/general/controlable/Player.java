@@ -36,7 +36,7 @@ public class Player extends Entity {
             moveD = speed;
         }
 
-        move(moveA + moveD, moveW + moveS);
+        if(moveA + moveD + moveS + moveW != 0) move(moveA + moveD, moveW + moveS);
     }
 
 

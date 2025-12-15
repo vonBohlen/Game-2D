@@ -11,7 +11,7 @@ public class BallwP extends Entity {
         super(hb, true, 0, txt);
     }
 
-    private int MoveX = 0;
+    private int MoveX = 10;
 
     private int MoveY = 0;
 

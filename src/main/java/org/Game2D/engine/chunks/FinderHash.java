@@ -48,7 +48,7 @@ public class FinderHash {
      */
     public void addChunk(Chunk chunk) {
         chunkPos.put(getIndex(chunk.posX, chunk.posY), chunk);
-        System.out.println("New Chunk got added to FinderHash: x: " + chunk.posX + " y: " + chunk.posY + " Größe jetzt" + chunkPos.size());
+        //System.out.println("New Chunk got added to FinderHash: x: " + chunk.posX + " y: " + chunk.posY + " Größe jetzt" + chunkPos.size());
     }
 
     /**
@@ -74,7 +74,7 @@ public class FinderHash {
     }
 
     /**
-     * Create a List of Chunks in range of the specified Chunk
+     * Create a List of Chunks in range of the specified Chunk and creates chunks in reach if they don't exist
      *
      * @param target Origin Chunk
      * @param radius Radius around the origin
@@ -83,12 +83,17 @@ public class FinderHash {
     public List<Chunk> getChunksInReach(Chunk target, int radius) {
         List<Chunk> chunks = new ArrayList<>();
 
-        for (int x = 0; x < 2 * radius; x++) {
-            for (int y = 0; y < 2 * radius; y++) {
+        for (int x = 0; x <= 2 * radius; x++) {
+            for (int y = 0; y <= 2 * radius; y++) {
                 int chunkX = target.posX / chunkDimensions - radius + x;
                 int chunkY = target.posY / chunkDimensions - radius + y;
-                Chunk addition = chunkPos.get(getIndex(chunkX, chunkY));
-                if(addition != null) chunks.add(addition);
+                int index = getIndex(chunkX, chunkY);
+                Chunk addition = chunkPos.get(index);
+                if(addition == null){
+                    addition = new Chunk(chunkX, chunkY);
+                    addChunk(addition);
+                }
+                chunks.add(addition);
             }
         }
 

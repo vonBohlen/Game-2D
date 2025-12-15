@@ -35,7 +35,7 @@ public class Demo {
 
         //new Square(new Rectangle(100, 52, 48, 48), texture);
 
-        new BallwP(new Rectangle(600, 0, 48, 48), texture);
+        //new BallwP(new Rectangle(600, 0, 48, 48), texture);
 
         //new TpSquare(new Rectangle(800, 800, 48, 48), texture);
 

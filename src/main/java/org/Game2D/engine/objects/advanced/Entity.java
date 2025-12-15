@@ -87,6 +87,9 @@ public abstract class Entity extends GameObject {
         GameObject objectCacheX, objectCacheY;
         GameObject[] objectCache = new GameObject[2];
 
+        int oldX = hitBox.x;
+        int oldY = hitBox.y;
+
         while (xShift != 0 || yShift != 0) {
             int stepX = xShift != 0 ? Math.min(Math.abs(xShift), 5) * Integer.signum(xShift) : 0;
             int stepY = yShift != 0 ? Math.min(Math.abs(yShift), 5) * Integer.signum(yShift) : 0;
@@ -120,7 +123,7 @@ public abstract class Entity extends GameObject {
             if (objectCache[0] != null && objectCache[1] != null) break;
         }
 
-        ObjectTransferMan.transferAbs(this, this.hitBox.x, this.hitBox.y);
+        ObjectTransferMan.transferAbsAfterMove(this, oldX, oldY);
 
         return (objectCache[0] == null && objectCache[1] == null) ? null : objectCache;
     }

@@ -15,7 +15,7 @@ public class ChunkMan {
     private static int storedUpdateDistance = updateDistance;
     private static int storedRenderDistance = renderDistance;
     private static Chunk storedChunk = null;
-    private static List<Chunk> storedUpdateChunks = new ArrayList<>();
+    public static List<Chunk> storedUpdateChunks = new ArrayList<>();
     private static final List<Chunk> storedRenderChunks = new ArrayList<>();
     private static ConcurrentHashMap<UUID, Chunk> chunks = new ConcurrentHashMap<>();
 
@@ -30,11 +30,9 @@ public class ChunkMan {
     public static Chunk ChunkFromCoordinates(int posX, int posY) {
         Chunk target = chunksByCo.getChunkByCoordinate(posX, posY);
         if (target == null) {
-            Chunk new_chunk = new Chunk(posX, posY);
-            addChunk(new_chunk);
-            target = new_chunk;
+            target = new Chunk(posX / chunkSize, posY / chunkSize);
+            addChunk(target);
         }
-
         return target;
     }
 
