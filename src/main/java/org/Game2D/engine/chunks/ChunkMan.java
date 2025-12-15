@@ -7,21 +7,17 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class ChunkMan {
 
+    private static final HashMap<UUID, UUID> objectStorage = new HashMap<>();
     public static int chunkSize = 2000;
-
+    private static final FinderHash chunksByCo = new FinderHash(chunkSize);
     public static int updateDistance = 24;
     public static int renderDistance = 24;
-
     private static int storedUpdateDistance = updateDistance;
     private static int storedRenderDistance = renderDistance;
-
     private static Chunk storedChunk = null;
     private static List<Chunk> storedUpdateChunks = new ArrayList<>();
-    private static List<Chunk> storedRenderChunks = new ArrayList<>();
-
+    private static final List<Chunk> storedRenderChunks = new ArrayList<>();
     private static ConcurrentHashMap<UUID, Chunk> chunks = new ConcurrentHashMap<>();
-    private static final HashMap<UUID, UUID> objectStorage = new HashMap<>();
-    private static final FinderHash chunksByCo = new FinderHash(chunkSize);
 
     /**
      * Check if a Chunk with given global coordinates exists,
@@ -105,22 +101,20 @@ public class ChunkMan {
         List<Chunk> chunksToUpdate;
         if (storedChunk == chunk && storedUpdateDistance == updateDistance) {
             chunksToUpdate = storedUpdateChunks;
-        }
-        else {
+        } else {
             chunksToUpdate = chunksByCo.getChunksInReach(chunk, updateDistance);
             storedUpdateChunks = chunksToUpdate;
             storedChunk = chunk;
             storedUpdateDistance = updateDistance;
         }
-       for (Chunk currentChunk : chunksToUpdate) currentChunk.update();
+        for (Chunk currentChunk : chunksToUpdate) currentChunk.update();
     }
 
     public static void setRenderDataByChunk(Chunk chunk) {
         List<Chunk> chunksToRender;
         if (storedChunk == chunk && storedRenderDistance == renderDistance) {
             chunksToRender = storedRenderChunks;
-        }
-        else {
+        } else {
             chunksToRender = chunksByCo.getChunksInReach(chunk, renderDistance);
             storedUpdateChunks = chunksToRender;
             storedChunk = chunk;

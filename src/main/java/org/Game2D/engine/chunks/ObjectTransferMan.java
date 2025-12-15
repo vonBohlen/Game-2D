@@ -2,6 +2,10 @@ package org.Game2D.engine.chunks;
 
 import org.Game2D.engine.objects.GameObject;
 
+/**
+ * Object Transfer Manager
+ * Moves GameObjects around and changes their Chunk if needed
+ */
 public class ObjectTransferMan {
 
     /**

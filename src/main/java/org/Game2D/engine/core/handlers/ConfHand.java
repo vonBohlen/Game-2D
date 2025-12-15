@@ -31,8 +31,8 @@ public class ConfHand {
         Properties custom = ConfProvider.getConf(DataHand.confPath);
         Properties standart = getDefaultConf();
 
-        for(Map.Entry<Object, Object> entry : standart.entrySet()){
-            if(!custom.containsKey(entry.getKey())){
+        for (Map.Entry<Object, Object> entry : standart.entrySet()) {
+            if (!custom.containsKey(entry.getKey())) {
                 custom.put(entry.getKey(), entry.getValue());
             }
         }

@@ -1,6 +1,5 @@
 package org.Game2D.demo.Snake;
 
-import org.Game2D.demo.Snake.controllable.SnakePlayer;
 import org.Game2D.engine.core.Instance;
 import org.Game2D.engine.core.handlers.DataHand;
 import org.Game2D.engine.utils.AssetMan;

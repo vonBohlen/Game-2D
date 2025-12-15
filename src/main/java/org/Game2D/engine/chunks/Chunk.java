@@ -5,10 +5,16 @@ import org.Game2D.engine.objects.GameObject;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * Chunk class that stores a HashMap of GameObjects
+ * Used by the ChunkManager
+ */
 public class Chunk {
-
     public final UUID uuid;
     //private final List<GameObject> objects = new LinkedList<>();
+    /**
+     * HashMap of GameObjects in this Chunk identified by their UUID
+     */
     private final ConcurrentHashMap<UUID, GameObject> objects = new ConcurrentHashMap<>();
     public int posX;
     public int posY;
@@ -55,8 +61,11 @@ public class Chunk {
         }
     }
 
+    /**
+     * Not implemented yet
+     */
     public void setRenderData() {
-        //Do stuff
+        //TODO
     }
 
 

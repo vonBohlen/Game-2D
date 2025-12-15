@@ -10,11 +10,9 @@ public abstract class GameObject {
     public final Rectangle hitBox;
     public final UUID uuid;
     public int objectLayer;
-
+    public boolean render_enabled;
     protected Image texture;
     private boolean collisionActivated = false;
-
-    public boolean render_enabled;
 
     public GameObject(Rectangle hb, boolean collision, int objectLayer, boolean render_enabled, Image txt) {
 

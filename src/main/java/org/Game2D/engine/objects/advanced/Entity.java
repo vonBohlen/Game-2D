@@ -138,6 +138,7 @@ public abstract class Entity extends GameObject {
         return objectCache;
 
     }
+
     public GameObject setPosition(int newX, int newY) {
 
         if (hitBox == null) return null;

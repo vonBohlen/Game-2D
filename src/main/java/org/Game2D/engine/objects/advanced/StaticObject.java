@@ -11,6 +11,7 @@ public abstract class StaticObject extends GameObject {
     }
 
     @Override
-    public void update() {}
+    public void update() {
+    }
 
 }

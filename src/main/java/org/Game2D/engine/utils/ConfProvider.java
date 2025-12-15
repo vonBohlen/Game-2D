@@ -6,7 +6,7 @@ import java.util.Properties;
 
 public class ConfProvider {
 
-    public  static Properties getConf(Path confPath) {
+    public static Properties getConf(Path confPath) {
 
         File file = new File(String.valueOf(confPath));
 
@@ -48,8 +48,7 @@ public class ConfProvider {
                     throw new RuntimeException(e);
                 }
 
-            }
-            else return;
+            } else return;
 
         }
 

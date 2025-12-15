@@ -8,13 +8,11 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class SnakePlayer extends Entity {
+    private static final Queue<Block> blocks = new LinkedList<>();
     public static int posX;
     public static int velocityX;
     public static int posY;
     public static int velocityY;
-
-    private static final Queue<Block> blocks = new LinkedList<>();
-
     private static int sidelength;
 
     public SnakePlayer(boolean collision, int objectLayer, Image txt, int fieldSize) {
@@ -87,7 +85,9 @@ public class SnakePlayer extends Entity {
     }
 
     private void gameOver() {
-        try {Thread.sleep(1000);} catch (InterruptedException e) {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
         System.exit(0);

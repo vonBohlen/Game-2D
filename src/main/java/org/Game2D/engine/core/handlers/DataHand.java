@@ -14,16 +14,13 @@ import java.util.List;
 public class DataHand {
 
     private static final ArrayList<GameObject> gameObjects = new ArrayList<>();
+    //    private static final ArrayList<Camera> cameras = new ArrayList<>();
+    private static final SpinLock lock = new SpinLock();
     public static Path confPath = null;
     public static ActionMan actionMan = null;
     public static RenderMan renderMan = null;
-
     //Handlers
     public static Keyhand keyHand = null;
-
-
-//    private static final ArrayList<Camera> cameras = new ArrayList<>();
-    private static final SpinLock lock = new SpinLock();
 
 //    public static void addCamera(Camera camera) {
 //        long threadId = Thread.currentThread().getId();

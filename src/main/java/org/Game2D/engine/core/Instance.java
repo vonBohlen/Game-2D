@@ -4,10 +4,9 @@ import org.Game2D.engine.chunks.Chunk;
 import org.Game2D.engine.chunks.ChunkMan;
 import org.Game2D.engine.core.handlers.ConfHand;
 import org.Game2D.engine.core.handlers.DataHand;
+import org.Game2D.engine.core.handlers.Keyhand;
 import org.Game2D.engine.core.managers.ActionMan;
 import org.Game2D.engine.core.managers.RenderMan;
-
-import org.Game2D.engine.core.handlers.Keyhand;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,8 +17,18 @@ public class Instance {
     //Window
     JFrame window;
 
-    //Gamelogicelements
+    //Game Logic Elements
 
+    /**
+     * Implements basic Window Logic
+     * Hardware acceleration on Wayland with NVIDIA Graphics is
+     * not working properly at this time
+     * To use hardware acceleration, umcomment the given section in
+     * the class body
+     *
+     * @param confPath Path to the config file
+     *                 Defaults to ./config.properties
+     */
     public Instance(Path confPath) {
 
         //IMPORTANT
@@ -29,7 +38,7 @@ public class Instance {
         //if (os.contains("nix") || os.contains("nux") || os.contains("aix")) System.setProperty("sun.java2d.opengl", "true");
         //System.out.println("[Linux only]" + " OpenGL enabled: " + System.getProperty("sun.java2d.opengl"));
 
-        //Initialisatioin
+        //Initialization
 
         ConfHand.setConfPath(confPath);
         ConfHand.generateConf();
@@ -43,11 +52,17 @@ public class Instance {
 
     }
 
-    public void start(String windowTitle){
+    /**
+     * Create a new window
+     *
+     * @param windowTitle Window title
+     */
+    public void start(String windowTitle) {
 
         //Loading Window
         loadWindow(windowTitle);
 
+        //Create a single Chunk, otherwise no other Chunks can be added
         ChunkMan.addChunk(new Chunk(0, 0));
 
         //Starting Managerloops
@@ -57,7 +72,13 @@ public class Instance {
 
     }
 
-    private void loadWindow(String windowTitle){
+    /**
+     * Initialize the window with basic settings
+     * Called as part of window creation
+     *
+     * @param windowTitle Window title
+     */
+    private void loadWindow(String windowTitle) {
 
         window = new JFrame();
 
@@ -77,13 +98,14 @@ public class Instance {
 
     }
 
-    public int exit() {
+    /**
+     * Spin down all Managers and close the window
+     */
+    public void exit() {
         DataHand.actionMan.exit();
         DataHand.renderMan.exit();
 
         window.dispose();
-
-        return 0;
     }
 
 }

@@ -1,9 +1,9 @@
 package org.Game2D.engine.core.managers;
 
 import org.Game2D.engine.core.handlers.DataHand;
+import org.Game2D.engine.debug.DebugScreen;
 import org.Game2D.engine.objects.GameObject;
 import org.Game2D.engine.utils.ConfProvider;
-import org.Game2D.engine.debug.DebugScreen;
 
 import javax.swing.*;
 import java.awt.*;
@@ -104,21 +104,23 @@ public class RenderMan extends JPanel implements Runnable {
 
         super.paintComponent(g);
 
-        Graphics2D g2 = (Graphics2D)g;
+        Graphics2D g2 = (Graphics2D) g;
 
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
 
         g2.setColor(Color.magenta);
 
-        if (ConfProvider.getConf(DataHand.confPath).getProperty("game2d.render.hitboxes").equals("true")) renderHitBoxes = true;
+        if (ConfProvider.getConf(DataHand.confPath).getProperty("game2d.render.hitboxes").equals("true"))
+            renderHitBoxes = true;
 
         for (GameObject go : gameObjects) {
 
             //if (ActionMan.getGameTick() == 0) System.out.println(go.getClass().getName() + " at " + go.objectLayer);
 
             if (go.getTexture() != null || !go.render_enabled) go.render(g2);
-            if (go.hitBox != null && renderHitBoxes) g2.draw3DRect(go.hitBox.x, go.hitBox.y, go.hitBox.width, go.hitBox.height, true);
+            if (go.hitBox != null && renderHitBoxes)
+                g2.draw3DRect(go.hitBox.x, go.hitBox.y, go.hitBox.width, go.hitBox.height, true);
 
         }
 

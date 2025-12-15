@@ -4,9 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * Dark Magic for quickly identifying Chunks by their coordinates
+ * and finding nearby Chunks
+ */
 public class FinderHash {
 
     private final int chunkDimensions;
+    /**
+     * Index-Chunk Hashmap of all registered Chunks
+     */
     private ConcurrentHashMap<Integer, Chunk> chunkPos;
 
     FinderHash(int chunkDim) {
