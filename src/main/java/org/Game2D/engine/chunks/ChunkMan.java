@@ -12,6 +12,13 @@ public class ChunkMan {
     public static int updateDistance = 24;
     public static int renderDistance = 24;
 
+    private static int storedUpdateDistance = updateDistance;
+    private static int storedRenderDistance = renderDistance;
+
+    private static Chunk storedChunk = null;
+    private static List<Chunk> storedUpdateChunks = new ArrayList<>();
+    private static List<Chunk> storedRenderChunks = new ArrayList<>();
+
     private static ConcurrentHashMap<UUID, Chunk> chunks = new ConcurrentHashMap<>();
     private static HashMap<UUID, UUID> objectStorage = new HashMap<>();
     private static FinderHash chunksByCo = new FinderHash(chunkSize);
@@ -80,13 +87,31 @@ public class ChunkMan {
     }
 
     public static void updateByChunk(Chunk chunk) {
-        List<Chunk> chunks = chunksByCo.getChunksInReach(chunk, updateDistance);
-        for (Chunk currentChunk : chunks) currentChunk.update();
+        List<Chunk> chunksToUpdate;
+        if (storedChunk == chunk && storedUpdateDistance == updateDistance) {
+            chunksToUpdate = storedUpdateChunks;
+        }
+        else {
+            chunksToUpdate = chunksByCo.getChunksInReach(chunk, updateDistance);
+            storedUpdateChunks = chunksToUpdate;
+            storedChunk = chunk;
+            storedUpdateDistance = updateDistance;
+        }
+       for (Chunk currentChunk : chunksToUpdate) currentChunk.update();
     }
 
     public static void setRenderDataByChunk(Chunk chunk) {
-        List<Chunk> chunks = chunksByCo.getChunksInReach(chunk, renderDistance);
-        for (Chunk currentChunk : chunks) currentChunk.setRenderData();
+        List<Chunk> chunksToRender;
+        if (storedChunk == chunk && storedRenderDistance == renderDistance) {
+            chunksToRender = storedRenderChunks;
+        }
+        else {
+            chunksToRender = chunksByCo.getChunksInReach(chunk, renderDistance);
+            storedUpdateChunks = chunksToRender;
+            storedChunk = chunk;
+            storedRenderDistance = renderDistance;
+        }
+        for (Chunk currentChunk : chunksToRender) currentChunk.setRenderData();
     }
 
     public void flushChunks() {
