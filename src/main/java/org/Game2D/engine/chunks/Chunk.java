@@ -41,8 +41,8 @@ public class Chunk {
     }
 
     public void update() {
-        for (UUID object_uuid : objects.keySet()) {
-            objects.get(object_uuid).update();
+        for(GameObject object : objects.values()) {
+            object.update();
         }
     }
 
