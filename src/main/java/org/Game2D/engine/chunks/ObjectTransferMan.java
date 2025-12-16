@@ -47,6 +47,7 @@ public class ObjectTransferMan {
 
         Chunk new_chunk = ChunkMan.ChunkFromCoordinates(object.hitBox.x, object.hitBox.y);
         Chunk old_chunk = ChunkMan.ChunkFromCoordinates(oldX, oldY);
+
         moveObjectsInChunks(object, old_chunk, new_chunk);
     }
 

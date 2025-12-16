@@ -8,7 +8,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class ChunkMan {
 
     private static final HashMap<UUID, UUID> objectStorage = new HashMap<>(); // assigns each object a chunk
-    public static final int chunkSize = 1000; // each chunk is a square with a sidelength of chunksize
+    public static final int chunkSize = 50; // each chunk is a square with a sidelength of chunksize
     private static final FinderHash chunksByCo = new FinderHash(); // enables to find a chunk via its coordinates
     public static final int updateDistance = 24;
     public static final int renderDistance = 24;
@@ -16,7 +16,7 @@ public class ChunkMan {
     private static int storedRenderDistance = renderDistance;
     private static Chunk storedChunk = null;
     public static List<Chunk> storedUpdateChunks = new ArrayList<>();
-    private static final List<Chunk> storedRenderChunks = new ArrayList<>();
+    private static List<Chunk> storedRenderChunks = new ArrayList<>();
     private static ConcurrentHashMap<UUID, Chunk> chunks = new ConcurrentHashMap<>();
 
     /**
@@ -34,6 +34,18 @@ public class ChunkMan {
             addChunk(target);
         }
         return target;
+    }
+
+    public static void printNum(GameObject object, String a){
+        int counter = 0;
+        for(Chunk chunk : ChunkMan.storedUpdateChunks){
+
+            if(chunk.objects.contains(object)) {
+                //Chunk x = chunk;
+                counter++;
+            }
+        }
+        System.out.println(a + ": " + counter);
     }
 
     /**
@@ -115,7 +127,7 @@ public class ChunkMan {
             chunksToRender = storedRenderChunks;
         } else {
             chunksToRender = chunksByCo.getChunksInReach(chunk, renderDistance);
-            storedUpdateChunks = chunksToRender;
+            storedRenderChunks = chunksToRender;
             storedChunk = chunk;
             storedRenderDistance = renderDistance;
         }

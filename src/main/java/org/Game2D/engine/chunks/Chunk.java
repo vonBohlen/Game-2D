@@ -15,7 +15,7 @@ public class Chunk {
     /**
      * HashMap of GameObjects in this Chunk identified by their UUID
      */
-    private final ConcurrentHashMap<UUID, GameObject> objects = new ConcurrentHashMap<>();
+    public final ConcurrentHashMap<UUID, GameObject> objects = new ConcurrentHashMap<>();
     public final int posX;
     public final int posY;
 
@@ -38,7 +38,7 @@ public class Chunk {
      * @param object GameObject to be added
      */
     public void addGameObject(GameObject object) {
-        objects.put(object.uuid, object);
+        objects.put(object.uuid, object); // HIER PASSIERT DIE SCHEIßE
         ChunkMan.registerObject(object, this);
     }
 

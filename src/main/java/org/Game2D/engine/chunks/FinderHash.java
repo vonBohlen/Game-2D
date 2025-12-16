@@ -29,16 +29,38 @@ public class FinderHash {
      * @return Unique index of the coordinate pair
      */
     private int getIndex(int x, int y) {
-        //f: Z² -> N f is bijection that assigns a number in N to each integer coordinate
-        if (x > Math.abs(y)) {
-            return (2 * x) * (2 * x) - x + y; // Absolut dunkle Magie einfach
-        } else if (y > 0 && y >= Math.abs(x)) {
-            return (2 * y) * (2 * y) - y + x;
-        } else if (x <= -Math.abs(y)) {
-            return (2 * x) * (2 * x) - 3 * x - y;
+        // 1. Bijektion von Z nach N_0 (Transformation der Koordinaten)
+
+        // Abbildung x -> n1:
+        // 0, 1, 2, ... werden auf 0, 2, 4, ... abgebildet (gerade)
+        // -1, -2, -3, ... werden auf 1, 3, 5, ... abgebildet (ungerade)
+        long n1;
+        if (x >= 0) {
+            n1 = 2L * x;
         } else {
-            return (2 * y) * (2 * y) - 3 * y + x;
+            n1 = -2L * x - 1;
         }
+
+        // Abbildung y -> n2:
+        long n2;
+        if (y >= 0) {
+            n2 = 2L * y;
+        } else {
+            n2 = -2L * y - 1;
+        }
+
+        // 2. Cantor-Paarungsfunktion (Bijektion von N_0^2 nach N_0)
+
+        // Die Summe S = n1 + n2
+        long sum = n1 + n2;
+
+        // Formel: index = 0.5 * (S) * (S + 1) + n2
+        // Die Dreieckszahl T(S) ist der Start-Index der Diagonale.
+        long index = sum * (sum + 1) / 2 + n2;
+
+        // Cast zurück zu int. Beachten Sie, dass für sehr große x, y die Grenzen von int
+        // überschritten werden könnten, daher die Verwendung von long in der Berechnung.
+        return (int) index;
     }
 
     /**
@@ -85,8 +107,8 @@ public class FinderHash {
 
         for (int x = 0; x <= 2 * radius; x++) {
             for (int y = 0; y <= 2 * radius; y++) {
-                int chunkX = target.posX / chunkDimensions - radius + x;
-                int chunkY = target.posY / chunkDimensions - radius + y;
+                int chunkX = target.posX - radius + x;
+                int chunkY = target.posY - radius + y;
                 int index = getIndex(chunkX, chunkY);
                 Chunk addition = chunkPos.get(index);
                 if(addition == null){
