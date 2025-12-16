@@ -8,16 +8,17 @@ import java.util.concurrent.ConcurrentHashMap;
 public class ChunkMan {
 
     private static final HashMap<UUID, UUID> objectStorage = new HashMap<>(); // assigns each object a chunk
-    public static final int chunkSize = 50; // each chunk is a square with a sidelength of chunksize
+    public static final int chunkSize = 512; // each chunk is a square with a sidelength of chunksize
     private static final FinderHash chunksByCo = new FinderHash(); // enables to find a chunk via its coordinates
-    public static final int updateDistance = 24;
-    public static final int renderDistance = 24;
+    public static final int updateDistance = 12;
+    public static final int renderDistance = 12;
     private static int storedUpdateDistance = updateDistance;
     private static int storedRenderDistance = renderDistance;
     private static Chunk storedChunk = null;
     public static List<Chunk> storedUpdateChunks = new ArrayList<>();
     private static List<Chunk> storedRenderChunks = new ArrayList<>();
     private static ConcurrentHashMap<UUID, Chunk> chunks = new ConcurrentHashMap<>();
+
 
     /**
      * Check if a Chunk with given global coordinates exists,
