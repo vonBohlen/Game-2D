@@ -1,4 +1,4 @@
-package org.Game2D.demo.Snake;
+package org.Game2D.demo.snake;
 
 import java.awt.*;
 
@@ -11,15 +11,18 @@ public class PlayingField {
     private int screenY;
 
     /**
-     * Construct a new PlayingField with the specified size
+     * Construct a new square PlayingField with the specified size
      *
-     * @param size Size of the PlayingField -> Defaults to 20
+     * @param size Size of the PlayingField
      */
     public PlayingField(int size) {
         this.size = size;
         this.objects = new PField[this.size][this.size];
     }
 
+    /**
+     * Construct a new square PlayingField with size 20
+     */
     public PlayingField() {
         this.objects = new PField[this.size][this.size];
     }

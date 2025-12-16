@@ -1,11 +1,15 @@
-package org.Game2D.demo.Snake;
+package org.Game2D.demo.snake;
 
+import org.Game2D.demo.snake.controllable.SnakePlayer;
 import org.Game2D.engine.core.Instance;
 import org.Game2D.engine.core.handlers.DataHand;
 import org.Game2D.engine.utils.AssetMan;
 
 import java.awt.*;
 
+/**
+ * Snake implementation for demonstration purposes
+ */
 public class Snake {
     public static Instance instance;
     public static PlayingField playingField;
@@ -29,9 +33,9 @@ public class Snake {
                 playingField.setColor(i, j, white);
             }
         }
-        playingField.printPlayingField();
+        //playingField.printPlayingField();
         playingField.render();
 
-        //SnakePlayer snake = new SnakePlayer(false, 0, white, playingField.size);
+        SnakePlayer snake = new SnakePlayer(false, 0, white, playingField.size);
     }
 }
