@@ -38,14 +38,7 @@ public class Bird extends Entity {
         lastTime = System.nanoTime();
     }
 
-    void updatePassedTime(){
-        long nanosSinceLast = System.nanoTime() - lastTime;
-        passedTime = (double)nanosSinceLast / 1000000000.0;
-    }
-
     private void updatePosition() {
-
-        updatePassedTime();
 
         //if space bar is pressed the birds velocity is set to a fixed value
         if(DataHand.keyHand.keyPressed_SPACE){
