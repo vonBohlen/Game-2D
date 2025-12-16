@@ -29,11 +29,11 @@ public class FinderHash {
      * @return Unique index of the coordinate pair
      */
     private int getIndex(int x, int y) {
-        // 1. Bijektion von Z nach N_0 (Transformation der Koordinaten)
+        // 1. Bijection from Z to N_0
 
-        // Abbildung x -> n1:
-        // 0, 1, 2, ... werden auf 0, 2, 4, ... abgebildet (gerade)
-        // -1, -2, -3, ... werden auf 1, 3, 5, ... abgebildet (ungerade)
+        // x -> n1
+        // 0, 1, 2, ... get projected on 0, 2, 4, ... (even)
+        // -1, -2, -3, ... get projected on 1, 3, 5, ... (uneven)
         long n1;
         if (x >= 0) {
             n1 = 2L * x;
@@ -41,7 +41,7 @@ public class FinderHash {
             n1 = -2L * x - 1;
         }
 
-        // Abbildung y -> n2:
+        // y -> n2:
         long n2;
         if (y >= 0) {
             n2 = 2L * y;
@@ -49,17 +49,14 @@ public class FinderHash {
             n2 = -2L * y - 1;
         }
 
-        // 2. Cantor-Paarungsfunktion (Bijektion von N_0^2 nach N_0)
+        // 2. Bijection from N_0^2 to N_0
 
-        // Die Summe S = n1 + n2
+        // S = n1 + n2
         long sum = n1 + n2;
 
-        // Formel: index = 0.5 * (S) * (S + 1) + n2
-        // Die Dreieckszahl T(S) ist der Start-Index der Diagonale.
+        // Index = 0.5 * (S) * (S + 1) + n2
         long index = sum * (sum + 1) / 2 + n2;
 
-        // Cast zurück zu int. Beachten Sie, dass für sehr große x, y die Grenzen von int
-        // überschritten werden könnten, daher die Verwendung von long in der Berechnung.
         return (int) index;
     }
 
@@ -70,7 +67,6 @@ public class FinderHash {
      */
     public void addChunk(Chunk chunk) {
         chunkPos.put(getIndex(chunk.posX, chunk.posY), chunk);
-        //System.out.println("New Chunk got added to FinderHash: x: " + chunk.posX + " y: " + chunk.posY + " Größe jetzt" + chunkPos.size());
     }
 
     /**

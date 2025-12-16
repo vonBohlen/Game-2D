@@ -8,7 +8,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class ChunkMan {
 
     private static final HashMap<UUID, UUID> objectStorage = new HashMap<>(); // assigns each object a chunk
-    public static final int chunkSize = 512; // each chunk is a square with a sidelength of chunksize
+    public static final int chunkSize = 512; // each chunk is a square with a sidelength of chunk size
     private static final FinderHash chunksByCo = new FinderHash(); // enables to find a chunk via its coordinates
     public static final int updateDistance = 12;
     public static final int renderDistance = 12;
@@ -18,7 +18,6 @@ public class ChunkMan {
     public static List<Chunk> storedUpdateChunks = new ArrayList<>();
     private static List<Chunk> storedRenderChunks = new ArrayList<>();
     private static ConcurrentHashMap<UUID, Chunk> chunks = new ConcurrentHashMap<>();
-
 
     /**
      * Check if a Chunk with given global coordinates exists,
@@ -35,18 +34,6 @@ public class ChunkMan {
             addChunk(target);
         }
         return target;
-    }
-
-    public static void printNum(GameObject object, String a){
-        int counter = 0;
-        for(Chunk chunk : ChunkMan.storedUpdateChunks){
-
-            if(chunk.objects.contains(object)) {
-                //Chunk x = chunk;
-                counter++;
-            }
-        }
-        System.out.println(a + ": " + counter);
     }
 
     /**
@@ -85,7 +72,6 @@ public class ChunkMan {
      */
     public static void addChunk(Chunk chunk) {
         chunks.put(chunk.uuid, chunk);
-        //System.out.println("New Chunk gets added: x: " + chunk.posX + " y: " + chunk.posY + " Größe jetzt" + chunks.size());
         chunksByCo.addChunk(chunk);
     }
 
@@ -97,7 +83,6 @@ public class ChunkMan {
     public static void addChunks(Collection<Chunk> new_chunks) {
         for (Chunk i : new_chunks) {
             chunks.put(i.uuid, i);
-            //System.out.println("New Chunk gets added: x: " + i.posX + " y: " + i.posY + " Größe jetzt" + chunks.size());
             chunksByCo.addChunk(i);
         }
     }
@@ -117,9 +102,7 @@ public class ChunkMan {
             storedChunk = chunk;
             storedUpdateDistance = updateDistance;
         }
-        //System.out.println("chunksToUpdate: " + chunksToUpdate.size());
         for (Chunk currentChunk : chunksToUpdate) currentChunk.update();
-        //System.out.println("Chunks got updatet: Größe von ChunksToUpdate" + chunksToUpdate.size());
     }
 
     public static void setRenderDataByChunk(Chunk chunk) {
@@ -139,6 +122,9 @@ public class ChunkMan {
      * Flush all Chunk data in the ChunkManager
      */
     public void flushChunks() {
+        storedChunk = null;
+        storedUpdateChunks = new ArrayList<>();
+        storedRenderChunks = new ArrayList<>();
         chunks = new ConcurrentHashMap<>();
     }
 

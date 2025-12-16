@@ -11,7 +11,7 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class Chunk {
     public final UUID uuid;
-    //private final List<GameObject> objects = new LinkedList<>();
+
     /**
      * HashMap of GameObjects in this Chunk identified by their UUID
      */
@@ -38,7 +38,7 @@ public class Chunk {
      * @param object GameObject to be added
      */
     public void addGameObject(GameObject object) {
-        objects.put(object.uuid, object); // HIER PASSIERT DIE SCHEIßE
+        objects.put(object.uuid, object);
         ChunkMan.registerObject(object, this);
     }
 
@@ -56,7 +56,6 @@ public class Chunk {
      * Update all GameObjects in the Chunk
      */
     public void update() {
-        //System.out.println("Chunk: x: " + posX + " y: " + posY + " has size " + objects.size());
         for (GameObject object : objects.values()) {
             object.update();
         }
