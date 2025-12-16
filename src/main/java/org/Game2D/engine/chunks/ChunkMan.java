@@ -7,17 +7,29 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class ChunkMan {
 
-    private static final HashMap<UUID, UUID> objectStorage = new HashMap<>(); // assigns each object a chunk
-    public static final int chunkSize = 512; // each chunk is a square with a sidelength of chunk size
+    //Summary of Lists and Objects:
+    // 1. Each created chunk gets added to the ConcurrentHashMap chunks where it gets associated with its UUID
+    // 2. Each created chunk gets added to the FinderHash which allows for fast access based on the chunks coordinates
+    // 3. Each GameObject that is created looks for the chunk that it would be in based on its position and creates a chunk if not existent
+    // 4. The new GameObject gets registered in its Chunk in objects where it is associated with its UUID TODO: Irgendwie unnötig. Im chunk würde eine liste reichen
+    // 5. The GameObject also gets registered in ChunkMan in objectStorage where its UUID gets associated with its chunks UUID TODO: Das ist auch irgendwie unnötig da könnte man einfach das objekt selbst nehmen
+
+    private static ConcurrentHashMap<UUID, Chunk> chunks = new ConcurrentHashMap<>(); // all chunks with their UUID
     private static final FinderHash chunksByCo = new FinderHash(); // enables to find a chunk via its coordinates
+
+    private static final HashMap<UUID, UUID> objectStorage = new HashMap<>(); // assigns each object a chunk
+
+    public static final int chunkSize = 512; // each chunk is a square with a sidelength of chunk size
+
     public static final int updateDistance = 12;
     public static final int renderDistance = 12;
+
     private static int storedUpdateDistance = updateDistance;
     private static int storedRenderDistance = renderDistance;
-    private static Chunk storedChunk = null;
-    public static List<Chunk> storedUpdateChunks = new ArrayList<>();
-    private static List<Chunk> storedRenderChunks = new ArrayList<>();
-    private static ConcurrentHashMap<UUID, Chunk> chunks = new ConcurrentHashMap<>();
+
+    private static Chunk storedChunk = null; // the pivot element that dictates which chunks get updated and rendered
+    public static List<Chunk> storedUpdateChunks = new ArrayList<>(); // chunks that got updated in the last cycle
+    private static List<Chunk> storedRenderChunks = new ArrayList<>(); // chunks that got rendered in the last cycle
 
     /**
      * Check if a Chunk with given global coordinates exists,
