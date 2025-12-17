@@ -91,7 +91,7 @@ public class Chunk {
         //render the chunks outline if it contains an object
         if (renderChunk && !objectsByLayers.isEmpty()) {
             g2.setColor(new Color(0, 150, 200));
-            g2.draw3DRect((posX * ChunkMan.chunkSize * Camera.pixelsPerUnit) - Camera.getScreenSpacePosX(), (posY * ChunkMan.chunkSize * Camera.pixelsPerUnit) - Camera.getScreenSpacePosY(), ChunkMan.chunkSize * Camera.pixelsPerUnit, ChunkMan.chunkSize * Camera.pixelsPerUnit, false);
+            g2.draw3DRect((int)(posX * ChunkMan.chunkSize * Camera.pixelsPerUnit) - Camera.getScreenSpacePosX(), (int)(posY * ChunkMan.chunkSize * Camera.pixelsPerUnit) - Camera.getScreenSpacePosY(), (int)(ChunkMan.chunkSize * Camera.pixelsPerUnit), (int)(ChunkMan.chunkSize * Camera.pixelsPerUnit), false);
         }
     }
 

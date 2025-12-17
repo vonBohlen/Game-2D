@@ -62,16 +62,16 @@ public abstract class GameObject {
     }
 
     protected int getScreenCoordinateX(){
-        return (hitBox.x * Camera.pixelsPerUnit) - (Camera.getScreenSpacePosX());
+        return (int)(hitBox.x * Camera.pixelsPerUnit) - (Camera.getScreenSpacePosX());
     }
     protected int getScreenCoordinateY(){
-        return (hitBox.y * Camera.pixelsPerUnit) - (Camera.getScreenSpacePosY());
+        return (int)(hitBox.y * Camera.pixelsPerUnit) - (Camera.getScreenSpacePosY());
     }
     protected int getScreenSpaceWidth(){
-        return hitBox.width * Camera.pixelsPerUnit;
+        return (int)(hitBox.width * Camera.pixelsPerUnit);
     }
     protected int getScreenSpaceHeight(){
-        return hitBox.height * Camera.pixelsPerUnit;
+        return (int)(hitBox.height * Camera.pixelsPerUnit);
     }
 
 }

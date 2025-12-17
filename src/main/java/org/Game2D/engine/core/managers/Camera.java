@@ -15,7 +15,7 @@ public class Camera {
 
     private static double bow = 0;
 
-    public static int pixelsPerUnit;
+    public static double pixelsPerUnit;
 
     public Camera(double x, double y, double windowHeightUnits)
     {
@@ -26,15 +26,15 @@ public class Camera {
         height = windowHeightUnits;
         width = ((double)DataHand.renderMan.getWidth() / (double)DataHand.renderMan.getHeight()) * windowHeightUnits;
 
-        pixelsPerUnit = (int)((double)DataHand.renderMan.getHeight() / windowHeightUnits);
+        pixelsPerUnit = ((double)DataHand.renderMan.getHeight() / windowHeightUnits);
     }
 
     // kamera wird bewegt skalliert etc und gibt den chunk in ihrem mittelpunkt zurück
     public static Chunk renderUpdate(){
         // in case of errors with creating the value
-        if(pixelsPerUnit == 0){ pixelsPerUnit = (int)((double)DataHand.renderMan.getHeight() / height); }
+        if(pixelsPerUnit == 0){ pixelsPerUnit = ((double)DataHand.renderMan.getHeight() / height); }
 
-        move(0.3,0);
+        //move(0.3,0);
         //System.out.println(x + " " + y);
         //updateScreenHeight(height + 10);
 
@@ -56,10 +56,10 @@ public class Camera {
     }
 
     public static int getScreenSpacePosX(){
-        return (int)x * pixelsPerUnit;
+        return (int)(x * pixelsPerUnit);
     }
     public static int getScreenSpacePosY(){
-        return (int)y * pixelsPerUnit;
+        return (int)(y * pixelsPerUnit);
     }
 
     private static void move(double shiftX, double shiftY){
