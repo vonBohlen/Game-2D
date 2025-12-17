@@ -107,7 +107,7 @@ public class FinderHash {
                 int chunkY = target.posY - radius + y;
                 int index = getIndex(chunkX, chunkY);
                 Chunk addition = chunkPos.get(index);
-                if(addition == null){
+                if (addition == null) {
                     addition = new Chunk(chunkX, chunkY);
                     ChunkMan.addChunk(addition);
                 }
@@ -160,10 +160,10 @@ public class FinderHash {
     /**
      * Returns every Chunk that is directly adjacent to the given chunk
      *
-     * @param chunk     Origin Chunk
+     * @param chunk Origin Chunk
      * @return Chunks around given Chunk
      */
-    public Chunk[] getAdjacentChunks(Chunk chunk){
+    public Chunk[] getAdjacentChunks(Chunk chunk) {
         Chunk[] adjacentChunks = new Chunk[8];
 
         adjacentChunks[0] = getChunkByCoordinate(chunk.posX, chunk.posY - 1);

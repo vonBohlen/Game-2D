@@ -12,7 +12,7 @@ import java.awt.*;
 import java.util.List;
 
 /**
- * Action Manager
+ * Action Manager<br>
  * Handles GameObject updating with the Gameloop
  * and general timing
  */

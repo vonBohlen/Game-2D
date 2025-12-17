@@ -1,16 +1,18 @@
 package org.Game2D.engine.core.managers;
 
-import org.Game2D.engine.chunks.Chunk;
 import org.Game2D.engine.chunks.ChunkMan;
 import org.Game2D.engine.core.handlers.DataHand;
 import org.Game2D.engine.debug.DebugScreen;
-import org.Game2D.engine.objects.GameObject;
 import org.Game2D.engine.utils.ConfProvider;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.List;
+import java.util.Objects;
 
+/**
+ * Render Manager<br>
+ * Handles the rendering of <code>GameObjects</code>
+ */
 public class RenderMan extends JPanel implements Runnable {
 
     Thread renderThread;
@@ -18,16 +20,22 @@ public class RenderMan extends JPanel implements Runnable {
     private boolean exit = false;
     private boolean run = true;
 
-    private int posX = 0;
-    private int posY = 0;
+    private final int posX = 0;
+    private final int posY = 0;
 
+    /**
+     * Instantiate a new <code>RenderManager</code>
+     */
     public RenderMan() {
 
         confPanel();
-        confPanel();
+        confPanel(); // Warum wird confPanel() zwei Mal gecalled?
 
     }
 
+    /**
+     * Set up the screen
+     */
     private void confPanel() {
 
         this.setPreferredSize(Toolkit.getDefaultToolkit().getScreenSize());
@@ -42,6 +50,9 @@ public class RenderMan extends JPanel implements Runnable {
 
     }
 
+    /**
+     * Create a new render thread
+     */
     public void startRenderLoop() {
 
         renderThread = new Thread(this);
@@ -50,6 +61,11 @@ public class RenderMan extends JPanel implements Runnable {
 
     }
 
+    /**
+     * Executed by the render thread<br>
+     * Waits until the time is right to maintain a constant
+     * update rate
+     */
     @Override
     public void run() {
 
@@ -100,21 +116,19 @@ public class RenderMan extends JPanel implements Runnable {
 
     }
 
+    /**
+     * Implement the rendering of GameObjects
+     *
+     * @param g the <code>Graphics</code> object to protect
+     */
+    @Override
     public void paintComponent(Graphics g) {
 
         // Hitbox visualization
-        boolean renderHitBoxes = false;
-        if (ConfProvider.getConf(DataHand.confPath).getProperty("game2d.render.hitboxes").equals("true")) {
-            renderHitBoxes = true;
-        }
+        boolean renderHitBoxes = Objects.requireNonNull(ConfProvider.getConf(DataHand.confPath)).getProperty("game2d.render.hitboxes").equals("true");
 
         // render chunks that have objects in them
-        boolean renderActiveChunks = false;
-        try {
-            if (ConfProvider.getConf(DataHand.confPath).getProperty("game2d.render.activechunks").equals("true")){
-                renderActiveChunks = true;
-            }
-        }catch (Exception e){ /* config property doesnt exist yet */ }
+        boolean renderActiveChunks = Objects.requireNonNull(ConfProvider.getConf(DataHand.confPath)).getProperty("game2d.render.activechunks").equals("true");
 
         super.paintComponent(g);
 
@@ -133,14 +147,23 @@ public class RenderMan extends JPanel implements Runnable {
         g2.dispose();
     }
 
+    /**
+     * Temporarily pause the rendering thread
+     */
     public void freeze() {
         run = false;
     }
 
+    /**
+     * Resume the rendering thread after it has been paused
+     */
     public void resume() {
         run = true;
     }
 
+    /**
+     * Pause the renderin thread and exit cleanly
+     */
     public void exit() {
         freeze();
         exit = true;

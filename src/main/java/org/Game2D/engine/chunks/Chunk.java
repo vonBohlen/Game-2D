@@ -65,20 +65,24 @@ public class Chunk {
     }
 
     /**
-     * Not implemented yet
+     * Render the hitboxes of the GameObjects and the Chunks
+     *
+     * @param g2             Graphics instance passed by the RenderManager
+     * @param renderHitBoxes Render the hitboxes of the GameObjects?
+     * @param renderChunk    Render the bounding box of the Chunk?
      */
     public void render(Graphics2D g2, boolean renderHitBoxes, boolean renderChunk) {
 
         // render objects in chunk and their hitboxes
-        g2.setColor(new Color(0,200,50));
-        for(GameObject go : objects.values()){
+        g2.setColor(new Color(0, 200, 50));
+        for (GameObject go : objects.values()) {
             if (go.getTexture() != null || !go.render_enabled) go.render(g2);
             if (go.hitBox != null && renderHitBoxes)
                 g2.draw3DRect(go.hitBox.x, go.hitBox.y, go.hitBox.width, go.hitBox.height, false);
         }
 
         //render the chunks outline if it contains an object
-        if(renderChunk && !objects.isEmpty()){
+        if (renderChunk && !objects.isEmpty()) {
             g2.setColor(new Color(0, 150, 200));
             g2.draw3DRect(posX * ChunkMan.chunkSize, posY * ChunkMan.chunkSize, ChunkMan.chunkSize, ChunkMan.chunkSize, false);
         }
