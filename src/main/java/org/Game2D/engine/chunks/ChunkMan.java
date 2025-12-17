@@ -19,10 +19,10 @@ public class ChunkMan {
 
     private static final HashMap<UUID, UUID> objectStorage = new HashMap<>(); // assigns each object a chunks UUID
 
-    public static final int chunkSize = 5; // each chunk is a square with a sidelength of chunk size
+    public static final int chunkSize = 512; // each chunk is a square with a sidelength of chunk size
 
-    public static final int updateDistance = 500;
-    public static final int renderDistance = 500;
+    public static final int updateDistance = 12;
+    public static final int renderDistance = 12;
 
     private static int storedUpdateDistance = updateDistance;
     private static int storedRenderDistance = renderDistance;
