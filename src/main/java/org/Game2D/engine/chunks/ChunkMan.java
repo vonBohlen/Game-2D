@@ -21,7 +21,7 @@ public class ChunkMan {
 
     public static final int chunkSize = 512; // each chunk is a square with a sidelength of chunk size
 
-    public static final int updateDistance = 12;
+    public static final int updateDistance = 24;
     public static final int renderDistance = 12;
 
     private static int storedUpdateDistance = updateDistance;

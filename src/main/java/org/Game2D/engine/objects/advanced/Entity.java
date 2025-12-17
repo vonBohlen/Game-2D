@@ -133,6 +133,9 @@ public abstract class Entity extends GameObject {
 
         if (hitBox == null) return;
 
+        int oldX = hitBox.x;
+        int oldY = hitBox.y;
+
         Rectangle newPosition = new Rectangle(newX, newY, hitBox.width, hitBox.height);
         GameObject objectCache = ActionMan.checkCollision(this, newPosition);
 
@@ -141,6 +144,7 @@ public abstract class Entity extends GameObject {
         hitBox.x = newX;
         hitBox.y = newY;
 
+        ObjectTransferMan.checkTransferAfterMoveAbs(this, oldX, oldY);
     }
 
     public GameObject setPosition(int newX, int newY) {
