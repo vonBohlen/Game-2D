@@ -1,5 +1,7 @@
 package org.Game2D.engine.core.managers;
 
+import org.Game2D.engine.chunks.Chunk;
+import org.Game2D.engine.chunks.ChunkMan;
 import org.Game2D.engine.core.handlers.DataHand;
 import org.Game2D.engine.debug.DebugScreen;
 import org.Game2D.engine.objects.GameObject;
@@ -15,6 +17,9 @@ public class RenderMan extends JPanel implements Runnable {
 
     private boolean exit = false;
     private boolean run = true;
+
+    private int posX = 0;
+    private int posY = 0;
 
     public RenderMan() {
 
@@ -97,10 +102,19 @@ public class RenderMan extends JPanel implements Runnable {
 
     public void paintComponent(Graphics g) {
 
+        // Hitbox visualization
         boolean renderHitBoxes = false;
+        if (ConfProvider.getConf(DataHand.confPath).getProperty("game2d.render.hitboxes").equals("true")) {
+            renderHitBoxes = true;
+        }
 
-        List<GameObject> gameObjects = DataHand.getGameObjs();
-
+        // render chunks that have objects in them
+        boolean renderActiveChunks = false;
+        try {
+            if (ConfProvider.getConf(DataHand.confPath).getProperty("game2d.render.activechunks").equals("true")){
+                renderActiveChunks = true;
+            }
+        }catch (Exception e){ /* config property doesnt exist yet */ }
 
         super.paintComponent(g);
 
@@ -111,18 +125,8 @@ public class RenderMan extends JPanel implements Runnable {
 
         g2.setColor(Color.magenta);
 
-        if (ConfProvider.getConf(DataHand.confPath).getProperty("game2d.render.hitboxes").equals("true"))
-            renderHitBoxes = true;
-
-        for (GameObject go : gameObjects) {
-
-            //if (ActionMan.getGameTick() == 0) System.out.println(go.getClass().getName() + " at " + go.objectLayer);
-
-            if (go.getTexture() != null || !go.render_enabled) go.render(g2);
-            if (go.hitBox != null && renderHitBoxes)
-                g2.draw3DRect(go.hitBox.x, go.hitBox.y, go.hitBox.width, go.hitBox.height, true);
-
-        }
+        // draw each object that is in render distance
+        ChunkMan.renderByChunk(posX + (getWidth() / 2), posY + (getHeight() / 2), g2, renderHitBoxes, renderActiveChunks);
 
         DebugScreen.draw(g2);
 

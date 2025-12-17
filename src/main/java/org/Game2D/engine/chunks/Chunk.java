@@ -2,6 +2,8 @@ package org.Game2D.engine.chunks;
 
 import org.Game2D.engine.objects.GameObject;
 
+import java.awt.*;
+import java.util.ArrayList;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -16,6 +18,7 @@ public class Chunk {
      * HashMap of GameObjects in this Chunk identified by their UUID
      */
     public final ConcurrentHashMap<UUID, GameObject> objects = new ConcurrentHashMap<>();
+    public final java.util.List<GameObject> objectsByLayers = new ArrayList<>();
     public final int posX;
     public final int posY;
 
@@ -64,8 +67,21 @@ public class Chunk {
     /**
      * Not implemented yet
      */
-    public void setRenderData() {
-        //TODO
+    public void render(Graphics2D g2, boolean renderHitBoxes, boolean renderChunk) {
+
+        // render objects in chunk and their hitboxes
+        g2.setColor(new Color(0,200,50));
+        for(GameObject go : objects.values()){
+            if (go.getTexture() != null || !go.render_enabled) go.render(g2);
+            if (go.hitBox != null && renderHitBoxes)
+                g2.draw3DRect(go.hitBox.x, go.hitBox.y, go.hitBox.width, go.hitBox.height, false);
+        }
+
+        //render the chunks outline if it contains an object
+        if(renderChunk && !objects.isEmpty()){
+            g2.setColor(new Color(0, 150, 200));
+            g2.draw3DRect(posX * ChunkMan.chunkSize, posY * ChunkMan.chunkSize, ChunkMan.chunkSize, ChunkMan.chunkSize, false);
+        }
     }
 
 
