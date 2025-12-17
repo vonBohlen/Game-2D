@@ -52,7 +52,6 @@ public class PipePair extends Entity {
     }
 
     private void teleport(){
-        System.out.println("TELE");
         int newX = top.hitBox.x + PipeHandler.pipesNum * PipeHandler.distancePipes;
         int y = PipeHandler.getRndY();
         top.setPosition(newX, y, true);
