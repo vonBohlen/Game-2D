@@ -39,11 +39,11 @@ public class FlappyBird {
 
 
         //Init bird
-        //new Bird(texture);
-        new Player(new Rectangle(10,10,10,10), texture);
+        new Bird(texture);
+        //new Player(new Rectangle(10,10,10,10), texture);
 
         //Init pipes
-        //new PipeHandler();
+        new PipeHandler();
 
         //Init base
         for (int i = 0; i <= screenWidth/336; i++) {
