@@ -5,6 +5,8 @@ import org.Game2D.engine.objects.GameObject;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -22,7 +24,7 @@ public class Chunk {
      * HashMap of GameObjects in this Chunk identified by their UUID
      */
     //public final ConcurrentHashMap<UUID, GameObject> objects = new ConcurrentHashMap<>();
-    public final java.util.List<GameObject> objectsByLayers = new ArrayList<>();
+    public java.util.List<GameObject> objectsByLayers = Collections.synchronizedList(new ArrayList<>());
     public final int posX;
     public final int posY;
 
@@ -47,7 +49,9 @@ public class Chunk {
     public void addGameObject(GameObject object) {
         //objects.put(object.uuid, object);
         //TODO: Put GameObject at right place in List
-        objectsByLayers.add(object);
+        synchronized (objectsByLayers) {
+            objectsByLayers.add(object);
+        }
         ChunkMan.registerObject(object, this);
     }
 
@@ -58,7 +62,9 @@ public class Chunk {
      */
     public void removeGameObject(GameObject object) {
         //objects.remove(object.uuid);
-        objectsByLayers.remove(object);
+        synchronized (objectsByLayers) {
+            objectsByLayers.remove(object);
+        }
         ChunkMan.unregisterObject(object);
     }
 
@@ -66,8 +72,10 @@ public class Chunk {
      * Update all GameObjects in the Chunk
      */
     public void update() {
-        for (GameObject object : objectsByLayers) {
-            object.update();
+        synchronized (objectsByLayers) {
+            for (GameObject object : objectsByLayers) {
+                object.update();
+            }
         }
     }
 
@@ -80,18 +88,21 @@ public class Chunk {
      */
     public void render(Graphics2D g2, boolean renderHitBoxes, boolean renderChunk) {
 
-        // render objects in chunk and their hitboxes
-        g2.setColor(new Color(0,200,50));
-        for(GameObject go : objectsByLayers){
-            if (go.getTexture() != null || !go.render_enabled) go.render(g2);
-            if (go.hitBox != null && renderHitBoxes)
-                go.drawHitBox(g2);
+        synchronized (objectsByLayers) {
+            // render objects in chunk and their hitboxes
+            g2.setColor(new Color(0, 200, 50));
+            for (GameObject go : objectsByLayers) {
+                if (go.getTexture() != null || !go.render_enabled) go.render(g2);
+                if (go.hitBox != null && renderHitBoxes) go.drawHitBox(g2);
+            }
         }
 
-        //render the chunks outline if it contains an object
-        if (renderChunk && !objectsByLayers.isEmpty()) {
-            g2.setColor(new Color(0, 150, 200));
-            g2.draw3DRect((int)(posX * ChunkMan.chunkSize * Camera.pixelsPerUnit) - Camera.getScreenSpacePosX(), (int)(posY * ChunkMan.chunkSize * Camera.pixelsPerUnit) - Camera.getScreenSpacePosY(), (int)(ChunkMan.chunkSize * Camera.pixelsPerUnit), (int)(ChunkMan.chunkSize * Camera.pixelsPerUnit), false);
+        synchronized (objectsByLayers) {
+            //render the chunks outline if it contains an object
+            if (renderChunk && !objectsByLayers.isEmpty()) {
+                g2.setColor(new Color(0, 150, 200));
+                g2.draw3DRect((int) (posX * ChunkMan.chunkSize * Camera.pixelsPerUnit) - Camera.getScreenSpacePosX(), (int) (posY * ChunkMan.chunkSize * Camera.pixelsPerUnit) - Camera.getScreenSpacePosY(), (int) (ChunkMan.chunkSize * Camera.pixelsPerUnit), (int) (ChunkMan.chunkSize * Camera.pixelsPerUnit), false);
+            }
         }
     }
 

@@ -32,7 +32,7 @@ public class RenderMan extends JPanel implements Runnable {
     }
 
     public void initializeCamera(){
-        camera = new Camera(0,0,1080*2);
+        camera = new Camera(0,0,1080);
     }
 
     /**
