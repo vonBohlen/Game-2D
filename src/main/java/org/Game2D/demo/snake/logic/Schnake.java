@@ -1,4 +1,4 @@
-package org.Game2D.demo.schnake.logic;
+package org.Game2D.demo.snake.logic;
 
 import java.util.LinkedList;
 import java.util.Queue;

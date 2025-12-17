@@ -1,4 +1,4 @@
-package org.Game2D.demo.schnake.logic;
+package org.Game2D.demo.snake.logic;
 
 import org.Game2D.engine.objects.GameObject;
 
