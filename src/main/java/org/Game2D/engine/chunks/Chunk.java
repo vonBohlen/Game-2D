@@ -42,6 +42,8 @@ public class Chunk {
      */
     public void addGameObject(GameObject object) {
         objects.put(object.uuid, object);
+        //TODO: Put GameObject at right place in List
+        objectsByLayers.add(object);
         ChunkMan.registerObject(object, this);
     }
 
@@ -52,6 +54,7 @@ public class Chunk {
      */
     public void removeGameObject(GameObject object) {
         objects.remove(object.uuid);
+        objectsByLayers.remove(object);
         ChunkMan.unregisterObject(object);
     }
 
@@ -71,7 +74,7 @@ public class Chunk {
 
         // render objects in chunk and their hitboxes
         g2.setColor(new Color(0,200,50));
-        for(GameObject go : objects.values()){
+        for(GameObject go : objectsByLayers){
             if (go.getTexture() != null || !go.render_enabled) go.render(g2);
             if (go.hitBox != null && renderHitBoxes)
                 g2.draw3DRect(go.hitBox.x, go.hitBox.y, go.hitBox.width, go.hitBox.height, false);
