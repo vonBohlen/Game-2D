@@ -1,5 +1,6 @@
 package org.Game2D.engine.objects.advanced;
 
+import org.Game2D.engine.chunks.ObjectTransferMan;
 import org.Game2D.engine.core.managers.ActionMan;
 import org.Game2D.engine.objects.GameObject;
 
@@ -86,6 +87,9 @@ public abstract class Entity extends GameObject {
         GameObject objectCacheX, objectCacheY;
         GameObject[] objectCache = new GameObject[2];
 
+        int oldX = hitBox.x;
+        int oldY = hitBox.y;
+
         while (xShift != 0 || yShift != 0) {
             int stepX = xShift != 0 ? Math.min(Math.abs(xShift), 5) * Integer.signum(xShift) : 0;
             int stepY = yShift != 0 ? Math.min(Math.abs(yShift), 5) * Integer.signum(yShift) : 0;
@@ -119,25 +123,30 @@ public abstract class Entity extends GameObject {
             if (objectCache[0] != null && objectCache[1] != null) break;
         }
 
+        ObjectTransferMan.checkTransferAfterMoveAbs(this, oldX, oldY);
+
         return (objectCache[0] == null && objectCache[1] == null) ? null : objectCache;
     }
 
 
-    public GameObject setPosition(int newX, int newY, boolean ignoreCollision) {
+    public void setPosition(int newX, int newY, boolean ignoreCollision) {
 
-        if (hitBox == null) return null;
+        if (hitBox == null) return;
+
+        int oldX = hitBox.x;
+        int oldY = hitBox.y;
 
         Rectangle newPosition = new Rectangle(newX, newY, hitBox.width, hitBox.height);
         GameObject objectCache = ActionMan.checkCollision(this, newPosition);
 
-        if (objectCache != null && !ignoreCollision) return objectCache;
+        if (objectCache != null && !ignoreCollision) return;
 
         hitBox.x = newX;
         hitBox.y = newY;
 
-        return objectCache;
-
+        ObjectTransferMan.checkTransferAfterMoveAbs(this, oldX, oldY);
     }
+
     public GameObject setPosition(int newX, int newY) {
 
         if (hitBox == null) return null;

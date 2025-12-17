@@ -15,8 +15,8 @@ public class AssetMan {
         List<Image> assets = new ArrayList<>();
 
         try {
-            for (int i = paths.length; i > 0;) {
-                assets.add(ImageIO.read(Objects.requireNonNull(RenderMan.class.getClassLoader().getResource(paths[i -1]))));
+            for (int i = paths.length; i > 0; ) {
+                assets.add(ImageIO.read(Objects.requireNonNull(RenderMan.class.getClassLoader().getResource(paths[i - 1]))));
                 i--;
             }
         } catch (IOException e) {
@@ -27,7 +27,7 @@ public class AssetMan {
     }
 
     public static Image loadAsset(String path) {
-        Image asset = null;
+        Image asset;
 
         try {
             asset = ImageIO.read(Objects.requireNonNull(RenderMan.class.getClassLoader().getResource(path)));

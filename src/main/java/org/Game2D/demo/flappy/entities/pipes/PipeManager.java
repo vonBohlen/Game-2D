@@ -11,16 +11,16 @@ import java.util.Random;
 
 public class PipeManager extends Entity {
 
-    int neededPipes;
-    int distanceTopBelow = 500;
-    int distancePipes = 300;
+    final int neededPipes;
+    final int distanceTopBelow = 500;
+    final int distancePipes = 300;
 
     int posX;
     int posY;
     int random;
 
-    List<PipeTop> tops = new ArrayList<>();
-    List<PipeBelow> belows = new ArrayList<>();
+    final List<PipeTop> tops = new ArrayList<>();
+    final List<PipeBelow> belows = new ArrayList<>();
 
     public PipeManager(){
         super(new Rectangle(), false, -1, null);
@@ -39,8 +39,8 @@ public class PipeManager extends Entity {
     private void CreatePipes(){
         for(int i = 0; i < this.neededPipes; i++){
 
-            this.random = getRnd(-200, 200);
-            //112 because it's the base height and the 20 is so that there is a bit distance between top/bottom and the pipeend
+            this.random = getRnd();
+            //112 because it's the base height and the 20 is so that there is a bit of distance between top/bottom and the pipe end
             if(this.posY + this.random < distancePipes + 20 || this.posY + this.random > DataHand.renderMan.getHeight() - 112 - 20){
                 this.random *= -1;
             }
@@ -54,9 +54,9 @@ public class PipeManager extends Entity {
         }
     }
 
-    private int getRnd(int a, int b){
+    private int getRnd(){
         Random random = new Random();
-        return random.nextInt(b - a + 1) + a;
+        return random.nextInt(200 + 200 + 1) - 200;
     }
 
     @Override
@@ -64,14 +64,14 @@ public class PipeManager extends Entity {
         if(!Bird.gameOver){
             movePipes();
         }
-        else if (Bird.gameOver && DataHand.keyHand.keyPressed_SPACE){
+        else if (DataHand.keyHand.keyPressed_SPACE){
             setDefault();
         }
     }
 
     void movePipes(){
-        this.random = getRnd(-200, 200);
-        //112 because it's the base height and the 20 is so that there is a bit distance between top/bottom and the pipeend
+        this.random = getRnd();
+        //112 because it's the base height and the 20 is so that there is a bit of distance between top/bottom and the pipe end
         if(this.posY + this.random < distancePipes + 20 || this.posY + this.random > DataHand.renderMan.getHeight() - 112 - 20){
             this.random *= -1;
         }
@@ -90,9 +90,7 @@ public class PipeManager extends Entity {
     }
 
     @Override
-    public void render(Graphics2D g2) {
-
-    }
+    public void render(Graphics2D g2) {}
 
     private void setDefaultAlt(){
 
@@ -108,8 +106,8 @@ public class PipeManager extends Entity {
 
         for(int i = 0; i < this.neededPipes; i++){
 
-            this.random = getRnd(-200, 200);
-            //112 because it's the base height and the 20 is so that there is a bit distance between top/bottom and the pipeend
+            this.random = getRnd();
+            //112 because it's the base height and the 20 is so that there is a bit of distance between top/bottom and the pipe end
             if(this.posY + this.random < distancePipes + 20 || this.posY + this.random > DataHand.renderMan.getHeight() - 112 - 20){
                 this.random *= -1;
             }
@@ -122,14 +120,14 @@ public class PipeManager extends Entity {
 
     }
     private void setDefault(){
-        //Standardvalues
+        //Standard values
         this.posX = DataHand.renderMan.getWidth() / 2;
         this.posY = DataHand.renderMan.getHeight() / 2 + this.distanceTopBelow / 2;
 
         for(int i = 0; i < this.neededPipes; i++){
 
-            this.random = getRnd(-200, 200);
-            //112 because it's the base height and the 20 is so that there is a bit distance between top/bottom and the pipeend
+            this.random = getRnd();
+            //112 because it's the base height and the 20 is so that there is a bit of distance between top/bottom and the pipe end
             if(this.posY + this.random < distancePipes + 20 || this.posY + this.random > DataHand.renderMan.getHeight() - 112 - 20){
                 this.random *= -1;
             }

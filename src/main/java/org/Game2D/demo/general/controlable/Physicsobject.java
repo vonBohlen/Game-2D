@@ -10,12 +10,12 @@ public class Physicsobject extends Entity {
     double veloX = 0;
     double veloY = 0;
 
-    double passedTime; //at 60 targetTPS it is around 1.6
+    final double passedTime; //at 60 targetTPS it is around 1.6
 
-    double gravityConst = 9.81; //earths gravity is 9.81
-    double dragConst = 0.75; //best is 0.75 and 0 for no energy loss
-    double boost = 6; //best is 6 and should not be more than gravConst
-    double speedLossAtCollisionPercent = 2.0; //best is 1.25 and 0 for no energy loss
+    final double gravityConst = 9.81; //earths gravity is 9.81
+    final double dragConst = 0.75; //best is 0.75 and 0 for no energy loss
+    final double boost = 6; //best is 6 and should not be more than gravConst
+    final double speedLossAtCollisionPercent = 2.0; //best is 1.25 and 0 for no energy loss
 
     public Physicsobject(boolean collision, Image txt, int tps) {
         super(new Rectangle(100,100,48,48), collision, 0, txt);
@@ -97,13 +97,5 @@ public class Physicsobject extends Entity {
         //moving the object at last
         move(moveX, 0);
         move(0, moveY);
-    }
-
-    @Override
-    public void render(Graphics2D g2) {
-
-        g2.setColor(Color.WHITE);
-
-        g2.drawImage(texture, hitBox.x, hitBox.y, hitBox.width, hitBox.height, null);
     }
 }

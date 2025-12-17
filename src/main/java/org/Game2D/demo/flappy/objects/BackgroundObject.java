@@ -9,12 +9,4 @@ public class BackgroundObject extends StaticObject {
     public BackgroundObject(Rectangle hb, boolean collision, Image txt) {
         super(hb, collision, 0, txt);
     }
-
-    @Override
-    public void render(Graphics2D g2) {
-
-        g2.drawImage(texture, hitBox.x, hitBox.y, hitBox.width, hitBox.height, null);
-
-    }
-
 }

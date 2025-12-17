@@ -1,6 +1,5 @@
 package org.Game2D.demo.general.entities;
 
-import org.Game2D.engine.core.handlers.DataHand;
 import org.Game2D.engine.core.managers.ActionMan;
 import org.Game2D.engine.objects.advanced.Entity;
 
@@ -12,7 +11,7 @@ public class BallwP extends Entity {
         super(hb, true, 0, txt);
     }
 
-    private int MoveX = 0;
+    private int MoveX = 10;
 
     private int MoveY = 0;
 
@@ -43,7 +42,7 @@ public class BallwP extends Entity {
 
         MoveY += 2;
 
-        //Teleportierlogik -> Wenn es aus den Rändern des Fensters ist wird es zurück rein teleportiert
+        //Teleportier-Logik → Wenn es aus den Rändern des Fensters ist, wird es zurück rein teleportiert
         if(hitBox.x <= 0){
             setPosition(0, hitBox.y, false);
         }
@@ -61,13 +60,5 @@ public class BallwP extends Entity {
 
         move(MoveX, 0);
         move(0, MoveY);
-    }
-
-    public void render(Graphics2D g2) {
-
-        g2.setColor(Color.WHITE);
-
-        g2.drawImage(texture, hitBox.x, hitBox.y, hitBox.width, hitBox.height, null);
-
     }
 }

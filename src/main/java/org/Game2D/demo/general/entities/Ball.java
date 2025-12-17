@@ -16,21 +16,12 @@ public class Ball extends Entity {
     public void update(){
 
         if (hitBox.y >= DataHand.renderMan.getHeight()) setPosition(0, 0, false);
-        if (ActionMan.getGameTick() != 30 && ActionMan.getGameTick() != 60) return;
+        //if (ActionMan.getGameTick() != 30 && ActionMan.getGameTick() != 60) return;
 
-        int x = hitBox.x + 50;
-        int y = x / 10;
+        int x = hitBox.x + 1;
+        int y = x / 2;
 
         move(50, y);
-
-    }
-
-    @Override
-    public void render(Graphics2D g2) {
-
-        g2.setColor(Color.WHITE);
-
-        g2.drawImage(texture, hitBox.x, hitBox.y, hitBox.width, hitBox.height, null);
 
     }
 }

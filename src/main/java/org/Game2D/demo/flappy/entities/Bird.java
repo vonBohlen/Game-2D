@@ -11,19 +11,20 @@ import java.awt.*;
 public class Bird extends Entity {
 
     double velo = 0.0; //only one velocity because the bird stays in position on x-axis
-    double veloOnPress = -10;
-    double gravityConst = 40; //earths gravity is 9.81
+    final double veloOnPress = -10;
+    final double gravityConst = 40; //earths gravity is 9.81
     double passedTime; //at 60 targetTPS it is around 1.6
+    long lastTime;
 
 
-    Image txtMid = AssetMan.loadAsset("flappy_assets/bird/yellowbird-midflap.png");
-    Image txtUp = AssetMan.loadAsset("flappy_assets/bird/yellowbird-upflap.png");
-    Image txtDown = AssetMan.loadAsset("flappy_assets/bird/yellowbird-downflap.png");
+    final Image txtMid = AssetMan.loadAsset("flappy_assets/bird/yellowbird-midflap.png");
+    final Image txtUp = AssetMan.loadAsset("flappy_assets/bird/yellowbird-upflap.png");
+    final Image txtDown = AssetMan.loadAsset("flappy_assets/bird/yellowbird-downflap.png");
 
     public static boolean gameOver = false;
     public static int speed = 10;
 
-    //with more time the bird(the pipes) move faster but the movement speed is a int
+    //with more time the bird(the pipes) move faster but the movement speed is an int
     public static double remainder = 0.0;
 
     public Bird(Image txt) {
@@ -33,6 +34,8 @@ public class Bird extends Entity {
 
         //ideal time between two ticks
         this.passedTime = 1 / (double) Integer.parseInt(ConfProvider.getConf(DataHand.confPath).getProperty("game2d.core.tps"));
+
+        lastTime = System.nanoTime();
     }
 
     private void updatePosition() {
@@ -70,7 +73,7 @@ public class Bird extends Entity {
         }
 
         if(remainder >= 1){
-            speed += remainder;
+            speed += (int) remainder;
             remainder--;
         }
     }

@@ -14,16 +14,17 @@ import java.util.List;
 public class DataHand {
 
     private static final ArrayList<GameObject> gameObjects = new ArrayList<>();
+    //    private static final ArrayList<Camera> cameras = new ArrayList<>();
+
+    private static final SpinLock lock = new SpinLock();
+
     public static Path confPath = null;
+
     public static ActionMan actionMan = null;
     public static RenderMan renderMan = null;
 
     //Handlers
     public static Keyhand keyHand = null;
-
-
-//    private static final ArrayList<Camera> cameras = new ArrayList<>();
-    private static final SpinLock lock = new SpinLock();
 
 //    public static void addCamera(Camera camera) {
 //        long threadId = Thread.currentThread().getId();
@@ -43,6 +44,13 @@ public class DataHand {
 //        return new ArrayList<>(cameras);
 //    }
 
+    /**
+     * Automatically add the specified <code>GameObject</code>
+     * to a <code>Chunk</code> based on its position<br>
+     * Also add it to the global list of all <code>GameObjects</code>
+     *
+     * @param go <code>GameObject</code> to be registered
+     */
     public static void regGameObj(GameObject go) {
         if (!gameObjects.contains(go)) {
             gameObjects.add(go);
@@ -54,19 +62,34 @@ public class DataHand {
         }
     }
 
+    /**
+     * Remove a <code>GameObject</code> from the parent list
+     * TODO: Remove from Chunk as well
+     *
+     * @param go <code>GameObject</code> to be removed
+     */
     public static void remGameObj(GameObject go) {
         gameObjects.removeIf(gameObject -> gameObject == go);
         sortList(0, gameObjects.size() - 1);
     }
 
+    /**
+     * Returns a copy of the currently registered <code>GameObjects</code>
+     *
+     * @return Current <code>GameObjects</code>
+     */
+    @SuppressWarnings("unchecked")
     public static List<GameObject> getGameObjs() {
         return (List<GameObject>) gameObjects.clone();
     }
 
-    protected static List<GameObject> getOriginalsGameObjs() {
-        return gameObjects;
-    }
-
+    /**
+     * Sort the parent list of <code>GameObjects</code>
+     * between the two specified indices
+     *
+     * @param start First index to be sorted
+     * @param end   Last index to be sorted
+     */
     private static void sortList(int start, int end) {
         if (start >= end) {
             return;
@@ -88,6 +111,14 @@ public class DataHand {
         if (pivot < gameObjects.size() - 1) sortList(pivot + 1, end);
     }
 
+    /**
+     * Switch the place of the <code>GameObject</code> at origin
+     * to target by shifting over the entries (to the left to
+     * clear up a free space at the end
+     *
+     * @param origin Index of the <code>GameObject</code> to be moved
+     * @param target Index to move to
+     */
     private static void queueObjects(int origin, int target) {
         GameObject storedObject = gameObjects.get(origin);
         for (int i = origin + 1; i <= target; i++) {

@@ -8,18 +8,18 @@ import java.awt.*;
 
 public class PipePair extends Entity {
 
-    PipeTop top;
-    PipeBelow below;
+    final PipeTop top;
+    final PipeBelow below;
 
-    int startX;
+    final int startX;
 
-    int space = 300;
+    final int space = 300;
 
     boolean updatedScore = false;
 
     //Standard coordinates
     public PipePair(int x){
-        super(null, false, -1, null);
+        super(new Rectangle(0,0), false, -1, null);
         startX = x;
         int y = PipeHandler.getRndY();
         top = new PipeTop(x, y);
@@ -52,6 +52,7 @@ public class PipePair extends Entity {
     }
 
     private void teleport(){
+        System.out.println("TELE");
         int newX = top.hitBox.x + PipeHandler.pipesNum * PipeHandler.distancePipes;
         int y = PipeHandler.getRndY();
         top.setPosition(newX, y, true);
@@ -61,7 +62,5 @@ public class PipePair extends Entity {
     }
 
     @Override
-    public void render(Graphics2D g2) {
-
-    }
+    public void render(Graphics2D g2) {}
 }

@@ -5,6 +5,7 @@ import org.Game2D.demo.flappy.entities.InfoDisplay;
 import org.Game2D.demo.flappy.entities.pipes.PipeHandler;
 import org.Game2D.demo.flappy.objects.BackgroundObject;
 import org.Game2D.demo.flappy.objects.BaseObject;
+import org.Game2D.demo.general.controlable.Player;
 import org.Game2D.engine.core.Instance;
 import org.Game2D.engine.core.handlers.DataHand;
 import org.Game2D.engine.utils.AssetMan;
@@ -39,6 +40,7 @@ public class FlappyBird {
 
         //Init bird
         new Bird(texture);
+        //new Player(new Rectangle(10,10,10,10), texture);
 
         //Init pipes
         new PipeHandler();

@@ -20,20 +20,10 @@ public class TpSquare extends Entity {
         Random random = new Random();
         int randomX, randomY;
 
-        while (true) {
-            randomX = random.nextInt(DataHand.renderMan.getWidth()-hitBox.width);
-            randomY = random.nextInt(DataHand.renderMan.getHeight()-hitBox.height);
+        do {
+            randomX = random.nextInt(DataHand.renderMan.getWidth() - hitBox.width);
+            randomY = random.nextInt(DataHand.renderMan.getHeight() - hitBox.height);
 
-            if (setPosition(randomX, randomY) == null) break;
-        }
+        } while (setPosition(randomX, randomY) != null);
     }
-
-    public void render(Graphics2D g2) {
-
-        g2.setColor(Color.WHITE);
-
-        g2.drawImage(texture, hitBox.x, hitBox.y, hitBox.width, hitBox.height, null);
-
-    }
-
 }

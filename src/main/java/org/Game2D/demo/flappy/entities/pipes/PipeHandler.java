@@ -12,14 +12,14 @@ import java.util.List;
 
 public class PipeHandler extends Entity {
 
-    public static int distancePipes = 500;
+    public static final int distancePipes = 500;
 
-    int startX = DataHand.renderMan.getWidth() / 4 * 3;
+    final int startX = DataHand.renderMan.getWidth() / 4 * 3;
 
-    public static int pipesNum = DataHand.renderMan.getWidth() / distancePipes + 1;
+    public static final int pipesNum = DataHand.renderMan.getWidth() / distancePipes + 1;
 
 
-    List<PipePair> pairs = new ArrayList<>();
+    final List<PipePair> pairs = new ArrayList<>();
 
 
     //150 because default space between pipes is 300 (half so that its centered)
@@ -37,8 +37,8 @@ public class PipeHandler extends Entity {
     }
 
     public static int getRndY(){
-        int adder = getRnd(-200, 200);
-        int twice = getRnd(-200, 200);
+        int adder = getRnd();
+        int twice = getRnd();
 
         int differenceA = adder > 0 ? adder : -adder;
         int differenceB = twice > 0 ? twice : -twice;
@@ -51,14 +51,14 @@ public class PipeHandler extends Entity {
         random += adder;
         return random;
     }
-    private static int getRnd(int a, int b){
+    private static int getRnd(){
         Random random = new Random();
-        return random.nextInt(b - a + 1) + a;
+        return random.nextInt(200 + 200 + 1) - 200;
     }
 
     @Override
     public void update() {
-        //only used for reseting the game
+        //only used for resetting the game
         random = DataHand.renderMan.getHeight() / 2 + 150;
         if(Bird.gameOver && DataHand.keyHand.keyPressed_SPACE){
             for(int i = pairs.size() - 1; i >= 0; i--){

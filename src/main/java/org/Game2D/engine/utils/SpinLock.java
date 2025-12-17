@@ -4,10 +4,8 @@ import java.util.ArrayList;
 
 public class SpinLock {
 
-    private volatile boolean lockAcquired = false;
-
     private final ArrayList<Long> queue = new ArrayList<>();
-
+    private volatile boolean lockAcquired = false;
     private long current = 0;
 
 

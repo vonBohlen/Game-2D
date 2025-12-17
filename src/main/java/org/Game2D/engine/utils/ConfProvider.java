@@ -6,13 +6,13 @@ import java.util.Properties;
 
 public class ConfProvider {
 
-    public  static Properties getConf(Path confPath) {
+    public static Properties getConf(Path confPath) {
 
         File file = new File(String.valueOf(confPath));
 
         if (!file.exists()) return null;
 
-        InputStream input = null;
+        InputStream input;
 
         try {
             input = new FileInputStream(String.valueOf(confPath));
@@ -48,12 +48,11 @@ public class ConfProvider {
                     throw new RuntimeException(e);
                 }
 
-            }
-            else return;
+            } else return;
 
         }
 
-        OutputStream outputStream = null;
+        OutputStream outputStream;
 
         try {
             outputStream = new FileOutputStream(String.valueOf(confPath));

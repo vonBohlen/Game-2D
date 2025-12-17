@@ -1,5 +1,7 @@
 package org.Game2D.demo.general.controlable;
 
+import org.Game2D.engine.chunks.Chunk;
+import org.Game2D.engine.chunks.ChunkMan;
 import org.Game2D.engine.core.handlers.DataHand;
 import org.Game2D.engine.objects.advanced.Entity;
 
@@ -13,10 +15,11 @@ public class Player extends Entity {
 
     }
 
-    int speed = 1;
+    final int speed = 10;
 
     public void update() {
 
+        boolean moved = false;
         int moveA = 0;
         int moveD = 0;
 
@@ -25,27 +28,22 @@ public class Player extends Entity {
 
         if (DataHand.keyHand.keyPressed_W) {
             moveW = -speed;
+            moved = true;
         }
         if (DataHand.keyHand.keyPressed_S) {
             moveS = speed;
+            moved = true;
         }
         if (DataHand.keyHand.keyPressed_A) {
             moveA = -speed;
+            moved = true;
         }
         if (DataHand.keyHand.keyPressed_D) {
             moveD = speed;
+            moved = true;
         }
 
-        move(moveA + moveD, moveW + moveS);
-    }
-
-
-    public void render(Graphics2D g2) {
-
-        g2.setColor(Color.WHITE);
-
-        g2.drawImage(texture, hitBox.x, hitBox.y, hitBox.width, hitBox.height, null);
-
+        if(moved) move(moveA + moveD, moveW + moveS);
     }
 
 }
