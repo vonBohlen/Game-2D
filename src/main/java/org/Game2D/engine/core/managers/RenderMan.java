@@ -20,8 +20,7 @@ public class RenderMan extends JPanel implements Runnable {
     private boolean exit = false;
     private boolean run = true;
 
-    private final int posX = 0;
-    private final int posY = 0;
+    Camera camera;
 
     /**
      * Instantiate a new <code>RenderManager</code>
@@ -30,7 +29,10 @@ public class RenderMan extends JPanel implements Runnable {
 
         confPanel();
         confPanel(); // Warum wird confPanel() zwei Mal gecalled?
+    }
 
+    public void initializeCamera(){
+        camera = new Camera(0,0,1080);
     }
 
     /**
@@ -140,7 +142,7 @@ public class RenderMan extends JPanel implements Runnable {
         g2.setColor(Color.magenta);
 
         // draw each object that is in render distance
-        ChunkMan.renderByChunk(posX + (getWidth() / 2), posY + (getHeight() / 2), g2, renderHitBoxes, renderActiveChunks);
+        ChunkMan.renderByChunk(Camera.renderUpdate(), g2, renderHitBoxes, renderActiveChunks);
 
         DebugScreen.draw(g2);
 

@@ -31,9 +31,4 @@ public class PipeFiller extends Entity {
         this.hitBox.width = 104;
         this.hitBox.height = belowPipe ? y : DataHand.renderMan.getHeight() - (y + 612);
     }
-
-    @Override
-    public void render(Graphics2D g2) {
-        g2.drawImage(texture, hitBox.x, hitBox.y, hitBox.width, hitBox.height, null);
-    }
 }

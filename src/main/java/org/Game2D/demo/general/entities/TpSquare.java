@@ -26,13 +26,4 @@ public class TpSquare extends Entity {
 
         } while (setPosition(randomX, randomY) != null);
     }
-
-    public void render(Graphics2D g2) {
-
-        g2.setColor(Color.WHITE);
-
-        g2.drawImage(texture, hitBox.x, hitBox.y, hitBox.width, hitBox.height, null);
-
-    }
-
 }

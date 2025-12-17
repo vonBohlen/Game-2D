@@ -136,19 +136,12 @@ public class ChunkMan {
      * Render all Chunks (and in turn the GameObjects contained in them)
      * in range of the updateDistance from the specified Chunk
      *
-     * @param renderPosX
-     * @param renderPosY
+     * @param chunk
      * @param g2
      * @param renderHitboxes
      * @param renderActiveChunks
      */
-    public static void renderByChunk(int renderPosX, int renderPosY, Graphics2D g2, boolean renderHitboxes, boolean renderActiveChunks) {
-        Chunk chunk = chunksByCo.getChunkByCoordinate(renderPosX, renderPosY);
-        // first iteration
-        if (chunk == null) {
-            addChunk(new Chunk(renderPosX / chunkSize, renderPosY / chunkSize));
-        }
-
+    public static void renderByChunk(Chunk chunk, Graphics2D g2, boolean renderHitboxes, boolean renderActiveChunks) {
         List<Chunk> chunksToRender;
         if (storedChunk == chunk && storedRenderDistance == renderDistance) {
             chunksToRender = storedRenderChunks;

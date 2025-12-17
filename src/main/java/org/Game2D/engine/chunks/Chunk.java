@@ -1,5 +1,6 @@
 package org.Game2D.engine.chunks;
 
+import org.Game2D.engine.core.managers.Camera;
 import org.Game2D.engine.objects.GameObject;
 
 import java.awt.*;
@@ -84,13 +85,13 @@ public class Chunk {
         for(GameObject go : objectsByLayers){
             if (go.getTexture() != null || !go.render_enabled) go.render(g2);
             if (go.hitBox != null && renderHitBoxes)
-                g2.draw3DRect(go.hitBox.x, go.hitBox.y, go.hitBox.width, go.hitBox.height, false);
+                go.drawHitBox(g2);
         }
 
         //render the chunks outline if it contains an object
         if (renderChunk && !objectsByLayers.isEmpty()) {
             g2.setColor(new Color(0, 150, 200));
-            g2.draw3DRect(posX * ChunkMan.chunkSize, posY * ChunkMan.chunkSize, ChunkMan.chunkSize, ChunkMan.chunkSize, false);
+            g2.draw3DRect((posX * ChunkMan.chunkSize * Camera.pixelsPerUnit) - Camera.getScreenSpacePosX(), (posY * ChunkMan.chunkSize * Camera.pixelsPerUnit) - Camera.getScreenSpacePosY(), ChunkMan.chunkSize * Camera.pixelsPerUnit, ChunkMan.chunkSize * Camera.pixelsPerUnit, false);
         }
     }
 

@@ -50,6 +50,8 @@ public class Instance {
 
         DataHand.actionMan = new ActionMan();
 
+        DataHand.renderMan.initializeCamera();
+
     }
 
     /**

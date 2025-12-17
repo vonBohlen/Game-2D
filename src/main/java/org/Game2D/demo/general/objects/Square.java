@@ -10,12 +10,4 @@ public class Square extends StaticObject {
         super(hb, true, 0, txt);
     }
 
-    public void render(Graphics2D g2) {
-
-        g2.setColor(Color.WHITE);
-
-        g2.drawImage(texture, hitBox.x, hitBox.y, hitBox.width, hitBox.height, null);
-
-    }
-
 }
