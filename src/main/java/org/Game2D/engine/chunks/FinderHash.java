@@ -109,7 +109,7 @@ public class FinderHash {
                 Chunk addition = chunkPos.get(index);
                 if(addition == null){
                     addition = new Chunk(chunkX, chunkY);
-                    addChunk(addition);
+                    ChunkMan.addChunk(addition);
                 }
                 chunks.add(addition);
             }

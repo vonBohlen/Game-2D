@@ -123,7 +123,7 @@ public abstract class Entity extends GameObject {
             if (objectCache[0] != null && objectCache[1] != null) break;
         }
 
-        ObjectTransferMan.transferAbsAfterMove(this, oldX, oldY);
+        ObjectTransferMan.checkTransferAfterMoveAbs(this, oldX, oldY);
 
         return (objectCache[0] == null && objectCache[1] == null) ? null : objectCache;
     }

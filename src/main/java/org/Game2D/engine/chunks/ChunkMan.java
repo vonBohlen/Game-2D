@@ -8,27 +8,27 @@ import java.util.concurrent.ConcurrentHashMap;
 public class ChunkMan {
 
     //Summary of Lists and Objects:
-    // 1. Each created chunk gets added to the ConcurrentHashMap chunks where it gets associated with its UUID
+    // 1. Each created chunk gets added to the ConcurrentHashMap chunks where it gets associated with its UUID to enable quick finding of the chunk associated with an object
     // 2. Each created chunk gets added to the FinderHash which allows for fast access based on the chunks coordinates
     // 3. Each GameObject that is created looks for the chunk that it would be in based on its position and creates a chunk if not existent
-    // 4. The new GameObject gets registered in its Chunk in objects where it is associated with its UUID TODO: Irgendwie unnötig. Im chunk würde eine liste reichen
-    // 5. The GameObject also gets registered in ChunkMan in objectStorage where its UUID gets associated with its chunks UUID TODO: Das ist auch irgendwie unnötig da könnte man einfach das objekt selbst nehmen
+    // 4. The new GameObject gets registered in its Chunk in objects where it is associated with its UUID to enable quick removal of the object from the chunk
+    // 5. The GameObject also gets registered in ChunkMan in objectStorage where its UUID gets associated with its chunks UUID to be able to get the chunk just by looking at the object
 
-    private static ConcurrentHashMap<UUID, Chunk> chunks = new ConcurrentHashMap<>(); // all chunks with their UUID
+    public static ConcurrentHashMap<UUID, Chunk> chunks = new ConcurrentHashMap<>(); // all chunks with their UUID
     private static final FinderHash chunksByCo = new FinderHash(); // enables to find a chunk via its coordinates
 
-    private static final HashMap<UUID, UUID> objectStorage = new HashMap<>(); // assigns each object a chunk
+    private static final HashMap<UUID, UUID> objectStorage = new HashMap<>(); // assigns each object a chunks UUID
 
-    public static final int chunkSize = 512; // each chunk is a square with a sidelength of chunk size
+    public static final int chunkSize = 5; // each chunk is a square with a sidelength of chunk size
 
-    public static final int updateDistance = 12;
-    public static final int renderDistance = 12;
+    public static final int updateDistance = 500;
+    public static final int renderDistance = 500;
 
     private static int storedUpdateDistance = updateDistance;
     private static int storedRenderDistance = renderDistance;
 
     private static Chunk storedChunk = null; // the pivot element that dictates which chunks get updated and rendered
-    public static List<Chunk> storedUpdateChunks = new ArrayList<>(); // chunks that got updated in the last cycle
+    private static List<Chunk> storedUpdateChunks = new ArrayList<>(); // chunks that got updated in the last cycle
     private static List<Chunk> storedRenderChunks = new ArrayList<>(); // chunks that got rendered in the last cycle
 
     /**
@@ -55,7 +55,8 @@ public class ChunkMan {
      * @return Chunk of the given GameObject
      */
     public static Chunk getChunkFromObject(GameObject object) {
-        return chunks.get(objectStorage.get(object.uuid));
+        UUID ch = objectStorage.get(object.uuid);
+        return chunks.get(ch);
     }
 
     /**
@@ -105,6 +106,7 @@ public class ChunkMan {
      * @param chunk Origin Chunk
      */
     public static void updateByChunk(Chunk chunk) {
+        // selecting chunks to update
         List<Chunk> chunksToUpdate;
         if (storedChunk == chunk && storedUpdateDistance == updateDistance) {
             chunksToUpdate = storedUpdateChunks;
@@ -114,7 +116,15 @@ public class ChunkMan {
             storedChunk = chunk;
             storedUpdateDistance = updateDistance;
         }
+
+        // setting up the TransferManager to be able to shift elements between chunks
+        ObjectTransferMan.prepareObjectTransfer();
+
+        // update objects in chunks
         for (Chunk currentChunk : chunksToUpdate) currentChunk.update();
+
+        //conclude the update by transferring objects to their new chunks
+        ObjectTransferMan.transferQueue();
     }
 
     public static void setRenderDataByChunk(Chunk chunk) {
