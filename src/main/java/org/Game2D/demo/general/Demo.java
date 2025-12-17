@@ -43,10 +43,6 @@ public class Demo {
 
         //new Physicsobject(true, texture, 60);
 
-        for(GameObject go : DataHand.getGameObjs()){
-            System.out.println(go.getClass().getName());
-        }
-
     }
 
 }

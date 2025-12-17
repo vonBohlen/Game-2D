@@ -2,22 +2,37 @@ package org.Game2D.engine.chunks;
 
 import org.Game2D.engine.objects.GameObject;
 
+import java.awt.*;
 import java.util.*;
+import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class ChunkMan {
 
-    private static final HashMap<UUID, UUID> objectStorage = new HashMap<>(); // assigns each object a chunk
-    public static final int chunkSize = 512; // each chunk is a square with a sidelength of chunk size
+    //Summary of Lists and Objects:
+    // 1. Each created chunk gets added to the ConcurrentHashMap chunks where it gets associated with its UUID to enable quick finding of the chunk associated with an object
+    // 2. Each created chunk gets added to the FinderHash which allows for fast access based on the chunks coordinates
+    // 3. Each GameObject that is created looks for the chunk that it would be in based on its position and creates a chunk if not existent
+    // 4. The new GameObject gets registered in its Chunk in objects where it is associated with its UUID to enable quick removal of the object from the chunk
+    // 5. The GameObject also gets registered in ChunkMan in objectStorage where its UUID gets associated with its chunks UUID to be able to get the chunk just by looking at the object
+
+    public static ConcurrentHashMap<UUID, Chunk> chunks = new ConcurrentHashMap<>(); // all chunks with their UUID
     private static final FinderHash chunksByCo = new FinderHash(); // enables to find a chunk via its coordinates
-    public static final int updateDistance = 12;
+
+    private static final HashMap<UUID, UUID> objectStorage = new HashMap<>(); // assigns each object a chunks UUID
+
+    public static final int chunkSize = 512; // each chunk is a square with a sidelength of chunk size
+
+    public static final int updateDistance = 24;
     public static final int renderDistance = 12;
+
     private static int storedUpdateDistance = updateDistance;
     private static int storedRenderDistance = renderDistance;
-    private static Chunk storedChunk = null;
-    public static List<Chunk> storedUpdateChunks = new ArrayList<>();
-    private static List<Chunk> storedRenderChunks = new ArrayList<>();
-    private static ConcurrentHashMap<UUID, Chunk> chunks = new ConcurrentHashMap<>();
+
+    private static Chunk storedChunk = null; // the pivot element that dictates which chunks get updated and rendered
+    private static Chunk lastStoredChunk = null; // the last iterations pivot element that is used to look up whether the chunks to update need to be calculated again
+    private static List<Chunk> storedUpdateChunks = new ArrayList<>(); // chunks that got updated in the last cycle
+    private static List<Chunk> storedRenderChunks = new ArrayList<>(); // chunks that got rendered in the last cycle
 
     /**
      * Check if a Chunk with given global coordinates exists,
@@ -43,7 +58,8 @@ public class ChunkMan {
      * @return Chunk of the given GameObject
      */
     public static Chunk getChunkFromObject(GameObject object) {
-        return chunks.get(objectStorage.get(object.uuid));
+        UUID ch = objectStorage.get(object.uuid);
+        return chunks.get(ch);
     }
 
     /**
@@ -92,20 +108,38 @@ public class ChunkMan {
      *
      * @param chunk Origin Chunk
      */
-    public static void updateByChunk(Chunk chunk) {
+    public static void updateByChunk() {
+        // renderMan hasn't initialized yet
+        if(storedChunk == null){ return; }
+
+        // selecting chunks to update
         List<Chunk> chunksToUpdate;
-        if (storedChunk == chunk && storedUpdateDistance == updateDistance) {
+        if (storedChunk == lastStoredChunk && storedUpdateDistance == updateDistance) {
             chunksToUpdate = storedUpdateChunks;
         } else {
-            chunksToUpdate = chunksByCo.getChunksInReach(chunk, updateDistance);
+            chunksToUpdate = chunksByCo.getChunksInReach(storedChunk, updateDistance);
             storedUpdateChunks = chunksToUpdate;
-            storedChunk = chunk;
             storedUpdateDistance = updateDistance;
         }
+        lastStoredChunk = storedChunk;
+
+        // setting up the TransferManager to be able to shift elements between chunks
+        ObjectTransferMan.prepareObjectTransfer();
+
+        // update objects in chunks
         for (Chunk currentChunk : chunksToUpdate) currentChunk.update();
+
+        //conclude the update by transferring objects to their new chunks
+        ObjectTransferMan.transferQueue();
     }
 
-    public static void setRenderDataByChunk(Chunk chunk) {
+    public static void renderByChunk(int renderPosX, int renderPosY, Graphics2D g2, boolean renderHitboxes, boolean renderActiveChunks) {
+        Chunk chunk = chunksByCo.getChunkByCoordinate(renderPosX, renderPosY);
+        // first iteration
+        if(chunk == null){
+            addChunk(new Chunk(renderPosX / chunkSize, renderPosY / chunkSize));
+        }
+
         List<Chunk> chunksToRender;
         if (storedChunk == chunk && storedRenderDistance == renderDistance) {
             chunksToRender = storedRenderChunks;
@@ -115,7 +149,8 @@ public class ChunkMan {
             storedChunk = chunk;
             storedRenderDistance = renderDistance;
         }
-        for (Chunk currentChunk : chunksToRender) currentChunk.setRenderData();
+        // go through each chunk and render objects in them
+        for (Chunk currentChunk : chunksToRender) currentChunk.render(g2, renderHitboxes, renderActiveChunks );
     }
 
     /**

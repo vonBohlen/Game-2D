@@ -19,7 +19,7 @@ public class PipePair extends Entity {
 
     //Standard coordinates
     public PipePair(int x){
-        super(null, false, -1, null);
+        super(new Rectangle(0,0), false, -1, null);
         startX = x;
         int y = PipeHandler.getRndY();
         top = new PipeTop(x, y);
@@ -52,6 +52,7 @@ public class PipePair extends Entity {
     }
 
     private void teleport(){
+        System.out.println("TELE");
         int newX = top.hitBox.x + PipeHandler.pipesNum * PipeHandler.distancePipes;
         int y = PipeHandler.getRndY();
         top.setPosition(newX, y, true);
