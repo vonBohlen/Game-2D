@@ -31,17 +31,17 @@ public class Demo {
             throw new RuntimeException(e);
         }
 
-        new Player(new Rectangle(200, 200, 48, 48), texture);
+        //new Player(new Rectangle(200, 200, 48, 48), texture);
 
         //new Square(new Rectangle(100, 52, 48, 48), texture);
 
-        //new BallwP(new Rectangle(600, 0, 48, 48), texture);
+        new BallwP(new Rectangle(600, 0, 48, 48), texture);
 
         //new TpSquare(new Rectangle(800, 800, 48, 48), texture);
 
         //new Ball(new Rectangle(0, 0, 48, 48), texture);
 
-        //new Physicsobject(true, texture, 60);
+        new Physicsobject(true, texture, 60);
 
     }
 

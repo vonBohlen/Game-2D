@@ -19,6 +19,7 @@ public class Player extends Entity {
 
     public void update() {
 
+        boolean moved = false;
         int moveA = 0;
         int moveD = 0;
 
@@ -27,18 +28,22 @@ public class Player extends Entity {
 
         if (DataHand.keyHand.keyPressed_W) {
             moveW = -speed;
+            moved = true;
         }
         if (DataHand.keyHand.keyPressed_S) {
             moveS = speed;
+            moved = true;
         }
         if (DataHand.keyHand.keyPressed_A) {
             moveA = -speed;
+            moved = true;
         }
         if (DataHand.keyHand.keyPressed_D) {
             moveD = speed;
+            moved = true;
         }
 
-        if(moveA + moveD + moveS + moveW != 0) move(moveA + moveD, moveW + moveS);
+        if(moved) move(moveA + moveD, moveW + moveS);
     }
 
 

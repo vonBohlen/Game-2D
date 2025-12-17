@@ -16,6 +16,9 @@ public class ChunkMan {
     // 4. The new GameObject gets registered in its Chunk in objects where it is associated with its UUID to enable quick removal of the object from the chunk
     // 5. The GameObject also gets registered in ChunkMan in objectStorage where its UUID gets associated with its chunks UUID to be able to get the chunk just by looking at the object
 
+    //TODO: Kann man nicht einfach objectStorage als HashMap<GameObject,Chunk> machen?
+    //TODO: objectStorage nach FinderHash verschieben um Chunk-finde-sachen alle in einer Klasse zu haben
+
     public static final int chunkSize = 512; // each chunk is a square with a sidelength of chunk size
     public static final int updateDistance = 24;
     public static final int renderDistance = 12;
@@ -54,8 +57,7 @@ public class ChunkMan {
      * @return Chunk of the given GameObject
      */
     public static Chunk getChunkFromObject(GameObject object) {
-        UUID ch = objectStorage.get(object.uuid);
-        return chunks.get(ch);
+        return chunks.get(objectStorage.get(object.uuid));
     }
 
     /**

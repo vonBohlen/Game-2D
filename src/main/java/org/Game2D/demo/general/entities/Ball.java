@@ -16,10 +16,10 @@ public class Ball extends Entity {
     public void update(){
 
         if (hitBox.y >= DataHand.renderMan.getHeight()) setPosition(0, 0, false);
-        if (ActionMan.getGameTick() != 30 && ActionMan.getGameTick() != 60) return;
+        //if (ActionMan.getGameTick() != 30 && ActionMan.getGameTick() != 60) return;
 
-        int x = hitBox.x + 50;
-        int y = x / 10;
+        int x = hitBox.x + 1;
+        int y = x / 2;
 
         move(50, y);
 

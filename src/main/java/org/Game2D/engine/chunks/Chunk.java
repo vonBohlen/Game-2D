@@ -14,10 +14,13 @@ import java.util.concurrent.ConcurrentHashMap;
 public class Chunk {
     public final UUID uuid;
 
+    //TODO: Ich habe hier jetzt die ConcurrentHashMap auskommentiert weil irgendwie wurde die Funktionalität anhand einer UUID ein Objekt zu finden garnicht verwendet...
+    // Zusätzlich hat das immer fehler erzeugt aus irgendeinem Grund
+
     /**
      * HashMap of GameObjects in this Chunk identified by their UUID
      */
-    public final ConcurrentHashMap<UUID, GameObject> objects = new ConcurrentHashMap<>();
+    //public final ConcurrentHashMap<UUID, GameObject> objects = new ConcurrentHashMap<>();
     public final java.util.List<GameObject> objectsByLayers = new ArrayList<>();
     public final int posX;
     public final int posY;
@@ -41,7 +44,7 @@ public class Chunk {
      * @param object GameObject to be added
      */
     public void addGameObject(GameObject object) {
-        objects.put(object.uuid, object);
+        //objects.put(object.uuid, object);
         //TODO: Put GameObject at right place in List
         objectsByLayers.add(object);
         ChunkMan.registerObject(object, this);
@@ -53,7 +56,7 @@ public class Chunk {
      * @param object Object to be removed
      */
     public void removeGameObject(GameObject object) {
-        objects.remove(object.uuid);
+        //objects.remove(object.uuid);
         objectsByLayers.remove(object);
         ChunkMan.unregisterObject(object);
     }
@@ -62,7 +65,7 @@ public class Chunk {
      * Update all GameObjects in the Chunk
      */
     public void update() {
-        for (GameObject object : objects.values()) {
+        for (GameObject object : objectsByLayers) {
             object.update();
         }
     }
@@ -85,7 +88,7 @@ public class Chunk {
         }
 
         //render the chunks outline if it contains an object
-        if (renderChunk && !objects.isEmpty()) {
+        if (renderChunk && !objectsByLayers.isEmpty()) {
             g2.setColor(new Color(0, 150, 200));
             g2.draw3DRect(posX * ChunkMan.chunkSize, posY * ChunkMan.chunkSize, ChunkMan.chunkSize, ChunkMan.chunkSize, false);
         }
