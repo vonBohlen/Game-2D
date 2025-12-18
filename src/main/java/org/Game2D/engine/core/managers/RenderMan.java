@@ -27,10 +27,7 @@ public class RenderMan extends JPanel implements Runnable {
      */
     public RenderMan() {
 
-        //confPanel();
         confPanel();
-        // Warum wird confPanel() zwei Mal gecalled?
-        // Gute Frage, keine Ahnung
     }
 
     public void initializeCamera(){
