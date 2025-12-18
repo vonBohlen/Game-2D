@@ -1,7 +1,7 @@
 package org.Game2D.engine.chunks;
 
 import org.Game2D.engine.objects.GameObject;
-import org.jetbrains.annotations.NotNull;
+import lombok.NonNull;
 
 import java.awt.*;
 import java.util.*;
@@ -42,7 +42,7 @@ public class ChunkMan {
      * @param posY Global y-Coordinate
      * @return Chunk at the given coordinates
      */
-    public static @NotNull Chunk ChunkFromCoordinates(int posX, int posY) {
+    public static @NonNull Chunk ChunkFromCoordinates(int posX, int posY) {
         Chunk target = chunksByCo.getChunkByCoordinate(posX, posY);
         if (target == null) {
             target = new Chunk(posX / chunkSize, posY / chunkSize);
@@ -57,7 +57,7 @@ public class ChunkMan {
      * @param object GameObject to be searched for
      * @return Chunk of the given GameObject
      */
-    public static Chunk getChunkFromObject(@NotNull GameObject object) {
+    public static Chunk getChunkFromObject(@NonNull GameObject object) {
         return chunks.get(objectStorage.get(object.uuid));
     }
 
@@ -67,7 +67,7 @@ public class ChunkMan {
      * @param object GameObject to be registered
      * @param chunk  Chunk in which the GameObject is to be stored
      */
-    public static void registerObject(@NotNull GameObject object, @NotNull Chunk chunk) {
+    public static void registerObject(@NonNull GameObject object, @NonNull Chunk chunk) {
         objectStorage.put(object.uuid, chunk.uuid);
     }
 
@@ -76,7 +76,7 @@ public class ChunkMan {
      *
      * @param object GameObject to be unregistered
      */
-    public static void unregisterObject(@NotNull GameObject object) {
+    public static void unregisterObject(@NonNull GameObject object) {
         objectStorage.remove(object.uuid);
     }
 
@@ -95,7 +95,7 @@ public class ChunkMan {
      *
      * @param new_chunks Collection of Chunks to be added
      */
-    public static void addChunks(@NotNull Collection<Chunk> new_chunks) {
+    public static void addChunks(@NonNull Collection<Chunk> new_chunks) {
         for (Chunk i : new_chunks) {
             chunks.put(i.uuid, i);
             chunksByCo.addChunk(i);

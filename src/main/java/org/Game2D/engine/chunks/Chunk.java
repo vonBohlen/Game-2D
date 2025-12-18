@@ -2,7 +2,7 @@ package org.Game2D.engine.chunks;
 
 import org.Game2D.engine.core.managers.Camera;
 import org.Game2D.engine.objects.GameObject;
-import org.jetbrains.annotations.NotNull;
+import lombok.NonNull;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -87,7 +87,7 @@ public class Chunk {
      * @param renderHitBoxes Render the hitboxes of the GameObjects?
      * @param renderChunk    Render the bounding box of the Chunk?
      */
-    public void render(@NotNull Graphics2D g2, boolean renderHitBoxes, boolean renderChunk) {
+    public void render(@NonNull Graphics2D g2, boolean renderHitBoxes, boolean renderChunk) {
 
         synchronized (objectsByLayers) {
             // render objects in chunk and their hitboxes
