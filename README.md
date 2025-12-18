@@ -25,5 +25,5 @@ We would be happy about contributions to this project.
 
 ## Download
 
-To currently use Game2D, you either have to compile the project by yourself, or you have to clone this repository and base your work on it.
+To currently use Game2D, you either have to compile the project by yourself, or you have to clone this repository and base your work on to it.
 <p>In the future, Game2D will be available as a maven package.</p>
