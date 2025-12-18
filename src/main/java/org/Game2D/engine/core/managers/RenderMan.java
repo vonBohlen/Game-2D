@@ -27,12 +27,14 @@ public class RenderMan extends JPanel implements Runnable {
      */
     public RenderMan() {
 
+        //confPanel();
         confPanel();
-        confPanel(); // Warum wird confPanel() zwei Mal gecalled?
+        // Warum wird confPanel() zwei Mal gecalled?
+        // Gute Frage, keine Ahnung
     }
 
     public void initializeCamera(){
-        camera = new Camera(0,0,1080);
+        camera = new Camera(0,0,1440);
     }
 
     /**
@@ -164,7 +166,7 @@ public class RenderMan extends JPanel implements Runnable {
     }
 
     /**
-     * Pause the renderin thread and exit cleanly
+     * Pause the rendering thread and exits cleanly
      */
     public void exit() {
         freeze();
