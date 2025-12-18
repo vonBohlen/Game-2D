@@ -1,7 +1,6 @@
 [license]: https://github.com/vonBohlen/Game-2D/blob/main/LICENSE
 [license-shield]: https://img.shields.io/github/license/vonBohlen/Game-2D?color=%239164c4
 
-
 [ ![license-shield][] ][license]
 
 # Game2D
@@ -24,6 +23,5 @@ We would be happy about contributions to this project.
 - **Sound engine**
 
 ## Download
-
 To currently use Game2D, you either have to compile the project by yourself, or you have to clone this repository and base your work on to it.
 <p>In the future, Game2D will be available as a maven package.</p>
