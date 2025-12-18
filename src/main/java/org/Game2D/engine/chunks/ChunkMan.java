@@ -8,6 +8,9 @@ import java.util.*;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
+//TODO: Only load the smallest possible amount of chunks from disk into memory to safe recourses
+//TODO: Maybe provide tools to game developers, to further optimise this by letting them control this feature to tie loading from disk to player progress in game
+
 public class ChunkMan {
 
     //Summary of Lists and Objects:
@@ -19,6 +22,7 @@ public class ChunkMan {
 
     //TODO: Kann man nicht einfach objectStorage als HashMap<GameObject,Chunk> machen?
     //TODO: objectStorage nach FinderHash verschieben um Chunk-finde-sachen alle in einer Klasse zu haben
+    //TODO: Ja, Justus sagt das das möglich wäre
 
     public static final int chunkSize = 512; // each chunk is a square with a sidelength of chunk size
     public static final int updateDistance = 24;
