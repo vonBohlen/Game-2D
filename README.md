@@ -1,5 +1,7 @@
+[license]: https://github.com/vonBohlen/Game-2D/blob/master/LICENSE
+[license-shield]: https://img.shields.io/github/license/vonBohlen/Game-2D?color=%239164c4
 
-
+[ ![license-shield][] ][license]
 # Game2D
 
 Game2D is an open source 2D game engine for Java. 
