@@ -1,5 +1,7 @@
 package org.Game2D.engine.chunks;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
@@ -127,7 +129,7 @@ public class FinderHash {
      * @return Chunk in that direction
      * @see Directions
      */
-    public Chunk getAdjacentChunk(Chunk chunk, Directions direction) {
+    public Chunk getAdjacentChunk(Chunk chunk, @NotNull Directions direction) {
         switch (direction) {
             case TOP -> {
                 return getChunkByCoordinate(chunk.posX, chunk.posY - 1);
@@ -163,7 +165,7 @@ public class FinderHash {
      * @param chunk Origin Chunk
      * @return Chunks around given Chunk
      */
-    public Chunk[] getAdjacentChunks(Chunk chunk) {
+    public Chunk[] getAdjacentChunks(@NotNull Chunk chunk) {
         Chunk[] adjacentChunks = new Chunk[8];
 
         adjacentChunks[0] = getChunkByCoordinate(chunk.posX, chunk.posY - 1);

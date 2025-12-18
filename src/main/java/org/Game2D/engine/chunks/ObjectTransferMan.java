@@ -1,6 +1,8 @@
 package org.Game2D.engine.chunks;
 
 import org.Game2D.engine.objects.GameObject;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +40,7 @@ public class ObjectTransferMan {
      *
      * @param object GameObject to be moved
      */
-    private static void transferObject(GameObject object) {
+    private static void transferObject(@NotNull GameObject object) {
         Chunk new_chunk = ChunkMan.ChunkFromCoordinates(object.hitBox.x, object.hitBox.y);
         Chunk old_chunk = ChunkMan.getChunkFromObject(object);
 
@@ -52,7 +54,7 @@ public class ObjectTransferMan {
      * @param old_chunk Old Chunk
      * @param new_chunk New Chunk
      */
-    private static void moveObjectsInChunks(GameObject object, Chunk old_chunk, Chunk new_chunk) {
+    private static void moveObjectsInChunks(GameObject object, @NotNull Chunk old_chunk, @NotNull Chunk new_chunk) {
         //first remove then add because if you add first the relation between chunk and object gets set to a new value but after that the object gets removed
         old_chunk.removeGameObject(object);
         new_chunk.addGameObject(object);
@@ -68,7 +70,8 @@ public class ObjectTransferMan {
      * @param newY   New y-Coordinate
      * @return chunkTransferIsNecessary
      */
-    private static boolean chunkTransferIsNecessary(GameObject object, int newX, int newY) {
+    @Contract(pure = true)
+    private static boolean chunkTransferIsNecessary(@NotNull GameObject object, int newX, int newY) {
         int size = ChunkMan.chunkSize;
         return !(object.hitBox.x / size == newX / size && object.hitBox.y / size == newY / size);
     }
