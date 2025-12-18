@@ -1,6 +1,7 @@
 package org.Game2D.engine.objects;
 
 import org.Game2D.engine.core.handlers.DataHand;
+import org.Game2D.engine.core.managers.Camera;
 
 import java.awt.*;
 import java.util.UUID;
@@ -53,6 +54,33 @@ public abstract class GameObject {
 
     public abstract void update();
 
-    public abstract void render(Graphics2D g2);
+    public void render(Graphics2D g2){
+        g2.drawImage(texture, getScreenCoordinateX(), getScreenCoordinateY(), getScreenSpaceWidth(), getScreenSpaceHeight(), null);
+    }
+    public void drawHitBox(Graphics g2){
+        g2.draw3DRect(getScreenCoordinateX(), getScreenCoordinateY(), getScreenSpaceWidth(), getScreenSpaceHeight(), false);
+    }
+
+    protected int getScreenCoordinateX(){
+        return (int)(hitBox.x * Camera.pixelsPerUnit) - (Camera.getScreenSpacePosX());
+    }
+    protected int getScreenCoordinateY(){
+        return (int)(hitBox.y * Camera.pixelsPerUnit) - (Camera.getScreenSpacePosY());
+    }
+    protected int getScreenCoordinateX( int offset){
+        return (int)((hitBox.x + offset) * Camera.pixelsPerUnit) - (Camera.getScreenSpacePosX());
+    }
+    protected int getScreenCoordinateY(int offset){
+        return (int)((hitBox.y + offset) * Camera.pixelsPerUnit) - (Camera.getScreenSpacePosY());
+    }
+    protected int getScreenSpaceWidth(){
+        return (int)(hitBox.width * Camera.pixelsPerUnit);
+    }
+    protected int getScreenSpaceHeight(){
+        return (int)(hitBox.height * Camera.pixelsPerUnit);
+    }
+    protected int getCustomScreenSpace(int value){
+        return (int)(value * Camera.pixelsPerUnit);
+    }
 
 }

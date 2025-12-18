@@ -1,7 +1,12 @@
 package org.Game2D.engine.chunks;
 
+import org.Game2D.engine.core.managers.Camera;
 import org.Game2D.engine.objects.GameObject;
 
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -12,10 +17,14 @@ import java.util.concurrent.ConcurrentHashMap;
 public class Chunk {
     public final UUID uuid;
 
+    //TODO: Ich habe hier jetzt die ConcurrentHashMap auskommentiert weil irgendwie wurde die Funktionalität anhand einer UUID ein Objekt zu finden garnicht verwendet...
+    // Zusätzlich hat das immer fehler erzeugt aus irgendeinem Grund
+
     /**
      * HashMap of GameObjects in this Chunk identified by their UUID
      */
-    public final ConcurrentHashMap<UUID, GameObject> objects = new ConcurrentHashMap<>();
+    //public final ConcurrentHashMap<UUID, GameObject> objects = new ConcurrentHashMap<>();
+    public java.util.List<GameObject> objectsByLayers = Collections.synchronizedList(new ArrayList<>());
     public final int posX;
     public final int posY;
 
@@ -38,7 +47,11 @@ public class Chunk {
      * @param object GameObject to be added
      */
     public void addGameObject(GameObject object) {
-        objects.put(object.uuid, object);
+        //objects.put(object.uuid, object);
+        //TODO: Put GameObject at right place in List
+        synchronized (objectsByLayers) {
+            objectsByLayers.add(object);
+        }
         ChunkMan.registerObject(object, this);
     }
 
@@ -48,7 +61,10 @@ public class Chunk {
      * @param object Object to be removed
      */
     public void removeGameObject(GameObject object) {
-        objects.remove(object.uuid);
+        //objects.remove(object.uuid);
+        synchronized (objectsByLayers) {
+            objectsByLayers.remove(object);
+        }
         ChunkMan.unregisterObject(object);
     }
 
@@ -56,16 +72,38 @@ public class Chunk {
      * Update all GameObjects in the Chunk
      */
     public void update() {
-        for (GameObject object : objects.values()) {
-            object.update();
+        synchronized (objectsByLayers) {
+            for (GameObject object : objectsByLayers) {
+                object.update();
+            }
         }
     }
 
     /**
-     * Not implemented yet
+     * Render the hitboxes of the GameObjects and the Chunks
+     *
+     * @param g2             Graphics instance passed by the RenderManager
+     * @param renderHitBoxes Render the hitboxes of the GameObjects?
+     * @param renderChunk    Render the bounding box of the Chunk?
      */
-    public void setRenderData() {
-        //TODO
+    public void render(Graphics2D g2, boolean renderHitBoxes, boolean renderChunk) {
+
+        synchronized (objectsByLayers) {
+            // render objects in chunk and their hitboxes
+            g2.setColor(new Color(0, 200, 50));
+            for (GameObject go : objectsByLayers) {
+                if (go.getTexture() != null || !go.render_enabled) go.render(g2);
+                if (go.hitBox != null && renderHitBoxes) go.drawHitBox(g2);
+            }
+        }
+
+        synchronized (objectsByLayers) {
+            //render the chunks outline if it contains an object
+            if (renderChunk && !objectsByLayers.isEmpty()) {
+                g2.setColor(new Color(0, 150, 200));
+                g2.draw3DRect((int) (posX * ChunkMan.chunkSize * Camera.pixelsPerUnit) - Camera.getScreenSpacePosX(), (int) (posY * ChunkMan.chunkSize * Camera.pixelsPerUnit) - Camera.getScreenSpacePosY(), (int) (ChunkMan.chunkSize * Camera.pixelsPerUnit), (int) (ChunkMan.chunkSize * Camera.pixelsPerUnit), false);
+            }
+        }
     }
 
 

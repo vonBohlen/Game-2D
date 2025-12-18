@@ -12,7 +12,7 @@ import java.awt.*;
 import java.util.List;
 
 /**
- * Action Manager
+ * Action Manager<br>
  * Handles GameObject updating with the Gameloop
  * and general timing
  */
@@ -130,8 +130,7 @@ public class ActionMan implements Runnable {
      * Actual method calling the Chunks to update all the GameObjects contained within
      */
     private void update() {
-        Chunk target = ChunkMan.ChunkFromCoordinates(0, 0);
-        ChunkMan.updateByChunk(target);
+        ChunkMan.updateByChunk();
     }
 
     /**

@@ -1,5 +1,7 @@
 package org.Game2D.engine.core;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.Game2D.engine.chunks.Chunk;
 import org.Game2D.engine.chunks.ChunkMan;
 import org.Game2D.engine.core.handlers.ConfHand;
@@ -15,7 +17,20 @@ import java.nio.file.Path;
 public class Instance {
 
     //Window
-    JFrame window;
+    private JFrame window;
+
+    //Engine values
+    @Getter
+    @Setter
+    private int updateDistance = 16; // the amount of chunks to be updated in each direction from the start chunk
+
+    @Getter
+    @Setter
+    private int renderDistance = 16; // the amount of chunks to be rendered in each direction from the start chunk
+
+    @Getter
+    @Setter
+    private int chunkSize = 512; // each chunk is a square with a sidelength of chunk size
 
     //Game Logic Elements
 
@@ -24,7 +39,7 @@ public class Instance {
      * Hardware acceleration on Wayland with NVIDIA Graphics is
      * not working properly at this time
      * To use hardware acceleration, uncomment the given section in
-     * the class body
+     * the class constructor
      *
      * @param confPath Path to the config file
      *                 Defaults to ./config.properties
@@ -50,6 +65,7 @@ public class Instance {
 
         DataHand.actionMan = new ActionMan();
 
+        DataHand.renderMan.initializeCamera();
     }
 
     /**

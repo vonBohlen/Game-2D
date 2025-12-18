@@ -80,8 +80,8 @@ public class FinderHash {
      * Retrieve the Chunk in which the specified coordinates lie by looking up the
      * unique index of the pair of coordinates in the HashMap
      *
-     * @param posX x-Coordinate
-     * @param posY y-Coordinate
+     * @param posX x-Coordinate in World-Coordinates
+     * @param posY y-Coordinate in World-Coordinates
      * @return Chunk of the coordinates
      */
     public Chunk getChunkByCoordinate(int posX, int posY) {
@@ -107,9 +107,9 @@ public class FinderHash {
                 int chunkY = target.posY - radius + y;
                 int index = getIndex(chunkX, chunkY);
                 Chunk addition = chunkPos.get(index);
-                if(addition == null){
+                if (addition == null) {
                     addition = new Chunk(chunkX, chunkY);
-                    addChunk(addition);
+                    ChunkMan.addChunk(addition);
                 }
                 chunks.add(addition);
             }
@@ -155,5 +155,26 @@ public class FinderHash {
             }
         }
         return null;
+    }
+
+    /**
+     * Returns every Chunk that is directly adjacent to the given chunk
+     *
+     * @param chunk Origin Chunk
+     * @return Chunks around given Chunk
+     */
+    public Chunk[] getAdjacentChunks(Chunk chunk) {
+        Chunk[] adjacentChunks = new Chunk[8];
+
+        adjacentChunks[0] = getChunkByCoordinate(chunk.posX, chunk.posY - 1);
+        adjacentChunks[1] = getChunkByCoordinate(chunk.posX + 1, chunk.posY - 1);
+        adjacentChunks[2] = getChunkByCoordinate(chunk.posX + 1, chunk.posY);
+        adjacentChunks[3] = getChunkByCoordinate(chunk.posX + 1, chunk.posY + 1);
+        adjacentChunks[4] = getChunkByCoordinate(chunk.posX, chunk.posY + 1);
+        adjacentChunks[5] = getChunkByCoordinate(chunk.posX - 1, chunk.posY + 1);
+        adjacentChunks[6] = getChunkByCoordinate(chunk.posX - 1, chunk.posY);
+        adjacentChunks[7] = getChunkByCoordinate(chunk.posX - 1, chunk.posY - 1);
+
+        return adjacentChunks;
     }
 }

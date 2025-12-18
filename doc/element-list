@@ -6,8 +6,8 @@ org.Game2D.demo.general
 org.Game2D.demo.general.controlable
 org.Game2D.demo.general.entities
 org.Game2D.demo.general.objects
-org.Game2D.demo.Snake
-org.Game2D.demo.Snake.controllable
+org.Game2D.demo.snake
+org.Game2D.demo.snake.logic
 org.Game2D.engine.chunks
 org.Game2D.engine.core
 org.Game2D.engine.core.handlers
