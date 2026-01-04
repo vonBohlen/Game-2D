@@ -16,6 +16,7 @@ public class Main {
     public static void main(String[] args) {
         //Engine Boilerplate
         Instance instance = new Instance(null);
+        instance.start("Snake");
 
         int screenWidth = DataHand.renderMan.getWidth();
         int screenHeight = DataHand.renderMan.getHeight();

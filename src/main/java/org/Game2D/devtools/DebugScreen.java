@@ -1,4 +1,4 @@
-package org.Game2D.engine.debug;
+package org.Game2D.devtools;
 
 import org.Game2D.engine.core.handlers.DataHand;
 import org.Game2D.engine.utils.ConfProvider;

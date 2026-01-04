@@ -81,7 +81,7 @@ public class Instance {
         //Create a single Chunk, otherwise no other Chunks can be added
         ChunkMan.addChunk(new Chunk(0, 0));
 
-        //Starting Managerloops
+        //Starting ManagerLoops
         DataHand.renderMan.startRenderLoop();
 
         DataHand.actionMan.startGameLoop();

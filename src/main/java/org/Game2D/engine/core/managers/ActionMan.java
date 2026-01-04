@@ -1,10 +1,8 @@
 package org.Game2D.engine.core.managers;
 
-import org.Game2D.engine.chunks.Chunk;
 import org.Game2D.engine.chunks.ChunkMan;
-import org.Game2D.engine.chunks.ObjectTransferMan;
 import org.Game2D.engine.core.handlers.DataHand;
-import org.Game2D.engine.debug.DebugScreen;
+import org.Game2D.devtools.DebugScreen;
 import org.Game2D.engine.objects.GameObject;
 import org.Game2D.engine.utils.ConfProvider;
 

@@ -13,6 +13,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class FinderHash {
 
     private final int chunkDimensions;
+
     /**
      * Index-Chunk Hashmap of all registered Chunks
      */
@@ -179,4 +180,5 @@ public class FinderHash {
 
         return adjacentChunks;
     }
+
 }

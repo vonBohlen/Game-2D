@@ -13,7 +13,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class ChunkMan {
 
-    //Summary of Lists and Objects:
+    // Summary of Collections and Objects:
     // 1. Each created chunk gets added to the ConcurrentHashMap chunks where it gets associated with its UUID to enable quick finding of the chunk associated with an object
     // 2. Each created chunk gets added to the FinderHash which allows for fast access based on the chunks coordinates
     // 3. Each GameObject that is created looks for the chunk that it would be in based on its position and creates a chunk if not existent
@@ -97,10 +97,10 @@ public class ChunkMan {
     /**
      * Add a Collection of Chunks to the ChunkManager
      *
-     * @param new_chunks Collection of Chunks to be added
+     * @param newChunks Collection of Chunks to be added
      */
-    public static void addChunks(@NonNull Collection<Chunk> new_chunks) {
-        for (Chunk i : new_chunks) {
+    public static void addChunks(@NonNull Collection<Chunk> newChunks) {
+        for (Chunk i : newChunks) {
             chunks.put(i.uuid, i);
             chunksByCo.addChunk(i);
         }
