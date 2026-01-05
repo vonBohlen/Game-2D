@@ -2,34 +2,39 @@ package org.Game2D.engine.objects;
 
 import org.Game2D.engine.core.handlers.DataHand;
 import org.Game2D.engine.core.managers.Camera;
+import org.Game2D.engine.utils.AssetMan;
 
 import java.awt.*;
 import java.util.UUID;
 
 public abstract class GameObject {
 
-    public final Rectangle hitBox;
+    public Rectangle hitBox;
     public final UUID uuid;
-    public final int objectLayer;
+    public int objectLayer;
     public boolean render_enabled;
     protected Image texture;
     private boolean collisionActivated = false;
 
-    public GameObject(Rectangle hb, boolean collision, int objectLayer, boolean render_enabled, Image txt) {
+    private void init(Rectangle hitbox, boolean collision, int objectLayer, boolean render_enabled) {
 
-        if (hb != null && collision) collisionActivated = true;
-        hitBox = hb;
-
+        if (hitbox != null && collision) collisionActivated = true;
+        this.hitBox = hitbox;
         this.objectLayer = objectLayer;
-
-        texture = txt;
-
-        uuid = UUID.randomUUID();
-
         this.render_enabled = render_enabled;
-
         DataHand.regGameObj(this);
+    }
 
+    public GameObject(Rectangle hitBox, boolean collision, int objectLayer, boolean render_enabled, Image texture) {
+        uuid = UUID.randomUUID();
+        init(hitBox, collision, objectLayer, render_enabled);
+        this.texture = texture;
+    }
+
+    public GameObject(Rectangle hitBox, boolean collision, int objectLayer, boolean render_enabled) {
+        uuid = UUID.randomUUID();
+        init(hitBox, collision, objectLayer, render_enabled);
+        texture = AssetMan.loadAsset("default.png");
     }
 
     protected void activateCollision() {

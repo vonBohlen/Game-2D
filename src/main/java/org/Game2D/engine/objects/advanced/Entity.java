@@ -8,10 +8,12 @@ import java.awt.*;
 
 public abstract class Entity extends GameObject {
 
-    public Entity(Rectangle hb, boolean collision, int objectLayer, Image txt) {
+    public Entity(Rectangle hitbox, boolean collision, int objectLayer, Image texture) {
+        super(hitbox, collision, objectLayer, true, texture);
+    }
 
-        super(hb, collision, objectLayer, true, txt);
-
+    public Entity(Rectangle hitbox, boolean collision, int objectLayer) {
+        super(hitbox, collision, objectLayer, true);
     }
 
 //    protected GameObject[] move(int xShift, int yShift) {
