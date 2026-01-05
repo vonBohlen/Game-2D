@@ -1,3 +1,9 @@
+/**
+ * Dark Magic for quickly identifying Chunks by their coordinates
+ * and finding nearby Chunks
+ * @author The Game2D contributors
+ */
+
 package org.Game2D.engine.chunks;
 
 import lombok.NonNull;

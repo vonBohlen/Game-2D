@@ -1,3 +1,10 @@
+/**
+ * Action Manager<br>
+ * Handles GameObject updating with the Gameloop
+ * and general timing
+ * @author The Game2D contributors
+ */
+
 package org.Game2D.engine.core.managers;
 
 import org.Game2D.engine.chunks.ChunkMan;

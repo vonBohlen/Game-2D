@@ -1,3 +1,8 @@
+/**
+ * Chunk class that stores a HashMap of GameObjects Used by the ChunkManager
+ * @author The Game2D contributors
+ */
+
 package org.Game2D.engine.chunks;
 
 import org.Game2D.engine.core.managers.Camera;

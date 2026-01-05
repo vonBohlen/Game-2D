@@ -1,3 +1,8 @@
+/**
+ * Enum of all possible cardinal directions + their linear combinations
+ * @author The Game2D contributors
+ */
+
 package org.Game2D.engine.chunks;
 
 /**

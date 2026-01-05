@@ -1,3 +1,9 @@
+/**
+ * Key-input Handler
+ * Manages received keystrokes and sets the appropriate <code>keyPressed_*</code> boolean
+ * @author The Game2D contributors
+ */
+
 package org.Game2D.engine.core.handlers;
 
 import java.awt.event.KeyEvent;

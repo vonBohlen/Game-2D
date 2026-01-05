@@ -1,3 +1,7 @@
+/**
+ * @author The Game2D contributors
+ */
+
 package org.Game2D.engine.core;
 
 import lombok.Getter;

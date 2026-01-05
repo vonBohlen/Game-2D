@@ -1,3 +1,9 @@
+/**
+ * Object Transfer Manager <br>
+ * Moves GameObjects around and changes their Chunk if needed
+ * @author The Game2D contributors
+ */
+
 package org.Game2D.engine.chunks;
 
 import org.Game2D.engine.objects.GameObject;

@@ -1,3 +1,7 @@
+/**
+ * @author The Game2D contributors
+ */
+
 package org.Game2D.demo.general.entities;
 
 import org.Game2D.engine.core.handlers.DataHand;
