@@ -2,13 +2,11 @@
  * @author The Game2D contributors
  */
 
-package org.Game2D.engine.core.managers;
+package org.Game2D.engine.graphics;
 
 import org.Game2D.engine.chunks.Chunk;
-import org.Game2D.engine.chunks.ChunkMan;
-import org.Game2D.engine.core.handlers.DataHand;
-
-import java.awt.*;
+import org.Game2D.engine.chunks.manager.ChunkMan;
+import org.Game2D.engine.data.runtime.DataHand;
 
 public class Camera {
 
@@ -26,9 +24,9 @@ public class Camera {
         this.y = y;
 
         height = windowHeightUnits;
-        width = ((double)DataHand.renderMan.getWidth() / (double)DataHand.renderMan.getHeight()) * windowHeightUnits;
+        width = ((double)DataHand.renderLoop.getWidth() / (double)DataHand.renderLoop.getHeight()) * windowHeightUnits;
 
-        pixelsPerUnit = ((double)DataHand.renderMan.getHeight() / windowHeightUnits);
+        pixelsPerUnit = ((double)DataHand.renderLoop.getHeight() / windowHeightUnits);
     }
     public Camera(double windowHeightUnits){
 
@@ -37,7 +35,7 @@ public class Camera {
     // kamera wird bewegt skalliert etc und gibt den chunk in ihrem mittelpunkt zurück
     public static Chunk renderUpdate(){
         // in case of errors with creating the value
-        if(pixelsPerUnit == 0){ pixelsPerUnit = ((double)DataHand.renderMan.getHeight() / height); }
+        if(pixelsPerUnit == 0){ pixelsPerUnit = ((double)DataHand.renderLoop.getHeight() / height); }
 
         // ===== Test Kamera bewegung =====
 
@@ -51,8 +49,8 @@ public class Camera {
 
     public static void updateScreenHeight(double newHeight){
         height = newHeight;
-        width = ((double)DataHand.renderMan.getWidth() / (double)DataHand.renderMan.getHeight()) * height;
-        pixelsPerUnit = ((double)DataHand.renderMan.getHeight() / height);
+        width = ((double)DataHand.renderLoop.getWidth() / (double)DataHand.renderLoop.getHeight()) * height;
+        pixelsPerUnit = ((double)DataHand.renderLoop.getHeight() / height);
     }
 
     public static int getScreenSpacePosX(){

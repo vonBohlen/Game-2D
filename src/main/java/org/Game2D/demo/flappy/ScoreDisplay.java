@@ -5,8 +5,8 @@
 package org.Game2D.demo.flappy;
 
 import org.Game2D.demo.flappy.entities.ScoreDigit;
-import org.Game2D.engine.core.handlers.DataHand;
-import org.Game2D.engine.utils.AssetMan;
+import org.Game2D.engine.data.runtime.DataHand;
+import org.Game2D.engine.io.assets.AssetMan;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -39,7 +39,7 @@ public class ScoreDisplay {
     }
 
     private static void addDigit() {
-        scoreDigits.add(new ScoreDigit(new Rectangle(DataHand.renderMan.getWidth() / 2 - 12, 10, 24, 36)));
+        scoreDigits.add(new ScoreDigit(new Rectangle(DataHand.renderLoop.getWidth() / 2 - 12, 10, 24, 36)));
     }
 
     private static void centerDigit() {
@@ -47,13 +47,13 @@ public class ScoreDisplay {
 
         if (scoreDigits.size() % 2 != 0) {
             int half = scoreDigits.size() / 2;
-            int posX = DataHand.renderMan.getWidth() / 2 - 12;
+            int posX = DataHand.renderLoop.getWidth() / 2 - 12;
             for (int i = half + 1; i >= 0;) {
                 scoreDigits.get(i).setPositionX(posX);
                 posX -= 26;
                 i--;
             }
-            posX = DataHand.renderMan.getWidth() / 2 + 12;
+            posX = DataHand.renderLoop.getWidth() / 2 + 12;
             for (int i = half + 2; i < scoreDigits.size();) {
                 scoreDigits.get(i).setPositionX(posX);
                 posX += 26;
@@ -62,13 +62,13 @@ public class ScoreDisplay {
         }
         else {
             int half = scoreDigits.size() / 2 - 1;
-            int posX = DataHand.renderMan.getWidth() / 2 - 24;
+            int posX = DataHand.renderLoop.getWidth() / 2 - 24;
             for (int i = half; i >= 0;) {
                 scoreDigits.get(i).setPositionX(posX);
                 posX -= 24;
                 i--;
             }
-            posX = DataHand.renderMan.getWidth() / 2;
+            posX = DataHand.renderLoop.getWidth() / 2;
             for (int i = half + 1; i < scoreDigits.size();) {
                 scoreDigits.get(i).setPositionX(posX);
                 posX += 24;

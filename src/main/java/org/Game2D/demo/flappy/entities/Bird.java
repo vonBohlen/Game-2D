@@ -5,10 +5,10 @@
 package org.Game2D.demo.flappy.entities;
 
 import org.Game2D.demo.flappy.FlappyBird;
-import org.Game2D.engine.core.handlers.DataHand;
+import org.Game2D.engine.data.runtime.DataHand;
 import org.Game2D.engine.objects.advanced.Entity;
-import org.Game2D.engine.utils.AssetMan;
-import org.Game2D.engine.utils.ConfProvider;
+import org.Game2D.engine.io.assets.AssetMan;
+import org.Game2D.engine.io.conf.ConfProvider;
 
 import java.awt.*;
 
@@ -34,7 +34,7 @@ public class Bird extends Entity {
     public Bird(Image txt) {
 
         //bird gets placed at one half of the height and one third of the width
-        super(new Rectangle(DataHand.renderMan.getWidth() / 5, DataHand.renderMan.getHeight() / 2, 44, 24), true, 2, txt);
+        super(new Rectangle(DataHand.renderLoop.getWidth() / 5, DataHand.renderLoop.getHeight() / 2, 44, 24), true, 2, txt);
 
         //ideal time between two ticks
         this.passedTime = 1 / (double) Integer.parseInt(ConfProvider.getConf(DataHand.confPath).getProperty("game2d.core.tps"));
@@ -54,7 +54,7 @@ public class Bird extends Entity {
         this.velo += this.gravityConst * this.passedTime;
 
         //checks if the top or bottom is reached
-        if(this.hitBox.y <= 0 || this.hitBox.y + this.hitBox.getHeight() >= DataHand.renderMan.getHeight() - 112){
+        if(this.hitBox.y <= 0 || this.hitBox.y + this.hitBox.getHeight() >= DataHand.renderLoop.getHeight() - 112){
             gameOver = true;
         }
 
@@ -95,7 +95,7 @@ public class Bird extends Entity {
     }
 
     public static int getBirdPosition(){
-        return DataHand.renderMan.getWidth() / 5;
+        return DataHand.renderLoop.getWidth() / 5;
     }
 
     @Override
@@ -104,6 +104,6 @@ public class Bird extends Entity {
     }
 
     private void setDefault(){
-        setPosition(DataHand.renderMan.getWidth() / 5, DataHand.renderMan.getHeight() / 2);
+        setPosition(DataHand.renderLoop.getWidth() / 5, DataHand.renderLoop.getHeight() / 2);
     }
 }

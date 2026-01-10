@@ -2,8 +2,10 @@
  * @author The Game2D contributors
  */
 
-package org.Game2D.engine.chunks;
+package org.Game2D.engine.chunks.manager;
 
+import org.Game2D.engine.chunks.Chunk;
+import org.Game2D.engine.chunks.utils.math.FinderHash;
 import org.Game2D.engine.objects.GameObject;
 import lombok.NonNull;
 

@@ -4,7 +4,7 @@
  * @author The Game2D contributors
  */
 
-package org.Game2D.engine.core.handlers;
+package org.Game2D.engine.io.user;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;

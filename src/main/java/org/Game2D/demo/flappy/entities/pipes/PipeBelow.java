@@ -6,7 +6,7 @@ package org.Game2D.demo.flappy.entities.pipes;
 
 import org.Game2D.demo.flappy.entities.Bird;
 import org.Game2D.engine.objects.advanced.Entity;
-import org.Game2D.engine.utils.AssetMan;
+import org.Game2D.engine.io.assets.AssetMan;
 
 import java.awt.*;
 

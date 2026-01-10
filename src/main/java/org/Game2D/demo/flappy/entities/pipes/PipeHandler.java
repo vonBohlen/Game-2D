@@ -6,7 +6,7 @@ package org.Game2D.demo.flappy.entities.pipes;
 
 import org.Game2D.demo.flappy.ScoreDisplay;
 import org.Game2D.demo.flappy.entities.Bird;
-import org.Game2D.engine.core.handlers.DataHand;
+import org.Game2D.engine.data.runtime.DataHand;
 import org.Game2D.engine.objects.advanced.Entity;
 
 import java.awt.*;
@@ -18,16 +18,16 @@ public class PipeHandler extends Entity {
 
     public static final int distancePipes = 500;
 
-    final int startX = DataHand.renderMan.getWidth() / 4 * 3;
+    final int startX = DataHand.renderLoop.getWidth() / 4 * 3;
 
-    public static final int pipesNum = DataHand.renderMan.getWidth() / distancePipes + 1;
+    public static final int pipesNum = DataHand.renderLoop.getWidth() / distancePipes + 1;
 
 
     final List<PipePair> pairs = new ArrayList<>();
 
 
     //150 because default space between pipes is 300 (half so that its centered)
-    static int random = DataHand.renderMan.getHeight() / 2 + 150;
+    static int random = DataHand.renderLoop.getHeight() / 2 + 150;
 
     public PipeHandler(){
         super(new Rectangle(0,0), false, -1, null);
@@ -49,7 +49,7 @@ public class PipeHandler extends Entity {
 
         adder = differenceA > differenceB ? adder : twice;
 
-        if(adder + random < 300 || adder + random > DataHand.renderMan.getHeight()){
+        if(adder + random < 300 || adder + random > DataHand.renderLoop.getHeight()){
             adder *= -1;
         }
         random += adder;
@@ -63,7 +63,7 @@ public class PipeHandler extends Entity {
     @Override
     public void update() {
         //only used for resetting the game
-        random = DataHand.renderMan.getHeight() / 2 + 150;
+        random = DataHand.renderLoop.getHeight() / 2 + 150;
         if(Bird.gameOver && DataHand.keyHand.keyPressed_SPACE){
             for(int i = pairs.size() - 1; i >= 0; i--){
                 pairs.get(i).reset();

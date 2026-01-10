@@ -8,9 +8,9 @@ import org.Game2D.demo.snake.logic.Board;
 import org.Game2D.demo.snake.logic.Cell;
 import org.Game2D.demo.snake.logic.Game;
 import org.Game2D.demo.snake.logic.Schnake;
-import org.Game2D.engine.core.Instance;
-import org.Game2D.engine.core.handlers.DataHand;
-import org.Game2D.engine.utils.AssetMan;
+import org.Game2D.engine.data.runtime.Instance;
+import org.Game2D.engine.data.runtime.DataHand;
+import org.Game2D.engine.io.assets.AssetMan;
 
 import java.awt.*;
 
@@ -22,8 +22,8 @@ public class Main {
         Instance instance = new Instance(null);
         instance.start("Snake");
 
-        int screenWidth = DataHand.renderMan.getWidth();
-        int screenHeight = DataHand.renderMan.getHeight();
+        int screenWidth = DataHand.renderLoop.getWidth();
+        int screenHeight = DataHand.renderLoop.getHeight();
 
         Image white = AssetMan.loadAsset("snake_assets/white10.png");
         Image black = AssetMan.loadAsset("snake_assets/black10.png");

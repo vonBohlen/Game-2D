@@ -10,9 +10,9 @@ import org.Game2D.demo.flappy.entities.pipes.PipeHandler;
 import org.Game2D.demo.flappy.objects.BackgroundObject;
 import org.Game2D.demo.flappy.objects.BaseObject;
 import org.Game2D.demo.general.controlable.Player;
-import org.Game2D.engine.core.Instance;
-import org.Game2D.engine.core.handlers.DataHand;
-import org.Game2D.engine.utils.AssetMan;
+import org.Game2D.engine.data.runtime.Instance;
+import org.Game2D.engine.data.runtime.DataHand;
+import org.Game2D.engine.io.assets.AssetMan;
 
 import java.awt.*;
 
@@ -27,8 +27,8 @@ public class FlappyBird {
         instance = new Instance(null);
         instance.start("Flappy bird");
 
-        int screenHeight = DataHand.renderMan.getHeight();
-        int screenWidth = DataHand.renderMan.getWidth();
+        int screenHeight = DataHand.renderLoop.getHeight();
+        int screenWidth = DataHand.renderLoop.getWidth();
 
         Image texture = AssetMan.loadAsset("default.png");
         Image blueTxt = AssetMan.loadAsset("flappy_assets/background/blue.png");

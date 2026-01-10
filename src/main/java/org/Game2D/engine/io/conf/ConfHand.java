@@ -2,9 +2,9 @@
  * @author The Game2D contributors
  */
 
-package org.Game2D.engine.core.handlers;
+package org.Game2D.engine.io.conf;
 
-import org.Game2D.engine.utils.ConfProvider;
+import org.Game2D.engine.data.runtime.DataHand;
 
 import java.io.File;
 import java.nio.file.Path;

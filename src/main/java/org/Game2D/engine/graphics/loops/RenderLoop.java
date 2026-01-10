@@ -4,12 +4,13 @@
  * @author The Game2D contributors
  */
 
-package org.Game2D.engine.core.managers;
+package org.Game2D.engine.graphics.loops;
 
-import org.Game2D.engine.chunks.ChunkMan;
-import org.Game2D.engine.core.handlers.DataHand;
-import org.Game2D.devtools.DebugScreen;
-import org.Game2D.engine.utils.ConfProvider;
+import org.Game2D.engine.chunks.manager.ChunkMan;
+import org.Game2D.engine.data.runtime.DataHand;
+import org.Game2D.engine.graphics.Camera;
+import org.Game2D.tools.DebugScreen;
+import org.Game2D.engine.io.conf.ConfProvider;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,7 +20,7 @@ import java.util.Objects;
  * Render Manager<br>
  * Handles the rendering of <code>GameObjects</code>
  */
-public class RenderMan extends JPanel implements Runnable {
+public class RenderLoop extends JPanel implements Runnable {
 
     Thread renderThread;
 
@@ -31,7 +32,7 @@ public class RenderMan extends JPanel implements Runnable {
     /**
      * Instantiate a new <code>RenderManager</code>
      */
-    public RenderMan() {
+    public RenderLoop() {
 
         confPanel();
     }

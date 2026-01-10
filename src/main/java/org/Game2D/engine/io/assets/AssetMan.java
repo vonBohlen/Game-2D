@@ -2,9 +2,9 @@
  * @author The Game2D contributors
  */
 
-package org.Game2D.engine.utils;
+package org.Game2D.engine.io.assets;
 
-import org.Game2D.engine.core.managers.RenderMan;
+import org.Game2D.engine.graphics.loops.RenderLoop;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -20,7 +20,7 @@ public class AssetMan {
 
         try {
             for (int i = paths.length; i > 0; ) {
-                assets.add(ImageIO.read(Objects.requireNonNull(RenderMan.class.getClassLoader().getResource(paths[i - 1]))));
+                assets.add(ImageIO.read(Objects.requireNonNull(RenderLoop.class.getClassLoader().getResource(paths[i - 1]))));
                 i--;
             }
         } catch (IOException e) {
@@ -34,7 +34,7 @@ public class AssetMan {
         Image asset;
 
         try {
-            asset = ImageIO.read(Objects.requireNonNull(RenderMan.class.getClassLoader().getResource(path)));
+            asset = ImageIO.read(Objects.requireNonNull(RenderLoop.class.getClassLoader().getResource(path)));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
