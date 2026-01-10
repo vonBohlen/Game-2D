@@ -2,7 +2,7 @@
  * @author The Game2D contributors
  */
 
-package org.Game2D.engine.physics.collision;
+package org.Game2D.engine.objects.collision;
 
 public class CollisionManager {
 
