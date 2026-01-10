@@ -6,7 +6,7 @@
 
 package org.Game2D.engine.graphics.managers;
 
-import org.Game2D.engine.chunks.ChunkMan;
+import org.Game2D.engine.chunks.manager.ChunkMan;
 import org.Game2D.engine.data.runtime.DataHand;
 import org.Game2D.engine.graphics.Camera;
 import org.Game2D.tools.DebugScreen;

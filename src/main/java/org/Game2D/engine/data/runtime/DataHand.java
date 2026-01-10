@@ -5,7 +5,7 @@
 package org.Game2D.engine.data.runtime;
 
 import org.Game2D.engine.chunks.Chunk;
-import org.Game2D.engine.chunks.ChunkMan;
+import org.Game2D.engine.chunks.manager.ChunkMan;
 import org.Game2D.engine.io.user.Keyhand;
 import org.Game2D.engine.physics.managers.ActionMan;
 import org.Game2D.engine.graphics.managers.RenderMan;

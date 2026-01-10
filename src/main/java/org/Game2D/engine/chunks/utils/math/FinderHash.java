@@ -4,9 +4,12 @@
  * @author The Game2D contributors
  */
 
-package org.Game2D.engine.chunks;
+package org.Game2D.engine.chunks.utils.math;
 
 import lombok.NonNull;
+import org.Game2D.engine.chunks.Chunk;
+import org.Game2D.engine.chunks.manager.ChunkMan;
+import org.Game2D.engine.chunks.utils.data.Directions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +28,7 @@ public class FinderHash {
      */
     private ConcurrentHashMap<Integer, Chunk> chunkPos;
 
-    FinderHash() {
+    public FinderHash() {
         chunkPos = new ConcurrentHashMap<>();
         chunkDimensions = ChunkMan.chunkSize;
     }

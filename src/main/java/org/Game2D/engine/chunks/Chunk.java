@@ -5,6 +5,7 @@
 
 package org.Game2D.engine.chunks;
 
+import org.Game2D.engine.chunks.manager.ChunkMan;
 import org.Game2D.engine.graphics.Camera;
 import org.Game2D.engine.objects.GameObject;
 import lombok.NonNull;
