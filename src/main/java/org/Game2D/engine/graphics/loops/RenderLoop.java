@@ -4,7 +4,7 @@
  * @author The Game2D contributors
  */
 
-package org.Game2D.engine.graphics.managers;
+package org.Game2D.engine.graphics.loops;
 
 import org.Game2D.engine.chunks.manager.ChunkMan;
 import org.Game2D.engine.data.runtime.DataHand;
@@ -20,7 +20,7 @@ import java.util.Objects;
  * Render Manager<br>
  * Handles the rendering of <code>GameObjects</code>
  */
-public class RenderMan extends JPanel implements Runnable {
+public class RenderLoop extends JPanel implements Runnable {
 
     Thread renderThread;
 
@@ -32,7 +32,7 @@ public class RenderMan extends JPanel implements Runnable {
     /**
      * Instantiate a new <code>RenderManager</code>
      */
-    public RenderMan() {
+    public RenderLoop() {
 
         confPanel();
     }

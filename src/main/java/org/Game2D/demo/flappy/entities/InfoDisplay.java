@@ -19,7 +19,7 @@ public class InfoDisplay extends Entity {
 
     public InfoDisplay() {
 
-        super(new Rectangle(DataHand.renderMan.getWidth() / 2, DataHand.renderMan.getHeight() / 2, 0, 0), false, 4, null);
+        super(new Rectangle(DataHand.renderLoop.getWidth() / 2, DataHand.renderLoop.getHeight() / 2, 0, 0), false, 4, null);
 
     }
 
@@ -43,8 +43,8 @@ public class InfoDisplay extends Entity {
     }
 
     private void setPosition() {
-        int posX = DataHand.renderMan.getWidth() / 2;
-        int posY = DataHand.renderMan.getHeight() / 2;
+        int posX = DataHand.renderLoop.getWidth() / 2;
+        int posY = DataHand.renderLoop.getHeight() / 2;
 
         if (texture == messageTxt) {
             posX -= 92;

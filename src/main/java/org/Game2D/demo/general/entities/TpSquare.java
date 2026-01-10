@@ -5,7 +5,7 @@
 package org.Game2D.demo.general.entities;
 
 import org.Game2D.engine.data.runtime.DataHand;
-import org.Game2D.engine.physics.managers.ActionMan;
+import org.Game2D.engine.physics.loops.ActionLoop;
 import org.Game2D.engine.objects.advanced.Entity;
 
 import java.awt.*;
@@ -19,14 +19,14 @@ public class TpSquare extends Entity {
 
     public void update() {
 
-        if (!(ActionMan.getGameTick() == 30)) return;
+        if (!(ActionLoop.getGameTick() == 30)) return;
 
         Random random = new Random();
         int randomX, randomY;
 
         do {
-            randomX = random.nextInt(DataHand.renderMan.getWidth() - hitBox.width);
-            randomY = random.nextInt(DataHand.renderMan.getHeight() - hitBox.height);
+            randomX = random.nextInt(DataHand.renderLoop.getWidth() - hitBox.width);
+            randomY = random.nextInt(DataHand.renderLoop.getHeight() - hitBox.height);
 
         } while (setPosition(randomX, randomY) != null);
     }

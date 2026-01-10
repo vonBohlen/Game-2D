@@ -5,7 +5,7 @@
  * @author The Game2D contributors
  */
 
-package org.Game2D.engine.physics.managers;
+package org.Game2D.engine.physics.loops;
 
 import org.Game2D.engine.chunks.manager.ChunkMan;
 import org.Game2D.engine.data.runtime.DataHand;
@@ -21,7 +21,7 @@ import java.util.List;
  * Handles GameObject updating with the Gameloop
  * and general timing
  */
-public class ActionMan implements Runnable {
+public class ActionLoop implements Runnable {
 
     private static int gameTick = 0;
     /**

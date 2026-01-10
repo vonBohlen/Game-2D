@@ -31,11 +31,11 @@ public class PipeManager extends Entity {
 
         //first the amount of needed pipes is calculated
         //the distance between two pipes will be 300 pixels
-        this.neededPipes = DataHand.renderMan.getWidth() / this.distancePipes + 1;
+        this.neededPipes = DataHand.renderLoop.getWidth() / this.distancePipes + 1;
 
         //the first position for the pipes gets set
-        this.posX = DataHand.renderMan.getWidth() / 2;
-        this.posY = DataHand.renderMan.getHeight() / 2 + this.distanceTopBelow / 2;
+        this.posX = DataHand.renderLoop.getWidth() / 2;
+        this.posY = DataHand.renderLoop.getHeight() / 2 + this.distanceTopBelow / 2;
 
         CreatePipes();
     }
@@ -45,7 +45,7 @@ public class PipeManager extends Entity {
 
             this.random = getRnd();
             //112 because it's the base height and the 20 is so that there is a bit of distance between top/bottom and the pipe end
-            if(this.posY + this.random < distancePipes + 20 || this.posY + this.random > DataHand.renderMan.getHeight() - 112 - 20){
+            if(this.posY + this.random < distancePipes + 20 || this.posY + this.random > DataHand.renderLoop.getHeight() - 112 - 20){
                 this.random *= -1;
             }
 
@@ -76,7 +76,7 @@ public class PipeManager extends Entity {
     void movePipes(){
         this.random = getRnd();
         //112 because it's the base height and the 20 is so that there is a bit of distance between top/bottom and the pipe end
-        if(this.posY + this.random < distancePipes + 20 || this.posY + this.random > DataHand.renderMan.getHeight() - 112 - 20){
+        if(this.posY + this.random < distancePipes + 20 || this.posY + this.random > DataHand.renderLoop.getHeight() - 112 - 20){
             this.random *= -1;
         }
 
@@ -105,14 +105,14 @@ public class PipeManager extends Entity {
             below.setPosition(below.hitBox.x, below.hitBox.y + 1000);
         }
 
-        this.posX = DataHand.renderMan.getWidth() / 2;
-        this.posY = DataHand.renderMan.getHeight() / 2 + this.distanceTopBelow / 2;
+        this.posX = DataHand.renderLoop.getWidth() / 2;
+        this.posY = DataHand.renderLoop.getHeight() / 2 + this.distanceTopBelow / 2;
 
         for(int i = 0; i < this.neededPipes; i++){
 
             this.random = getRnd();
             //112 because it's the base height and the 20 is so that there is a bit of distance between top/bottom and the pipe end
-            if(this.posY + this.random < distancePipes + 20 || this.posY + this.random > DataHand.renderMan.getHeight() - 112 - 20){
+            if(this.posY + this.random < distancePipes + 20 || this.posY + this.random > DataHand.renderLoop.getHeight() - 112 - 20){
                 this.random *= -1;
             }
 
@@ -125,14 +125,14 @@ public class PipeManager extends Entity {
     }
     private void setDefault(){
         //Standard values
-        this.posX = DataHand.renderMan.getWidth() / 2;
-        this.posY = DataHand.renderMan.getHeight() / 2 + this.distanceTopBelow / 2;
+        this.posX = DataHand.renderLoop.getWidth() / 2;
+        this.posY = DataHand.renderLoop.getHeight() / 2 + this.distanceTopBelow / 2;
 
         for(int i = 0; i < this.neededPipes; i++){
 
             this.random = getRnd();
             //112 because it's the base height and the 20 is so that there is a bit of distance between top/bottom and the pipe end
-            if(this.posY + this.random < distancePipes + 20 || this.posY + this.random > DataHand.renderMan.getHeight() - 112 - 20){
+            if(this.posY + this.random < distancePipes + 20 || this.posY + this.random > DataHand.renderLoop.getHeight() - 112 - 20){
                 this.random *= -1;
             }
 

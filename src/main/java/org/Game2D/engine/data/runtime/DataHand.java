@@ -7,8 +7,8 @@ package org.Game2D.engine.data.runtime;
 import org.Game2D.engine.chunks.Chunk;
 import org.Game2D.engine.chunks.manager.ChunkMan;
 import org.Game2D.engine.io.user.Keyhand;
-import org.Game2D.engine.physics.managers.ActionMan;
-import org.Game2D.engine.graphics.managers.RenderMan;
+import org.Game2D.engine.physics.loops.ActionLoop;
+import org.Game2D.engine.graphics.loops.RenderLoop;
 import org.Game2D.engine.objects.GameObject;
 
 import java.nio.file.Path;
@@ -22,8 +22,8 @@ public class DataHand {
 
     public static Path confPath = null;
 
-    public static ActionMan actionMan = null;
-    public static RenderMan renderMan = null;
+    public static ActionLoop actionLoop = null;
+    public static RenderLoop renderLoop = null;
 
     //Handlers
     public static Keyhand keyHand = null;

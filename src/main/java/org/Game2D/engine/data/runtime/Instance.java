@@ -8,10 +8,10 @@ import lombok.Getter;
 import lombok.Setter;
 import org.Game2D.engine.chunks.Chunk;
 import org.Game2D.engine.chunks.manager.ChunkMan;
+import org.Game2D.engine.graphics.loops.RenderLoop;
 import org.Game2D.engine.io.conf.ConfHand;
 import org.Game2D.engine.io.user.Keyhand;
-import org.Game2D.engine.physics.managers.ActionMan;
-import org.Game2D.engine.graphics.managers.RenderMan;
+import org.Game2D.engine.physics.loops.ActionLoop;
 
 import javax.swing.*;
 import java.awt.*;
@@ -64,11 +64,11 @@ public class Instance {
 
         DataHand.keyHand = new Keyhand();
 
-        DataHand.renderMan = new RenderMan();
+        DataHand.renderLoop = new RenderLoop();
 
-        DataHand.actionMan = new ActionMan();
+        DataHand.actionLoop = new ActionLoop();
 
-        DataHand.renderMan.initializeCamera();
+        DataHand.renderLoop.initializeCamera();
     }
 
     /**
@@ -85,9 +85,9 @@ public class Instance {
         ChunkMan.addChunk(new Chunk(0, 0));
 
         //Starting ManagerLoops
-        DataHand.renderMan.startRenderLoop();
+        DataHand.renderLoop.startRenderLoop();
 
-        DataHand.actionMan.startGameLoop();
+        DataHand.actionLoop.startGameLoop();
 
     }
 
@@ -107,7 +107,7 @@ public class Instance {
         window.setResizable(true);
         window.setTitle(windowTitle);
 
-        window.add(DataHand.renderMan);
+        window.add(DataHand.renderLoop);
 
         window.pack();
 
@@ -121,8 +121,8 @@ public class Instance {
      * Spin down all Managers and close the window
      */
     public void exit() {
-        DataHand.actionMan.exit();
-        DataHand.renderMan.exit();
+        DataHand.actionLoop.exit();
+        DataHand.renderLoop.exit();
 
         window.dispose();
     }

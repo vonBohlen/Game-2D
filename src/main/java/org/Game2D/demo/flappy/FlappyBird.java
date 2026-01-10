@@ -27,8 +27,8 @@ public class FlappyBird {
         instance = new Instance(null);
         instance.start("Flappy bird");
 
-        int screenHeight = DataHand.renderMan.getHeight();
-        int screenWidth = DataHand.renderMan.getWidth();
+        int screenHeight = DataHand.renderLoop.getHeight();
+        int screenWidth = DataHand.renderLoop.getWidth();
 
         Image texture = AssetMan.loadAsset("default.png");
         Image blueTxt = AssetMan.loadAsset("flappy_assets/background/blue.png");
