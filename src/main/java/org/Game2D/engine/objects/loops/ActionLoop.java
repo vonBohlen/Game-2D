@@ -5,7 +5,7 @@
  * @author The Game2D contributors
  */
 
-package org.Game2D.engine.physics.loops;
+package org.Game2D.engine.objects.loops;
 
 import org.Game2D.engine.chunks.manager.ChunkMan;
 import org.Game2D.engine.data.runtime.DataHand;

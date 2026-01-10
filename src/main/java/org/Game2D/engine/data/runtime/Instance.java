@@ -11,7 +11,7 @@ import org.Game2D.engine.chunks.manager.ChunkMan;
 import org.Game2D.engine.graphics.loops.RenderLoop;
 import org.Game2D.engine.io.conf.ConfHand;
 import org.Game2D.engine.io.user.Keyhand;
-import org.Game2D.engine.physics.loops.ActionLoop;
+import org.Game2D.engine.objects.loops.ActionLoop;
 
 import javax.swing.*;
 import java.awt.*;
