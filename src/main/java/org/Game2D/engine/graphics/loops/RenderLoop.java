@@ -14,6 +14,7 @@ import org.Game2D.engine.io.conf.ConfProvider;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.Objects;
 
 /**
@@ -132,15 +133,16 @@ public class RenderLoop extends JPanel implements Runnable {
     @Override
     public void paintComponent(Graphics g) {
 
+        super.paintComponent(g);
+
         // Hitbox visualization
         boolean renderHitBoxes = Objects.requireNonNull(ConfProvider.getConf(DataHand.confPath)).getProperty("game2d.render.hitboxes").equals("true");
 
         // render chunks that have objects in them
         boolean renderActiveChunks = Objects.requireNonNull(ConfProvider.getConf(DataHand.confPath)).getProperty("game2d.render.activechunks").equals("true");
 
-        super.paintComponent(g);
-
-        Graphics2D g2 = (Graphics2D) g;
+        BufferedImage img = new BufferedImage(DataHand.renderLoop.getWidth(), DataHand.renderLoop.getHeight(), BufferedImage.TYPE_INT_RGB);
+        Graphics2D g2 = img.createGraphics();
 
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
@@ -153,6 +155,15 @@ public class RenderLoop extends JPanel implements Runnable {
         DebugScreen.draw(g2);
 
         g2.dispose();
+
+        /*for(int i = 0; i < DataHand.renderLoop.getWidth(); i++){
+            for(int j = 0; j < DataHand.renderLoop.getHeight(); j++){
+                img.getRGB()
+                int c =
+            }
+        }*/
+
+        g.drawImage(img, 0, 0, this);
     }
 
     /**
