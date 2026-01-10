@@ -5,16 +5,14 @@
 
 package org.Game2D.engine.chunks;
 
-import org.Game2D.engine.core.managers.Camera;
+import org.Game2D.engine.graphics.Camera;
 import org.Game2D.engine.objects.GameObject;
 import lombok.NonNull;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Chunk class that stores a HashMap of GameObjects

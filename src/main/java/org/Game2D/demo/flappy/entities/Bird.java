@@ -5,10 +5,10 @@
 package org.Game2D.demo.flappy.entities;
 
 import org.Game2D.demo.flappy.FlappyBird;
-import org.Game2D.engine.core.handlers.DataHand;
+import org.Game2D.engine.data.runtime.DataHand;
 import org.Game2D.engine.objects.advanced.Entity;
-import org.Game2D.engine.utils.AssetMan;
-import org.Game2D.engine.utils.ConfProvider;
+import org.Game2D.engine.io.assets.AssetMan;
+import org.Game2D.engine.io.conf.ConfProvider;
 
 import java.awt.*;
 

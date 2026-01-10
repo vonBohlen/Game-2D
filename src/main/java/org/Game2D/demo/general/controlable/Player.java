@@ -4,9 +4,7 @@
 
 package org.Game2D.demo.general.controlable;
 
-import org.Game2D.engine.chunks.Chunk;
-import org.Game2D.engine.chunks.ChunkMan;
-import org.Game2D.engine.core.handlers.DataHand;
+import org.Game2D.engine.data.runtime.DataHand;
 import org.Game2D.engine.objects.advanced.Entity;
 
 import java.awt.*;

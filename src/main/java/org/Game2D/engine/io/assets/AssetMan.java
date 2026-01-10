@@ -2,9 +2,9 @@
  * @author The Game2D contributors
  */
 
-package org.Game2D.engine.utils;
+package org.Game2D.engine.io.assets;
 
-import org.Game2D.engine.core.managers.RenderMan;
+import org.Game2D.engine.graphics.managers.RenderMan;
 
 import javax.imageio.ImageIO;
 import java.awt.*;

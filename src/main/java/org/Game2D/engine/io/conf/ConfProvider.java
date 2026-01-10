@@ -2,7 +2,7 @@
  * @author The Game2D contributors
  */
 
-package org.Game2D.engine.utils;
+package org.Game2D.engine.io.conf;
 
 import java.io.*;
 import java.nio.file.Path;

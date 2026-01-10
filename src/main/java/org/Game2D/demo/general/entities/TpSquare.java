@@ -4,8 +4,8 @@
 
 package org.Game2D.demo.general.entities;
 
-import org.Game2D.engine.core.handlers.DataHand;
-import org.Game2D.engine.core.managers.ActionMan;
+import org.Game2D.engine.data.runtime.DataHand;
+import org.Game2D.engine.physics.managers.ActionMan;
 import org.Game2D.engine.objects.advanced.Entity;
 
 import java.awt.*;

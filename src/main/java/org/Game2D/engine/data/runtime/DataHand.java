@@ -2,14 +2,14 @@
  * @author The Game2D contributors
  */
 
-package org.Game2D.engine.core.handlers;
+package org.Game2D.engine.data.runtime;
 
 import org.Game2D.engine.chunks.Chunk;
 import org.Game2D.engine.chunks.ChunkMan;
-import org.Game2D.engine.core.managers.ActionMan;
-import org.Game2D.engine.core.managers.RenderMan;
+import org.Game2D.engine.io.user.Keyhand;
+import org.Game2D.engine.physics.managers.ActionMan;
+import org.Game2D.engine.graphics.managers.RenderMan;
 import org.Game2D.engine.objects.GameObject;
-import org.Game2D.engine.utils.SpinLock;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -18,9 +18,7 @@ import java.util.List;
 public class DataHand {
 
     private static final ArrayList<GameObject> gameObjects = new ArrayList<>();
-    //    private static final ArrayList<Camera> cameras = new ArrayList<>();
 
-    private static final SpinLock lock = new SpinLock();
 
     public static Path confPath = null;
 
@@ -29,24 +27,6 @@ public class DataHand {
 
     //Handlers
     public static Keyhand keyHand = null;
-
-//    public static void addCamera(Camera camera) {
-//        long threadId = Thread.currentThread().getId();
-//        lock.acquirerLock(threadId);
-//        cameras.add(camera);
-//        lock.dropLock(threadId);
-//    }
-//
-//    public static void removeCamera(Camera camera) {
-//        long threadId = Thread.currentThread().getId();
-//        lock.acquirerLock(threadId);
-//        cameras.remove(camera);
-//        lock.dropLock(threadId);
-//    }
-//
-//    public static List<Camera> getCameras() {
-//        return new ArrayList<>(cameras);
-//    }
 
     /**
      * Automatically add the specified <code>GameObject</code>

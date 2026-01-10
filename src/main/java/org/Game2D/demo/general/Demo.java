@@ -10,10 +10,8 @@ import org.Game2D.demo.general.entities.Ball;
 import org.Game2D.demo.general.entities.BallwP;
 import org.Game2D.demo.general.entities.TpSquare;
 import org.Game2D.demo.general.objects.Square;
-import org.Game2D.engine.core.Instance;
-import org.Game2D.engine.core.handlers.DataHand;
-import org.Game2D.engine.core.managers.RenderMan;
-import org.Game2D.engine.objects.GameObject;
+import org.Game2D.engine.data.runtime.Instance;
+import org.Game2D.engine.graphics.managers.RenderMan;
 
 import javax.imageio.ImageIO;
 import java.awt.*;

@@ -5,7 +5,7 @@
 package org.Game2D.engine.objects.advanced;
 
 import org.Game2D.engine.chunks.ObjectTransferMan;
-import org.Game2D.engine.core.managers.ActionMan;
+import org.Game2D.engine.physics.managers.ActionMan;
 import org.Game2D.engine.objects.GameObject;
 
 import java.awt.*;

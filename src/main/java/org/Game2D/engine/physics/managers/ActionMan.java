@@ -5,13 +5,13 @@
  * @author The Game2D contributors
  */
 
-package org.Game2D.engine.core.managers;
+package org.Game2D.engine.physics.managers;
 
 import org.Game2D.engine.chunks.ChunkMan;
-import org.Game2D.engine.core.handlers.DataHand;
-import org.Game2D.devtools.DebugScreen;
+import org.Game2D.engine.data.runtime.DataHand;
+import org.Game2D.tools.DebugScreen;
 import org.Game2D.engine.objects.GameObject;
-import org.Game2D.engine.utils.ConfProvider;
+import org.Game2D.engine.io.conf.ConfProvider;
 
 import java.awt.*;
 import java.util.List;

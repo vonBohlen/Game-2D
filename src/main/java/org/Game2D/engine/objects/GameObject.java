@@ -4,9 +4,9 @@
 
 package org.Game2D.engine.objects;
 
-import org.Game2D.engine.core.handlers.DataHand;
-import org.Game2D.engine.core.managers.Camera;
-import org.Game2D.engine.utils.AssetMan;
+import org.Game2D.engine.data.runtime.DataHand;
+import org.Game2D.engine.graphics.Camera;
+import org.Game2D.engine.io.assets.AssetMan;
 
 import java.awt.*;
 import java.util.UUID;

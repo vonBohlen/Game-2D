@@ -2,13 +2,11 @@
  * @author The Game2D contributors
  */
 
-package org.Game2D.engine.core.managers;
+package org.Game2D.engine.graphics;
 
 import org.Game2D.engine.chunks.Chunk;
 import org.Game2D.engine.chunks.ChunkMan;
-import org.Game2D.engine.core.handlers.DataHand;
-
-import java.awt.*;
+import org.Game2D.engine.data.runtime.DataHand;
 
 public class Camera {
 

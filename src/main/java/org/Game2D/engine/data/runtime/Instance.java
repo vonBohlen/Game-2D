@@ -2,17 +2,16 @@
  * @author The Game2D contributors
  */
 
-package org.Game2D.engine.core;
+package org.Game2D.engine.data.runtime;
 
 import lombok.Getter;
 import lombok.Setter;
 import org.Game2D.engine.chunks.Chunk;
 import org.Game2D.engine.chunks.ChunkMan;
-import org.Game2D.engine.core.handlers.ConfHand;
-import org.Game2D.engine.core.handlers.DataHand;
-import org.Game2D.engine.core.handlers.Keyhand;
-import org.Game2D.engine.core.managers.ActionMan;
-import org.Game2D.engine.core.managers.RenderMan;
+import org.Game2D.engine.io.conf.ConfHand;
+import org.Game2D.engine.io.user.Keyhand;
+import org.Game2D.engine.physics.managers.ActionMan;
+import org.Game2D.engine.graphics.managers.RenderMan;
 
 import javax.swing.*;
 import java.awt.*;
