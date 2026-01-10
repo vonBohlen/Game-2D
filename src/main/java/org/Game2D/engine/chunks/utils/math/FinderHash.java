@@ -10,8 +10,10 @@ import lombok.NonNull;
 import org.Game2D.engine.chunks.Chunk;
 import org.Game2D.engine.chunks.manager.ChunkMan;
 import org.Game2D.engine.chunks.utils.data.Directions;
+import org.Game2D.engine.objects.GameObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 

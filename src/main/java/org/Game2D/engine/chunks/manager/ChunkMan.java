@@ -34,8 +34,7 @@ public class ChunkMan {
     public static final int updateDistance = 24;
     public static final int renderDistance = 12;
     private static final FinderHash chunksByCo = new FinderHash(); // enables to find a chunk via its coordinates
-    private static final HashMap<UUID, UUID> objectStorage = new HashMap<>(); // assigns each object a chunks UUID
-    public static ConcurrentHashMap<UUID, Chunk> chunks = new ConcurrentHashMap<>(); // all chunks with their UUID
+    private static final HashMap<GameObject,Chunk> objectStorage = new HashMap<>(); // assigns each object a chunks UUID
     private static int storedUpdateDistance = updateDistance;
     private static int storedRenderDistance = renderDistance;
 
@@ -68,7 +67,7 @@ public class ChunkMan {
      * @return Chunk of the given GameObject
      */
     public static Chunk getChunkFromObject(@NonNull GameObject object) {
-        return chunks.get(objectStorage.get(object.uuid));
+        return objectStorage.get(object);
     }
 
     /**
@@ -78,7 +77,7 @@ public class ChunkMan {
      * @param chunk  Chunk in which the GameObject is to be stored
      */
     public static void registerObject(@NonNull GameObject object, @NonNull Chunk chunk) {
-        objectStorage.put(object.uuid, chunk.uuid);
+        objectStorage.put(object, chunk);
     }
 
     /**
@@ -87,7 +86,7 @@ public class ChunkMan {
      * @param object GameObject to be unregistered
      */
     public static void unregisterObject(@NonNull GameObject object) {
-        objectStorage.remove(object.uuid);
+        objectStorage.remove(object);
     }
 
     /**
@@ -96,7 +95,6 @@ public class ChunkMan {
      * @param chunk Chunk to be added
      */
     public static void addChunk(Chunk chunk) {
-        chunks.put(chunk.uuid, chunk);
         chunksByCo.addChunk(chunk);
     }
 
@@ -107,7 +105,6 @@ public class ChunkMan {
      */
     public static void addChunks(@NonNull Collection<Chunk> newChunks) {
         for (Chunk i : newChunks) {
-            chunks.put(i.uuid, i);
             chunksByCo.addChunk(i);
         }
     }
@@ -173,7 +170,6 @@ public class ChunkMan {
         storedChunk = null;
         storedUpdateChunks = new ArrayList<>();
         storedRenderChunks = new ArrayList<>();
-        chunks = new ConcurrentHashMap<>();
     }
 
 }
