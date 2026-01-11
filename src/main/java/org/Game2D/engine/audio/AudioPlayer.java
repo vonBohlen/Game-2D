@@ -36,4 +36,9 @@ public class AudioPlayer {
         audioClip.stop();
     }
 
+    public void stop() {
+        pause();
+        stopped = true;
+    }
+
 }

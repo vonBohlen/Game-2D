@@ -4,6 +4,7 @@
 
 package org.Game2D.engine.data.runtime;
 
+import org.Game2D.engine.audio.loops.AudioLoop;
 import org.Game2D.engine.chunks.Chunk;
 import org.Game2D.engine.chunks.manager.ChunkMan;
 import org.Game2D.engine.io.user.Keyhand;
@@ -24,6 +25,7 @@ public class DataHand {
 
     public static ActionLoop actionLoop = null;
     public static RenderLoop renderLoop = null;
+    public static AudioLoop audioLoop = null;
 
     //Handlers
     public static Keyhand keyHand = null;

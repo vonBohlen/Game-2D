@@ -6,6 +6,7 @@ package org.Game2D.engine.data.runtime;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.Game2D.engine.audio.loops.AudioLoop;
 import org.Game2D.engine.chunks.Chunk;
 import org.Game2D.engine.chunks.manager.ChunkMan;
 import org.Game2D.engine.graphics.loops.RenderLoop;
@@ -68,6 +69,8 @@ public class Instance {
 
         DataHand.actionLoop = new ActionLoop();
 
+        DataHand.audioLoop = new AudioLoop();
+
         DataHand.renderLoop.initializeCamera();
     }
 
@@ -88,6 +91,8 @@ public class Instance {
         DataHand.renderLoop.startRenderLoop();
 
         DataHand.actionLoop.startGameLoop();
+
+        DataHand.audioLoop.startAudioThread();
 
     }
 
@@ -123,6 +128,7 @@ public class Instance {
     public void exit() {
         DataHand.actionLoop.exit();
         DataHand.renderLoop.exit();
+        DataHand.audioLoop.exit();
 
         window.dispose();
     }
