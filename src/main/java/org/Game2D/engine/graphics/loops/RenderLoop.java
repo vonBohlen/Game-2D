@@ -60,7 +60,7 @@ public class RenderLoop extends JPanel implements Runnable {
     }
 
     /**
-     * Create a new render thread
+     * Create a new setRenderData thread
      */
     public void startRenderLoop() {
 
@@ -71,7 +71,7 @@ public class RenderLoop extends JPanel implements Runnable {
     }
 
     /**
-     * Executed by the render thread<br>
+     * Executed by the setRenderData thread<br>
      * Waits until the time is right to maintain a constant
      * update rate
      */
@@ -136,10 +136,10 @@ public class RenderLoop extends JPanel implements Runnable {
 //        super.paintComponent(g);
 //
 //        // Hitbox visualization
-//        boolean renderHitBoxes = Objects.requireNonNull(ConfProvider.getConf(DataHand.confPath)).getProperty("game2d.render.hitboxes").equals("true");
+//        boolean renderHitBoxes = Objects.requireNonNull(ConfProvider.getConf(DataHand.confPath)).getProperty("game2d.setRenderData.hitboxes").equals("true");
 //
-//        // render chunks that have objects in them
-//        boolean renderActiveChunks = Objects.requireNonNull(ConfProvider.getConf(DataHand.confPath)).getProperty("game2d.render.activechunks").equals("true");
+//        // setRenderData chunks that have objects in them
+//        boolean renderActiveChunks = Objects.requireNonNull(ConfProvider.getConf(DataHand.confPath)).getProperty("game2d.setRenderData.activechunks").equals("true");
 //
 //        BufferedImage img = new BufferedImage(DataHand.renderLoop.getWidth(), DataHand.renderLoop.getHeight(), BufferedImage.TYPE_INT_RGB);
 //        Graphics2D g2 = img.createGraphics();
@@ -149,7 +149,7 @@ public class RenderLoop extends JPanel implements Runnable {
 //
 //        g2.setColor(Color.magenta);
 //
-//        // draw each object that is in render distance
+//        // draw each object that is in setRenderData distance
 //        ChunkMan.renderByChunk(Camera.renderUpdate(), g2, renderHitBoxes, renderActiveChunks);
 //
 //        DebugScreen.draw(g2);
@@ -177,7 +177,7 @@ public class RenderLoop extends JPanel implements Runnable {
         // Hitbox visualization
         boolean renderHitBoxes = Objects.requireNonNull(ConfProvider.getConf(DataHand.confPath)).getProperty("game2d.render.hitboxes").equals("true");
 
-        // render chunks that have objects in them
+        // setRenderData chunks that have objects in them
         boolean renderActiveChunks = Objects.requireNonNull(ConfProvider.getConf(DataHand.confPath)).getProperty("game2d.render.activechunks").equals("true");
 
         super.paintComponent(g);
@@ -189,7 +189,7 @@ public class RenderLoop extends JPanel implements Runnable {
 
         g2.setColor(Color.magenta);
 
-        // draw each object that is in render distance
+        // draw each object that is in setRenderData distance
         ChunkMan.renderByChunk(Camera.renderUpdate(), g2, renderHitBoxes, renderActiveChunks);
 
         DebugScreen.draw(g2);

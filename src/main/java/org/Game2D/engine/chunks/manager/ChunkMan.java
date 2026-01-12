@@ -155,7 +155,7 @@ public class ChunkMan {
             storedChunk = chunk;
             storedRenderDistance = renderDistance;
         }
-        // go through each chunk and render objects in them
+        // go through each chunk and setRenderData objects in them
         for (Chunk currentChunk : chunksToRender) currentChunk.render(g2, renderHitboxes, renderActiveChunks);
     }
 

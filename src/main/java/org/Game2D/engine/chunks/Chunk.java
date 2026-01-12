@@ -20,6 +20,7 @@ import java.util.UUID;
  * Used by the ChunkManager
  */
 public class Chunk {
+
     public final UUID uuid;
 
     //TODO: Ich habe hier jetzt die ConcurrentHashMap auskommentiert weil irgendwie wurde die Funktionalität anhand einer UUID ein Objekt zu finden garnicht verwendet...
@@ -94,16 +95,16 @@ public class Chunk {
     public void render(@NonNull Graphics2D g2, boolean renderHitBoxes, boolean renderChunk) {
 
         synchronized (objectsByLayers) {
-            // render objects in chunk and their hitboxes
+            // setRenderData objects in chunk and their hitboxes
             g2.setColor(new Color(0, 200, 50));
             for (GameObject go : objectsByLayers) {
-                if (go.getTexture() != null || !go.render_enabled) go.render(g2);
-                if (go.hitBox != null && renderHitBoxes) go.drawHitBox(g2);
+                if (go.getTexture() != null || !go.renderEnabled) go.setRenderData(g2);
+                if (go.hitBox != null && renderHitBoxes) go.setHitboxRenderData(g2);
             }
         }
 
         synchronized (objectsByLayers) {
-            //render the chunks outline if it contains an object
+            //setRenderData the chunks outline if it contains an object
             if (renderChunk && !objectsByLayers.isEmpty()) {
                 g2.setColor(new Color(0, 150, 200));
                 g2.draw3DRect((int) (posX * ChunkMan.chunkSize * Camera.pixelsPerUnit) - Camera.getScreenSpacePosX(), (int) (posY * ChunkMan.chunkSize * Camera.pixelsPerUnit) - Camera.getScreenSpacePosY(), (int) (ChunkMan.chunkSize * Camera.pixelsPerUnit), (int) (ChunkMan.chunkSize * Camera.pixelsPerUnit), false);

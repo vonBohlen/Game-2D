@@ -4,72 +4,109 @@
 
 package org.Game2D.engine.objects;
 
+import lombok.NonNull;
 import org.Game2D.engine.data.runtime.DataHand;
 import org.Game2D.engine.graphics.Camera;
 import org.Game2D.engine.io.assets.AssetMan;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
+/**
+ * The GameObject class provides the fundamental data structure and key functionality to all GameObjects within the engine.
+ */
 public abstract class GameObject {
 
-    public Rectangle hitBox;
-    public final UUID uuid;
-    public int objectLayer;
-    public boolean render_enabled;
-    protected Image texture;
-    private boolean collisionActivated = false;
+    // Identifier
+    public final UUID uuid = UUID.randomUUID();
 
-    private void init(Rectangle hitbox, boolean collision, int objectLayer, boolean render_enabled) {
+    // Flags
+    public boolean renderEnabled;
+    public boolean collisionEnabled;
 
-        if (hitbox != null && collision) collisionActivated = true;
+    // HitBox
+    @NonNull public Rectangle hitBox; // TODO: Create custom Hitbox class
+    public int objectLayer; //TODO: Move into HitBox
+
+    // Texture
+    @NonNull public Image texture = AssetMan.loadAsset("default.png");
+
+    /**
+     * Initializes all fields within the class.
+     *
+     * @param renderEnabled Flag for rendering
+     * @param collisionEnabled Flag for collision
+     * @param hitbox Hitbox for the GameObject
+     * @param objectLayer Additional hitbox data for the layer of the GameObject
+     */
+    private void init(boolean renderEnabled, boolean collisionEnabled, @NonNull Rectangle hitbox, int objectLayer) {
+
+        this.collisionEnabled = collisionEnabled;
+        this.renderEnabled = renderEnabled;
+
         this.hitBox = hitbox;
+
         this.objectLayer = objectLayer;
-        this.render_enabled = render_enabled;
+
         DataHand.regGameObj(this);
     }
 
-    public GameObject(Rectangle hitBox, boolean collision, int objectLayer, boolean render_enabled, Image texture) {
-        uuid = UUID.randomUUID();
-        init(hitBox, collision, objectLayer, render_enabled);
+    /**
+     * Creates the fundamental data structure and key functionality for GameObjects.
+     *
+     * @param renderEnabled Flag for rendering
+     * @param collisionEnabled Flag for collision
+     * @param hitbox Hitbox for the GameObject
+     * @param objectLayer Additional hitbox data for the layer of the GameObject
+     * @param texture Texture for the GameObject
+     */
+    public GameObject(boolean renderEnabled, boolean collisionEnabled, @NonNull Rectangle hitbox, int objectLayer, @NonNull Image texture) {
+
+        init(renderEnabled, collisionEnabled, hitbox, objectLayer);
+
         this.texture = texture;
+
     }
 
-    public GameObject(Rectangle hitBox, boolean collision, int objectLayer, boolean render_enabled) {
-        uuid = UUID.randomUUID();
-        init(hitBox, collision, objectLayer, render_enabled);
-        texture = AssetMan.loadAsset("default.png");
+    /**
+     * Creates the fundamental data structure and key functionality for GameObjects.
+     *
+     * @param renderEnabled Flag for rendering
+     * @param collisionEnabled Flag for collision
+     * @param hitbox Hitbox for the GameObject
+     * @param objectLayer Additional hitbox data for the layer of the GameObject
+     */
+    public GameObject(boolean renderEnabled, boolean collisionEnabled, @NonNull Rectangle hitbox, int objectLayer) {
+
+        init(renderEnabled, collisionEnabled, hitbox, objectLayer);
+
     }
 
-    protected void activateCollision() {
-        if (hitBox != null) collisionActivated = true;
-    }
-
-    protected void deactivateCollision() {
-        collisionActivated = false;
-    }
-
-    public boolean getCollisionActivated() {
-        return collisionActivated;
-    }
-
-    public Image getTexture() {
-        return texture;
-    }
-
-    public void destroy() {
-        DataHand.remGameObj(this);
-    }
-
+    /**
+     * Gets called by the ActionLoop according to TPS, and can therefor be overridden to manipulate the GameObject.
+     */
     public abstract void update();
 
-    public void render(Graphics2D g2){
+    /**
+     * Adds the GameObjects's render data to the provided Graphics2D.
+     *
+     * @param g2 Java.awt Graphics2D, to add render data to
+     */
+    public void setRenderData(Graphics2D g2){
+
         g2.drawImage(texture, getScreenCoordinateX(), getScreenCoordinateY(), getScreenSpaceWidth(), getScreenSpaceHeight(), null);
+
     }
-    public void drawHitBox(Graphics g2){
-        g2.draw3DRect(getScreenCoordinateX(), getScreenCoordinateY(), getScreenSpaceWidth(), getScreenSpaceHeight(), false);
+
+    /**
+     * Adds the GameObjects's hitbox render data to the provided Graphics.
+     *
+     * @param g Java.awt Graphics, to add render data to
+     */
+    public void setHitboxRenderData(Graphics g){
+
+        g.draw3DRect(getScreenCoordinateX(), getScreenCoordinateY(), getScreenSpaceWidth(), getScreenSpaceHeight(), false);
+
     }
 
     protected int getScreenCoordinateX(){
@@ -92,6 +129,16 @@ public abstract class GameObject {
     }
     protected int getCustomScreenSpace(int value){
         return (int)(value * Camera.pixelsPerUnit);
+    }
+
+    /**
+     * Removes the GameObject from the engine.
+     */
+    public void destroy() {
+
+        //TODO: Actually remove the GameObject from the engine.
+        DataHand.remGameObj(this);
+
     }
 
 }
