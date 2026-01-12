@@ -1,4 +1,4 @@
-package org.Game2D.engine.network;
+package org.Game2D.engine.network.tcp;
 
 import java.io.*;
 import java.net.*;

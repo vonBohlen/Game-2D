@@ -1,4 +1,4 @@
-package org.Game2D.engine.network;
+package org.Game2D.engine.network.udp;
 
 import java.net.*;
 
