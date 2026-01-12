@@ -33,7 +33,7 @@ public class Demo {
             throw new RuntimeException(e);
         }
 
-        //new Player(new Rectangle(200, 200, 48, 48), texture);
+        new Player(new Rectangle(200, 200, 48, 48), texture);
 
         //new Square(new Rectangle(100, 52, 48, 48), texture);
 

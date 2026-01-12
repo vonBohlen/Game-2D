@@ -9,6 +9,8 @@ import org.Game2D.engine.graphics.Camera;
 import org.Game2D.engine.io.assets.AssetMan;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public abstract class GameObject {
