@@ -19,7 +19,7 @@ public class InfoDisplay extends Entity {
 
     public InfoDisplay() {
 
-        super(new Rectangle(DataHand.renderLoop.getWidth() / 2, DataHand.renderLoop.getHeight() / 2, 0, 0), false, 4, null);
+        super(new Rectangle(DataHand.renderLoop.getWidth() / 2, DataHand.renderLoop.getHeight() / 2, 0, 0), false, 4, false);
 
     }
 

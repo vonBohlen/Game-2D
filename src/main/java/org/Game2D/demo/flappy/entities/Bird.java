@@ -99,7 +99,7 @@ public class Bird extends Entity {
     }
 
     @Override
-    public void render(Graphics2D g2) {
+    public void setRenderData(Graphics2D g2) {
         g2.drawImage(texture, getScreenCoordinateX(-12), getScreenCoordinateY(-6), getCustomScreenSpace(64), getCustomScreenSpace(48), null);
     }
 

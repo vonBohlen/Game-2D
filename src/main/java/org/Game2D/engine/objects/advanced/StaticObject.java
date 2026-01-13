@@ -11,11 +11,11 @@ import java.awt.*;
 public abstract class StaticObject extends GameObject {
 
     public StaticObject(Rectangle hitbox, boolean collision, int objectLayer, Image texture) {
-        super(hitbox, collision, objectLayer, true, texture);
+        super(true, collision, hitbox, objectLayer, texture);
     }
 
     public StaticObject(Rectangle hitbox, boolean collision, int objectLayer) {
-        super(hitbox, collision, objectLayer, true);
+        super(true, collision, hitbox, objectLayer);
     }
 
     @Override

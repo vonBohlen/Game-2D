@@ -93,9 +93,6 @@ public class PipeManager extends Entity {
         }
     }
 
-    @Override
-    public void render(Graphics2D g2) {}
-
     private void setDefaultAlt(){
 
         for(PipeTop top : tops){

@@ -12,12 +12,20 @@ import java.awt.*;
 
 public abstract class Entity extends GameObject {
 
+    public Entity(Rectangle hitbox, boolean collision, int objectLayer, Image texture, boolean renderEnabled) {
+        super(renderEnabled, collision, hitbox, objectLayer, texture);
+    }
+
     public Entity(Rectangle hitbox, boolean collision, int objectLayer, Image texture) {
-        super(hitbox, collision, objectLayer, true, texture);
+        super(true, collision, hitbox, objectLayer, texture);
+    }
+
+    public Entity(Rectangle hitbox, boolean collision, int objectLayer, boolean renderEnabled) {
+        super(renderEnabled, collision, hitbox, objectLayer);
     }
 
     public Entity(Rectangle hitbox, boolean collision, int objectLayer) {
-        super(hitbox, collision, objectLayer, true);
+        super(true, collision, hitbox, objectLayer);
     }
 
 //    protected GameObject[] move(int xShift, int yShift) {
