@@ -98,7 +98,7 @@ public class Chunk {
             // setRenderData objects in chunk and their hitboxes
             g2.setColor(new Color(0, 200, 50));
             for (GameObject go : objectsByLayers) {
-                if (go.getTexture() != null || !go.renderEnabled) go.setRenderData(g2);
+                if (go.renderEnabled) go.setRenderData(g2);
                 if (go.hitBox != null && renderHitBoxes) go.setHitboxRenderData(g2);
             }
         }
