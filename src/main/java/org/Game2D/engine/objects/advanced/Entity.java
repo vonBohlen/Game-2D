@@ -128,7 +128,6 @@ public abstract class Entity extends GameObject {
 
     }
 
-
     /**
      * Changes the position of the entity by setting new x- and y-coordinate values.
      *
@@ -172,7 +171,6 @@ public abstract class Entity extends GameObject {
         return null;
 
     }
-
 
     /**
      * Changes width and height of the entity.
