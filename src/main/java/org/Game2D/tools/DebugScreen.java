@@ -63,7 +63,8 @@ public class DebugScreen {
 
             g2.setColor(Color.YELLOW);
 
-            g2.drawString("Objects: " + DataHand.getGameObjs().size(), 20, 80);
+            // TODO: Get number of objects from the chunk system
+            //g2.drawString("Objects: " + DataHand.getGameObjs().size(), 20, 80);
 
             g2.setColor(Color.BLUE);
 

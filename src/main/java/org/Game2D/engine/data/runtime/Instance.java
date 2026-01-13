@@ -8,7 +8,10 @@ import lombok.Getter;
 import lombok.Setter;
 import org.Game2D.engine.audio.loops.AudioLoop;
 import org.Game2D.engine.chunks.Chunk;
+import org.Game2D.engine.chunks.handlers.GameObjectHand;
 import org.Game2D.engine.chunks.manager.ChunkMan;
+import org.Game2D.engine.events.events.objects.ObjectCreationEvent;
+import org.Game2D.engine.events.events.objects.ObjectDeletionEvent;
 import org.Game2D.engine.graphics.loops.RenderLoop;
 import org.Game2D.engine.io.conf.ConfHand;
 import org.Game2D.engine.io.user.Keyhand;
@@ -86,6 +89,10 @@ public class Instance {
 
         //Create a single Chunk, otherwise no other Chunks can be added
         ChunkMan.addChunk(new Chunk(0, 0));
+
+        // Listeners
+        ObjectCreationEvent.addHandler(new GameObjectHand());
+        ObjectDeletionEvent.addHandler(new GameObjectHand());
 
         //Starting ManagerLoops
         DataHand.renderLoop.startRenderLoop();

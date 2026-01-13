@@ -105,7 +105,7 @@ public class ScoreDisplay {
 
     public static void reset() {
         for (int i = scoreDigits.size() - 1; i >= 0; i--) {
-            scoreDigits.get(i).destroy();
+            scoreDigits.get(i).delete();
             scoreDigits.remove(i);
         }
         addDigit();

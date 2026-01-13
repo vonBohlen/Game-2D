@@ -43,9 +43,9 @@ public class ActionLoop implements Runnable {
 
         //ObjectTransferMan.transferAbs(go, position.x, position.y);
 
-        List<GameObject> gameObjects = DataHand.getGameObjs();
+        // TODO: Replace methode
 
-        for (GameObject current : gameObjects) {
+        for (GameObject current : ChunkMan.getChunkFromObject(go).objectsByLayers) {
 
             if (current.collisionEnabled && !current.equals(go) && go.objectLayer == current.objectLayer && position.intersects(current.hitBox))
                 return current;

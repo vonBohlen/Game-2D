@@ -51,7 +51,7 @@ public class ScoreDigit extends Entity {
     }
 
     public void remove() {
-        destroy();
+        delete();
     }
 
 }
