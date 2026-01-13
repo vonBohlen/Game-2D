@@ -1,7 +1,8 @@
-package org.Game2D.engine.events.events;
+package org.Game2D.engine.events.events.objects;
 
 import lombok.Getter;
-import org.Game2D.engine.events.handlers.ObjectCreationHandler;
+import lombok.NonNull;
+import org.Game2D.engine.events.handlers.objects.ObjectCreationHandler;
 import org.Game2D.engine.objects.GameObject;
 
 import java.util.ArrayList;
@@ -13,19 +14,19 @@ public class ObjectCreationEvent {
     @Getter
     private static final List<ObjectCreationHandler> handlers = Collections.synchronizedList(new ArrayList<>());
 
-    public static void addListener(ObjectCreationHandler listener) {
+    public static void addHandler(ObjectCreationHandler handler) {
         synchronized (handlers) {
-            handlers.add(listener);
+            handlers.add(handler);
         }
     }
 
-    public static void removeListener(ObjectCreationHandler listener) {
+    public static void removeHandler(ObjectCreationHandler handler) {
         synchronized (handlers) {
-            handlers.remove(listener);
+            handlers.remove(handler);
         }
     }
 
-    public static void callEvent(GameObject gameObject) {
+    public static void callEvent(@NonNull GameObject gameObject) {
         synchronized (handlers) {
             handlers.forEach(handler -> handler.handelObjectCreationEvent(gameObject));
         }
