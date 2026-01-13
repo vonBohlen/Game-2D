@@ -1,7 +1,7 @@
 package org.Game2D.engine.events.events;
 
 import lombok.Getter;
-import org.Game2D.engine.events.handler.interfaces.ObjectCreationHandler;
+import org.Game2D.engine.events.handlers.ObjectCreationHandler;
 import org.Game2D.engine.objects.GameObject;
 
 import java.util.ArrayList;

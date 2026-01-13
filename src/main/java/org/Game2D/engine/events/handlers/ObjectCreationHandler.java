@@ -1,4 +1,4 @@
-package org.Game2D.engine.events.handler.interfaces;
+package org.Game2D.engine.events.handlers;
 
 import org.Game2D.engine.objects.GameObject;
 
