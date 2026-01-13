@@ -4,99 +4,84 @@
 
 package org.Game2D.engine.objects.advanced;
 
+import lombok.NonNull;
 import org.Game2D.engine.chunks.manager.ObjectTransferMan;
 import org.Game2D.engine.objects.loops.ActionLoop;
 import org.Game2D.engine.objects.GameObject;
 
 import java.awt.*;
 
+/**
+ * The Entity class provides with entities associate features to a GameObject.
+ */
 public abstract class Entity extends GameObject {
 
-    public Entity(Rectangle hitbox, boolean collision, int objectLayer, Image texture, boolean renderEnabled) {
-        super(renderEnabled, collision, hitbox, objectLayer, texture);
+    /**
+     * Creates a GameObject with entity features.
+     *
+     * @param renderEnabled Flag for rendering
+     * @param collisionEnabled Flag for collisionEnabled
+     * @param hitbox Hitbox for the GameObject
+     * @param objectLayer Additional hitbox data for the layer of the GameObject
+     * @param texture Texture for the GameObject
+     */
+    public Entity(boolean renderEnabled, boolean collisionEnabled, @NonNull Rectangle hitbox, int objectLayer, @NonNull Image texture) {
+
+        super(renderEnabled, collisionEnabled, hitbox, objectLayer, texture);
+
     }
 
-    public Entity(Rectangle hitbox, boolean collision, int objectLayer, Image texture) {
-        super(true, collision, hitbox, objectLayer, texture);
+    /**
+     * Creates a GameObject with entity features.
+     *
+     * @param renderEnabled Flag for rendering
+     * @param collisionEnabled Flag for collision
+     * @param hitbox Hitbox for the GameObject
+     * @param objectLayer Additional hitbox data for the layer of the GameObject
+     */
+    public Entity(boolean renderEnabled, boolean collisionEnabled, @NonNull Rectangle hitbox, int objectLayer) {
+
+        super(renderEnabled, collisionEnabled, hitbox, objectLayer);
+
     }
 
-    public Entity(Rectangle hitbox, boolean collision, int objectLayer, boolean renderEnabled) {
-        super(renderEnabled, collision, hitbox, objectLayer);
+    /**
+     * Creates a GameObject with entity features.
+     *
+     * @param collisionEnabled Flag for collision
+     * @param hitbox Hitbox for the GameObject
+     * @param objectLayer Additional hitbox data for the layer of the GameObject
+     * @param texture Texture for the GameObject
+     */
+    public Entity(boolean collisionEnabled, @NonNull Rectangle hitbox, int objectLayer, @NonNull Image texture) {
+
+        super(true, collisionEnabled, hitbox, objectLayer, texture);
+
     }
 
-    public Entity(Rectangle hitbox, boolean collision, int objectLayer) {
-        super(true, collision, hitbox, objectLayer);
+    /**
+     * Creates a GameObject with entity features.
+     *
+     * @param collisionEnabled Flag for collision
+     * @param hitbox Hitbox for the GameObject
+     * @param objectLayer Additional hitbox data for the layer of the GameObject
+     */
+    public Entity(boolean collisionEnabled, @NonNull Rectangle hitbox, int objectLayer) {
+
+        super(true, collisionEnabled, hitbox, objectLayer);
+
     }
 
-//    protected GameObject[] move(int xShift, int yShift) {
-//
-//        if (hitBox == null) return null;
-//
-//        GameObject objectCacheX, objectCacheY;
-//
-//        GameObject[] objectCache = new GameObject[2];
-//    }
-
-//    protected GameObject[] move(int xShift, int yShift) {
-//
-//        if (hitBox == null) return null;
-//
-//        GameObject objectCacheX, objectCacheY;
-//
-//        GameObject[] objectCache = new GameObject[2];
-//
-//        while (xShift != 0 || yShift != 0) {
-//            int newX = hitBox.x;
-//            int newY = hitBox.y;
-//
-//            if (xShift < 0) {
-//                newX = hitBox.x - 1;
-//                xShift++;
-//            }
-//            else if (xShift > 0) {
-//                newX = hitBox.x + 1;
-//                xShift--;
-//            }
-//
-//            if (yShift < 0) {
-//                newY = hitBox.y - 1;
-//                yShift++;
-//            }
-//            else if (yShift > 0) {
-//                newY = hitBox.y + 1;
-//                yShift--;
-//            }
-//
-//            objectCacheX = ActionMan.checkCollision(this, new Rectangle(newX, hitBox.y, hitBox.width, hitBox.height));
-//            objectCacheY = ActionMan.checkCollision(this, new Rectangle(hitBox.x, newY, hitBox.width, hitBox.height));
-//
-//            if (newX != hitBox.x) {
-//                if (objectCacheX == null) hitBox.x = newX;
-//                else {
-//                    xShift = 0;
-//                    objectCache[0] = objectCacheX;
-//                }
-//            }
-//
-//            if (newY != hitBox.y) {
-//                if (objectCacheY == null) hitBox.y = newY;
-//                else {
-//                    yShift = 0;
-//                    objectCache[1] = objectCacheY;
-//                }
-//            }
-//
-//        }
-//
-//        if (objectCache[0] == null && objectCache[1] == null) return null;
-//
-//        return objectCache;
-//
-//    }
-
+    /**
+     * Moves the entity for the provided x- and y-shift.
+     *
+     * @param xShift Units to move x-coordinate
+     * @param yShift Units to move y-coordinate
+     * @return GameObjects the entity collided with during moving
+     */
     protected GameObject[] move(int xShift, int yShift) {
 
-        if (hitBox == null) return null;
+        // TODO: Replace methode
 
         GameObject objectCacheX, objectCacheY;
         GameObject[] objectCache = new GameObject[2];
@@ -140,12 +125,18 @@ public abstract class Entity extends GameObject {
         ObjectTransferMan.checkTransferAfterMoveAbs(this, oldX, oldY);
 
         return (objectCache[0] == null && objectCache[1] == null) ? null : objectCache;
+
     }
 
 
+    /**
+     * Changes the position of the entity by setting new x- and y-coordinate values.
+     *
+     * @param newX New x-coordinate
+     * @param newY New y-coordinate
+     * @param ignoreCollision Ignore collision while setting new coordinates
+     */
     public void setPosition(int newX, int newY, boolean ignoreCollision) {
-
-        if (hitBox == null) return;
 
         int oldX = hitBox.x;
         int oldY = hitBox.y;
@@ -159,11 +150,16 @@ public abstract class Entity extends GameObject {
         hitBox.y = newY;
 
         ObjectTransferMan.checkTransferAfterMoveAbs(this, oldX, oldY);
+
     }
 
+    /**
+     * Changes the position of the entity by setting new x- and y-coordinate values.
+     *
+     * @param newX New x-coordinate
+     * @param newY New y-coordinate
+     */
     public GameObject setPosition(int newX, int newY) {
-
-        if (hitBox == null) return null;
 
         Rectangle newPosition = new Rectangle(newX, newY, hitBox.width, hitBox.height);
         GameObject objectCache = ActionLoop.checkCollision(this, newPosition);
@@ -178,9 +174,14 @@ public abstract class Entity extends GameObject {
     }
 
 
+    /**
+     * Changes width and height of the entity.
+     *
+     * @param newWidth New entity width
+     * @param newHeight New entity height
+     * @return GameObjects the entity collided with during size change
+     */
     public GameObject changeEntitySize(int newWidth, int newHeight) {
-
-        if (hitBox == null) return null;
 
         Rectangle newSize = new Rectangle(hitBox.x, hitBox.y, newWidth, newHeight);
         GameObject objectCache = ActionLoop.checkCollision(this, newSize);

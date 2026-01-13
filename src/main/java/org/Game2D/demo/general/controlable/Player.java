@@ -13,7 +13,7 @@ public class Player extends Entity {
 
     public Player(Rectangle hb, Image txt) {
 
-        super(hb, true, 0, txt);
+        super(true, hb, 0, txt);
 
     }
 

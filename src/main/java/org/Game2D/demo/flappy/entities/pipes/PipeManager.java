@@ -27,7 +27,7 @@ public class PipeManager extends Entity {
     final List<PipeBelow> belows = new ArrayList<>();
 
     public PipeManager(){
-        super(new Rectangle(), false, -1, null);
+        super(false, false, new Rectangle(), -1);
 
         //first the amount of needed pipes is calculated
         //the distance between two pipes will be 300 pixels

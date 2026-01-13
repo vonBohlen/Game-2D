@@ -23,7 +23,7 @@ public class PipePair extends Entity {
 
     //Standard coordinates
     public PipePair(int x){
-        super(new Rectangle(0,0), false, -1, false);
+        super(false, false, new Rectangle(0,0), -1);
         startX = x;
         int y = PipeHandler.getRndY();
         top = new PipeTop(x, y);

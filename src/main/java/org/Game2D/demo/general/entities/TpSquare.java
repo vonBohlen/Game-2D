@@ -14,7 +14,7 @@ import java.util.Random;
 public class TpSquare extends Entity {
 
     public TpSquare( Rectangle hb, Image txt) {
-        super(hb, true, 0, txt);
+        super(true, hb, 0, txt);
     }
 
     public void update() {

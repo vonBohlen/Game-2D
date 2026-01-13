@@ -11,7 +11,7 @@ import java.awt.*;
 public class Square extends StaticObject {
 
     public Square(Rectangle hb, Image txt) {
-        super(hb, true, 0, txt);
+        super(true, hb, 0, txt);
     }
 
 }

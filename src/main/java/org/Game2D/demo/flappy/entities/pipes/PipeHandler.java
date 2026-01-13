@@ -30,7 +30,7 @@ public class PipeHandler extends Entity {
     static int random = DataHand.renderLoop.getHeight() / 2 + 150;
 
     public PipeHandler(){
-        super(new Rectangle(0,0), false, -1, false);
+        super(false, false, new Rectangle(0,0), -1);
         initialisePipes();
     }
 

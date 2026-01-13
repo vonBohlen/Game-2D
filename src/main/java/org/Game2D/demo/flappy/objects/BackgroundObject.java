@@ -7,6 +7,6 @@ import java.awt.*;
 public class BackgroundObject extends StaticObject {
 
     public BackgroundObject(Rectangle hb, boolean collision, Image txt) {
-        super(hb, collision, 0, txt);
+        super(collision, hb, 0, txt);
     }
 }

@@ -26,7 +26,7 @@ public abstract class GameObject {
 
     // HitBox
     @NonNull public Rectangle hitBox; // TODO: Create custom Hitbox class
-    public int objectLayer; //TODO: Move into HitBox
+    public int objectLayer; // TODO: Move into HitBox
 
     // Texture
     @NonNull public Image texture = AssetMan.loadAsset("default.png");
@@ -48,7 +48,7 @@ public abstract class GameObject {
 
         this.objectLayer = objectLayer;
 
-        DataHand.regGameObj(this);
+        DataHand.regGameObj(this); // TODO: Replace with event
     }
 
     /**
@@ -109,6 +109,8 @@ public abstract class GameObject {
 
     }
 
+    // Experimental graphics stuff
+
     protected int getScreenCoordinateX(){
         return (int)(hitBox.x * Camera.pixelsPerUnit) - (Camera.getScreenSpacePosX());
     }
@@ -136,8 +138,8 @@ public abstract class GameObject {
      */
     public void destroy() {
 
-        //TODO: Actually remove the GameObject from the engine.
-        DataHand.remGameObj(this);
+        // TODO: Actually remove the GameObject from the engine.
+        DataHand.remGameObj(this); // TODO: Replace with event
 
     }
 

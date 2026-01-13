@@ -14,7 +14,7 @@ import java.awt.*;
 public class PipeFiller extends Entity {
 
     public PipeFiller(int x, int y, boolean belowPipe) {
-        super(new Rectangle(x, belowPipe ? 0 : y + 612, 104, belowPipe ? y : DataHand.renderLoop.getHeight() - (y + 612)), true, 2, AssetMan.loadAsset("flappy_assets/pipe/pipe-green-filler.png"));
+        super(true, new Rectangle(x, belowPipe ? 0 : y + 612, 104, belowPipe ? y : DataHand.renderLoop.getHeight() - (y + 612)), 2, AssetMan.loadAsset("flappy_assets/pipe/pipe-green-filler.png"));
     }
 
     @Override

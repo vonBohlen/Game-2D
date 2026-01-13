@@ -12,7 +12,7 @@ import java.awt.*;
 public class Ball extends Entity {
 
     public Ball(Rectangle hb, Image txt) {
-        super(hb, true, 0, txt);
+        super(true, hb, 0, txt);
     }
 
     @Override

@@ -22,7 +22,7 @@ public class Physicsobject extends Entity {
     final double speedLossAtCollisionPercent = 2.0; //best is 1.25 and 0 for no energy loss
 
     public Physicsobject(boolean collision, Image txt, int tps) {
-        super(new Rectangle(100,100,48,48), collision, 0, txt);
+        super(collision, new Rectangle(100,100,48,48), 0, txt);
 
         this.passedTime = 1/ (double) tps;
     }

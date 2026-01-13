@@ -14,7 +14,7 @@ public class PipeBelow extends Entity {
 
     final PipeFiller filler;
     public PipeBelow(int x, int y) {
-        super(new Rectangle(x, y, 104, 628), true, 2, AssetMan.loadAsset("flappy_assets/pipe/pipe-green-upside-down.png"));
+        super(true, new Rectangle(x, y, 104, 628), 2, AssetMan.loadAsset("flappy_assets/pipe/pipe-green-upside-down.png"));
         filler = new PipeFiller(x, y, true);
     }
 
