@@ -6,6 +6,8 @@ package org.Game2D.engine.objects;
 
 import lombok.NonNull;
 import org.Game2D.engine.data.runtime.DataHand;
+import org.Game2D.engine.events.events.objects.ObjectCreationEvent;
+import org.Game2D.engine.events.events.objects.ObjectDeletionEvent;
 import org.Game2D.engine.graphics.Camera;
 import org.Game2D.engine.io.assets.AssetMan;
 
@@ -48,6 +50,7 @@ public abstract class GameObject {
 
         this.objectLayer = objectLayer;
 
+        ObjectCreationEvent.callEvent(this);
         DataHand.regGameObj(this); // TODO: Replace with event
     }
 
@@ -138,6 +141,7 @@ public abstract class GameObject {
      */
     public void destroy() {
 
+        ObjectDeletionEvent.callEvent(this);
         // TODO: Actually remove the GameObject from the engine.
         DataHand.remGameObj(this); // TODO: Replace with event
 
