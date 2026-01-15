@@ -7,13 +7,17 @@
 
 package org.Game2D.engine.objects.loops;
 
+import lombok.Getter;
+import org.Game2D.engine.chunks.Chunk;
 import org.Game2D.engine.chunks.manager.ChunkMan;
+import org.Game2D.engine.chunks.utils.data.Directions;
 import org.Game2D.engine.data.runtime.DataHand;
 import org.Game2D.tools.DebugScreen;
 import org.Game2D.engine.objects.GameObject;
 import org.Game2D.engine.io.conf.ConfProvider;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,6 +27,7 @@ import java.util.List;
  */
 public class ActionLoop implements Runnable {
 
+    @Getter
     private static int gameTick = 0;
     /**
      * Thread executing GameObject updates
@@ -45,19 +50,29 @@ public class ActionLoop implements Runnable {
 
         // TODO: Replace methode
 
-        for (GameObject current : ChunkMan.getChunkFromObject(go).objectsByLayers) {
+        Chunk chunk = ChunkMan.getChunkFromObject(go);
 
-            if (current.collisionEnabled && !current.equals(go) && go.objectLayer == current.objectLayer && position.intersects(current.hitBox))
+        List<GameObject> gameObjectCache = new ArrayList<>(chunk.objectsByLayers);
+
+        // TODO: Replace by only loading adjacent chunks in the direction in which the GameObject is moving
+        gameObjectCache.addAll(ChunkMan.getAdjacentChunk(chunk, Directions.TOP).objectsByLayers);
+        gameObjectCache.addAll(ChunkMan.getAdjacentChunk(chunk, Directions.TOP_LEFT).objectsByLayers);
+        gameObjectCache.addAll(ChunkMan.getAdjacentChunk(chunk, Directions.LEFT).objectsByLayers);
+        gameObjectCache.addAll(ChunkMan.getAdjacentChunk(chunk, Directions.BOTTOM_LEFT).objectsByLayers);
+        gameObjectCache.addAll(ChunkMan.getAdjacentChunk(chunk, Directions.BOTTOM).objectsByLayers);
+        gameObjectCache.addAll(ChunkMan.getAdjacentChunk(chunk, Directions.TOP_RIGHT).objectsByLayers);
+        gameObjectCache.addAll(ChunkMan.getAdjacentChunk(chunk, Directions.RIGHT).objectsByLayers);
+        gameObjectCache.addAll(ChunkMan.getAdjacentChunk(chunk, Directions.BOTTOM_RIGHT).objectsByLayers);
+
+        for (GameObject current : gameObjectCache) {
+
+            if (current.collisionEnabled && !current.equals(go) /*&& go.objectLayer == current.objectLayer*/ && position.intersects(current.hitBox))
                 return current;
 
         }
 
         return null;
 
-    }
-
-    public static int getGameTick() {
-        return gameTick;
     }
 
     /**

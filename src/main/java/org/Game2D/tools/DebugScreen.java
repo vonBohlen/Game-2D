@@ -4,6 +4,7 @@
 
 package org.Game2D.tools;
 
+import org.Game2D.engine.chunks.manager.ChunkMan;
 import org.Game2D.engine.data.runtime.DataHand;
 import org.Game2D.engine.io.conf.ConfProvider;
 import org.Game2D.engine.io.user.Keyhand;
@@ -63,8 +64,7 @@ public class DebugScreen {
 
             g2.setColor(Color.YELLOW);
 
-            // TODO: Get number of objects from the chunk system
-            //g2.drawString("Objects: " + DataHand.getGameObjs().size(), 20, 80);
+            g2.drawString("Objects: " + ChunkMan.getTotalObjectCount(), 20, 80);
 
             g2.setColor(Color.BLUE);
 

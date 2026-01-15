@@ -5,8 +5,7 @@
 package org.Game2D.engine.objects;
 
 import lombok.NonNull;
-import org.Game2D.engine.events.events.objects.ObjectCreationEvent;
-import org.Game2D.engine.events.events.objects.ObjectDeletionEvent;
+import org.Game2D.engine.events.events.GameObjectEvents;
 import org.Game2D.engine.graphics.Camera;
 import org.Game2D.engine.io.assets.AssetMan;
 
@@ -49,7 +48,8 @@ public abstract class GameObject {
 
         this.objectLayer = objectLayer;
 
-        ObjectCreationEvent.callEvent(this);
+        // Call object creation event
+        GameObjectEvents.callEvent(handler -> handler.handelObjectCreationEvent(this));
 
     }
 
@@ -140,7 +140,8 @@ public abstract class GameObject {
      */
     public void delete() {
 
-        ObjectDeletionEvent.callEvent(this);
+        // Call objec deletion event
+        GameObjectEvents.callEvent(handler -> handler.handelObjectDeletionEvent(this));
 
     }
 

@@ -4,14 +4,11 @@
 
 package org.Game2D.engine.data.runtime;
 
-import lombok.Getter;
-import lombok.Setter;
 import org.Game2D.engine.audio.loops.AudioLoop;
 import org.Game2D.engine.chunks.Chunk;
 import org.Game2D.engine.chunks.handlers.GameObjectHand;
 import org.Game2D.engine.chunks.manager.ChunkMan;
-import org.Game2D.engine.events.events.objects.ObjectCreationEvent;
-import org.Game2D.engine.events.events.objects.ObjectDeletionEvent;
+import org.Game2D.engine.events.events.GameObjectEvents;
 import org.Game2D.engine.graphics.loops.RenderLoop;
 import org.Game2D.engine.io.conf.ConfHand;
 import org.Game2D.engine.io.user.Keyhand;
@@ -27,17 +24,11 @@ public class Instance {
     private JFrame window;
 
     //Engine values
-    @Getter
-    @Setter
-    private int updateDistance = 16; // the amount of chunks to be updated in each direction from the start chunk
+    public int updateDistance = 16; // the amount of chunks to be updated in each direction from the start chunk
 
-    @Getter
-    @Setter
-    private int renderDistance = 16; // the amount of chunks to be rendered in each direction from the start chunk
+    public int renderDistance = 16; // the amount of chunks to be rendered in each direction from the start chunk
 
-    @Getter
-    @Setter
-    private int chunkSize = 512; // each chunk is a square with a sidelength of chunk size
+    public int chunkSize = 512; // each chunk is a square with a sidelength of chunk size
 
     //Game Logic Elements
 
@@ -62,9 +53,16 @@ public class Instance {
 
         //Initialization
 
+        DataHand.instance = this;
+
         ConfHand.setConfPath(confPath);
         ConfHand.generateConf();
         ConfHand.updateConf();
+
+        ChunkMan.initialize();
+
+        //Create a single Chunk, otherwise no other Chunks can be added
+        ChunkMan.addChunk(new Chunk(0, 0));
 
         DataHand.keyHand = new Keyhand();
 
@@ -87,12 +85,8 @@ public class Instance {
         //Loading Window
         loadWindow(windowTitle);
 
-        //Create a single Chunk, otherwise no other Chunks can be added
-        ChunkMan.addChunk(new Chunk(0, 0));
-
         // Listeners
-        ObjectCreationEvent.addHandler(new GameObjectHand());
-        ObjectDeletionEvent.addHandler(new GameObjectHand());
+        GameObjectEvents.addHandler(new GameObjectHand());
 
         //Starting ManagerLoops
         DataHand.renderLoop.startRenderLoop();

@@ -5,14 +5,16 @@
 package org.Game2D.engine.chunks.manager;
 
 import org.Game2D.engine.chunks.Chunk;
+import org.Game2D.engine.chunks.utils.data.Directions;
 import org.Game2D.engine.chunks.utils.math.FinderHash;
+import org.Game2D.engine.data.runtime.DataHand;
+import org.Game2D.engine.data.runtime.Instance;
 import org.Game2D.engine.objects.GameObject;
 import lombok.NonNull;
 
 import java.awt.*;
 import java.util.*;
 import java.util.List;
-import java.util.concurrent.ConcurrentHashMap;
 
 //TODO: Only load the smallest possible amount of chunks from disk into memory to safe recourses
 //TODO: Maybe provide tools to game developers, to further optimise this by letting them control this feature to tie loading from disk to player progress in game
@@ -26,18 +28,36 @@ public class ChunkMan {
     // 4. The new GameObject gets registered in its Chunk in objects where it is associated with its UUID to enable quick removal of the object from the chunk
     // 5. The GameObject also gets registered in ChunkMan in objectStorage where its UUID gets associated with its chunks UUID to be able to get the chunk just by looking at the object
 
-    public static final int chunkSize = 512; // each chunk is a square with a sidelength of chunk size
-    public static final int updateDistance = 24;
-    public static final int renderDistance = 12;
-    private static final FinderHash chunksByCo = new FinderHash(); // enables to find a chunk via its coordinates
+    public static int chunkSize; // each chunk is a square with a sidelength of chunk size
+    public static int updateDistance;
+    public static int renderDistance;
+    private static FinderHash chunksByCo; // enables to find a chunk via its coordinates
     private static final HashMap<GameObject,Chunk> objectStorage = new HashMap<>(); // assigns each object a chunks UUID
-    private static int storedUpdateDistance = updateDistance;
-    private static int storedRenderDistance = renderDistance;
+    private static int storedUpdateDistance;
+    private static int storedRenderDistance;
 
     private static Chunk storedChunk = null; // the pivot element that dictates which chunks get updated and rendered
     private static Chunk lastStoredChunk = null; // the last iterations pivot element that is used to look up whether the chunks to update need to be calculated again
     private static List<Chunk> storedUpdateChunks = new ArrayList<>(); // chunks that got updated in the last cycle
     private static List<Chunk> storedRenderChunks = new ArrayList<>(); // chunks that got rendered in the last cycle
+
+    /**
+     * Initializes the Chunk system.
+     */
+    public static void initialize() {
+
+        Instance instance = DataHand.instance;
+
+        chunkSize = instance.chunkSize;
+        updateDistance = instance.updateDistance;
+        renderDistance = instance.renderDistance;
+
+        storedUpdateDistance = updateDistance;
+        storedRenderDistance = renderDistance;
+
+        chunksByCo = new FinderHash();
+
+    }
 
     /**
      * Check if a Chunk with given global coordinates exists,
@@ -66,6 +86,10 @@ public class ChunkMan {
         return objectStorage.get(object);
     }
 
+    public static Chunk getAdjacentChunk(Chunk chunk, @NonNull Directions direction) {
+        return chunksByCo.getAdjacentChunk(chunk, direction);
+    }
+
     /**
      * Register a new GameObject in the ChunkManager
      *
@@ -83,6 +107,10 @@ public class ChunkMan {
      */
     public static void unregisterObject(@NonNull GameObject object) {
         objectStorage.remove(object);
+    }
+
+    public static int getTotalObjectCount() {
+        return objectStorage.size();
     }
 
     /**

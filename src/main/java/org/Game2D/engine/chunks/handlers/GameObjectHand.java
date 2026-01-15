@@ -3,11 +3,10 @@ package org.Game2D.engine.chunks.handlers;
 import lombok.NonNull;
 import org.Game2D.engine.chunks.Chunk;
 import org.Game2D.engine.chunks.manager.ChunkMan;
-import org.Game2D.engine.events.handlers.objects.ObjectCreationHandler;
-import org.Game2D.engine.events.handlers.objects.ObjectDeletionHandler;
+import org.Game2D.engine.events.handlers.GameObjectEventHandler;
 import org.Game2D.engine.objects.GameObject;
 
-public class GameObjectHand implements ObjectCreationHandler, ObjectDeletionHandler {
+public class GameObjectHand implements GameObjectEventHandler {
 
     @Override
     public void handelObjectCreationEvent(@NonNull GameObject gameObject) {

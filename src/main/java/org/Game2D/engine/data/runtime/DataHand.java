@@ -13,6 +13,9 @@ import java.nio.file.Path;
 
 public class DataHand {
 
+    // Instance
+    public static Instance instance = null;
+
     // Configuration path
     public static Path confPath = null;
 
