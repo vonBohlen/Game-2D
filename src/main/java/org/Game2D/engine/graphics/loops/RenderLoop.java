@@ -39,7 +39,7 @@ public class RenderLoop extends JPanel implements Runnable {
     }
 
     public void initializeCamera(){
-        camera = new Camera(0,0,1440);
+        camera = new Camera(0,0,0);
     }
 
     /**
@@ -130,19 +130,113 @@ public class RenderLoop extends JPanel implements Runnable {
      *
      * @param g the <code>Graphics</code> object to protect
      */
+    @Override
+    public void paintComponent(Graphics g) {
+
+        super.paintComponent(g);
+
+        // Hitbox visualization
+        boolean renderHitBoxes = Objects.requireNonNull(ConfProvider.getConf(DataHand.confPath)).getProperty("game2d.setRenderData.hitboxes").equals("true");
+
+        // setRenderData chunks that have objects in them
+        boolean renderActiveChunks = Objects.requireNonNull(ConfProvider.getConf(DataHand.confPath)).getProperty("game2d.setRenderData.activechunks").equals("true");
+
+        BufferedImage img = new BufferedImage(DataHand.renderLoop.getWidth(), DataHand.renderLoop.getHeight(), BufferedImage.TYPE_INT_RGB);
+        Graphics2D g2 = img.createGraphics();
+
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g2.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+
+        g2.setColor(Color.magenta);
+
+        // draw each object that is in setRenderData distance
+        ChunkMan.renderByChunk(Camera.renderUpdate(), g2, renderHitBoxes, renderActiveChunks);
+
+        DebugScreen.draw(g2);
+
+        effect(img, 1);
+
+        g2.dispose();
+
+        g.drawImage(img, 0, 0, this);
+    }
+
+    public void effect(BufferedImage img, int type){
+        for(int i = 0; i < DataHand.renderLoop.getWidth(); i++){
+            for(int j = 0; j < DataHand.renderLoop.getHeight(); j++){
+                int pixel = img.getRGB(i, j);
+
+                int red   = (pixel >> 16) & 0xFF;
+                int green = (pixel >> 8)  & 0xFF;
+                int blue  = (pixel)       & 0xFF;
+
+                int newRGB = 0;
+                switch(type){
+                    case 0 -> {
+                        //SETTING EVERYTHING TO GREYSCALE
+                        int mid = (red + green + blue) / 3;
+                        newRGB = ((mid & 0xFF) << 16) | ((mid & 0xFF) << 8) | (mid & 0xFF);
+                    }
+                    case 1 -> {
+                        // INVERTING COLORS
+                        red = 255 - red;
+                        green = 255 - green;
+                        blue = 255 - blue;
+                        newRGB = ((red & 0xFF) << 16) | ((green & 0xFF) << 8) | (blue & 0xFF);
+                    }
+                    case 2 -> {
+                        // SWITCHING CHANNELS
+                        newRGB = ((green & 0xFF) << 16) | ((blue & 0xFF) << 8) | (red & 0xFF);
+                    }
+                    case 3 -> {
+                        // NO RED
+                        newRGB = ((green & 0xFF) << 8) | (blue & 0xFF);
+                    }
+                    case 4 -> {
+                        // NO GREEN
+                        newRGB = ((red & 0xFF) << 16) | (blue & 0xFF);
+                    }
+                    case 5 -> {
+                        // NO BLUE
+                        newRGB = ((red & 0xFF) << 16) | ((green & 0xFF) << 8);
+                    }
+                    case 6 -> {
+                        // GANZE WERTE
+                        red = red > 128 ? 255 : 0;
+                        green = green > 128 ? 255 : 0;
+                        blue = blue > 128 ? 255 : 0;
+                        newRGB = ((red & 0xFF) << 16) | ((green & 0xFF) << 8) | (blue & 0xFF);
+                    }
+                    case 7 -> {
+                        // VINTAGE
+                        red = Math.min(255, (int)(0.393 * (double)red + 0.769 * (double)green + 0.189 * (double)blue));
+                        green = Math.min(255, (int)(0.349 * (double)red + 0.686 * (double)green + 0.168 * (double)blue));
+                        blue = Math.min(255, (int)(0.272 * (double)red + 0.534 * (double)green + 0.131 * (double)blue));
+                        newRGB = ((red & 0xFF) << 16) | ((green & 0xFF) << 8) | (blue & 0xFF);
+                    }
+                }
+                img.setRGB(i, j,  newRGB);
+            }
+        }
+    }
+
+    /**
+     * Implement the rendering of GameObjects
+     *
+     * @param g the <code>Graphics</code> object to protect
+     */
 //    @Override
 //    public void paintComponent(Graphics g) {
 //
-//        super.paintComponent(g);
-//
 //        // Hitbox visualization
-//        boolean renderHitBoxes = Objects.requireNonNull(ConfProvider.getConf(DataHand.confPath)).getProperty("game2d.setRenderData.hitboxes").equals("true");
+//        boolean renderHitBoxes = Objects.requireNonNull(ConfProvider.getConf(DataHand.confPath)).getProperty("game2d.render.hitboxes").equals("true");
 //
 //        // setRenderData chunks that have objects in them
-//        boolean renderActiveChunks = Objects.requireNonNull(ConfProvider.getConf(DataHand.confPath)).getProperty("game2d.setRenderData.activechunks").equals("true");
+//        boolean renderActiveChunks = Objects.requireNonNull(ConfProvider.getConf(DataHand.confPath)).getProperty("game2d.render.activechunks").equals("true");
 //
-//        BufferedImage img = new BufferedImage(DataHand.renderLoop.getWidth(), DataHand.renderLoop.getHeight(), BufferedImage.TYPE_INT_RGB);
-//        Graphics2D g2 = img.createGraphics();
+//        super.paintComponent(g);
+//
+//        Graphics2D g2 = (Graphics2D) g;
 //
 //        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 //        g2.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
@@ -155,47 +249,7 @@ public class RenderLoop extends JPanel implements Runnable {
 //        DebugScreen.draw(g2);
 //
 //        g2.dispose();
-//
-//        /*for(int i = 0; i < DataHand.renderLoop.getWidth(); i++){
-//            for(int j = 0; j < DataHand.renderLoop.getHeight(); j++){
-//                img.getRGB()
-//                int c =
-//            }
-//        }*/
-//
-//        g.drawImage(img, 0, 0, this);
 //    }
-
-    /**
-     * Implement the rendering of GameObjects
-     *
-     * @param g the <code>Graphics</code> object to protect
-     */
-    @Override
-    public void paintComponent(Graphics g) {
-
-        // Hitbox visualization
-        boolean renderHitBoxes = Objects.requireNonNull(ConfProvider.getConf(DataHand.confPath)).getProperty("game2d.render.hitboxes").equals("true");
-
-        // setRenderData chunks that have objects in them
-        boolean renderActiveChunks = Objects.requireNonNull(ConfProvider.getConf(DataHand.confPath)).getProperty("game2d.render.activechunks").equals("true");
-
-        super.paintComponent(g);
-
-        Graphics2D g2 = (Graphics2D) g;
-
-        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g2.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-
-        g2.setColor(Color.magenta);
-
-        // draw each object that is in setRenderData distance
-        ChunkMan.renderByChunk(Camera.renderUpdate(), g2, renderHitBoxes, renderActiveChunks);
-
-        DebugScreen.draw(g2);
-
-        g2.dispose();
-    }
 
     /**
      * Temporarily pause the rendering thread

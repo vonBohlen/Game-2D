@@ -34,6 +34,9 @@ public class Camera {
 
     // kamera wird bewegt skalliert etc und gibt den chunk in ihrem mittelpunkt zurück
     public static Chunk renderUpdate(){
+        // set height and width if not set correctly
+        if(height == 0){ height = (double)DataHand.renderLoop.getHeight(); }
+
         // in case of errors with creating the value
         if(pixelsPerUnit == 0){ pixelsPerUnit = ((double)DataHand.renderLoop.getHeight() / height); }
 
