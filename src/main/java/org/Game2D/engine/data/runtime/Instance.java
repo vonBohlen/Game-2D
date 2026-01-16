@@ -24,11 +24,11 @@ public class Instance {
     private JFrame window;
 
     //Engine values
-    public int updateDistance = 16; // the amount of chunks to be updated in each direction from the start chunk
+    public int updateDistance; // the amount of chunks to be updated in each direction from the start chunk
 
-    public int renderDistance = 16; // the amount of chunks to be rendered in each direction from the start chunk
+    public int renderDistance; // the amount of chunks to be rendered in each direction from the start chunk
 
-    public int chunkSize = 512; // each chunk is a square with a sidelength of chunk size
+    public int chunkSize; // each chunk is a square with a sidelength of chunk size
 
     //Game Logic Elements
 
@@ -47,9 +47,9 @@ public class Instance {
         //IMPORTANT
         //Hardware acceleration is known to cause problems on wayland while using NVIDIA graphic cards
 
-        //String os = System.getProperty("os.name").toLowerCase();
-        //if (os.contains("nix") || os.contains("nux") || os.contains("aix")) System.setProperty("sun.java2d.opengl", "true");
-        //System.out.println("[Linux only]" + " OpenGL enabled: " + System.getProperty("sun.java2d.opengl"));
+        String os = System.getProperty("os.name").toLowerCase();
+        if (os.contains("nix") || os.contains("nux") || os.contains("aix")) System.setProperty("sun.java2d.opengl", "true");
+        System.out.println("[Linux only]" + " OpenGL enabled: " + System.getProperty("sun.java2d.opengl"));
 
         //Initialization
 
@@ -59,10 +59,13 @@ public class Instance {
         ConfHand.generateConf();
         ConfHand.updateConf();
 
-        ChunkMan.initialize();
+        // Initializing engine values
+        updateDistance = 16;
+        renderDistance = 16;
+        chunkSize = 512;
 
-        //Create a single Chunk, otherwise no other Chunks can be added
-        ChunkMan.addChunk(new Chunk(0, 0));
+        // Starting the chunk system first, to prevent errors in other systems
+        ChunkMan.initialize();
 
         DataHand.keyHand = new Keyhand();
 

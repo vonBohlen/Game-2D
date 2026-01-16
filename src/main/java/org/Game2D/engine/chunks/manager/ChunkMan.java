@@ -57,6 +57,9 @@ public class ChunkMan {
 
         chunksByCo = new FinderHash();
 
+        //Create a single Chunk, otherwise no other Chunks can be added
+        ChunkMan.addChunk(new Chunk(0, 0));
+
     }
 
     /**

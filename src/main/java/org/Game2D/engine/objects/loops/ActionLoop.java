@@ -66,7 +66,7 @@ public class ActionLoop implements Runnable {
 
         for (GameObject current : gameObjectCache) {
 
-            if (current.collisionEnabled && !current.equals(go) /*&& go.objectLayer == current.objectLayer*/ && position.intersects(current.hitBox))
+            if (current.collisionEnabled && !current.equals(go) && go.objectLayer == current.objectLayer && position.intersects(current.hitBox))
                 return current;
 
         }
