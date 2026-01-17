@@ -28,233 +28,270 @@ public class RenderLoop extends JPanel implements Runnable {
     private boolean exit = false;
     private boolean run = true;
 
-    private BufferedImage frame;
+    // Only for effects - lazy initialized
+    private BufferedImage effectBuffer;
+    private int lastEffectType = -1;
 
     Camera camera;
+
+    // Optimized rendering hints for better performance
+    private static final RenderingHints RENDERING_HINTS = new RenderingHints(null);
+    static {
+        RENDERING_HINTS.put(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        RENDERING_HINTS.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_SPEED);
+        RENDERING_HINTS.put(RenderingHints.KEY_COLOR_RENDERING, RenderingHints.VALUE_COLOR_RENDER_SPEED);
+        RENDERING_HINTS.put(RenderingHints.KEY_DITHERING, RenderingHints.VALUE_DITHER_DISABLE);
+    }
 
     /**
      * Instantiate a new <code>RenderManager</code>
      */
     public RenderLoop() {
-
         confPanel();
     }
 
-    public void initializeCamera(){
-        camera = new Camera(0,0,0);
+    public void initializeCamera() {
+        camera = new Camera(0, 0, 0);
     }
 
     /**
-     * Set up the screen
+     * Set up the screen configuration
      */
     private void confPanel() {
-
         this.setPreferredSize(Toolkit.getDefaultToolkit().getScreenSize());
-
         this.setBackground(Color.BLACK);
-
-        this.setDoubleBuffered(true);
-
+        this.setDoubleBuffered(true); // Use Swing's built-in double buffering
         this.addKeyListener(DataHand.keyHand);
-
         this.setFocusable(true);
-
     }
 
     /**
-     * Create a new setRenderData thread
+     * Create and start a new rendering thread
      */
     public void startRenderLoop() {
-
-        frame = new BufferedImage(DataHand.renderLoop.getWidth(), DataHand.renderLoop.getHeight(), BufferedImage.TYPE_INT_RGB);
-
         renderThread = new Thread(this);
-
         renderThread.start();
-
     }
 
     /**
-     * Executed by the setRenderData thread<br>
-     * Waits until the time is right to maintain a constant
-     * update rate
+     * Main rendering loop executed by the rendering thread
+     * Maintains a constant frame rate
      */
     @Override
     public void run() {
+        if (renderThread == null) return;
 
-        while (renderThread != null && !exit) {
+        double drawInterval = (double) 1000000000 / Integer.parseInt(
+                ConfProvider.getConf(DataHand.confPath).getProperty("game2d.core.fps"));
+        double delta = 0;
+        long lastTime = System.nanoTime();
+        long currentTime;
+        long timer = 0;
+        int drawCount = 0;
+        long startTime;
+        long frameTime;
 
-            double drawInterval = (double) 1000000000 / Integer.parseInt(ConfProvider.getConf(DataHand.confPath).getProperty("game2d.core.fps"));
-            double delta = 0;
-            long lastTime = System.nanoTime();
-            long currentTime;
-            long timer = 0;
-            int drawCount = 0;
-            long startTime;
-            long frameTime;
+        while (!exit) {
+            currentTime = System.nanoTime();
+            delta += (currentTime - lastTime) / drawInterval;
+            timer += (currentTime - lastTime);
+            lastTime = currentTime;
 
-            while (run) {
+            if (delta >= 1) {
+                startTime = System.nanoTime();
 
-                currentTime = System.nanoTime();
+                repaint(); // Swing handles the buffering internally
 
-                delta += (currentTime - lastTime) / drawInterval;
-                timer += (currentTime - lastTime);
-                lastTime = currentTime;
+                frameTime = System.nanoTime() - startTime;
+                DebugScreen.updateFrameTime(frameTime);
 
-                if (delta >= 1) {
+                delta--;
+                drawCount++;
+            }
 
-                    startTime = System.nanoTime();
+            if (timer >= 1000000000) {
+                DebugScreen.updateFPS(drawCount);
+                drawCount = 0;
+                timer = 0;
+            }
 
-                    //renderFrame();
-                    repaint();
-
-                    frameTime = System.nanoTime() - startTime;
-
-                    DebugScreen.updateFrameTime(frameTime);
-
-                    delta--;
-                    drawCount++;
+            // Small pause to reduce CPU usage
+            if (delta < 0.5) {
+                try {
+                    Thread.sleep(1);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                    break;
                 }
-
-                if (timer >= 1000000000) {
-
-                    DebugScreen.updateFPS(drawCount);
-
-                    drawCount = 0;
-                    timer = 0;
-                }
-
             }
         }
-
     }
 
     /**
-     * Implement the rendering of GameObjects
+     * Main rendering method called by Swing
      *
-     * @param g the <code>Graphics</code> object to protect
+     * @param g the <code>Graphics</code> object for rendering
      */
     @Override
     public void paintComponent(Graphics g) {
-
         super.paintComponent(g);
 
-        // Hitbox visualization
-        boolean renderHitBoxes = Objects.requireNonNull(ConfProvider.getConf(DataHand.confPath)).getProperty("game2d.setRenderData.hitboxes").equals("true");
-
-        // setRenderData chunks that have objects in them
-        boolean renderActiveChunks = Objects.requireNonNull(ConfProvider.getConf(DataHand.confPath)).getProperty("game2d.setRenderData.activechunks").equals("true");
-
-        Graphics2D g2 = frame.createGraphics();
-
-        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g2.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-
-        g2.setColor(Color.magenta);
-
-        // draw each object that is in setRenderData distance
-        ChunkMan.setRenderDataByChunk(g2, Camera.renderUpdate(), renderHitBoxes, renderActiveChunks);
-
-        DebugScreen.draw(g2);
-
-        //effect(img, 1);
-
-        g2.dispose();
-
-        g.drawImage(frame, 0, 0, this);
-
-        frame.flush();
-    }
-
-    public void effect(BufferedImage img, int type){
-        for(int i = 0; i < DataHand.renderLoop.getWidth(); i++){
-            for(int j = 0; j < DataHand.renderLoop.getHeight(); j++){
-                int pixel = img.getRGB(i, j);
-
-                int red   = (pixel >> 16) & 0xFF;
-                int green = (pixel >> 8)  & 0xFF;
-                int blue  = (pixel)       & 0xFF;
-
-                int newRGB = 0;
-                switch(type){
-                    case 0 -> {
-                        //SETTING EVERYTHING TO GREYSCALE
-                        int mid = (red + green + blue) / 3;
-                        newRGB = ((mid & 0xFF) << 16) | ((mid & 0xFF) << 8) | (mid & 0xFF);
-                    }
-                    case 1 -> {
-                        // INVERTING COLORS
-                        red = 255 - red;
-                        green = 255 - green;
-                        blue = 255 - blue;
-                        newRGB = ((red & 0xFF) << 16) | ((green & 0xFF) << 8) | (blue & 0xFF);
-                    }
-                    case 2 -> {
-                        // SWITCHING CHANNELS
-                        newRGB = ((green & 0xFF) << 16) | ((blue & 0xFF) << 8) | (red & 0xFF);
-                    }
-                    case 3 -> {
-                        // NO RED
-                        newRGB = ((green & 0xFF) << 8) | (blue & 0xFF);
-                    }
-                    case 4 -> {
-                        // NO GREEN
-                        newRGB = ((red & 0xFF) << 16) | (blue & 0xFF);
-                    }
-                    case 5 -> {
-                        // NO BLUE
-                        newRGB = ((red & 0xFF) << 16) | ((green & 0xFF) << 8);
-                    }
-                    case 6 -> {
-                        // GANZE WERTE
-                        red = red > 128 ? 255 : 0;
-                        green = green > 128 ? 255 : 0;
-                        blue = blue > 128 ? 255 : 0;
-                        newRGB = ((red & 0xFF) << 16) | ((green & 0xFF) << 8) | (blue & 0xFF);
-                    }
-                    case 7 -> {
-                        // VINTAGE
-                        red = Math.min(255, (int)(0.393 * (double)red + 0.769 * (double)green + 0.189 * (double)blue));
-                        green = Math.min(255, (int)(0.349 * (double)red + 0.686 * (double)green + 0.168 * (double)blue));
-                        blue = Math.min(255, (int)(0.272 * (double)red + 0.534 * (double)green + 0.131 * (double)blue));
-                        newRGB = ((red & 0xFF) << 16) | ((green & 0xFF) << 8) | (blue & 0xFF);
-                    }
-                }
-                img.setRGB(i, j,  newRGB);
+        // Check if visual effects are enabled
+        boolean useEffects = false;
+        int effectType = 0;
+        try {
+            String effectConfig = ConfProvider.getConf(DataHand.confPath).getProperty("game2d.render.effects");
+            if (effectConfig != null && !effectConfig.equals("0")) {
+                useEffects = true;
+                effectType = Integer.parseInt(effectConfig);
             }
+        } catch (Exception e) {
+            // Fallback: no effects
+        }
+
+        if (useEffects && effectType > 0) {
+            renderWithEffects(g, effectType);
+        } else {
+            renderDirect(g);
         }
     }
 
     /**
-     * Implement the rendering of GameObjects
-     *
-     * @param g the <code>Graphics</code> object to protect
+     * Direct rendering without effects (standard mode)
      */
-//    @Override
-//    public void paintComponent(Graphics g) {
-//
-//        // Hitbox visualization
-//        boolean renderHitBoxes = Objects.requireNonNull(ConfProvider.getConf(DataHand.confPath)).getProperty("game2d.render.hitboxes").equals("true");
-//
-//        // setRenderData chunks that have objects in them
-//        boolean renderActiveChunks = Objects.requireNonNull(ConfProvider.getConf(DataHand.confPath)).getProperty("game2d.render.activechunks").equals("true");
-//
-//        super.paintComponent(g);
-//
-//        Graphics2D g2 = (Graphics2D) g;
-//
-//        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-//        g2.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-//
-//        g2.setColor(Color.magenta);
-//
-//        // draw each object that is in setRenderData distance
-//        ChunkMan.setRenderDataByChunk(Camera.renderUpdate(), g2, renderHitBoxes, renderActiveChunks);
-//
-//        DebugScreen.draw(g2);
-//
-//        g2.dispose();
-//    }
+    private void renderDirect(Graphics g) {
+        boolean renderHitBoxes = Objects.requireNonNull(ConfProvider.getConf(DataHand.confPath))
+                .getProperty("game2d.setRenderData.hitboxes").equals("true");
+        boolean renderActiveChunks = Objects.requireNonNull(ConfProvider.getConf(DataHand.confPath))
+                .getProperty("game2d.setRenderData.activechunks").equals("true");
+
+        Graphics2D g2 = (Graphics2D) g;
+        g2.setRenderingHints(RENDERING_HINTS);
+
+        // Viewport clipping for better performance
+        g2.setClip(0, 0, getWidth(), getHeight());
+
+        g2.setColor(Color.magenta);
+
+        // Draw each object within rendering distance
+        ChunkMan.setRenderDataByChunk(g2, Camera.renderUpdate(), renderHitBoxes, renderActiveChunks);
+
+        DebugScreen.draw(g2);
+    }
+
+    /**
+     * Rendering with visual effects (only when needed)
+     */
+    private void renderWithEffects(Graphics g, int effectType) {
+        boolean renderHitBoxes = Objects.requireNonNull(ConfProvider.getConf(DataHand.confPath))
+                .getProperty("game2d.setRenderData.hitboxes").equals("true");
+        boolean renderActiveChunks = Objects.requireNonNull(ConfProvider.getConf(DataHand.confPath))
+                .getProperty("game2d.setRenderData.activechunks").equals("true");
+
+        // Create/update effect buffer only when needed
+        if (effectBuffer == null ||
+                effectBuffer.getWidth() != getWidth() ||
+                effectBuffer.getHeight() != getHeight() ||
+                lastEffectType != effectType) {
+
+            // Create compatible image for better performance
+            effectBuffer = getGraphicsConfiguration()
+                    .createCompatibleImage(getWidth(), getHeight());
+            lastEffectType = effectType;
+        }
+
+        // Render to effect buffer
+        Graphics2D bufferG2 = effectBuffer.createGraphics();
+        bufferG2.setRenderingHints(RENDERING_HINTS);
+        bufferG2.setClip(0, 0, getWidth(), getHeight());
+        bufferG2.setColor(Color.magenta);
+
+        // Clear background
+        bufferG2.setColor(Color.BLACK);
+        bufferG2.fillRect(0, 0, getWidth(), getHeight());
+        bufferG2.setColor(Color.magenta);
+
+        // Draw each object within rendering distance
+        ChunkMan.setRenderDataByChunk(bufferG2, Camera.renderUpdate(), renderHitBoxes, renderActiveChunks);
+
+        DebugScreen.draw(bufferG2);
+        bufferG2.dispose();
+
+        // Apply effect if not type 0 (no effect)
+        if (effectType > 0) {
+            applyEffect(effectBuffer, effectType);
+        }
+
+        // Draw final result
+        g.drawImage(effectBuffer, 0, 0, this);
+    }
+
+    /**
+     * Optimized effect application using direct pixel access
+     */
+    private void applyEffect(BufferedImage img, int type) {
+        int width = img.getWidth();
+        int height = img.getHeight();
+
+        // Only process if valid size
+        if (width <= 0 || height <= 0) return;
+
+        // Direct pixel access for better performance
+        int[] pixels = new int[width * height];
+        img.getRGB(0, 0, width, height, pixels, 0, width);
+
+        // Apply effect to pixel array
+        for (int i = 0; i < pixels.length; i++) {
+            int pixel = pixels[i];
+
+            int a = (pixel >> 24) & 0xFF;
+            int r = (pixel >> 16) & 0xFF;
+            int g = (pixel >> 8) & 0xFF;
+            int b = pixel & 0xFF;
+
+            int newRGB = 0;
+
+            switch(type) {
+                case 1 -> { // INVERTING COLORS
+                    r = 255 - r;
+                    g = 255 - g;
+                    b = 255 - b;
+                    newRGB = (a << 24) | (r << 16) | (g << 8) | b;
+                }
+                case 2 -> { // SWITCHING CHANNELS
+                    newRGB = (a << 24) | (g << 16) | (b << 8) | r;
+                }
+                case 3 -> { // NO RED
+                    newRGB = (a << 24) | (g << 8) | b;
+                }
+                case 4 -> { // NO GREEN
+                    newRGB = (a << 24) | (r << 16) | b;
+                }
+                case 5 -> { // NO BLUE
+                    newRGB = (a << 24) | (r << 16) | (g << 8);
+                }
+                case 6 -> { // BINARY THRESHOLD
+                    r = r > 128 ? 255 : 0;
+                    g = g > 128 ? 255 : 0;
+                    b = b > 128 ? 255 : 0;
+                    newRGB = (a << 24) | (r << 16) | (g << 8) | b;
+                }
+                case 7 -> { // VINTAGE / SEPIA
+                    int newR = Math.min(255, (int)(0.393 * r + 0.769 * g + 0.189 * b));
+                    int newG = Math.min(255, (int)(0.349 * r + 0.686 * g + 0.168 * b));
+                    int newB = Math.min(255, (int)(0.272 * r + 0.534 * g + 0.131 * b));
+                    newRGB = (a << 24) | (newR << 16) | (newG << 8) | newB;
+                }
+                default -> { // GREYSCALE (fallback)
+                    int avg = (r + g + b) / 3;
+                    newRGB = (a << 24) | (avg << 16) | (avg << 8) | avg;
+                }
+            }
+            pixels[i] = newRGB;
+        }
+
+        img.setRGB(0, 0, width, height, pixels, 0, width);
+    }
 
     /**
      * Temporarily pause the rendering thread
@@ -271,11 +308,27 @@ public class RenderLoop extends JPanel implements Runnable {
     }
 
     /**
-     * Pause the rendering thread and exits cleanly
+     * Stop the rendering thread and perform clean exit
      */
     public void exit() {
         freeze();
         exit = true;
+
+        // Release resources
+        if (effectBuffer != null) {
+            effectBuffer.flush();
+            effectBuffer = null;
+        }
+
+        renderThread = null;
     }
 
+    /**
+     * Cleanup when component is removed
+     */
+    @Override
+    public void removeNotify() {
+        super.removeNotify();
+        exit();
+    }
 }
