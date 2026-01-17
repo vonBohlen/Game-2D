@@ -6,9 +6,9 @@
 
 package org.Game2D.engine.chunks.manager;
 
+import lombok.NonNull;
 import org.Game2D.engine.chunks.Chunk;
 import org.Game2D.engine.objects.GameObject;
-import lombok.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;

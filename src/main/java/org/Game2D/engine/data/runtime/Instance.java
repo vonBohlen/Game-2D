@@ -5,7 +5,6 @@
 package org.Game2D.engine.data.runtime;
 
 import org.Game2D.engine.audio.loops.AudioLoop;
-import org.Game2D.engine.chunks.Chunk;
 import org.Game2D.engine.chunks.handlers.GameObjectHand;
 import org.Game2D.engine.chunks.manager.ChunkMan;
 import org.Game2D.engine.events.events.GameObjectEvents;
@@ -115,6 +114,7 @@ public class Instance {
         window.setUndecorated(true);
         window.setResizable(true);
         window.setTitle(windowTitle);
+        window.setIgnoreRepaint(true);
 
         window.add(DataHand.renderLoop);
 

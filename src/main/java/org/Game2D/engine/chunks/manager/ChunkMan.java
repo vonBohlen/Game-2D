@@ -4,16 +4,18 @@
 
 package org.Game2D.engine.chunks.manager;
 
+import lombok.NonNull;
 import org.Game2D.engine.chunks.Chunk;
 import org.Game2D.engine.chunks.utils.data.Directions;
 import org.Game2D.engine.chunks.utils.math.FinderHash;
 import org.Game2D.engine.data.runtime.DataHand;
 import org.Game2D.engine.data.runtime.Instance;
 import org.Game2D.engine.objects.GameObject;
-import lombok.NonNull;
 
 import java.awt.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 
 //TODO: Only load the smallest possible amount of chunks from disk into memory to safe recourses
@@ -171,12 +173,12 @@ public class ChunkMan {
      * Render all Chunks (and in turn the GameObjects contained in them)
      * in range of the updateDistance from the specified Chunk
      *
-     * @param chunk
      * @param g2
+     * @param chunk
      * @param renderHitboxes
      * @param renderActiveChunks
      */
-    public static void renderByChunk(Chunk chunk, Graphics2D g2, boolean renderHitboxes, boolean renderActiveChunks) {
+    public static void setRenderDataByChunk(Graphics2D g2, Chunk chunk, boolean renderHitboxes, boolean renderActiveChunks) {
         List<Chunk> chunksToRender;
         if (storedChunk == chunk && storedRenderDistance == renderDistance) {
             chunksToRender = storedRenderChunks;
@@ -187,7 +189,7 @@ public class ChunkMan {
             storedRenderDistance = renderDistance;
         }
         // go through each chunk and setRenderData objects in them
-        for (Chunk currentChunk : chunksToRender) currentChunk.render(g2, renderHitboxes, renderActiveChunks);
+        for (Chunk currentChunk : chunksToRender) currentChunk.setRenderData(g2, renderHitboxes, renderActiveChunks);
     }
 
     /**

@@ -6,8 +6,8 @@ package org.Game2D.engine.objects.advanced;
 
 import lombok.NonNull;
 import org.Game2D.engine.chunks.manager.ObjectTransferMan;
-import org.Game2D.engine.objects.loops.ActionLoop;
 import org.Game2D.engine.objects.GameObject;
+import org.Game2D.engine.objects.loops.ActionLoop;
 
 import java.awt.*;
 

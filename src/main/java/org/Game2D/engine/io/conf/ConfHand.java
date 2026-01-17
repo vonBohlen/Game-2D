@@ -68,7 +68,8 @@ public class ConfHand {
         properties.setProperty("game2d.core.tps", "60");
         properties.setProperty("game2d.core.fps", "120");
         properties.setProperty("game2d.core.showDebugScreen", "false");
-        properties.setProperty("game2d.render.hitboxes", "false");
+        properties.setProperty("game2d.setRenderData.hitboxes", "false");
+        properties.setProperty("game2d.setRenderData.activechunks", "false");
 
         return properties;
 

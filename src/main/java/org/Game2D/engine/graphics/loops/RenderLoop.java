@@ -9,8 +9,8 @@ package org.Game2D.engine.graphics.loops;
 import org.Game2D.engine.chunks.manager.ChunkMan;
 import org.Game2D.engine.data.runtime.DataHand;
 import org.Game2D.engine.graphics.Camera;
-import org.Game2D.tools.DebugScreen;
 import org.Game2D.engine.io.conf.ConfProvider;
+import org.Game2D.tools.DebugScreen;
 
 import javax.swing.*;
 import java.awt.*;
@@ -27,6 +27,8 @@ public class RenderLoop extends JPanel implements Runnable {
 
     private boolean exit = false;
     private boolean run = true;
+
+    private BufferedImage frame;
 
     Camera camera;
 
@@ -63,6 +65,8 @@ public class RenderLoop extends JPanel implements Runnable {
      * Create a new setRenderData thread
      */
     public void startRenderLoop() {
+
+        frame = new BufferedImage(DataHand.renderLoop.getWidth(), DataHand.renderLoop.getHeight(), BufferedImage.TYPE_INT_RGB);
 
         renderThread = new Thread(this);
 
@@ -141,8 +145,7 @@ public class RenderLoop extends JPanel implements Runnable {
         // setRenderData chunks that have objects in them
         boolean renderActiveChunks = Objects.requireNonNull(ConfProvider.getConf(DataHand.confPath)).getProperty("game2d.setRenderData.activechunks").equals("true");
 
-        BufferedImage img = new BufferedImage(DataHand.renderLoop.getWidth(), DataHand.renderLoop.getHeight(), BufferedImage.TYPE_INT_RGB);
-        Graphics2D g2 = img.createGraphics();
+        Graphics2D g2 = frame.createGraphics();
 
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
@@ -150,15 +153,17 @@ public class RenderLoop extends JPanel implements Runnable {
         g2.setColor(Color.magenta);
 
         // draw each object that is in setRenderData distance
-        ChunkMan.renderByChunk(Camera.renderUpdate(), g2, renderHitBoxes, renderActiveChunks);
+        ChunkMan.setRenderDataByChunk(g2, Camera.renderUpdate(), renderHitBoxes, renderActiveChunks);
 
         DebugScreen.draw(g2);
 
-        effect(img, 1);
+        //effect(img, 1);
 
         g2.dispose();
 
-        g.drawImage(img, 0, 0, this);
+        g.drawImage(frame, 0, 0, this);
+
+        frame.flush();
     }
 
     public void effect(BufferedImage img, int type){
@@ -244,7 +249,7 @@ public class RenderLoop extends JPanel implements Runnable {
 //        g2.setColor(Color.magenta);
 //
 //        // draw each object that is in setRenderData distance
-//        ChunkMan.renderByChunk(Camera.renderUpdate(), g2, renderHitBoxes, renderActiveChunks);
+//        ChunkMan.setRenderDataByChunk(Camera.renderUpdate(), g2, renderHitBoxes, renderActiveChunks);
 //
 //        DebugScreen.draw(g2);
 //

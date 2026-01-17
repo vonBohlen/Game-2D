@@ -4,8 +4,8 @@
 
 package org.Game2D.demo.general.entities;
 
-import org.Game2D.engine.objects.loops.ActionLoop;
 import org.Game2D.engine.objects.advanced.Entity;
+import org.Game2D.engine.objects.loops.ActionLoop;
 
 import java.awt.*;
 
