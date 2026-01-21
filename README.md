@@ -5,8 +5,8 @@
 
 # Game2D
 
-Game2D is an open source 2D game engine for Java. 
-<p>Our focus currently lies on getting this project to a usable state. </p>
+Game2D is an open source 2D game engine for Java.<br>
+Our focus currently lies on getting this project to a usable state.<br>
 We would be happy about contributions to this project.
 
 ## Getting started
@@ -15,17 +15,14 @@ We would be happy about contributions to this project.
 
 ## Development progress
 
-### Finished
-
-- **Chunk system** (*still some fixes and integration todo*)
-- **Migrate render system to functionality provided by the chunk system**
-
 ### In progress
 
 - **Updated collision system**
 - **Documentation**
+- **Chunk system**
+- **Migrate render system to functionality provided by the chunk system**
 
-### Planed
+### Planned
 
 - **Interface improvements**
 - **Fixing the demos**
