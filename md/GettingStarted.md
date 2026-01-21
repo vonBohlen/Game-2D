@@ -9,14 +9,14 @@
 
 ## Installation
 
-Currently, there are no official packages of Game2D.
-<p>To use Game2D, you either have to compile the project by yourself, or you have to clone this repository and base your work on to it.</p>
+Currently, there are no official packages of Game2D. \
+To use Game2D, you either have to compile the project by yourself, or you have to clone this repository and base your work on to it. \
 In the future, Game2D will be available as a maven package.
 
 ## Creating an instance
 
-To use Game2D, we need to create an instance of the engine first.
-<p>This can be done, by adding this line of code to your project:</p>
+To use Game2D, we need to create an instance of the engine first. \
+This can be done, by adding this line of code to your project:
 
 ```java
 public static Instance instance = new Instance(null);
@@ -33,7 +33,8 @@ instance.start("Title-of-your-project");
 ## Adding an object
 
 Until now, we have an empty instance of the engine, which is pretty boring.
-<p>So let's add some excitement by creating an object.</p>
+
+So let's add some excitement by creating an object. \
 To create a game object, create a new class which extends one of the game object classes of Game2D:
 
 ```java
@@ -49,8 +50,8 @@ public class Cube extends Entity {
 }
 ```
 
-To actually use this game object, we need to set its hitbox.
-<p>Game2D uses the Rectangle class of Java awt as hitboxes, therefore we can simply add:</p>
+To actually use this game object, we need to set its hitbox. \
+Game2D uses the Rectangle class of Java awt as hitboxes, therefore we can simply add:
 
 ```java
 Rectangle hitbox = new Rectangle(0, 0, 40, 40); // x, y, width, height
@@ -66,7 +67,8 @@ public void update(){}
 ```
 
 Therefore, we can use it to manipulate our object.
-<p>For example to move the object around the center of the screen:</p>
+
+For example to move the object around the center of the screen:
 
 ```java
 int centerX = DataHand.renderMan.getWidth() / 2;
@@ -91,5 +93,5 @@ public void update(){
 
 ## Additional documentation
 
-**The full documentation of Game2D can be found in [/doc](../doc).**
-<p>In the future there will also be a wiki page dedicated to Game2D.</p>
+**The full documentation of Game2D can be found in [/doc](../doc).**  \
+In the future there will also be a wiki page dedicated to Game2D.
