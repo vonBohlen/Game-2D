@@ -7,11 +7,14 @@ package org.Game2D.engine.data.runtime;
 import org.Game2D.engine.audio.loops.AudioLoop;
 import org.Game2D.engine.chunks.handlers.GameObjectHand;
 import org.Game2D.engine.chunks.manager.ChunkMan;
+import org.Game2D.engine.errors.EngineErrorHand;
+import org.Game2D.engine.events.events.EngineErrorEvents;
 import org.Game2D.engine.events.events.GameObjectEvents;
 import org.Game2D.engine.graphics.loops.RenderLoop;
 import org.Game2D.engine.io.conf.ConfHand;
 import org.Game2D.engine.io.user.Keyhand;
-import org.Game2D.engine.objects.loops.ActionLoop;
+import org.Game2D.engine.objects.loops.GameLoop;
+import org.Game2D.tools.DebugScreen;
 
 import javax.swing.*;
 import java.awt.*;
@@ -38,7 +41,7 @@ public class Instance {
      * To use hardware acceleration, uncomment the given section in
      * the class constructor
      *
-     * @param confPath Path to the config file
+     * @param confPath Path to the config file,
      *                 Defaults to ./config.properties
      */
     public Instance(Path confPath) {
@@ -48,11 +51,22 @@ public class Instance {
 
         String os = System.getProperty("os.name").toLowerCase();
         if (os.contains("nix") || os.contains("nux") || os.contains("aix")) System.setProperty("sun.java2d.opengl", "true");
-        System.out.println("[Linux only]" + " OpenGL enabled: " + System.getProperty("sun.java2d.opengl"));
+        DebugScreen.HARDWARE_ACCELERATION = Boolean.parseBoolean(System.getProperty("sun.java2d.opengl"));
 
         //Initialization
 
         DataHand.instance = this;
+
+        // Error listeners
+        EngineErrorEvents.addHandler(new EngineErrorHand());
+
+        EngineErrorEvents.callEvent(handler -> {
+            try {
+                handler.handelFatalEngineError(this.getClass(), this.getClass().getDeclaredMethod("start", String.class), 0, "", true);
+            } catch (NoSuchMethodException e) {
+                throw new RuntimeException(e);
+            }
+        });
 
         ConfHand.setConfPath(confPath);
         ConfHand.generateConf();
@@ -70,7 +84,7 @@ public class Instance {
 
         DataHand.renderLoop = new RenderLoop();
 
-        DataHand.actionLoop = new ActionLoop();
+        DataHand.actionLoop = new GameLoop();
 
         DataHand.audioLoop = new AudioLoop();
 

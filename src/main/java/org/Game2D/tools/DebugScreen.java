@@ -15,10 +15,14 @@ import java.util.Objects;
 public class DebugScreen {
 
     private static int FPS = 0;
-    private static long FRAMETIME = 0;
+    private static long FRAME_TIME = 0;
 
     private static int TPS = 0;
-    private static long TICKTIME = 0;
+    private static long TICK_TIME = 0;
+
+    public static boolean HARDWARE_ACCELERATION = false;
+
+    private  static  Keyhand keyhand = null;
 
     public static void updateFPS(int fps) {
         if (fps == FPS) return;
@@ -26,8 +30,8 @@ public class DebugScreen {
     }
 
     public static void updateFrameTime(long frameTime) {
-        if (frameTime == FRAMETIME) return;
-        FRAMETIME = frameTime;
+        if (frameTime == FRAME_TIME) return;
+        FRAME_TIME = frameTime;
     }
 
     public static void updateTPS(int tps) {
@@ -36,39 +40,42 @@ public class DebugScreen {
     }
 
     public static void updateTickTime(long tickTime) {
-        if (tickTime == TICKTIME) return;
-        TICKTIME = tickTime;
+        if (tickTime == TICK_TIME) return;
+        TICK_TIME = tickTime;
     }
 
     private static String printPressedKeys() {
+        if (keyhand == null) keyhand = DataHand.keyHand;
         String pressedKeys = "";
-        Keyhand keyhand = DataHand.keyHand;
         if (keyhand.keyPressed_A) pressedKeys += " A";
         if (keyhand.keyPressed_D) pressedKeys += " D";
         if (keyhand.keyPressed_S) pressedKeys += " S";
         if (keyhand.keyPressed_W) pressedKeys += " W";
         if (keyhand.keyPressed_SPACE) pressedKeys += " SPACE";
         if (keyhand.keyPressed_ESC) pressedKeys += " ESC";
+        pressedKeys = pressedKeys.replaceFirst(" ", "");
         return  pressedKeys;
     }
 
     public static void draw(Graphics2D g2) {
-        if (Boolean.parseBoolean(Objects.requireNonNull(ConfProvider.getConf(DataHand.confPath)).getProperty("game2d.core.showDebugScreen"))) {
+        if (ConfProvider.getConfValueAsBool("game2d.core.showDebugScreen")) {
             g2.setColor(Color.RED);
 
-            g2.drawString("FPS: " + FPS, 20, 20);
-            g2.drawString("Time_ns: " + FRAMETIME, 20, 35);
+            g2.drawString(String.format("FPS=%s", FPS), 20, 20);
+            g2.drawString(String.format("Frame_time_ns=%s", FRAME_TIME), 20, 35);
 
-            g2.drawString("TPS: " + TPS, 20, 50);
-            g2.drawString("Time_ns: " + TICKTIME, 20, 65);
+            g2.drawString(String.format("TPS=%s", TPS), 20, 50);
+            g2.drawString(String.format("Tick_time_ns=%s", TICK_TIME), 20, 65);
 
             g2.setColor(Color.YELLOW);
 
-            g2.drawString("Objects: " + ChunkMan.getTotalObjectCount(), 20, 80);
+            g2.drawString(String.format("Objects=%s", ChunkMan.getTotalObjectCount()), 20, 80);
 
             g2.setColor(Color.BLUE);
 
-            g2.drawString("Keys_pressed:" + printPressedKeys(), 20, 95);
+            g2.drawString(String.format("Keys_pressed=%S", printPressedKeys()), 20, 95);
+
+            g2.drawString(String.format("Hardware_acceleration=%b", HARDWARE_ACCELERATION) , 20, 110);
         }
     }
 

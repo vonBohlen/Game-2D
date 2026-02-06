@@ -5,7 +5,7 @@
 package org.Game2D.demo.general.entities;
 
 import org.Game2D.engine.objects.advanced.Entity;
-import org.Game2D.engine.objects.loops.ActionLoop;
+import org.Game2D.engine.objects.loops.GameLoop;
 
 import java.awt.*;
 
@@ -23,14 +23,14 @@ public class BallwP extends Entity {
 
     public void update(){
 
-        if (tickBottomReached != 0 && hitBox.y == 1050 && tickBottomReached == ActionLoop.getGameTick()) {
+        if (tickBottomReached != 0 && hitBox.y == 1050 && tickBottomReached == GameLoop.getGameTick()) {
             hitBox.x = 0;
             hitBox.y = 0;
             tickBottomReached = 0;
         }
 
         if (tickBottomReached == 0 && hitBox.y == 1050) {
-            tickBottomReached = ActionLoop.getGameTick();
+            tickBottomReached = GameLoop.getGameTick();
         }
 
         //Wenn Wände getroffen an den Seiten bewegungsrichtung verändern

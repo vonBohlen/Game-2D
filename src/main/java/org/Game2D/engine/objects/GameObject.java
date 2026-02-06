@@ -49,7 +49,12 @@ public abstract class GameObject {
         this.objectLayer = objectLayer;
 
         // Call object creation event
-        GameObjectEvents.callEvent(handler -> handler.handelObjectCreationEvent(this));
+        GameObjectEvents.callEvent(
+                handler ->
+                        handler.handelObjectCreationEvent(
+                                this
+                        )
+        );
 
     }
 
@@ -85,7 +90,7 @@ public abstract class GameObject {
     }
 
     /**
-     * Gets called by the ActionLoop according to TPS, and can therefor be overridden to manipulate the GameObject.
+     * Gets called by the GameLoop according to TPS, and can therefor be overridden to manipulate the GameObject.
      */
     public abstract void update();
 
@@ -141,7 +146,12 @@ public abstract class GameObject {
     public void delete() {
 
         // Call objec deletion event
-        GameObjectEvents.callEvent(handler -> handler.handelObjectDeletionEvent(this));
+        GameObjectEvents.callEvent(
+                handler ->
+                        handler.handelObjectDeletionEvent(
+                                this
+                        )
+        );
 
     }
 

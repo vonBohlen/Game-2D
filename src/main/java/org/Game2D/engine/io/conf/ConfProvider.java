@@ -4,8 +4,11 @@
 
 package org.Game2D.engine.io.conf;
 
+import org.Game2D.engine.data.runtime.DataHand;
+
 import java.io.*;
 import java.nio.file.Path;
+import java.util.Objects;
 import java.util.Properties;
 
 public class ConfProvider {
@@ -34,6 +37,22 @@ public class ConfProvider {
 
         return properties;
 
+    }
+
+    public static String getConfValue(String key) {
+        return Objects.requireNonNull(getConf(DataHand.confPath)).getProperty(key);
+    }
+
+    public static int getConfValueAsInt(String key) {
+        return Integer.parseInt(getConfValue(key));
+    }
+
+    public static float getConfValueAsFloat(String key) {
+        return Float.parseFloat(getConfValue(key));
+    }
+
+    public static  boolean getConfValueAsBool(String key) {
+        return Boolean.parseBoolean(getConfValue(key));
     }
 
     public static void writeConf(Properties properties, Path confPath, String tMod, boolean generate) {

@@ -28,6 +28,8 @@ public class RenderLoop extends JPanel implements Runnable {
     private boolean exit = false;
     private boolean run = true;
 
+    public static int FPS = 0;
+
     // Only for effects - lazy initialized
     private BufferedImage effectBuffer;
     private int lastEffectType = -1;
@@ -69,6 +71,9 @@ public class RenderLoop extends JPanel implements Runnable {
      * Create and start a new rendering thread
      */
     public void startRenderLoop() {
+
+        FPS = ConfProvider.getConfValueAsInt("game2d.core.fps");
+
         renderThread = new Thread(this);
         renderThread.start();
     }
@@ -81,8 +86,7 @@ public class RenderLoop extends JPanel implements Runnable {
     public void run() {
         if (renderThread == null) return;
 
-        double drawInterval = (double) 1000000000 / Integer.parseInt(
-                ConfProvider.getConf(DataHand.confPath).getProperty("game2d.core.fps"));
+        double drawInterval = (double) 1000000000 / FPS;
         double delta = 0;
         long lastTime = System.nanoTime();
         long currentTime;
@@ -140,7 +144,7 @@ public class RenderLoop extends JPanel implements Runnable {
         boolean useEffects = false;
         int effectType = 0;
         try {
-            String effectConfig = ConfProvider.getConf(DataHand.confPath).getProperty("game2d.render.effects");
+            String effectConfig = ConfProvider.getConfValue("game2d.render.effects");
             if (effectConfig != null && !effectConfig.equals("0")) {
                 useEffects = true;
                 effectType = Integer.parseInt(effectConfig);
@@ -160,10 +164,8 @@ public class RenderLoop extends JPanel implements Runnable {
      * Direct rendering without effects (standard mode)
      */
     private void renderDirect(Graphics g) {
-        boolean renderHitBoxes = Objects.requireNonNull(ConfProvider.getConf(DataHand.confPath))
-                .getProperty("game2d.setRenderData.hitboxes").equals("true");
-        boolean renderActiveChunks = Objects.requireNonNull(ConfProvider.getConf(DataHand.confPath))
-                .getProperty("game2d.setRenderData.activechunks").equals("true");
+        boolean renderHitBoxes = ConfProvider.getConfValueAsBool("game2d.setRenderData.hitboxes");
+        boolean renderActiveChunks = ConfProvider.getConfValueAsBool("game2d.setRenderData.activechunks");
 
         Graphics2D g2 = (Graphics2D) g;
         g2.setRenderingHints(RENDERING_HINTS);
@@ -183,10 +185,8 @@ public class RenderLoop extends JPanel implements Runnable {
      * Rendering with visual effects (only when needed)
      */
     private void renderWithEffects(Graphics g, int effectType) {
-        boolean renderHitBoxes = Objects.requireNonNull(ConfProvider.getConf(DataHand.confPath))
-                .getProperty("game2d.setRenderData.hitboxes").equals("true");
-        boolean renderActiveChunks = Objects.requireNonNull(ConfProvider.getConf(DataHand.confPath))
-                .getProperty("game2d.setRenderData.activechunks").equals("true");
+        boolean renderHitBoxes = ConfProvider.getConfValueAsBool("game2d.setRenderData.hitboxes");
+        boolean renderActiveChunks = ConfProvider.getConfValueAsBool("game2d.setRenderData.activechunks");
 
         // Create/update effect buffer only when needed
         if (effectBuffer == null ||

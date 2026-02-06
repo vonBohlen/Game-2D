@@ -7,7 +7,7 @@ package org.Game2D.engine.objects.advanced;
 import lombok.NonNull;
 import org.Game2D.engine.chunks.manager.ObjectTransferMan;
 import org.Game2D.engine.objects.GameObject;
-import org.Game2D.engine.objects.loops.ActionLoop;
+import org.Game2D.engine.objects.loops.GameLoop;
 
 import java.awt.*;
 
@@ -96,8 +96,8 @@ public abstract class Entity extends GameObject {
             int newX = hitBox.x + stepX;
             int newY = hitBox.y + stepY;
 
-            objectCacheX = ActionLoop.checkCollision(this, new Rectangle(newX, hitBox.y, hitBox.width, hitBox.height));
-            objectCacheY = ActionLoop.checkCollision(this, new Rectangle(hitBox.x, newY, hitBox.width, hitBox.height));
+            objectCacheX = GameLoop.checkCollision(this, new Rectangle(newX, hitBox.y, hitBox.width, hitBox.height));
+            objectCacheY = GameLoop.checkCollision(this, new Rectangle(hitBox.x, newY, hitBox.width, hitBox.height));
 
             if (stepX != 0) {
                 if (objectCacheX == null) {
@@ -141,7 +141,7 @@ public abstract class Entity extends GameObject {
         int oldY = hitBox.y;
 
         Rectangle newPosition = new Rectangle(newX, newY, hitBox.width, hitBox.height);
-        GameObject objectCache = ActionLoop.checkCollision(this, newPosition);
+        GameObject objectCache = GameLoop.checkCollision(this, newPosition);
 
         if (objectCache != null && !ignoreCollision) return;
 
@@ -161,7 +161,7 @@ public abstract class Entity extends GameObject {
     public GameObject setPosition(int newX, int newY) {
 
         Rectangle newPosition = new Rectangle(newX, newY, hitBox.width, hitBox.height);
-        GameObject objectCache = ActionLoop.checkCollision(this, newPosition);
+        GameObject objectCache = GameLoop.checkCollision(this, newPosition);
 
         if (objectCache != null) return objectCache;
 
@@ -182,7 +182,7 @@ public abstract class Entity extends GameObject {
     public GameObject changeEntitySize(int newWidth, int newHeight) {
 
         Rectangle newSize = new Rectangle(hitBox.x, hitBox.y, newWidth, newHeight);
-        GameObject objectCache = ActionLoop.checkCollision(this, newSize);
+        GameObject objectCache = GameLoop.checkCollision(this, newSize);
 
         if (objectCache != null) return objectCache;
 

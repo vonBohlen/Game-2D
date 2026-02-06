@@ -6,7 +6,7 @@ package org.Game2D.demo.general.entities;
 
 import org.Game2D.engine.data.runtime.DataHand;
 import org.Game2D.engine.objects.advanced.Entity;
-import org.Game2D.engine.objects.loops.ActionLoop;
+import org.Game2D.engine.objects.loops.GameLoop;
 
 import java.awt.*;
 import java.util.Random;
@@ -19,7 +19,7 @@ public class TpSquare extends Entity {
 
     public void update() {
 
-        if (!(ActionLoop.getGameTick() == 30)) return;
+        if (!(GameLoop.getGameTick() == 30)) return;
 
         Random random = new Random();
         int randomX, randomY;
