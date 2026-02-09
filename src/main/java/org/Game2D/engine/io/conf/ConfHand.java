@@ -5,8 +5,11 @@
 package org.Game2D.engine.io.conf;
 
 import org.Game2D.engine.data.runtime.DataHand;
+import org.Game2D.engine.data.runtime.Instance;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Map;
 import java.util.Properties;
@@ -65,11 +68,11 @@ public class ConfHand {
 
         Properties properties = new Properties();
 
-        properties.setProperty("game2d.core.tps", "60");
-        properties.setProperty("game2d.core.fps", "120");
-        properties.setProperty("game2d.core.showDebugScreen", "false");
-        properties.setProperty("game2d.setRenderData.hitboxes", "false");
-        properties.setProperty("game2d.setRenderData.activechunks", "false");
+        try {
+            properties.load(Instance.class.getResourceAsStream("/conf/default.properties"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         return properties;
 

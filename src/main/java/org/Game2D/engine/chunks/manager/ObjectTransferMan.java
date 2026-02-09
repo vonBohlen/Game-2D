@@ -77,7 +77,7 @@ public class ObjectTransferMan {
      * @return chunkTransferIsNecessary
      */
     private static boolean chunkTransferIsNecessary(@NonNull GameObject object, int newX, int newY) {
-        int size = ChunkMan.chunkSize;
+        int size = ChunkMan.CHUNK_SIZE;
         return !(object.hitBox.x / size == newX / size && object.hitBox.y / size == newY / size);
     }
 

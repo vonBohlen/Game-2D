@@ -30,7 +30,7 @@ public class FinderHash {
 
     public FinderHash() {
         chunkPos = new ConcurrentHashMap<>();
-        chunkDimensions = ChunkMan.chunkSize;
+        chunkDimensions = ChunkMan .CHUNK_SIZE;
     }
 
     /**

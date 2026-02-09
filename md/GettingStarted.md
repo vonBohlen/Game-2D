@@ -75,7 +75,7 @@ int centerX = DataHand.renderMan.getWidth() / 2;
 int centerY = DataHand.renderMan.getHeight() / 2;
 
 int count = 0;
-int segment = Integer.parseInt(ConfProvider.getConf(DataHand.confPath).getProperty("game2d.core.tps")) / 4;
+int segment = ConfProvider.getConfValueAsInt("game2d.game_loop.target_tps") / 4;
 
 @Override
 public void update(){

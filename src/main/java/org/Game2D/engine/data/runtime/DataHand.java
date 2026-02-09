@@ -17,7 +17,7 @@ public class DataHand {
     public static Instance instance = null;
 
     // Configuration path
-    public static Path confPath = null;
+    public static Path confPath = Path.of("./config.properties");
 
     // Loops
     public static GameLoop actionLoop = null;

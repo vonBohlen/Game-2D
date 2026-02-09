@@ -12,6 +12,7 @@ import org.Game2D.engine.events.events.EngineErrorEvents;
 import org.Game2D.engine.events.events.GameObjectEvents;
 import org.Game2D.engine.graphics.loops.RenderLoop;
 import org.Game2D.engine.io.conf.ConfHand;
+import org.Game2D.engine.io.conf.ConfProvider;
 import org.Game2D.engine.io.user.Keyhand;
 import org.Game2D.engine.objects.loops.GameLoop;
 import org.Game2D.tools.DebugScreen;
@@ -25,15 +26,6 @@ public class Instance {
     //Window
     private JFrame window;
 
-    //Engine values
-    public int updateDistance; // the amount of chunks to be updated in each direction from the start chunk
-
-    public int renderDistance; // the amount of chunks to be rendered in each direction from the start chunk
-
-    public int chunkSize; // each chunk is a square with a sidelength of chunk size
-
-    //Game Logic Elements
-
     /**
      * Implements basic Window Logic
      * Hardware acceleration on Wayland with NVIDIA Graphics is
@@ -46,49 +38,36 @@ public class Instance {
      */
     public Instance(Path confPath) {
 
-        //IMPORTANT
-        //Hardware acceleration is known to cause problems on wayland while using NVIDIA graphic cards
-
-        String os = System.getProperty("os.name").toLowerCase();
-        if (os.contains("nix") || os.contains("nux") || os.contains("aix")) System.setProperty("sun.java2d.opengl", "true");
-        DebugScreen.HARDWARE_ACCELERATION = Boolean.parseBoolean(System.getProperty("sun.java2d.opengl"));
-
-        //Initialization
-
         DataHand.instance = this;
 
-        // Error listeners
-        EngineErrorEvents.addHandler(new EngineErrorHand());
-
-        EngineErrorEvents.callEvent(handler -> {
-            try {
-                handler.handelFatalEngineError(this.getClass(), this.getClass().getDeclaredMethod("start", String.class), 0, "", true);
-            } catch (NoSuchMethodException e) {
-                throw new RuntimeException(e);
-            }
-        });
-
+        // Initializing config system
         ConfHand.setConfPath(confPath);
         ConfHand.generateConf();
         ConfHand.updateConf();
 
-        // Initializing engine values
-        updateDistance = 16;
-        renderDistance = 16;
-        chunkSize = 512;
+        // IMPORTANT
+        // Hardware acceleration is known to cause problems on wayland while using NVIDIA graphic cards
+
+        // Hardware acceleration
+        if (ConfProvider.getConfValueAsBool("game2d.game_loop.enable_hardware_acceleration"))
+            System.setProperty("sun.java2d.opengl", "true");
+        else
+            System.setProperty("sun.java2d.opengl", "false");
+        DebugScreen.HARDWARE_ACCELERATION = Boolean.parseBoolean(System.getProperty("sun.java2d.opengl"));
+
+        // Error listeners
+        EngineErrorEvents.addHandler(new EngineErrorHand());
 
         // Starting the chunk system first, to prevent errors in other systems
         ChunkMan.initialize();
 
         DataHand.keyHand = new Keyhand();
-
         DataHand.renderLoop = new RenderLoop();
-
         DataHand.actionLoop = new GameLoop();
-
         DataHand.audioLoop = new AudioLoop();
 
         DataHand.renderLoop.initializeCamera();
+
     }
 
     /**
@@ -104,11 +83,9 @@ public class Instance {
         // Listeners
         GameObjectEvents.addHandler(new GameObjectHand());
 
-        //Starting ManagerLoops
+        //Starting Manager loops
         DataHand.renderLoop.startRenderLoop();
-
         DataHand.actionLoop.startGameLoop();
-
         DataHand.audioLoop.startAudioThread();
 
     }

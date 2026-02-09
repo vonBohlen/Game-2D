@@ -26,7 +26,7 @@ import java.util.List;
  */
 public class GameLoop implements Runnable {
 
-    public static int TPS = 60;
+    public static int TARGET_TPS = 60;
 
     @Getter
     private static int gameTick = 0;
@@ -48,20 +48,20 @@ public class GameLoop implements Runnable {
      */
     public void startGameLoop() {
 
-        TPS = ConfProvider.getConfValueAsInt("game2d.core.tps");
+        TARGET_TPS = ConfProvider.getConfValueAsInt("game2d.game_loop.target_tps");
 
         actionThread = new Thread(this);
         actionThread.start();
     }
 
     /**
-     * Times the updating of GameObjects and calculating TPS
+     * Times the updating of GameObjects and calculating TARGET_TPS
      */
     @Override
     public void run() {
         while (actionThread != null && !exit) {
 
-            double updateInterval = (double) 1000000000 / TPS;
+            double updateInterval = (double) 1000000000 / TARGET_TPS;
             double delta = 0;
             long lastTime = System.nanoTime();
             long currentTime;
@@ -96,7 +96,7 @@ public class GameLoop implements Runnable {
                     timer = 0;
                 }
 
-                if (gameTick >= TPS) {
+                if (gameTick >= TARGET_TPS) {
                     gameTick = 0;
                 }
 

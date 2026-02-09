@@ -30,7 +30,7 @@ public class Chunk {
      * HashMap of GameObjects in this Chunk identified by their UUID
      */
     //public final ConcurrentHashMap<UUID, GameObject> objects = new ConcurrentHashMap<>();
-    public java.util.List<GameObject> objectsByLayers = Collections.synchronizedList(new ArrayList<>());
+    public final java.util.List<GameObject> objectsByLayers = Collections.synchronizedList(new ArrayList<>());
     public final int posX;
     public final int posY;
 
@@ -107,7 +107,7 @@ public class Chunk {
             //setRenderData the chunks outline if it contains an object
             if (renderChunk && !objectsByLayers.isEmpty()) {
                 g2.setColor(new Color(0, 150, 200));
-                g2.draw3DRect((int) (posX * ChunkMan.chunkSize * Camera.pixelsPerUnit) - Camera.getScreenSpacePosX(), (int) (posY * ChunkMan.chunkSize * Camera.pixelsPerUnit) - Camera.getScreenSpacePosY(), (int) (ChunkMan.chunkSize * Camera.pixelsPerUnit), (int) (ChunkMan.chunkSize * Camera.pixelsPerUnit), false);
+                g2.draw3DRect((int) (posX * ChunkMan.CHUNK_SIZE * Camera.pixelsPerUnit) - Camera.getScreenSpacePosX(), (int) (posY * ChunkMan.CHUNK_SIZE * Camera.pixelsPerUnit) - Camera.getScreenSpacePosY(), (int) (ChunkMan.CHUNK_SIZE * Camera.pixelsPerUnit), (int) (ChunkMan.CHUNK_SIZE * Camera.pixelsPerUnit), false);
             }
         }
     }

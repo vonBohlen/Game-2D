@@ -15,7 +15,6 @@ import org.Game2D.tools.DebugScreen;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.Objects;
 
 /**
  * Render Manager<br>
@@ -28,7 +27,7 @@ public class RenderLoop extends JPanel implements Runnable {
     private boolean exit = false;
     private boolean run = true;
 
-    public static int FPS = 0;
+    public static int TARGET_FPS = 0;
 
     // Only for effects - lazy initialized
     private BufferedImage effectBuffer;
@@ -72,7 +71,7 @@ public class RenderLoop extends JPanel implements Runnable {
      */
     public void startRenderLoop() {
 
-        FPS = ConfProvider.getConfValueAsInt("game2d.core.fps");
+        TARGET_FPS = ConfProvider.getConfValueAsInt("game2d.graphics.target_fps");
 
         renderThread = new Thread(this);
         renderThread.start();
@@ -86,7 +85,7 @@ public class RenderLoop extends JPanel implements Runnable {
     public void run() {
         if (renderThread == null) return;
 
-        double drawInterval = (double) 1000000000 / FPS;
+        double drawInterval = (double) 1000000000 / TARGET_FPS;
         double delta = 0;
         long lastTime = System.nanoTime();
         long currentTime;
@@ -144,7 +143,7 @@ public class RenderLoop extends JPanel implements Runnable {
         boolean useEffects = false;
         int effectType = 0;
         try {
-            String effectConfig = ConfProvider.getConfValue("game2d.render.effects");
+            String effectConfig = ConfProvider.getConfValue("game2d.graphics.render_effects");
             if (effectConfig != null && !effectConfig.equals("0")) {
                 useEffects = true;
                 effectType = Integer.parseInt(effectConfig);
@@ -164,8 +163,8 @@ public class RenderLoop extends JPanel implements Runnable {
      * Direct rendering without effects (standard mode)
      */
     private void renderDirect(Graphics g) {
-        boolean renderHitBoxes = ConfProvider.getConfValueAsBool("game2d.setRenderData.hitboxes");
-        boolean renderActiveChunks = ConfProvider.getConfValueAsBool("game2d.setRenderData.activechunks");
+        boolean renderHitBoxes = ConfProvider.getConfValueAsBool("game2d.debug.graphics.render_hitboxes");
+        boolean renderChunkBorders = ConfProvider.getConfValueAsBool("game2d.debug.graphics.render_chunk_borders");
 
         Graphics2D g2 = (Graphics2D) g;
         g2.setRenderingHints(RENDERING_HINTS);
@@ -176,7 +175,7 @@ public class RenderLoop extends JPanel implements Runnable {
         g2.setColor(Color.magenta);
 
         // Draw each object within rendering distance
-        ChunkMan.setRenderDataByChunk(g2, Camera.renderUpdate(), renderHitBoxes, renderActiveChunks);
+        ChunkMan.setRenderDataByChunk(g2, Camera.renderUpdate(), renderHitBoxes, renderChunkBorders);
 
         DebugScreen.draw(g2);
     }
@@ -185,8 +184,8 @@ public class RenderLoop extends JPanel implements Runnable {
      * Rendering with visual effects (only when needed)
      */
     private void renderWithEffects(Graphics g, int effectType) {
-        boolean renderHitBoxes = ConfProvider.getConfValueAsBool("game2d.setRenderData.hitboxes");
-        boolean renderActiveChunks = ConfProvider.getConfValueAsBool("game2d.setRenderData.activechunks");
+        boolean renderHitBoxes = ConfProvider.getConfValueAsBool("game2d.debug.graphics.render_hitboxes");
+        boolean renderChunkBorders = ConfProvider.getConfValueAsBool("game2d.debug.graphics.render_chunk_borders");
 
         // Create/update effect buffer only when needed
         if (effectBuffer == null ||
@@ -212,7 +211,7 @@ public class RenderLoop extends JPanel implements Runnable {
         bufferG2.setColor(Color.magenta);
 
         // Draw each object within rendering distance
-        ChunkMan.setRenderDataByChunk(bufferG2, Camera.renderUpdate(), renderHitBoxes, renderActiveChunks);
+        ChunkMan.setRenderDataByChunk(bufferG2, Camera.renderUpdate(), renderHitBoxes, renderChunkBorders);
 
         DebugScreen.draw(bufferG2);
         bufferG2.dispose();

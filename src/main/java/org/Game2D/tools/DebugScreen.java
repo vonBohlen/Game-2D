@@ -58,13 +58,13 @@ public class DebugScreen {
     }
 
     public static void draw(Graphics2D g2) {
-        if (ConfProvider.getConfValueAsBool("game2d.core.showDebugScreen")) {
+        if (ConfProvider.getConfValueAsBool("game2d.debug.tools.render_debug_screen")) {
             g2.setColor(Color.RED);
 
-            g2.drawString(String.format("FPS=%s", FPS), 20, 20);
+            g2.drawString(String.format("TARGET_FPS=%s", FPS), 20, 20);
             g2.drawString(String.format("Frame_time_ns=%s", FRAME_TIME), 20, 35);
 
-            g2.drawString(String.format("TPS=%s", TPS), 20, 50);
+            g2.drawString(String.format("TARGET_TPS=%s", TPS), 20, 50);
             g2.drawString(String.format("Tick_time_ns=%s", TICK_TIME), 20, 65);
 
             g2.setColor(Color.YELLOW);

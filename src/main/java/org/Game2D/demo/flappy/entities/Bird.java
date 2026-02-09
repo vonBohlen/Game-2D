@@ -7,7 +7,6 @@ package org.Game2D.demo.flappy.entities;
 import org.Game2D.demo.flappy.FlappyBird;
 import org.Game2D.engine.data.runtime.DataHand;
 import org.Game2D.engine.io.assets.AssetMan;
-import org.Game2D.engine.io.conf.ConfProvider;
 import org.Game2D.engine.objects.advanced.Entity;
 import org.Game2D.engine.objects.loops.GameLoop;
 
@@ -38,7 +37,7 @@ public class Bird extends Entity {
         super(true, new Rectangle(DataHand.renderLoop.getWidth() / 5, DataHand.renderLoop.getHeight() / 2, 44, 24), 2, txt);
 
         //ideal time between two ticks
-        this.passedTime = 1 / (double) GameLoop.TPS;
+        this.passedTime = 1 / (double) GameLoop.TARGET_TPS;
 
         lastTime = System.nanoTime();
     }
