@@ -99,7 +99,7 @@ public class Chunk {
             g2.setColor(new Color(0, 200, 50));
             for (GameObject go : objectsByLayers) {
                 if (go.renderEnabled) go.setRenderData(g2);
-                if (go.hitBox != null && renderHitBoxes) go.setHitboxRenderData(g2);
+                if (go.hitBox != null && renderHitBoxes) go.setHitBoxRenderData(g2);
             }
         }
 

@@ -2,13 +2,12 @@
  * @author The Game2D contributors
  */
 
-package org.Game2D.engine.io.conf;
+package org.Game2D.engine.data.disk.conf;
 
 import org.Game2D.engine.data.runtime.DataHand;
 import org.Game2D.engine.data.runtime.Instance;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Map;

@@ -11,7 +11,7 @@ import lombok.Getter;
 import org.Game2D.engine.chunks.Chunk;
 import org.Game2D.engine.chunks.manager.ChunkMan;
 import org.Game2D.engine.chunks.utils.data.Directions;
-import org.Game2D.engine.io.conf.ConfProvider;
+import org.Game2D.engine.data.disk.conf.ConfProvider;
 import org.Game2D.engine.objects.GameObject;
 import org.Game2D.tools.DebugScreen;
 

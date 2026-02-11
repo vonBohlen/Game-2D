@@ -7,7 +7,7 @@ package org.Game2D.engine.objects;
 import lombok.NonNull;
 import org.Game2D.engine.events.events.GameObjectEvents;
 import org.Game2D.engine.graphics.Camera;
-import org.Game2D.engine.io.assets.AssetMan;
+import org.Game2D.engine.data.disk.assets.AssetMan;
 
 import java.awt.*;
 import java.util.UUID;
@@ -30,6 +30,10 @@ public abstract class GameObject {
 
     // Texture
     @NonNull public Image texture = AssetMan.loadAsset("default.png");
+
+    // Render offset
+    public int renderOffsetX = 0;
+    public int renderOffsetY = 0;
 
     /**
      * Initializes all fields within the class.
@@ -101,7 +105,7 @@ public abstract class GameObject {
      */
     public void setRenderData(Graphics2D g2){
 
-        g2.drawImage(texture, getScreenCoordinateX(), getScreenCoordinateY(), getScreenSpaceWidth(), getScreenSpaceHeight(), null);
+        g2.drawImage(texture, getScreenCoordinateX() + renderOffsetX, getScreenCoordinateY() + renderOffsetY, getScreenSpaceWidth(), getScreenSpaceHeight(), null);
 
     }
 
@@ -110,7 +114,7 @@ public abstract class GameObject {
      *
      * @param g Java.awt Graphics, to add render data to
      */
-    public void setHitboxRenderData(Graphics g){
+    public void setHitBoxRenderData(Graphics g){
 
         g.draw3DRect(getScreenCoordinateX(), getScreenCoordinateY(), getScreenSpaceWidth(), getScreenSpaceHeight(), false);
 

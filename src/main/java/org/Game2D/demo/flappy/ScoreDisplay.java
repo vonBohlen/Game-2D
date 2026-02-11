@@ -6,7 +6,7 @@ package org.Game2D.demo.flappy;
 
 import org.Game2D.demo.flappy.entities.ScoreDigit;
 import org.Game2D.engine.data.runtime.DataHand;
-import org.Game2D.engine.io.assets.AssetMan;
+import org.Game2D.engine.data.disk.assets.AssetMan;
 
 import java.awt.*;
 import java.util.ArrayList;

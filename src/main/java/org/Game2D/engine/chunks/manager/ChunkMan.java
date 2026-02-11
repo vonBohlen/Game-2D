@@ -10,7 +10,7 @@ import org.Game2D.engine.chunks.utils.data.Directions;
 import org.Game2D.engine.chunks.utils.math.FinderHash;
 import org.Game2D.engine.data.runtime.DataHand;
 import org.Game2D.engine.data.runtime.Instance;
-import org.Game2D.engine.io.conf.ConfProvider;
+import org.Game2D.engine.data.disk.conf.ConfProvider;
 import org.Game2D.engine.objects.GameObject;
 
 import java.awt.*;

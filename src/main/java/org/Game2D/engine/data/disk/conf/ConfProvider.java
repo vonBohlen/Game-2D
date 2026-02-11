@@ -2,7 +2,7 @@
  * @author The Game2D contributors
  */
 
-package org.Game2D.engine.io.conf;
+package org.Game2D.engine.data.disk.conf;
 
 import org.Game2D.engine.data.runtime.DataHand;
 

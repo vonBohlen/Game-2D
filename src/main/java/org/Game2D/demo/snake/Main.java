@@ -10,7 +10,7 @@ import org.Game2D.demo.snake.logic.Game;
 import org.Game2D.demo.snake.logic.Schnake;
 import org.Game2D.engine.data.runtime.DataHand;
 import org.Game2D.engine.data.runtime.Instance;
-import org.Game2D.engine.io.assets.AssetMan;
+import org.Game2D.engine.data.disk.assets.AssetMan;
 
 import java.awt.*;
 

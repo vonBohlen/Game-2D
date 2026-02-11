@@ -6,7 +6,7 @@ package org.Game2D.demo.flappy.entities;
 
 import org.Game2D.demo.flappy.FlappyBird;
 import org.Game2D.engine.data.runtime.DataHand;
-import org.Game2D.engine.io.assets.AssetMan;
+import org.Game2D.engine.data.disk.assets.AssetMan;
 import org.Game2D.engine.objects.advanced.Entity;
 import org.Game2D.engine.objects.loops.GameLoop;
 

@@ -7,6 +7,7 @@ package org.Game2D.engine.graphics;
 import org.Game2D.engine.chunks.Chunk;
 import org.Game2D.engine.chunks.manager.ChunkMan;
 import org.Game2D.engine.data.runtime.DataHand;
+import org.Game2D.engine.objects.GameObject;
 
 public class Camera {
 
@@ -14,6 +15,8 @@ public class Camera {
     private static double y;
     private static double width;
     private static double height;
+
+    public static GameObject trackingObject = null;
 
     public static double pixelsPerUnit;
 
@@ -34,6 +37,7 @@ public class Camera {
 
     // kamera wird bewegt skalliert etc und gibt den chunk in ihrem mittelpunkt zurück
     public static Chunk renderUpdate(){
+        syncPositionToObject();
         // set height and width if not set correctly
         if(height == 0){ height = (double)DataHand.renderLoop.getHeight(); }
 
@@ -54,6 +58,12 @@ public class Camera {
         height = newHeight;
         width = ((double)DataHand.renderLoop.getWidth() / (double)DataHand.renderLoop.getHeight()) * height;
         pixelsPerUnit = ((double)DataHand.renderLoop.getHeight() / height);
+    }
+
+    private static void syncPositionToObject() {
+        if (trackingObject == null) return;
+        x = trackingObject.hitBox.x;
+        y = trackingObject.hitBox.y;
     }
 
     public static int getScreenSpacePosX(){
