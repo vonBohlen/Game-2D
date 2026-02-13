@@ -1,3 +1,11 @@
+/**
+ * /engine/ui/elements/UiElement.java
+ *
+ * DESCRIPTION
+ *
+ * Copyright (C) 2026 CHristian von Bohlen
+ */
+
 package org.Game2D.engine.ui.elements;
 
 import lombok.NonNull;

@@ -1,5 +1,9 @@
 /**
- * @author The Game2D contributors
+ * /engine/objects/advanced/StaticObject.java
+ *
+ * The StaticObject class provides a GameObject which cant be updated.
+ *
+ * Copyright (C) 2026 Christian von Bohlen, J. K.
  */
 
 package org.Game2D.engine.objects.advanced;

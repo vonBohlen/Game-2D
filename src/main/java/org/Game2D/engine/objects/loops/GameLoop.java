@@ -1,19 +1,20 @@
 /**
- * Action Manager<br>
- * Handles GameObject updating with the Gameloop
- * and general timing
- * @author The Game2D contributors
+ * /engine/objects/loops/GameLoop.java
+ *
+ * Handles GameObject updating with the GameLoop and general timing
+ *
+ * Copyright (C) 2026 Christian von Bohlen, Luca Mergel, J. K.
  */
 
 package org.Game2D.engine.objects.loops;
 
 import lombok.Getter;
 import org.Game2D.engine.chunks.Chunk;
-import org.Game2D.engine.chunks.manager.ChunkMan;
+import org.Game2D.engine.chunks.managers.ChunkMan;
 import org.Game2D.engine.chunks.utils.data.Directions;
 import org.Game2D.engine.data.disk.conf.ConfProvider;
 import org.Game2D.engine.objects.GameObject;
-import org.Game2D.tools.DebugScreen;
+import org.Game2D.tools.debug.DebugScreen;
 
 import java.awt.*;
 import java.util.ArrayList;

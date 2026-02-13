@@ -1,3 +1,11 @@
+/**
+ * /engine/audio/loops/AudioLoop.java
+ *
+ * DESCRIPTION
+ *
+ * Copyright (C) 2026 Christian von Bohlen
+ */
+
 package org.Game2D.engine.audio.loops;
 
 import org.Game2D.engine.audio.AudioPlayer;

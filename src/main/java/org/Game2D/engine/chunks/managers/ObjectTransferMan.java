@@ -1,10 +1,12 @@
 /**
- * Object Transfer Manager <br>
+ * /engine/chunks/managers/ObjectTransferMan.java
+ *
  * Moves GameObjects around and changes their Chunk if needed
- * @author The Game2D contributors
+ *
+ * Copyright (C) 2026 Silas Vogel, Christian von Bohlen, J. K.
  */
 
-package org.Game2D.engine.chunks.manager;
+package org.Game2D.engine.chunks.managers;
 
 import lombok.NonNull;
 import org.Game2D.engine.chunks.Chunk;

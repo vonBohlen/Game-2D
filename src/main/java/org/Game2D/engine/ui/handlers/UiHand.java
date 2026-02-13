@@ -1,3 +1,11 @@
+/**
+ * /engine/ui/handlers/UiHand.java
+ *
+ * DESCRIPTION
+ *
+ * Copyright (C) 2026 CHristian von Bohlen
+ */
+
 package org.Game2D.engine.ui.handlers;
 
 import lombok.NonNull;

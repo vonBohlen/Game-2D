@@ -93,5 +93,5 @@ public void update(){
 
 ## Additional documentation
 
-**The full documentation of Game2D can be found in [/doc](../doc).**  \
+**The full documentation of Game2D can be found in [/doc](../../doc).**  \
 In the future there will also be a wiki page dedicated to Game2D.

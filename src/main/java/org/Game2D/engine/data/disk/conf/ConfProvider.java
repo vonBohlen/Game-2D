@@ -1,5 +1,9 @@
 /**
- * @author The Game2D contributors
+ * /engine/data/disk/conf/ConfProvider.java
+ *
+ * DESCRIPTION
+ *
+ * Copyright (C) 2026 Christian von Bohlen, J. K.
  */
 
 package org.Game2D.engine.data.disk.conf;

@@ -11,7 +11,7 @@ We would be happy about contributions to this project.
 
 ## Getting started
 
-**Click [here](/md/GettingStarted.md), to get to our starter guide.**
+**Click [here](/md/doc/GettingStarted.md), to get to our starter guide.**
 
 ## Development progress
 

@@ -1,12 +1,15 @@
 /**
+ * /engine/chunks/Chunk.java
+ *
  * Chunk class that stores a HashMap of GameObjects Used by the ChunkManager
- * @author The Game2D contributors
+ *
+ * Copyright (C) 2026 Silas Vogel, J. K., Christian von Bohlen
  */
 
 package org.Game2D.engine.chunks;
 
 import lombok.NonNull;
-import org.Game2D.engine.chunks.manager.ChunkMan;
+import org.Game2D.engine.chunks.managers.ChunkMan;
 import org.Game2D.engine.graphics.Camera;
 import org.Game2D.engine.objects.GameObject;
 

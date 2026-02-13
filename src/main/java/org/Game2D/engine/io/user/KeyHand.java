@@ -1,7 +1,9 @@
 /**
- * Key-input Handler
+ * /engine/io/user/KeyHand.java
+ *
  * Manages received keystrokes and sets the appropriate <code>keyPressed_*</code> boolean
- * @author The Game2D contributors
+ *
+ * Copyright (C) 2026 Christian von Bohlen, J. K.
  */
 
 package org.Game2D.engine.io.user;
@@ -13,7 +15,7 @@ import java.awt.event.KeyListener;
  * Key-input Handler
  * Manages received keystrokes and sets the appropriate <code>keyPressed_*</code> boolean
  */
-public class Keyhand implements KeyListener {
+public class KeyHand implements KeyListener {
 
     public boolean keyPressed_W = false;
     public boolean keyPressed_A = false;

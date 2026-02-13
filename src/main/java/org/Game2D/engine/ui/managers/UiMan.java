@@ -1,3 +1,11 @@
+/**
+ * /engine/ui/managers/UiMan.java
+ *
+ * DESCRIPTION
+ *
+ * Copyright (C) 2026 CHristian von Bohlen
+ */
+
 package org.Game2D.engine.ui.managers;
 
 import lombok.NonNull;

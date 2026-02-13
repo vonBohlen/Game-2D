@@ -1,3 +1,11 @@
+/**
+ * /engine/events/handlers/UiElementHandler.java
+ *
+ * Event handler interface for ui element related events.
+ *
+ * Copyright (C) 2026 Christian von Bohlen
+ */
+
 package org.Game2D.engine.events.handlers;
 
 import lombok.NonNull;

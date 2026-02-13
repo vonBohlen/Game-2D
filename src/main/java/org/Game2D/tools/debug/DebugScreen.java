@@ -1,13 +1,17 @@
 /**
- * @author The Game2D contributors
+ * /tools/debug/DebugScreen.java
+ *
+ * DESCRIPTION
+ *
+ * Copyright (C) 2026 Christian von Bohlen
  */
 
-package org.Game2D.tools;
+package org.Game2D.tools.debug;
 
-import org.Game2D.engine.chunks.manager.ChunkMan;
+import org.Game2D.engine.chunks.managers.ChunkMan;
 import org.Game2D.engine.data.runtime.DataHand;
 import org.Game2D.engine.data.disk.conf.ConfProvider;
-import org.Game2D.engine.io.user.Keyhand;
+import org.Game2D.engine.io.user.KeyHand;
 
 import java.awt.*;
 
@@ -21,7 +25,7 @@ public class DebugScreen {
 
     public static boolean HARDWARE_ACCELERATION = false;
 
-    private  static  Keyhand keyhand = null;
+    private  static KeyHand keyhand = null;
 
     public static void updateFPS(int fps) {
         if (fps == FPS) return;

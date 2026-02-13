@@ -1,5 +1,9 @@
 /**
- * @author The Game2D contributors
+ * /demo/flappy/HighScoreDisplay.java
+ *
+ * DESCRIPTION
+ *
+ * Copyright (C) 2025 Christian von Bohlen
  */
 
 package org.Game2D.demo.flappy;

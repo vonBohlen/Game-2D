@@ -1,3 +1,11 @@
+/**
+ * /engine/errors/EngineErrorHand.java
+ *
+ * DESCRIPTION
+ *
+ * Copyright (C) 2026 Christian von Bohlen
+ */
+
 package org.Game2D.engine.errors;
 
 import org.Game2D.engine.events.handlers.EngineErrorEventHandler;

@@ -1,3 +1,11 @@
+/**
+ * /engine/events/events/UiElementsEvents.java
+ *
+ * Event utility class for ui element related events.
+ *
+ * Copyright (C) 2026 Christian von Bohlen
+ */
+
 package org.Game2D.engine.events.events;
 
 import lombok.Getter;

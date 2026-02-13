@@ -1,3 +1,11 @@
+/**
+ * /engine/events/handlers/GameObjectHandler.java
+ *
+ * Event handler interface for object related events.
+ *
+ * Copyright (C) 2026 Christian von Bohlen
+ */
+
 package org.Game2D.engine.events.handlers;
 
 import lombok.NonNull;

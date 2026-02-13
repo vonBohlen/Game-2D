@@ -1,3 +1,11 @@
+/**
+ * /demo/flappy/objects/BaseObject.java
+ *
+ * DESCRIPTION
+ *
+ * Copyright (C) 2025 Christian von Bohlen
+ */
+
 package org.Game2D.demo.flappy.objects;
 
 import org.Game2D.engine.objects.advanced.StaticObject;

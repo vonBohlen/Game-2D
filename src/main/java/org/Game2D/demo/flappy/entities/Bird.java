@@ -1,5 +1,9 @@
 /**
- * @author The Game2D contributors
+ * /demo/flappy/entities/Bird.java
+ *
+ * DESCRIPTION
+ *
+ * Copyright (C) 2026 Silas Vogel, Christian von Bohlen, J. K.
  */
 
 package org.Game2D.demo.flappy.entities;

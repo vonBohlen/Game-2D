@@ -1,16 +1,18 @@
 /**
- * Render Manager<br>
+ * /engine/graphics/loops/RenderLoop.java
+ *
  * Handles the rendering of <code>GameObjects</code>
- * @author The Game2D contributors
+ *
+ * Copyright (C) 2026 Christian von Bohlen, Luca Mergel, Silas Vogel, J. K.
  */
 
 package org.Game2D.engine.graphics.loops;
 
-import org.Game2D.engine.chunks.manager.ChunkMan;
+import org.Game2D.engine.chunks.managers.ChunkMan;
 import org.Game2D.engine.data.runtime.DataHand;
 import org.Game2D.engine.graphics.Camera;
 import org.Game2D.engine.data.disk.conf.ConfProvider;
-import org.Game2D.tools.DebugScreen;
+import org.Game2D.tools.debug.DebugScreen;
 
 import javax.swing.*;
 import java.awt.*;

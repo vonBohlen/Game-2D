@@ -1,3 +1,11 @@
+/**
+ * /engine/audio/AudioPlayer.java
+ *
+ * DESCRIPTION
+ *
+ * Copyright (C) 2026 Christian von Bohlen
+ */
+
 package org.Game2D.engine.audio;
 
 import lombok.Getter;

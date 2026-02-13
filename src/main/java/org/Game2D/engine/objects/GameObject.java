@@ -1,5 +1,9 @@
 /**
- * @author The Game2D contributors
+ * /engine/objects/GameObject.java
+ *
+ * The GameObject class provides the fundamental data structure and key functionality to all GameObjects within the engine.
+ *
+ * Copyright (C) 2026 Christian von Bohlen, Silas Vogel
  */
 
 package org.Game2D.engine.objects;

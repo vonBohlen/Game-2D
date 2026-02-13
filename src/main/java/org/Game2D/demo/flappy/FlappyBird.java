@@ -1,5 +1,9 @@
 /**
- * @author The Game2D contributors
+ * /demo/flappy/FlappyBird.java
+ *
+ * DESCRIPTION
+ *
+ * Copyright (C) 2025 Christian von Bohlen, Silas Vogel
  */
 
 package org.Game2D.demo.flappy;

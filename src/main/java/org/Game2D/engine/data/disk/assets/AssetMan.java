@@ -1,5 +1,9 @@
 /**
- * @author The Game2D contributors
+ * /engine/data/disk/assets/AssetMan.java
+ *
+ * DESCRIPTION
+ *
+ * Copyright (C) 2026 Christian von Bohlen
  */
 
 package org.Game2D.engine.data.disk.assets;

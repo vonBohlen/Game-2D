@@ -1,14 +1,16 @@
 /**
- * Dark Magic for quickly identifying Chunks by their coordinates
- * and finding nearby Chunks
- * @author The Game2D contributors
+ * /engine/chunks/utils/math/FinderHash.java
+ *
+ * Dark Magic for quickly identifying Chunks by their coordinates and finding nearby Chunks
+ *
+ * Copyright (C) Silas Vogel, J. K.
  */
 
 package org.Game2D.engine.chunks.utils.math;
 
 import lombok.NonNull;
 import org.Game2D.engine.chunks.Chunk;
-import org.Game2D.engine.chunks.manager.ChunkMan;
+import org.Game2D.engine.chunks.managers.ChunkMan;
 import org.Game2D.engine.chunks.utils.data.Directions;
 
 import java.util.ArrayList;

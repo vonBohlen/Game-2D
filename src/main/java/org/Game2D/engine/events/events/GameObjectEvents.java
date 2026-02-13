@@ -1,3 +1,11 @@
+/**
+ * /engine/events/events/GameObjectEvents.java
+ *
+ * Event utility class for object related events.
+ *
+ * Copyright (C) 2026 Christian von Bohlen
+ */
+
 package org.Game2D.engine.events.events;
 
 import lombok.Getter;

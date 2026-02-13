@@ -1,8 +1,12 @@
 /**
- * @author The Game2D contributors
+ * /engine/chunks/managers/ChunkMan.java
+ *
+ * Manager of the chunk system
+ *
+ * Copyright (C) 2026 Silas Vogel, J. K., Christian von Bohlen
  */
 
-package org.Game2D.engine.chunks.manager;
+package org.Game2D.engine.chunks.managers;
 
 import lombok.NonNull;
 import org.Game2D.engine.chunks.Chunk;

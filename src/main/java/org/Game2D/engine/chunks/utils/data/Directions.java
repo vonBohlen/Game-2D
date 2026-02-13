@@ -1,6 +1,9 @@
 /**
+ * /engine/chunks/utils/data/Directions.java
+ *
  * Enum of all possible cardinal directions + their linear combinations
- * @author The Game2D contributors
+ *
+ * Copyright (C) 2026 Silas Vogel, J. K.
  */
 
 package org.Game2D.engine.chunks.utils.data;

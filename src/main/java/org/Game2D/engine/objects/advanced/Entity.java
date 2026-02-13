@@ -1,11 +1,15 @@
 /**
- * @author The Game2D contributors
+ * /engine/objects/advanced/Entity.java
+ *
+ * The Entity class provides with entities associate features to a GameObject.
+ *
+ * Copyright (C) 2026 Christian von Bohlen, Silas Vogel, J. K.
  */
 
 package org.Game2D.engine.objects.advanced;
 
 import lombok.NonNull;
-import org.Game2D.engine.chunks.manager.ObjectTransferMan;
+import org.Game2D.engine.chunks.managers.ObjectTransferMan;
 import org.Game2D.engine.objects.GameObject;
 import org.Game2D.engine.objects.loops.GameLoop;
 

@@ -1,21 +1,25 @@
 /**
- * @author The Game2D contributors
+ * /engine/data/runtime/Instance.java
+ *
+ * DESCRIPTION
+ *
+ * Copyright (C) 2026 Christian von Bohlen, J. K.
  */
 
 package org.Game2D.engine.data.runtime;
 
 import org.Game2D.engine.audio.loops.AudioLoop;
 import org.Game2D.engine.chunks.handlers.GameObjectHand;
-import org.Game2D.engine.chunks.manager.ChunkMan;
+import org.Game2D.engine.chunks.managers.ChunkMan;
 import org.Game2D.engine.errors.EngineErrorHand;
 import org.Game2D.engine.events.events.EngineErrorEvents;
 import org.Game2D.engine.events.events.GameObjectEvents;
 import org.Game2D.engine.graphics.loops.RenderLoop;
 import org.Game2D.engine.data.disk.conf.ConfHand;
 import org.Game2D.engine.data.disk.conf.ConfProvider;
-import org.Game2D.engine.io.user.Keyhand;
+import org.Game2D.engine.io.user.KeyHand;
 import org.Game2D.engine.objects.loops.GameLoop;
-import org.Game2D.tools.DebugScreen;
+import org.Game2D.tools.debug.DebugScreen;
 
 import javax.swing.*;
 import java.awt.*;
@@ -61,7 +65,7 @@ public class Instance {
         // Starting the chunk system first, to prevent errors in other systems
         ChunkMan.initialize();
 
-        DataHand.keyHand = new Keyhand();
+        DataHand.keyHand = new KeyHand();
         DataHand.renderLoop = new RenderLoop();
         DataHand.actionLoop = new GameLoop();
         DataHand.audioLoop = new AudioLoop();
