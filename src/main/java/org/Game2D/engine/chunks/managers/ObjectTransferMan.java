@@ -49,7 +49,7 @@ public class ObjectTransferMan {
      * @param object GameObject to be moved
      */
     private static void transferObject(@NonNull GameObject object) {
-        Chunk new_chunk = ChunkMan.ChunkFromCoordinates(object.hitBox.x, object.hitBox.y);
+        Chunk new_chunk = ChunkMan.chunkFromCoordinates(object.hitBox.x, object.hitBox.y);
         Chunk old_chunk = ChunkMan.getChunkFromObject(object);
 
         moveObjectsInChunks(object, old_chunk, new_chunk);
@@ -62,7 +62,7 @@ public class ObjectTransferMan {
      * @param old_chunk Old Chunk
      * @param new_chunk New Chunk
      */
-    private static void moveObjectsInChunks(GameObject object, @NonNull Chunk old_chunk, @NonNull Chunk new_chunk) {
+    private static void moveObjectsInChunks(@NonNull GameObject object, @NonNull Chunk old_chunk, @NonNull Chunk new_chunk) {
         //first remove then add because if you add first the relation between chunk and object gets set to a new value but after that the object gets removed
         old_chunk.removeGameObject(object);
         new_chunk.addGameObject(object);
@@ -91,7 +91,7 @@ public class ObjectTransferMan {
      * @param oldX   Old x-Coordinate
      * @param oldY   Old y-Coordinate
      */
-    public static void checkTransferAfterMoveAbs(GameObject object, int oldX, int oldY) {
+    public static void checkTransferAfterMoveAbs(@NonNull GameObject object, int oldX, int oldY) {
         if (chunkTransferIsNecessary(object, oldX, oldY)) transferQueue.add(object);
     }
 
@@ -103,13 +103,13 @@ public class ObjectTransferMan {
      * @param newX   New x-Coordinate
      * @param newY   New y-Coordinate
      */
-    public static void transferAbs(GameObject object, int newX, int newY) {
+    public static void transferAbs(@NonNull GameObject object, int newX, int newY) {
         if (chunkTransferIsNecessary(object, newX, newY)) {
             object.hitBox.x = newX;
             object.hitBox.y = newY;
 
-            Chunk old_chunk = ChunkMan.ChunkFromCoordinates(object.hitBox.x, object.hitBox.y);
-            Chunk new_chunk = ChunkMan.ChunkFromCoordinates(newX, newY);
+            Chunk old_chunk = ChunkMan.chunkFromCoordinates(object.hitBox.x, object.hitBox.y);
+            Chunk new_chunk = ChunkMan.chunkFromCoordinates(newX, newY);
             moveObjectsInChunks(object, old_chunk, new_chunk);
         } else {
             object.hitBox.x = newX;
@@ -124,7 +124,7 @@ public class ObjectTransferMan {
      * @param relX   Relative change in the x-Coordinate
      * @param relY   Relative change in te y-Coordinate
      */
-    public static void transferRel(GameObject object, int relX, int relY) {
+    public static void transferRel(@NonNull GameObject object, int relX, int relY) {
         transferAbs(object, object.hitBox.x + relX, object.hitBox.y + relY);
     }
 }

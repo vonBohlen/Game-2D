@@ -18,7 +18,7 @@ public class GameObjectHand implements GameObjectEventHandler {
 
     @Override
     public void handelObjectCreationEvent(@NonNull GameObject gameObject) {
-        Chunk chunk = ChunkMan.ChunkFromCoordinates(gameObject.hitBox.x, gameObject.hitBox.y);
+        Chunk chunk = ChunkMan.chunkFromCoordinates(gameObject.hitBox.x, gameObject.hitBox.y);
         chunk.addGameObject(gameObject);
     }
 

@@ -55,7 +55,7 @@ public class Camera {
         // =========== Ende Test ==========
 
         // translating the world coordinates into screenspace
-        return ChunkMan.ChunkFromCoordinates((int)((x + width / 2.0) * pixelsPerUnit),(int)((y + height / 2.0) * pixelsPerUnit));
+        return ChunkMan.chunkFromCoordinates((int)((x + width / 2.0) * pixelsPerUnit),(int)((y + height / 2.0) * pixelsPerUnit));
     }
 
     public static void updateScreenHeight(double newHeight){

@@ -79,7 +79,7 @@ public class FinderHash {
      *
      * @param chunk Chunk to be stored
      */
-    public void addChunk(Chunk chunk) {
+    public void addChunk(@NonNull Chunk chunk) {
         chunkPos.put(getIndex(chunk.posX, chunk.posY), chunk);
     }
 
@@ -112,7 +112,7 @@ public class FinderHash {
      * @param radius Radius around the origin
      * @return List of Chunks in range
      */
-    public List<Chunk> getChunksInReach(Chunk target, int radius) {
+    public List<Chunk> getChunksInReach(@NonNull Chunk target, int radius) {
         List<Chunk> chunks = new ArrayList<>();
 
         for (int x = 0; x <= 2 * radius; x++) {
@@ -141,7 +141,7 @@ public class FinderHash {
      * @return Chunk in that direction
      * @see Directions
      */
-    public Chunk getAdjacentChunk(Chunk chunk, @NonNull Directions direction) {
+    public Chunk getAdjacentChunk(@NonNull Chunk chunk, @NonNull Directions direction) {
         switch (direction) {
             case TOP -> {
                 return getChunkByCoordinate(chunk.posX, chunk.posY - 1);

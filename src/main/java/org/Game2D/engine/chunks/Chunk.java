@@ -58,6 +58,7 @@ public class Chunk {
     public void addGameObject(GameObject object) {
         //objects.put(object.uuid, object);
         //TODO: Put GameObject at right place in List
+        // TODO: Fix GameObject layers with custom hashset implementation, which allows the same key multiple times
         synchronized (objectsByLayers) {
             objectsByLayers.add(object);
         }
