@@ -18,12 +18,7 @@ java {
 }
 
 repositories {
-
     mavenCentral()
-
-    maven(url = "https://maven.scijava.org/content/repositories/public/")
-    //maven(url = " https://jogamp.org/deployment/maven")
-
 }
 
 dependencies {
@@ -34,19 +29,8 @@ dependencies {
     implementation("org.jetbrains:annotations:24.1.0")
     implementation("org.reflections:reflections:0.10.2")
 
-    // Source: https://mvnrepository.com/artifact/org.jogamp.jogl/jogl-all-main
-    implementation("org.jogamp.jogl:jogl-all-main:2.6.0")
-    implementation("org.jogamp.gluegen:gluegen-rt:2.6.0")
-
-    // Source: https://mvnrepository.com/artifact/org.jogamp.jogl/jogl-all-natives-linux-amd64
-    implementation("org.jogamp.jogl:jogl-all-natives-linux-amd64:2.1.5")
+    implementation("org.lwjgl:lwjgl:3.4.1")
+    implementation("org.lwjgl:lwjgl-glfw:3.4.1")
+    implementation("org.lwjgl:lwjgl-opengl:3.4.1")
 
 }
-
-
-tasks.withType<Jar> {
-    manifest {
-        attributes["Main-Class"] = "org.Game2D.rendertest.Test"
-    }
-}
-
