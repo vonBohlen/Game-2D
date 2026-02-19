@@ -15,6 +15,7 @@ import org.Game2D.engine.objects.GameObject;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -33,7 +34,7 @@ public class Chunk {
      * HashMap of GameObjects in this Chunk identified by their UUID
      */
     //public final ConcurrentHashMap<UUID, GameObject> objects = new ConcurrentHashMap<>();
-    public final ConcurrentHashMap<Integer, ArrayList<GameObject>> objectsByLayers = new ConcurrentHashMap<>();
+    public final ConcurrentHashMap<Integer, ConcurrentHashMap<UUID, GameObject>> objectsByLayers = new ConcurrentHashMap<>();
    // public final java.util.List<GameObject> objectsByLayers = Collections.synchronizedList(new ArrayList<>());
     public final int posX;
     public final int posY;
@@ -59,11 +60,11 @@ public class Chunk {
     public void addGameObject(GameObject object) {
 
         if (objectsByLayers.containsKey(object.objectLayer)) {
-            objectsByLayers.get(object.objectLayer).add(object);
+                objectsByLayers.get(object.objectLayer).put(object.uuid, object);
         }
         else {
-            ArrayList<GameObject> layer = new ArrayList<>();
-            layer.add(object);
+            ConcurrentHashMap<UUID, GameObject> layer  = new ConcurrentHashMap<>();
+            layer.put(object.uuid, object);
             objectsByLayers.put(object.objectLayer, layer);
         }
 
@@ -78,9 +79,8 @@ public class Chunk {
     public void removeGameObject(GameObject object) {
 
         if (objectsByLayers.containsKey(object.objectLayer)) {
-            ArrayList<GameObject> layer = objectsByLayers.get(object.objectLayer);
-            layer.removeIf(current -> current.equals(object));
-            if (layer.isEmpty()) {
+            objectsByLayers.get(object.objectLayer).remove(object.uuid);
+            if (objectsByLayers.get(object.objectLayer).isEmpty()) {
                 objectsByLayers.remove(object.objectLayer);
             }
         }
@@ -97,9 +97,9 @@ public class Chunk {
         // TODO: sort the key list from lowest to highest integer
         for (Integer key : keys) {
             if (objectsByLayers.containsKey(key)) {
-                objectsByLayers.get(key).forEach(GameObject::update);
+                    objectsByLayers.get(key).forEachValue(1, GameObject::update);
+                }
             }
-        }
         }
 
     /**
@@ -119,11 +119,10 @@ public class Chunk {
             // TODO: sort the key list from lowest to highest integer
             for (Integer key : keys) {
                 if (objectsByLayers.containsKey(key)) {
-                    ArrayList<GameObject> layer = objectsByLayers.get(key);
-                    for (GameObject object : layer) {
+                    objectsByLayers.get(key).forEachValue(1, object -> {
                         if (object.renderEnabled) object.setRenderData(g2);
                         if (renderHitBoxes) object.setHitBoxRenderData(g2);
-                    }
+                    });
                 }
             }
         }

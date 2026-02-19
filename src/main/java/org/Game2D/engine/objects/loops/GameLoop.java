@@ -17,8 +17,9 @@ import org.Game2D.engine.objects.GameObject;
 import org.Game2D.tools.debug.DebugScreen;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * GameLoop<br>
@@ -136,36 +137,35 @@ public class GameLoop implements Runnable {
      * Temporary solution
      * To be replaced once the chunk system is fully implemented
      *
-     * @param go The GameObject to check collision for
+     * @param object The GameObject to check collision for
      * @param position The position to check
      * @return null if no collision is found, otherwise return the collision object
      */
-    public static GameObject checkCollision(GameObject go, Rectangle position) {
+    public static GameObject checkCollision(GameObject object, Rectangle position) {
 
         // TODO: Replace method once chunk system is complete
 
-        Chunk chunk = ChunkMan.getChunkFromObject(go);
+        Chunk chunk = ChunkMan.getChunkFromObject(object);
 
-        List<GameObject> gameObjectCache = new ArrayList<>(chunk.objectsByLayers.get(go.objectLayer));
+        ConcurrentHashMap<UUID, GameObject> objectCache = new ConcurrentHashMap<>(chunk.objectsByLayers.get(object.objectLayer));
 
         // TODO: Replace by only loading adjacent chunks in the direction in which the GameObject is moving
-        gameObjectCache.addAll(ChunkMan.getAdjacentChunk(chunk, Directions.TOP).objectsByLayers.get(go.objectLayer));
-        gameObjectCache.addAll(ChunkMan.getAdjacentChunk(chunk, Directions.TOP_LEFT).objectsByLayers.get(go.objectLayer));
-        gameObjectCache.addAll(ChunkMan.getAdjacentChunk(chunk, Directions.LEFT).objectsByLayers.get(go.objectLayer));
-        gameObjectCache.addAll(ChunkMan.getAdjacentChunk(chunk, Directions.BOTTOM_LEFT).objectsByLayers.get(go.objectLayer));
-        gameObjectCache.addAll(ChunkMan.getAdjacentChunk(chunk, Directions.BOTTOM).objectsByLayers.get(go.objectLayer));
-        gameObjectCache.addAll(ChunkMan.getAdjacentChunk(chunk, Directions.TOP_RIGHT).objectsByLayers.get(go.objectLayer));
-        gameObjectCache.addAll(ChunkMan.getAdjacentChunk(chunk, Directions.RIGHT).objectsByLayers.get(go.objectLayer));
-        gameObjectCache.addAll(ChunkMan.getAdjacentChunk(chunk, Directions.BOTTOM_RIGHT).objectsByLayers.get(go.objectLayer));
+//        objectCache.putAll(ChunkMan.getAdjacentChunk(chunk, Directions.TOP).objectsByLayers.get(object.objectLayer));
+//        objectCache.putAll(ChunkMan.getAdjacentChunk(chunk, Directions.TOP_LEFT).objectsByLayers.get(object.objectLayer));
+//        objectCache.putAll(ChunkMan.getAdjacentChunk(chunk, Directions.LEFT).objectsByLayers.get(object.objectLayer));
+//        objectCache.putAll(ChunkMan.getAdjacentChunk(chunk, Directions.BOTTOM_LEFT).objectsByLayers.get(object.objectLayer));
+//        objectCache.putAll(ChunkMan.getAdjacentChunk(chunk, Directions.BOTTOM).objectsByLayers.get(object.objectLayer));
+//        objectCache.putAll(ChunkMan.getAdjacentChunk(chunk, Directions.TOP_RIGHT).objectsByLayers.get(object.objectLayer));
+//        objectCache.putAll(ChunkMan.getAdjacentChunk(chunk, Directions.RIGHT).objectsByLayers.get(object.objectLayer));
+//        objectCache.putAll(ChunkMan.getAdjacentChunk(chunk, Directions.BOTTOM_RIGHT).objectsByLayers.get(object.objectLayer));
 
-        for (GameObject current : gameObjectCache) {
-            if (current.collisionEnabled && !current.equals(go) &&
-                    go.objectLayer == current.objectLayer && position.intersects(current.hitBox)) {
-                return current;
-            }
-        }
+        AtomicReference<GameObject> collisionCache = new AtomicReference<>();
 
-        return null;
+        objectCache.forEachValue(1, current -> {
+            if (current.collisionEnabled && !current.equals(object) && position.intersects(current.hitBox)) collisionCache.set(current);
+        });
+
+        return collisionCache.get();
     }
 
     /**
