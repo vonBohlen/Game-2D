@@ -15,8 +15,8 @@ import org.Game2D.engine.objects.GameObject;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Chunk class that stores a HashMap of GameObjects
@@ -33,7 +33,8 @@ public class Chunk {
      * HashMap of GameObjects in this Chunk identified by their UUID
      */
     //public final ConcurrentHashMap<UUID, GameObject> objects = new ConcurrentHashMap<>();
-    public final java.util.List<GameObject> objectsByLayers = Collections.synchronizedList(new ArrayList<>());
+    public final ConcurrentHashMap<Integer, ArrayList<GameObject>> objectsByLayers = new ConcurrentHashMap<>();
+   // public final java.util.List<GameObject> objectsByLayers = Collections.synchronizedList(new ArrayList<>());
     public final int posX;
     public final int posY;
 
@@ -56,12 +57,16 @@ public class Chunk {
      * @param object GameObject to be added
      */
     public void addGameObject(GameObject object) {
-        //objects.put(object.uuid, object);
-        //TODO: Put GameObject at right place in List
-        // TODO: Fix GameObject layers with custom hashset implementation, which allows the same key multiple times
-        synchronized (objectsByLayers) {
-            objectsByLayers.add(object);
+
+        if (objectsByLayers.containsKey(object.objectLayer)) {
+            objectsByLayers.get(object.objectLayer).add(object);
         }
+        else {
+            ArrayList<GameObject> layer = new ArrayList<>();
+            layer.add(object);
+            objectsByLayers.put(object.objectLayer, layer);
+        }
+
         ChunkMan.registerObject(object, this);
     }
 
@@ -71,10 +76,15 @@ public class Chunk {
      * @param object Object to be removed
      */
     public void removeGameObject(GameObject object) {
-        //objects.remove(object.uuid);
-        synchronized (objectsByLayers) {
-            objectsByLayers.remove(object);
+
+        if (objectsByLayers.containsKey(object.objectLayer)) {
+            ArrayList<GameObject> layer = objectsByLayers.get(object.objectLayer);
+            layer.removeIf(current -> current.equals(object));
+            if (layer.isEmpty()) {
+                objectsByLayers.remove(object.objectLayer);
+            }
         }
+
         ChunkMan.unregisterObject(object);
     }
 
@@ -82,12 +92,15 @@ public class Chunk {
      * Update all GameObjects in the Chunk
      */
     public void update() {
-        synchronized (objectsByLayers) {
-            for (GameObject object : objectsByLayers) {
-                object.update();
+        ArrayList<Integer> keys = new ArrayList<>();
+        objectsByLayers.forEachKey(1, keys::add);
+        // TODO: sort the key list from lowest to highest integer
+        for (Integer key : keys) {
+            if (objectsByLayers.containsKey(key)) {
+                objectsByLayers.get(key).forEach(GameObject::update);
             }
         }
-    }
+        }
 
     /**
      * Render the hitboxes of the GameObjects and the Chunks
@@ -101,9 +114,17 @@ public class Chunk {
         synchronized (objectsByLayers) {
             // setRenderData objects in chunk and their hitboxes
             g2.setColor(new Color(0, 200, 50));
-            for (GameObject go : objectsByLayers) {
-                if (go.renderEnabled) go.setRenderData(g2);
-                if (go.hitBox != null && renderHitBoxes) go.setHitBoxRenderData(g2);
+            ArrayList<Integer> keys = new ArrayList<>();
+            objectsByLayers.forEachKey(1, keys::add);
+            // TODO: sort the key list from lowest to highest integer
+            for (Integer key : keys) {
+                if (objectsByLayers.containsKey(key)) {
+                    ArrayList<GameObject> layer = objectsByLayers.get(key);
+                    for (GameObject object : layer) {
+                        if (object.renderEnabled) object.setRenderData(g2);
+                        if (renderHitBoxes) object.setHitBoxRenderData(g2);
+                    }
+                }
             }
         }
 

@@ -146,17 +146,17 @@ public class GameLoop implements Runnable {
 
         Chunk chunk = ChunkMan.getChunkFromObject(go);
 
-        List<GameObject> gameObjectCache = new ArrayList<>(chunk.objectsByLayers);
+        List<GameObject> gameObjectCache = new ArrayList<>(chunk.objectsByLayers.get(go.objectLayer));
 
         // TODO: Replace by only loading adjacent chunks in the direction in which the GameObject is moving
-        gameObjectCache.addAll(ChunkMan.getAdjacentChunk(chunk, Directions.TOP).objectsByLayers);
-        gameObjectCache.addAll(ChunkMan.getAdjacentChunk(chunk, Directions.TOP_LEFT).objectsByLayers);
-        gameObjectCache.addAll(ChunkMan.getAdjacentChunk(chunk, Directions.LEFT).objectsByLayers);
-        gameObjectCache.addAll(ChunkMan.getAdjacentChunk(chunk, Directions.BOTTOM_LEFT).objectsByLayers);
-        gameObjectCache.addAll(ChunkMan.getAdjacentChunk(chunk, Directions.BOTTOM).objectsByLayers);
-        gameObjectCache.addAll(ChunkMan.getAdjacentChunk(chunk, Directions.TOP_RIGHT).objectsByLayers);
-        gameObjectCache.addAll(ChunkMan.getAdjacentChunk(chunk, Directions.RIGHT).objectsByLayers);
-        gameObjectCache.addAll(ChunkMan.getAdjacentChunk(chunk, Directions.BOTTOM_RIGHT).objectsByLayers);
+        gameObjectCache.addAll(ChunkMan.getAdjacentChunk(chunk, Directions.TOP).objectsByLayers.get(go.objectLayer));
+        gameObjectCache.addAll(ChunkMan.getAdjacentChunk(chunk, Directions.TOP_LEFT).objectsByLayers.get(go.objectLayer));
+        gameObjectCache.addAll(ChunkMan.getAdjacentChunk(chunk, Directions.LEFT).objectsByLayers.get(go.objectLayer));
+        gameObjectCache.addAll(ChunkMan.getAdjacentChunk(chunk, Directions.BOTTOM_LEFT).objectsByLayers.get(go.objectLayer));
+        gameObjectCache.addAll(ChunkMan.getAdjacentChunk(chunk, Directions.BOTTOM).objectsByLayers.get(go.objectLayer));
+        gameObjectCache.addAll(ChunkMan.getAdjacentChunk(chunk, Directions.TOP_RIGHT).objectsByLayers.get(go.objectLayer));
+        gameObjectCache.addAll(ChunkMan.getAdjacentChunk(chunk, Directions.RIGHT).objectsByLayers.get(go.objectLayer));
+        gameObjectCache.addAll(ChunkMan.getAdjacentChunk(chunk, Directions.BOTTOM_RIGHT).objectsByLayers.get(go.objectLayer));
 
         for (GameObject current : gameObjectCache) {
             if (current.collisionEnabled && !current.equals(go) &&
