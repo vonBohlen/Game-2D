@@ -30,7 +30,7 @@ public abstract class GameObject {
 
     // HitBox
     @NonNull public Rectangle hitBox; // TODO: Create custom Hitbox class
-    public int objectLayer; // TODO: Move into HitBox
+    public int LAYER_ID; // TODO: Move into HitBox
 
     // Texture
     @NonNull public Image texture = AssetMan.loadAsset("default.png");
@@ -54,7 +54,7 @@ public abstract class GameObject {
 
         this.hitBox = hitbox;
 
-        this.objectLayer = objectLayer;
+        this.LAYER_ID = objectLayer;
 
         // Call object creation event
         GameObjectEvents.callEvent(
@@ -72,12 +72,12 @@ public abstract class GameObject {
      * @param renderEnabled Flag for rendering
      * @param collisionEnabled Flag for collision
      * @param hitbox Hitbox for the GameObject
-     * @param objectLayer Additional hitbox data for the layer of the GameObject
+     * @param LAYER_ID Additional hitbox data for the layer of the GameObject
      * @param texture Texture for the GameObject
      */
-    public GameObject(boolean renderEnabled, boolean collisionEnabled, @NonNull Rectangle hitbox, int objectLayer, @NonNull Image texture) {
+    public GameObject(boolean renderEnabled, boolean collisionEnabled, @NonNull Rectangle hitbox, int LAYER_ID, @NonNull Image texture) {
 
-        init(renderEnabled, collisionEnabled, hitbox, objectLayer);
+        init(renderEnabled, collisionEnabled, hitbox, LAYER_ID);
 
         this.texture = texture;
 
@@ -89,11 +89,11 @@ public abstract class GameObject {
      * @param renderEnabled Flag for rendering
      * @param collisionEnabled Flag for collision
      * @param hitbox Hitbox for the GameObject
-     * @param objectLayer Additional hitbox data for the layer of the GameObject
+     * @param LAYER_ID Additional hitbox data for the layer of the GameObject
      */
-    public GameObject(boolean renderEnabled, boolean collisionEnabled, @NonNull Rectangle hitbox, int objectLayer) {
+    public GameObject(boolean renderEnabled, boolean collisionEnabled, @NonNull Rectangle hitbox, int LAYER_ID) {
 
-        init(renderEnabled, collisionEnabled, hitbox, objectLayer);
+        init(renderEnabled, collisionEnabled, hitbox, LAYER_ID);
 
     }
 

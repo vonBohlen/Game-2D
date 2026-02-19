@@ -27,17 +27,13 @@ public class Chunk {
 
     public final UUID uuid;
 
-    //TODO: Ich habe hier jetzt die ConcurrentHashMap auskommentiert weil irgendwie wurde die Funktionalität anhand einer UUID ein Objekt zu finden garnicht verwendet...
-    // Zusätzlich hat das immer fehler erzeugt aus irgendeinem Grund
+    public final int posX;
+    public final int posY;
 
     /**
      * HashMap of GameObjects in this Chunk identified by their UUID
      */
-    //public final ConcurrentHashMap<UUID, GameObject> objects = new ConcurrentHashMap<>();
-    public final ConcurrentHashMap<Integer, ConcurrentHashMap<UUID, GameObject>> objectsByLayers = new ConcurrentHashMap<>();
-   // public final java.util.List<GameObject> objectsByLayers = Collections.synchronizedList(new ArrayList<>());
-    public final int posX;
-    public final int posY;
+    public final ConcurrentHashMap<Integer, ConcurrentHashMap<UUID, GameObject>> objectsByLayer = new ConcurrentHashMap<>();
 
     /**
      * Create a new Chunk with the specified coordinates
@@ -52,6 +48,11 @@ public class Chunk {
         uuid = UUID.randomUUID();
     }
 
+    public ConcurrentHashMap<UUID, GameObject> getLayer(int layerID) {
+        if (objectsByLayer.containsKey(layerID)) return objectsByLayer.get(layerID);
+        return new ConcurrentHashMap<>();
+    }
+
     /**
      * Add a GameObject to this Chunk
      *
@@ -59,13 +60,13 @@ public class Chunk {
      */
     public void addGameObject(GameObject object) {
 
-        if (objectsByLayers.containsKey(object.objectLayer)) {
-                objectsByLayers.get(object.objectLayer).put(object.uuid, object);
+        if (objectsByLayer.containsKey(object.LAYER_ID)) {
+                objectsByLayer.get(object.LAYER_ID).put(object.uuid, object);
         }
         else {
             ConcurrentHashMap<UUID, GameObject> layer  = new ConcurrentHashMap<>();
             layer.put(object.uuid, object);
-            objectsByLayers.put(object.objectLayer, layer);
+            objectsByLayer.put(object.LAYER_ID, layer);
         }
 
         ChunkMan.registerObject(object, this);
@@ -78,10 +79,10 @@ public class Chunk {
      */
     public void removeGameObject(GameObject object) {
 
-        if (objectsByLayers.containsKey(object.objectLayer)) {
-            objectsByLayers.get(object.objectLayer).remove(object.uuid);
-            if (objectsByLayers.get(object.objectLayer).isEmpty()) {
-                objectsByLayers.remove(object.objectLayer);
+        if (objectsByLayer.containsKey(object.LAYER_ID)) {
+            objectsByLayer.get(object.LAYER_ID).remove(object.uuid);
+            if (objectsByLayer.get(object.LAYER_ID).isEmpty()) {
+                objectsByLayer.remove(object.LAYER_ID);
             }
         }
 
@@ -93,11 +94,11 @@ public class Chunk {
      */
     public void update() {
         ArrayList<Integer> keys = new ArrayList<>();
-        objectsByLayers.forEachKey(1, keys::add);
-        // TODO: sort the key list from lowest to highest integer
+        objectsByLayer.forEachKey(Integer.MAX_VALUE, keys::add);
+        Collections.sort(keys);
         for (Integer key : keys) {
-            if (objectsByLayers.containsKey(key)) {
-                    objectsByLayers.get(key).forEachValue(1, GameObject::update);
+            if (key != null && objectsByLayer.containsKey(key)) {
+                    objectsByLayer.get(key).forEachValue(1, GameObject::update);
                 }
             }
         }
@@ -111,28 +112,24 @@ public class Chunk {
      */
     public void setRenderData(@NonNull Graphics2D g2, boolean renderHitBoxes, boolean renderChunk) {
 
-        synchronized (objectsByLayers) {
-            // setRenderData objects in chunk and their hitboxes
-            g2.setColor(new Color(0, 200, 50));
-            ArrayList<Integer> keys = new ArrayList<>();
-            objectsByLayers.forEachKey(1, keys::add);
-            // TODO: sort the key list from lowest to highest integer
-            for (Integer key : keys) {
-                if (objectsByLayers.containsKey(key)) {
-                    objectsByLayers.get(key).forEachValue(1, object -> {
-                        if (object.renderEnabled) object.setRenderData(g2);
-                        if (renderHitBoxes) object.setHitBoxRenderData(g2);
-                    });
-                }
+        // setRenderData objects in chunk and their hitboxes
+        g2.setColor(new Color(0, 200, 50));
+        ArrayList<Integer> keys = new ArrayList<>();
+        objectsByLayer.forEachKey(Integer.MAX_VALUE, keys::add);
+        Collections.sort(keys);
+        for (Integer key : keys) {
+            if (key != null && objectsByLayer.containsKey(key)) {
+                objectsByLayer.get(key).forEachValue(1, object -> {
+                    if (object.renderEnabled) object.setRenderData(g2);
+                    if (renderHitBoxes) object.setHitBoxRenderData(g2);
+                });
             }
         }
 
-        synchronized (objectsByLayers) {
-            //setRenderData the chunks outline if it contains an object
-            if (renderChunk && !objectsByLayers.isEmpty()) {
-                g2.setColor(new Color(0, 150, 200));
-                g2.draw3DRect((int) (posX * ChunkMan.CHUNK_SIZE * Camera.pixelsPerUnit) - Camera.getScreenSpacePosX(), (int) (posY * ChunkMan.CHUNK_SIZE * Camera.pixelsPerUnit) - Camera.getScreenSpacePosY(), (int) (ChunkMan.CHUNK_SIZE * Camera.pixelsPerUnit), (int) (ChunkMan.CHUNK_SIZE * Camera.pixelsPerUnit), false);
-            }
+        //setRenderData the chunks outline if it contains an object
+        if (renderChunk && !objectsByLayer.isEmpty()) {
+            g2.setColor(new Color(0, 150, 200));
+            g2.draw3DRect((int) (posX * ChunkMan.CHUNK_SIZE * Camera.pixelsPerUnit) - Camera.getScreenSpacePosX(), (int) (posY * ChunkMan.CHUNK_SIZE * Camera.pixelsPerUnit) - Camera.getScreenSpacePosY(), (int) (ChunkMan.CHUNK_SIZE * Camera.pixelsPerUnit), (int) (ChunkMan.CHUNK_SIZE * Camera.pixelsPerUnit), false);
         }
     }
 
