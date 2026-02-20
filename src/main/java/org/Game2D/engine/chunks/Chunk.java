@@ -39,6 +39,10 @@ public class Chunk {
      */
     public final ConcurrentHashMap<Integer, ConcurrentHashMap<UUID, GameObject>> objectsByLayer = new ConcurrentHashMap<>();
 
+    // Process times
+    public final ConcurrentHashMap<GameObject, Long> updateTimes = new ConcurrentHashMap<>();
+    public final ConcurrentHashMap<GameObject, Long> renderTimes = new ConcurrentHashMap<>();
+
     /**
      * Create a new Chunk with the specified coordinates
      *
@@ -52,7 +56,7 @@ public class Chunk {
         uuid = UUID.randomUUID();
     }
 
-    public ConcurrentHashMap<UUID, GameObject> getLayer(int layerID) {
+    public @NonNull ConcurrentHashMap<UUID, GameObject> getLayer(int layerID) {
         if (objectsByLayer.containsKey(layerID)) return objectsByLayer.get(layerID);
         return new ConcurrentHashMap<>();
     }
@@ -62,7 +66,7 @@ public class Chunk {
      *
      * @param object GameObject to be added
      */
-    public void addGameObject(GameObject object) {
+    public void addGameObject(@NonNull GameObject object) {
 
         if (objectsByLayer.containsKey(object.LAYER_ID)) {
                 objectsByLayer.get(object.LAYER_ID).put(object.uuid, object);
@@ -81,7 +85,7 @@ public class Chunk {
      *
      * @param object Object to be removed
      */
-    public void removeGameObject(GameObject object) {
+    public void removeGameObject(@NonNull GameObject object) {
 
         if (objectsByLayer.containsKey(object.LAYER_ID)) {
             objectsByLayer.get(object.LAYER_ID).remove(object.uuid);
@@ -102,7 +106,12 @@ public class Chunk {
         Collections.sort(keys);
         for (Integer key : keys) {
             if (key != null && objectsByLayer.containsKey(key)) {
-                    objectsByLayer.get(key).forEachValue(Integer.MAX_VALUE, GameObject::update);
+                    objectsByLayer.get(key).forEachValue(Integer.MAX_VALUE, object -> {
+                        updateTimes.remove(object);
+                        long start = System.nanoTime();
+                        object.update();
+                        updateTimes.put(object, start - System.nanoTime());
+                    });
                 }
             }
         }
@@ -124,8 +133,11 @@ public class Chunk {
         for (Integer key : keys) {
             if (key != null && objectsByLayer.containsKey(key)) {
                 objectsByLayer.get(key).forEachValue(Integer.MAX_VALUE, object -> {
+                    renderTimes.remove(object);
+                    long start = System.nanoTime();
                     if (object.renderEnabled) object.setRenderData(g2);
                     if (renderHitBoxes) object.setHitBoxRenderData(g2);
+                    renderTimes.put(object, start - System.nanoTime());
                 });
             }
         }
