@@ -19,6 +19,10 @@ import java.util.Collections;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
+// TODO: Fix texture overlapping between adjacent chunks
+
+// TODO: Feature idea: calculate the parallelismThreshold for rendering / updating by the number of objects contained within the chunk
+
 /**
  * Chunk class that stores a HashMap of GameObjects
  * Used by the ChunkManager
@@ -98,7 +102,7 @@ public class Chunk {
         Collections.sort(keys);
         for (Integer key : keys) {
             if (key != null && objectsByLayer.containsKey(key)) {
-                    objectsByLayer.get(key).forEachValue(1, GameObject::update);
+                    objectsByLayer.get(key).forEachValue(Integer.MAX_VALUE, GameObject::update);
                 }
             }
         }
@@ -108,9 +112,9 @@ public class Chunk {
      *
      * @param g2             Graphics instance passed by the RenderManager
      * @param renderHitBoxes Render the hitboxes of the GameObjects?
-     * @param renderChunk    Render the bounding box of the Chunk?
+     * @param renderChunkBorders    Render the bounding box of the Chunk?
      */
-    public void setRenderData(@NonNull Graphics2D g2, boolean renderHitBoxes, boolean renderChunk) {
+    public void setRenderData(@NonNull Graphics2D g2, boolean renderHitBoxes, boolean renderChunkBorders) {
 
         // setRenderData objects in chunk and their hitboxes
         g2.setColor(new Color(0, 200, 50));
@@ -119,19 +123,34 @@ public class Chunk {
         Collections.sort(keys);
         for (Integer key : keys) {
             if (key != null && objectsByLayer.containsKey(key)) {
-                objectsByLayer.get(key).forEachValue(1, object -> {
+                objectsByLayer.get(key).forEachValue(Integer.MAX_VALUE, object -> {
                     if (object.renderEnabled) object.setRenderData(g2);
                     if (renderHitBoxes) object.setHitBoxRenderData(g2);
                 });
             }
         }
 
-        //setRenderData the chunks outline if it contains an object
-        if (renderChunk && !objectsByLayer.isEmpty()) {
-            g2.setColor(new Color(0, 150, 200));
-            g2.draw3DRect((int) (posX * ChunkMan.CHUNK_SIZE * Camera.pixelsPerUnit) - Camera.getScreenSpacePosX(), (int) (posY * ChunkMan.CHUNK_SIZE * Camera.pixelsPerUnit) - Camera.getScreenSpacePosY(), (int) (ChunkMan.CHUNK_SIZE * Camera.pixelsPerUnit), (int) (ChunkMan.CHUNK_SIZE * Camera.pixelsPerUnit), false);
+        if (renderChunkBorders && !objectsByLayer.isEmpty()) {
+            g2.setColor(new Color(150, 100, 200));
+            g2.draw3DRect(
+                    (int) (posX * ChunkMan.CHUNK_SIZE * Camera.pixelsPerUnit) - Camera.getScreenSpacePosX(),
+                    (int) (posY * ChunkMan.CHUNK_SIZE * Camera.pixelsPerUnit) - Camera.getScreenSpacePosY(),
+                    (int) (ChunkMan.CHUNK_SIZE * Camera.pixelsPerUnit),
+                    (int) (ChunkMan.CHUNK_SIZE * Camera.pixelsPerUnit),
+                    false
+            );
         }
-    }
+        else if (renderChunkBorders) {
+            g2.setColor(new Color(0, 150, 200));
+            g2.draw3DRect(
+                    (int) (posX * ChunkMan.CHUNK_SIZE * Camera.pixelsPerUnit) - Camera.getScreenSpacePosX(),
+                    (int) (posY * ChunkMan.CHUNK_SIZE * Camera.pixelsPerUnit) - Camera.getScreenSpacePosY(),
+                    (int) (ChunkMan.CHUNK_SIZE * Camera.pixelsPerUnit),
+                    (int) (ChunkMan.CHUNK_SIZE * Camera.pixelsPerUnit),
+                    false
+            );
+        }
 
+    }
 
 }

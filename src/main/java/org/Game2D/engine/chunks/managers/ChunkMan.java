@@ -21,6 +21,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
+// TODO: Parallel processing for updating  / rendering chunks
 //TODO: Only load the smallest possible amount of chunks from disk into memory to safe recourses
 //TODO: Maybe provide tools to game developers, to further optimise this by letting them control this feature to tie loading from disk to player progress in game
 

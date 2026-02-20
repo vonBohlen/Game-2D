@@ -161,7 +161,7 @@ public class GameLoop implements Runnable {
 
         AtomicReference<GameObject> collisionCache = new AtomicReference<>();
 
-        objectCache.forEachValue(1, current -> {
+        objectCache.forEachValue(256, current -> {
             if (current.collisionEnabled && !current.equals(object) && position.intersects(current.hitBox)) collisionCache.set(current);
         });
 
