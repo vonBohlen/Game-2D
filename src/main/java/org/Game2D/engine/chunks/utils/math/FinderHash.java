@@ -63,7 +63,7 @@ public class FinderHash {
             n2 = -2L * y - 1;
         }
 
-        // 2. Bijection from N_0^2 to N_0
+        // 2. Surjective from N_0^2 to N_0
 
         // S = n1 + n2
         long sum = n1 + n2;
