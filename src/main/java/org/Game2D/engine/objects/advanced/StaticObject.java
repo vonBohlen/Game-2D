@@ -24,12 +24,12 @@ public abstract class StaticObject extends GameObject {
      * @param renderEnabled Flag for rendering
      * @param collisionEnabled Flag for collision
      * @param hitbox Hitbox for the GameObject
-     * @param objectLayer Additional hitbox data for the layer of the GameObject
+     * @param layerID Additional hitbox data for the layer of the GameObject
      * @param texture Texture for the GameObject
      */
-    public StaticObject(boolean renderEnabled, boolean collisionEnabled, @NonNull Rectangle hitbox, int objectLayer, @NonNull Image texture) {
+    public StaticObject(boolean renderEnabled, boolean collisionEnabled, @NonNull Rectangle hitbox, int layerID, @NonNull Image texture) {
 
-        super(renderEnabled, collisionEnabled, hitbox, objectLayer, texture);
+        super(renderEnabled, collisionEnabled, hitbox, layerID, texture);
 
     }
 
@@ -39,11 +39,11 @@ public abstract class StaticObject extends GameObject {
      * @param renderEnabled Flag for rendering
      * @param collisionEnabled Flag for collision
      * @param hitbox Hitbox for the GameObject
-     * @param objectLayer Additional hitbox data for the layer of the GameObject
+     * @param layerID Additional hitbox data for the layer of the GameObject
      */
-    public StaticObject(boolean renderEnabled, boolean collisionEnabled, @NonNull Rectangle hitbox, int objectLayer) {
+    public StaticObject(boolean renderEnabled, boolean collisionEnabled, @NonNull Rectangle hitbox, int layerID) {
 
-        super(renderEnabled, collisionEnabled, hitbox, objectLayer);
+        super(renderEnabled, collisionEnabled, hitbox, layerID);
 
     }
 
@@ -52,12 +52,12 @@ public abstract class StaticObject extends GameObject {
      *
      * @param collisionEnabled Flag for collision
      * @param hitbox Hitbox for the GameObject
-     * @param objectLayer Additional hitbox data for the layer of the GameObject
+     * @param layerID Additional hitbox data for the layer of the GameObject
      * @param texture Texture for the GameObject
      */
-    public StaticObject(boolean collisionEnabled, @NonNull Rectangle hitbox, int objectLayer, @NonNull Image texture) {
+    public StaticObject(boolean collisionEnabled, @NonNull Rectangle hitbox, int layerID, @NonNull Image texture) {
 
-        super(true, collisionEnabled, hitbox, objectLayer, texture);
+        super(true, collisionEnabled, hitbox, layerID, texture);
 
     }
 
@@ -66,11 +66,11 @@ public abstract class StaticObject extends GameObject {
      *
      * @param collisionEnabled Flag for collision
      * @param hitbox Hitbox for the GameObject
-     * @param objectLayer Additional hitbox data for the layer of the GameObject
+     * @param layerID Additional hitbox data for the layer of the GameObject
      */
-    public StaticObject(boolean collisionEnabled, @NonNull Rectangle hitbox, int objectLayer) {
+    public StaticObject(boolean collisionEnabled, @NonNull Rectangle hitbox, int layerID) {
 
-        super(true, collisionEnabled, hitbox, objectLayer);
+        super(true, collisionEnabled, hitbox, layerID);
 
     }
 

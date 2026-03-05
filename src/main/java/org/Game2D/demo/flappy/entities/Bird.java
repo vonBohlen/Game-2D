@@ -58,7 +58,7 @@ public class Bird extends Entity {
         this.velo += this.gravityConst * this.passedTime;
 
         //checks if the top or bottom is reached
-        if(this.hitBox.y <= 0 || this.hitBox.y + this.hitBox.getHeight() >= DataHand.renderLoop.getHeight() - 112){
+        if(this.hitbox.y <= 0 || this.hitbox.y + this.hitbox.getHeight() >= DataHand.renderLoop.getHeight() - 112){
             gameOver = true;
         }
 
@@ -103,7 +103,7 @@ public class Bird extends Entity {
     }
 
     @Override
-    public void setRenderData(Graphics2D g2) {
+    public void renderObject(Graphics2D g2) {
         g2.drawImage(texture, getScreenCoordinateX(-12), getScreenCoordinateY(-6), getCustomScreenSpace(64), getCustomScreenSpace(48), null);
     }
 

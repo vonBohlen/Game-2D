@@ -26,12 +26,12 @@ public abstract class Entity extends GameObject {
      * @param renderEnabled Flag for rendering
      * @param collisionEnabled Flag for collisionEnabled
      * @param hitbox Hitbox for the GameObject
-     * @param objectLayer Additional hitbox data for the layer of the GameObject
+     * @param layerID Additional hitbox data for the layer of the GameObject
      * @param texture Texture for the GameObject
      */
-    public Entity(boolean renderEnabled, boolean collisionEnabled, @NonNull Rectangle hitbox, int objectLayer, @NonNull Image texture) {
+    public Entity(boolean renderEnabled, boolean collisionEnabled, @NonNull Rectangle hitbox, int layerID, @NonNull Image texture) {
 
-        super(renderEnabled, collisionEnabled, hitbox, objectLayer, texture);
+        super(renderEnabled, collisionEnabled, hitbox, layerID, texture);
 
     }
 
@@ -41,11 +41,11 @@ public abstract class Entity extends GameObject {
      * @param renderEnabled Flag for rendering
      * @param collisionEnabled Flag for collision
      * @param hitbox Hitbox for the GameObject
-     * @param objectLayer Additional hitbox data for the layer of the GameObject
+     * @param layerID Additional hitbox data for the layer of the GameObject
      */
-    public Entity(boolean renderEnabled, boolean collisionEnabled, @NonNull Rectangle hitbox, int objectLayer) {
+    public Entity(boolean renderEnabled, boolean collisionEnabled, @NonNull Rectangle hitbox, int layerID) {
 
-        super(renderEnabled, collisionEnabled, hitbox, objectLayer);
+        super(renderEnabled, collisionEnabled, hitbox, layerID);
 
     }
 
@@ -54,12 +54,12 @@ public abstract class Entity extends GameObject {
      *
      * @param collisionEnabled Flag for collision
      * @param hitbox Hitbox for the GameObject
-     * @param objectLayer Additional hitbox data for the layer of the GameObject
+     * @param layerID Additional hitbox data for the layer of the GameObject
      * @param texture Texture for the GameObject
      */
-    public Entity(boolean collisionEnabled, @NonNull Rectangle hitbox, int objectLayer, @NonNull Image texture) {
+    public Entity(boolean collisionEnabled, @NonNull Rectangle hitbox, int layerID, @NonNull Image texture) {
 
-        super(true, collisionEnabled, hitbox, objectLayer, texture);
+        super(true, collisionEnabled, hitbox, layerID, texture);
 
     }
 
@@ -68,11 +68,11 @@ public abstract class Entity extends GameObject {
      *
      * @param collisionEnabled Flag for collision
      * @param hitbox Hitbox for the GameObject
-     * @param objectLayer Additional hitbox data for the layer of the GameObject
+     * @param layerID Additional hitbox data for the layer of the GameObject
      */
-    public Entity(boolean collisionEnabled, @NonNull Rectangle hitbox, int objectLayer) {
+    public Entity(boolean collisionEnabled, @NonNull Rectangle hitbox, int layerID) {
 
-        super(true, collisionEnabled, hitbox, objectLayer);
+        super(true, collisionEnabled, hitbox, layerID);
 
     }
 
@@ -90,22 +90,22 @@ public abstract class Entity extends GameObject {
         GameObject objectCacheX, objectCacheY;
         GameObject[] objectCache = new GameObject[2];
 
-        int oldX = hitBox.x;
-        int oldY = hitBox.y;
+        int oldX = hitbox.x;
+        int oldY = hitbox.y;
 
         while (xShift != 0 || yShift != 0) {
             int stepX = xShift != 0 ? Math.min(Math.abs(xShift), 5) * Integer.signum(xShift) : 0;
             int stepY = yShift != 0 ? Math.min(Math.abs(yShift), 5) * Integer.signum(yShift) : 0;
 
-            int newX = hitBox.x + stepX;
-            int newY = hitBox.y + stepY;
+            int newX = hitbox.x + stepX;
+            int newY = hitbox.y + stepY;
 
-            objectCacheX = GameLoop.checkCollision(this, new Rectangle(newX, hitBox.y, hitBox.width, hitBox.height));
-            objectCacheY = GameLoop.checkCollision(this, new Rectangle(hitBox.x, newY, hitBox.width, hitBox.height));
+            objectCacheX = GameLoop.checkCollision(this, new Rectangle(newX, hitbox.y, hitbox.width, hitbox.height));
+            objectCacheY = GameLoop.checkCollision(this, new Rectangle(hitbox.x, newY, hitbox.width, hitbox.height));
 
             if (stepX != 0) {
                 if (objectCacheX == null) {
-                    hitBox.x = newX;
+                    hitbox.x = newX;
                     xShift -= stepX;
                 } else {
                     xShift = 0;
@@ -115,7 +115,7 @@ public abstract class Entity extends GameObject {
 
             if (stepY != 0) {
                 if (objectCacheY == null) {
-                    hitBox.y = newY;
+                    hitbox.y = newY;
                     yShift -= stepY;
                 } else {
                     yShift = 0;
@@ -141,16 +141,16 @@ public abstract class Entity extends GameObject {
      */
     public void setPosition(int newX, int newY, boolean ignoreCollision) {
 
-        int oldX = hitBox.x;
-        int oldY = hitBox.y;
+        int oldX = hitbox.x;
+        int oldY = hitbox.y;
 
-        Rectangle newPosition = new Rectangle(newX, newY, hitBox.width, hitBox.height);
+        Rectangle newPosition = new Rectangle(newX, newY, hitbox.width, hitbox.height);
         GameObject objectCache = GameLoop.checkCollision(this, newPosition);
 
         if (objectCache != null && !ignoreCollision) return;
 
-        hitBox.x = newX;
-        hitBox.y = newY;
+        hitbox.x = newX;
+        hitbox.y = newY;
 
         ObjectTransferMan.checkTransferAfterMoveAbs(this, oldX, oldY);
 
@@ -164,13 +164,13 @@ public abstract class Entity extends GameObject {
      */
     public GameObject setPosition(int newX, int newY) {
 
-        Rectangle newPosition = new Rectangle(newX, newY, hitBox.width, hitBox.height);
+        Rectangle newPosition = new Rectangle(newX, newY, hitbox.width, hitbox.height);
         GameObject objectCache = GameLoop.checkCollision(this, newPosition);
 
         if (objectCache != null) return objectCache;
 
-        hitBox.x = newX;
-        hitBox.y = newY;
+        hitbox.x = newX;
+        hitbox.y = newY;
 
         return null;
 
@@ -185,13 +185,13 @@ public abstract class Entity extends GameObject {
      */
     public GameObject changeEntitySize(int newWidth, int newHeight) {
 
-        Rectangle newSize = new Rectangle(hitBox.x, hitBox.y, newWidth, newHeight);
+        Rectangle newSize = new Rectangle(hitbox.x, hitbox.y, newWidth, newHeight);
         GameObject objectCache = GameLoop.checkCollision(this, newSize);
 
         if (objectCache != null) return objectCache;
 
-        hitBox.width = newWidth;
-        hitBox.height = newHeight;
+        hitbox.width = newWidth;
+        hitbox.height = newHeight;
 
         return null;
 

@@ -55,7 +55,7 @@ public class Physicsobject extends Entity {
         int moveY = (int) this.veloY;
 
         //Wall logic -> if it hits wall it goes the opposite direction
-        if(this.hitBox.x + moveX <= 0 || this.hitBox.x + moveX >= 1850){
+        if(this.hitbox.x + moveX <= 0 || this.hitbox.x + moveX >= 1850){
             this.veloX = this.veloX*-1;
             moveX *= -1;
 
@@ -65,7 +65,7 @@ public class Physicsobject extends Entity {
         }
 
         //Bottom and Top logic -> if it hits bottom or top it goes the opposite direction
-        if(this.hitBox.y + moveY <= -1000 || this.hitBox.y + moveY >= 1050){
+        if(this.hitbox.y + moveY <= -1000 || this.hitbox.y + moveY >= 1050){
             this.veloY = this.veloY*-1;
             moveY *= -1;
             acceleration = false;

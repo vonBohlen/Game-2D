@@ -1,7 +1,7 @@
 /**
  * /engine/chunks/Chunk.java
  *
- * Chunk class that stores a HashMap of GameObjects Used by the ChunkManager
+ * The Chunk class is part of the global collision system and stores GameObject in layers.
  *
  * Copyright (C) 2026 Silas Vogel, J. K., Christian von Bohlen
  */
@@ -24,24 +24,33 @@ import java.util.concurrent.ConcurrentHashMap;
 // TODO: Feature idea: calculate the parallelismThreshold for rendering / updating by the number of objects contained within the chunk
 
 /**
- * Chunk class that stores a HashMap of GameObjects
- * Used by the ChunkManager
+ * The Chunk class is part of the global collision system and stores GameObject in layers.
  */
 public class Chunk {
 
-    public final UUID uuid;
-
-    public final int posX;
-    public final int posY;
+    /**
+     * Identifier to enable easy differentiation between Chunks.
+     */
+    public final UUID UUID = java.util.UUID.randomUUID();
 
     /**
-     * HashMap of GameObjects in this Chunk identified by their UUID
+     * X and Y coordinates of the Chunk.
+     */
+    public final int
+            POS_X,
+            POS_Y;
+
+    /**
+     * HashMap of object layers, witch contain the GameObjects stored in the Chunk.
      */
     public final ConcurrentHashMap<Integer, ConcurrentHashMap<UUID, GameObject>> objectsByLayer = new ConcurrentHashMap<>();
 
-    // Process times
-    public final ConcurrentHashMap<GameObject, Long> updateTimes = new ConcurrentHashMap<>();
-    public final ConcurrentHashMap<GameObject, Long> renderTimes = new ConcurrentHashMap<>();
+    /**
+     * Update and render times of all GameObjects within the Chunk.
+     */
+    public final ConcurrentHashMap<GameObject, Long>
+            updateTimes = new ConcurrentHashMap<>(),
+            renderTimes = new ConcurrentHashMap<>();
 
     /**
      * Create a new Chunk with the specified coordinates
@@ -50,12 +59,17 @@ public class Chunk {
      * @param posY y-Coordinate
      */
     public Chunk(int posX, int posY) {
-        this.posX = posX;
-        this.posY = posY;
-
-        uuid = UUID.randomUUID();
+        this.POS_X = posX;
+        this.POS_Y = posY;
     }
 
+    /**
+     * Get a specific object layer from the Chunk.
+     *
+     * @param layerID ID of the wanted layer
+     *
+     * @return Wanted layer
+     */
     public @NonNull ConcurrentHashMap<UUID, GameObject> getLayer(int layerID) {
         if (objectsByLayer.containsKey(layerID)) return objectsByLayer.get(layerID);
         return new ConcurrentHashMap<>();
@@ -68,13 +82,13 @@ public class Chunk {
      */
     public void addGameObject(@NonNull GameObject object) {
 
-        if (objectsByLayer.containsKey(object.LAYER_ID)) {
-                objectsByLayer.get(object.LAYER_ID).put(object.uuid, object);
+        if (objectsByLayer.containsKey(object.layerID)) {
+                objectsByLayer.get(object.layerID).put(object.UUID, object);
         }
         else {
             ConcurrentHashMap<UUID, GameObject> layer  = new ConcurrentHashMap<>();
-            layer.put(object.uuid, object);
-            objectsByLayer.put(object.LAYER_ID, layer);
+            layer.put(object.UUID, object);
+            objectsByLayer.put(object.layerID, layer);
         }
 
         ChunkMan.registerObject(object, this);
@@ -87,10 +101,10 @@ public class Chunk {
      */
     public void removeGameObject(@NonNull GameObject object) {
 
-        if (objectsByLayer.containsKey(object.LAYER_ID)) {
-            objectsByLayer.get(object.LAYER_ID).remove(object.uuid);
-            if (objectsByLayer.get(object.LAYER_ID).isEmpty()) {
-                objectsByLayer.remove(object.LAYER_ID);
+        if (objectsByLayer.containsKey(object.layerID)) {
+            objectsByLayer.get(object.layerID).remove(object.UUID);
+            if (objectsByLayer.get(object.layerID).isEmpty()) {
+                objectsByLayer.remove(object.layerID);
             }
         }
 
@@ -117,15 +131,13 @@ public class Chunk {
         }
 
     /**
-     * Render the hitboxes of the GameObjects and the Chunks
+     * Render the GameObjects contained within the Chunk
      *
-     * @param g2             Graphics instance passed by the RenderManager
-     * @param renderHitBoxes Render the hitboxes of the GameObjects?
-     * @param renderChunkBorders    Render the bounding box of the Chunk?
+     * @param g2 Graphics instance to render to
+     * @param renderHitBoxes Render the hitboxes of the GameObjects
      */
-    public void setRenderData(@NonNull Graphics2D g2, boolean renderHitBoxes, boolean renderChunkBorders) {
+    public void renderChunk(@NonNull Graphics2D g2, boolean renderHitBoxes) {
 
-        // setRenderData objects in chunk and their hitboxes
         g2.setColor(new Color(0, 200, 50));
         ArrayList<Integer> keys = new ArrayList<>();
         objectsByLayer.forEachKey(Integer.MAX_VALUE, keys::add);
@@ -135,30 +147,39 @@ public class Chunk {
                 objectsByLayer.get(key).forEachValue(Integer.MAX_VALUE, object -> {
                     renderTimes.remove(object);
                     long start = System.nanoTime();
-                    if (object.renderEnabled) object.setRenderData(g2);
-                    if (renderHitBoxes) object.setHitBoxRenderData(g2);
+                    if (object.renderEnabled) object.renderObject(g2);
+                    if (renderHitBoxes) object.renderHitbox(g2);
                     renderTimes.put(object, start - System.nanoTime());
                 });
             }
         }
 
-        if (renderChunkBorders && !objectsByLayer.isEmpty()) {
+    }
+
+    /**
+     * Render the border of the Chunk.
+     *
+     * @param g2 Graphics instance to render to
+     */
+    public void renderBorder(@NonNull Graphics2D g2) {
+
+        if (!objectsByLayer.isEmpty()) {
             g2.setColor(new Color(150, 100, 200));
             g2.draw3DRect(
-                    (int) (posX * ChunkMan.CHUNK_SIZE * Camera.pixelsPerUnit) - Camera.getScreenSpacePosX(),
-                    (int) (posY * ChunkMan.CHUNK_SIZE * Camera.pixelsPerUnit) - Camera.getScreenSpacePosY(),
-                    (int) (ChunkMan.CHUNK_SIZE * Camera.pixelsPerUnit),
-                    (int) (ChunkMan.CHUNK_SIZE * Camera.pixelsPerUnit),
+                    (int) (POS_X * ChunkMan.chunkSize * Camera.pixelsPerUnit) - Camera.getScreenSpacePosX(),
+                    (int) (POS_Y * ChunkMan.chunkSize * Camera.pixelsPerUnit) - Camera.getScreenSpacePosY(),
+                    (int) (ChunkMan.chunkSize * Camera.pixelsPerUnit),
+                    (int) (ChunkMan.chunkSize * Camera.pixelsPerUnit),
                     false
             );
         }
-        else if (renderChunkBorders) {
+        else {
             g2.setColor(new Color(0, 150, 200));
             g2.draw3DRect(
-                    (int) (posX * ChunkMan.CHUNK_SIZE * Camera.pixelsPerUnit) - Camera.getScreenSpacePosX(),
-                    (int) (posY * ChunkMan.CHUNK_SIZE * Camera.pixelsPerUnit) - Camera.getScreenSpacePosY(),
-                    (int) (ChunkMan.CHUNK_SIZE * Camera.pixelsPerUnit),
-                    (int) (ChunkMan.CHUNK_SIZE * Camera.pixelsPerUnit),
+                    (int) (POS_X * ChunkMan.chunkSize * Camera.pixelsPerUnit) - Camera.getScreenSpacePosX(),
+                    (int) (POS_Y * ChunkMan.chunkSize * Camera.pixelsPerUnit) - Camera.getScreenSpacePosY(),
+                    (int) (ChunkMan.chunkSize * Camera.pixelsPerUnit),
+                    (int) (ChunkMan.chunkSize * Camera.pixelsPerUnit),
                     false
             );
         }

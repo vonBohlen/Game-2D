@@ -30,9 +30,9 @@ public class PipeFiller extends Entity {
     }
 
     public void adjust(int x, int y, boolean belowPipe){
-        this.hitBox.x = x;
-        this.hitBox.y = belowPipe ? 0 : y + 612;
-        this.hitBox.width = 104;
-        this.hitBox.height = belowPipe ? y : DataHand.renderLoop.getHeight() - (y + 612);
+        this.hitbox.x = x;
+        this.hitbox.y = belowPipe ? 0 : y + 612;
+        this.hitbox.width = 104;
+        this.hitbox.height = belowPipe ? y : DataHand.renderLoop.getHeight() - (y + 612);
     }
 }

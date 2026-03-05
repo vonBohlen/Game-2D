@@ -177,7 +177,7 @@ public class RenderLoop extends JPanel implements Runnable {
         g2.setColor(Color.magenta);
 
         // Draw each object within rendering distance
-        ChunkMan.setRenderDataByChunk(g2, Camera.renderUpdate(), renderHitBoxes, renderChunkBorders);
+        ChunkMan.renderByChunk(g2, Camera.renderUpdate(), renderHitBoxes, renderChunkBorders);
 
         DebugScreen.draw(g2);
     }
@@ -213,7 +213,7 @@ public class RenderLoop extends JPanel implements Runnable {
         bufferG2.setColor(Color.magenta);
 
         // Draw each object within rendering distance
-        ChunkMan.setRenderDataByChunk(bufferG2, Camera.renderUpdate(), renderHitBoxes, renderChunkBorders);
+        ChunkMan.renderByChunk(bufferG2, Camera.renderUpdate(), renderHitBoxes, renderChunkBorders);
 
         DebugScreen.draw(bufferG2);
         bufferG2.dispose();

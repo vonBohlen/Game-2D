@@ -32,7 +32,7 @@ public class FinderHash {
 
     public FinderHash() {
         chunkPos = new ConcurrentHashMap<>();
-        chunkDimensions = ChunkMan .CHUNK_SIZE;
+        chunkDimensions = ChunkMan .chunkSize;
     }
 
     /**
@@ -80,7 +80,7 @@ public class FinderHash {
      * @param chunk Chunk to be stored
      */
     public void addChunk(@NonNull Chunk chunk) {
-        chunkPos.put(getIndex(chunk.posX, chunk.posY), chunk);
+        chunkPos.put(getIndex(chunk.POS_X, chunk.POS_Y), chunk);
     }
 
     /**
@@ -117,8 +117,8 @@ public class FinderHash {
 
         for (int x = 0; x <= 2 * radius; x++) {
             for (int y = 0; y <= 2 * radius; y++) {
-                int chunkX = target.posX - radius + x;
-                int chunkY = target.posY - radius + y;
+                int chunkX = target.POS_X - radius + x;
+                int chunkY = target.POS_Y - radius + y;
                 int index = getIndex(chunkX, chunkY);
                 Chunk addition = chunkPos.get(index);
                 if (addition == null) {
@@ -144,28 +144,28 @@ public class FinderHash {
     public Chunk getAdjacentChunk(@NonNull Chunk chunk, @NonNull Directions direction) {
         switch (direction) {
             case TOP -> {
-                return getChunkByCoordinate(chunk.posX, chunk.posY - 1);
+                return getChunkByCoordinate(chunk.POS_X, chunk.POS_Y - 1);
             }
             case TOP_RIGHT -> {
-                return getChunkByCoordinate(chunk.posX + 1, chunk.posY - 1);
+                return getChunkByCoordinate(chunk.POS_X + 1, chunk.POS_Y - 1);
             }
             case RIGHT -> {
-                return getChunkByCoordinate(chunk.posX + 1, chunk.posY);
+                return getChunkByCoordinate(chunk.POS_X + 1, chunk.POS_Y);
             }
             case BOTTOM_RIGHT -> {
-                return getChunkByCoordinate(chunk.posX + 1, chunk.posY + 1);
+                return getChunkByCoordinate(chunk.POS_X + 1, chunk.POS_Y + 1);
             }
             case BOTTOM -> {
-                return getChunkByCoordinate(chunk.posX, chunk.posY + 1);
+                return getChunkByCoordinate(chunk.POS_X, chunk.POS_Y + 1);
             }
             case BOTTOM_LEFT -> {
-                return getChunkByCoordinate(chunk.posX - 1, chunk.posY + 1);
+                return getChunkByCoordinate(chunk.POS_X - 1, chunk.POS_Y + 1);
             }
             case LEFT -> {
-                return getChunkByCoordinate(chunk.posX - 1, chunk.posY);
+                return getChunkByCoordinate(chunk.POS_X - 1, chunk.POS_Y);
             }
             case TOP_LEFT -> {
-                return getChunkByCoordinate(chunk.posX - 1, chunk.posY - 1);
+                return getChunkByCoordinate(chunk.POS_X - 1, chunk.POS_Y - 1);
             }
         }
         return null;
@@ -180,14 +180,14 @@ public class FinderHash {
     public Chunk[] getAdjacentChunks(@NonNull Chunk chunk) {
         Chunk[] adjacentChunks = new Chunk[8];
 
-        adjacentChunks[0] = getChunkByCoordinate(chunk.posX, chunk.posY - 1);
-        adjacentChunks[1] = getChunkByCoordinate(chunk.posX + 1, chunk.posY - 1);
-        adjacentChunks[2] = getChunkByCoordinate(chunk.posX + 1, chunk.posY);
-        adjacentChunks[3] = getChunkByCoordinate(chunk.posX + 1, chunk.posY + 1);
-        adjacentChunks[4] = getChunkByCoordinate(chunk.posX, chunk.posY + 1);
-        adjacentChunks[5] = getChunkByCoordinate(chunk.posX - 1, chunk.posY + 1);
-        adjacentChunks[6] = getChunkByCoordinate(chunk.posX - 1, chunk.posY);
-        adjacentChunks[7] = getChunkByCoordinate(chunk.posX - 1, chunk.posY - 1);
+        adjacentChunks[0] = getChunkByCoordinate(chunk.POS_X, chunk.POS_Y - 1);
+        adjacentChunks[1] = getChunkByCoordinate(chunk.POS_X + 1, chunk.POS_Y - 1);
+        adjacentChunks[2] = getChunkByCoordinate(chunk.POS_X + 1, chunk.POS_Y);
+        adjacentChunks[3] = getChunkByCoordinate(chunk.POS_X + 1, chunk.POS_Y + 1);
+        adjacentChunks[4] = getChunkByCoordinate(chunk.POS_X, chunk.POS_Y + 1);
+        adjacentChunks[5] = getChunkByCoordinate(chunk.POS_X - 1, chunk.POS_Y + 1);
+        adjacentChunks[6] = getChunkByCoordinate(chunk.POS_X - 1, chunk.POS_Y);
+        adjacentChunks[7] = getChunkByCoordinate(chunk.POS_X - 1, chunk.POS_Y - 1);
 
         return adjacentChunks;
     }

@@ -49,17 +49,17 @@ public class InfoDisplay extends Entity {
         if (texture == messageTxt) {
             posX -= 92;
             posY -= 133;
-            hitBox.width = 184;
-            hitBox.height = 267;
+            hitbox.width = 184;
+            hitbox.height = 267;
         }
         else if (texture == gameoverTxt) {
             posX -= 96;
             posY -= 21;
-            hitBox.width = 192;
-            hitBox.height = 42;
+            hitbox.width = 192;
+            hitbox.height = 42;
         }
-        hitBox.x = posX;
-        hitBox.y = posY;
+        hitbox.x = posX;
+        hitbox.y = posY;
     }
 
     public void showMessage() {

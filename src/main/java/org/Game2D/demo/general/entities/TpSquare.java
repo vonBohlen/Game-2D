@@ -25,8 +25,8 @@ public class TpSquare extends Entity {
         int randomX, randomY;
 
         do {
-            randomX = random.nextInt(DataHand.renderLoop.getWidth() - hitBox.width);
-            randomY = random.nextInt(DataHand.renderLoop.getHeight() - hitBox.height);
+            randomX = random.nextInt(DataHand.renderLoop.getWidth() - hitbox.width);
+            randomY = random.nextInt(DataHand.renderLoop.getHeight() - hitbox.height);
 
         } while (setPosition(randomX, randomY) != null);
     }

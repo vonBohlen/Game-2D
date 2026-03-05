@@ -22,15 +22,15 @@ import java.util.UUID;
 public abstract class GameObject {
 
     // Identifier
-    public final UUID uuid = UUID.randomUUID();
+    public final UUID UUID = java.util.UUID.randomUUID();
 
     // Flags
     public boolean renderEnabled;
     public boolean collisionEnabled;
 
-    // HitBox
-    @NonNull public Rectangle hitBox; // TODO: Create custom Hitbox class
-    public int LAYER_ID; // TODO: Move into HitBox
+    // Hitbox
+    @NonNull public Rectangle hitbox; // TODO: Create custom Hitbox class
+    public int layerID; // TODO: Move into HitBox
 
     // Texture
     @NonNull public Image texture = AssetMan.loadAsset("default.png");
@@ -45,16 +45,15 @@ public abstract class GameObject {
      * @param renderEnabled Flag for rendering
      * @param collisionEnabled Flag for collision
      * @param hitbox Hitbox for the GameObject
-     * @param objectLayer Additional hitbox data for the layer of the GameObject
+     * @param layerID Additional hitbox data for the layer of the GameObject
      */
-    private void init(boolean renderEnabled, boolean collisionEnabled, @NonNull Rectangle hitbox, int objectLayer) {
+    private void init(boolean renderEnabled, boolean collisionEnabled, @NonNull Rectangle hitbox, int layerID) {
 
         this.collisionEnabled = collisionEnabled;
         this.renderEnabled = renderEnabled;
 
-        this.hitBox = hitbox;
-
-        this.LAYER_ID = objectLayer;
+        this.hitbox = hitbox;
+        this.layerID = layerID;
 
         // Call object creation event
         GameObjectEvents.callEvent(
@@ -72,12 +71,12 @@ public abstract class GameObject {
      * @param renderEnabled Flag for rendering
      * @param collisionEnabled Flag for collision
      * @param hitbox Hitbox for the GameObject
-     * @param LAYER_ID Additional hitbox data for the layer of the GameObject
+     * @param layerID Additional hitbox data for the layer of the GameObject
      * @param texture Texture for the GameObject
      */
-    public GameObject(boolean renderEnabled, boolean collisionEnabled, @NonNull Rectangle hitbox, int LAYER_ID, @NonNull Image texture) {
+    public GameObject(boolean renderEnabled, boolean collisionEnabled, @NonNull Rectangle hitbox, int layerID, @NonNull Image texture) {
 
-        init(renderEnabled, collisionEnabled, hitbox, LAYER_ID);
+        init(renderEnabled, collisionEnabled, hitbox, layerID);
 
         this.texture = texture;
 
@@ -89,11 +88,11 @@ public abstract class GameObject {
      * @param renderEnabled Flag for rendering
      * @param collisionEnabled Flag for collision
      * @param hitbox Hitbox for the GameObject
-     * @param LAYER_ID Additional hitbox data for the layer of the GameObject
+     * @param layerID Additional hitbox data for the layer of the GameObject
      */
-    public GameObject(boolean renderEnabled, boolean collisionEnabled, @NonNull Rectangle hitbox, int LAYER_ID) {
+    public GameObject(boolean renderEnabled, boolean collisionEnabled, @NonNull Rectangle hitbox, int layerID) {
 
-        init(renderEnabled, collisionEnabled, hitbox, LAYER_ID);
+        init(renderEnabled, collisionEnabled, hitbox, layerID);
 
     }
 
@@ -103,22 +102,22 @@ public abstract class GameObject {
     public abstract void update();
 
     /**
-     * Adds the GameObjects's render data to the provided Graphics2D.
+     * Adds the GameObjects's renderObject data to the provided Graphics2D.
      *
-     * @param g2 Java.awt Graphics2D, to add render data to
+     * @param g2 Java.awt Graphics2D, to add renderObject data to
      */
-    public void setRenderData(Graphics2D g2){
+    public void renderObject(Graphics2D g2){
 
         g2.drawImage(texture, getScreenCoordinateX() + renderOffsetX, getScreenCoordinateY() + renderOffsetY, getScreenSpaceWidth(), getScreenSpaceHeight(), null);
 
     }
 
     /**
-     * Adds the GameObjects's hitbox render data to the provided Graphics.
+     * Adds the GameObjects's hitbox renderObject data to the provided Graphics.
      *
-     * @param g Java.awt Graphics, to add render data to
+     * @param g Java.awt Graphics, to add renderObject data to
      */
-    public void setHitBoxRenderData(Graphics g){
+    public void renderHitbox(Graphics g){
 
         g.draw3DRect(getScreenCoordinateX(), getScreenCoordinateY(), getScreenSpaceWidth(), getScreenSpaceHeight(), false);
 
@@ -127,22 +126,22 @@ public abstract class GameObject {
     // Experimental graphics stuff
 
     protected int getScreenCoordinateX(){
-        return (int)(hitBox.x * Camera.pixelsPerUnit) - (Camera.getScreenSpacePosX());
+        return (int)(hitbox.x * Camera.pixelsPerUnit) - (Camera.getScreenSpacePosX());
     }
     protected int getScreenCoordinateY(){
-        return (int)(hitBox.y * Camera.pixelsPerUnit) - (Camera.getScreenSpacePosY());
+        return (int)(hitbox.y * Camera.pixelsPerUnit) - (Camera.getScreenSpacePosY());
     }
     protected int getScreenCoordinateX( int offset){
-        return (int)((hitBox.x + offset) * Camera.pixelsPerUnit) - (Camera.getScreenSpacePosX());
+        return (int)((hitbox.x + offset) * Camera.pixelsPerUnit) - (Camera.getScreenSpacePosX());
     }
     protected int getScreenCoordinateY(int offset){
-        return (int)((hitBox.y + offset) * Camera.pixelsPerUnit) - (Camera.getScreenSpacePosY());
+        return (int)((hitbox.y + offset) * Camera.pixelsPerUnit) - (Camera.getScreenSpacePosY());
     }
     protected int getScreenSpaceWidth(){
-        return (int)(hitBox.width * Camera.pixelsPerUnit);
+        return (int)(hitbox.width * Camera.pixelsPerUnit);
     }
     protected int getScreenSpaceHeight(){
-        return (int)(hitBox.height * Camera.pixelsPerUnit);
+        return (int)(hitbox.height * Camera.pixelsPerUnit);
     }
     protected int getCustomScreenSpace(int value){
         return (int)(value * Camera.pixelsPerUnit);

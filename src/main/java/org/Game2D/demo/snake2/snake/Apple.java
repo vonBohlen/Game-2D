@@ -7,7 +7,7 @@ import java.awt.*;
 
 //public class Apple extends StaticObject {
 //
-//    public Apple(@NonNull Rectangle hitbox, int LAYER_ID) {
+//    public Apple(@NonNull Rectangle hitbox, int layerID) {
 //        super();
 //
 //    }

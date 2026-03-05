@@ -66,8 +66,8 @@ public class Camera {
 
     private static void syncPositionToObject() {
         if (trackingObject == null) return;
-        x = trackingObject.hitBox.x;
-        y = trackingObject.hitBox.y;
+        x = trackingObject.hitbox.x;
+        y = trackingObject.hitbox.y;
     }
 
     public static int getScreenSpacePosX(){

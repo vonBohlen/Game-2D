@@ -23,23 +23,23 @@ public class BallwP extends Entity {
 
     public void update(){
 
-        if (tickBottomReached != 0 && hitBox.y == 1050 && tickBottomReached == GameLoop.getGameTick()) {
-            hitBox.x = 0;
-            hitBox.y = 0;
+        if (tickBottomReached != 0 && hitbox.y == 1050 && tickBottomReached == GameLoop.getGameTick()) {
+            hitbox.x = 0;
+            hitbox.y = 0;
             tickBottomReached = 0;
         }
 
-        if (tickBottomReached == 0 && hitBox.y == 1050) {
+        if (tickBottomReached == 0 && hitbox.y == 1050) {
             tickBottomReached = GameLoop.getGameTick();
         }
 
         //Wenn Wände getroffen an den Seiten bewegungsrichtung verändern
-        if(hitBox.x + MoveX <= 0 || hitBox.x + MoveX >= 1850){
+        if(hitbox.x + MoveX <= 0 || hitbox.x + MoveX >= 1850){
             this.MoveX = this.MoveX * -1;
         }
 
         //Wenn Boden oder Decke getroffen bewegungsrichtung verändern
-        if(hitBox.y + MoveY <= 0 || hitBox.y + MoveY >= 1050) {
+        if(hitbox.y + MoveY <= 0 || hitbox.y + MoveY >= 1050) {
             this.MoveY = this.MoveY * -1;
         }
 
@@ -47,18 +47,18 @@ public class BallwP extends Entity {
         MoveY += 2;
 
         //Teleportier-Logik → Wenn es aus den Rändern des Fensters ist, wird es zurück rein teleportiert
-        if(hitBox.x <= 0){
-            setPosition(0, hitBox.y, false);
+        if(hitbox.x <= 0){
+            setPosition(0, hitbox.y, false);
         }
-        if(hitBox.y <= 0){
-            setPosition(hitBox.x, 0, false);
+        if(hitbox.y <= 0){
+            setPosition(hitbox.x, 0, false);
         }
 
-        if(hitBox.x >= 1850){
-            setPosition(1850, hitBox.y, false);
+        if(hitbox.x >= 1850){
+            setPosition(1850, hitbox.y, false);
         }
-        if(hitBox.y >= 1050){
-            setPosition(hitBox.x, 1050, false);
+        if(hitbox.y >= 1050){
+            setPosition(hitbox.x, 1050, false);
             //this.MoveY = -10;
         }
 

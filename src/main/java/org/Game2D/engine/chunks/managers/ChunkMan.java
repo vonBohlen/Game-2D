@@ -34,9 +34,9 @@ public class ChunkMan {
     // 4. The new GameObject gets registered in its Chunk in objects where it is associated with its UUID to enable quick removal of the object from the chunk
     // 5. The GameObject also gets registered in ChunkMan in objectStorage where its UUID gets associated with its chunks UUID to be able to get the chunk just by looking at the object
 
-    public static int CHUNK_SIZE ; // each chunk is a square with a sidelength of chunk size
-    public static int UPDATE_DISTANCE;
-    public static int RENDER_DISTANCE;
+    public static int chunkSize; // each chunk is a square with a sidelength of chunk size
+    public static int updateDistance;
+    public static int renderDistance;
     private static FinderHash finderHash; // enables to find a chunk via its coordinates
     private static final HashMap<GameObject,Chunk> objectStorage = new HashMap<>(); // assigns each object a chunks UUID
     private static int storedUpdateDistance;
@@ -52,12 +52,12 @@ public class ChunkMan {
      */
     public static void initialize() {
 
-        CHUNK_SIZE = ConfProvider.getConfValueAsInt("game2d.chunks.chunk_size");
-        UPDATE_DISTANCE = ConfProvider.getConfValueAsInt("game2d.game_loop.update_distance");
-        RENDER_DISTANCE = ConfProvider.getConfValueAsInt("game2d.graphics.render_distance");
+        chunkSize = ConfProvider.getConfValueAsInt("game2d.chunks.chunk_size");
+        updateDistance = ConfProvider.getConfValueAsInt("game2d.game_loop.update_distance");
+        renderDistance = ConfProvider.getConfValueAsInt("game2d.graphics.render_distance");
 
-        storedUpdateDistance = UPDATE_DISTANCE;
-        storedRenderDistance = RENDER_DISTANCE;
+        storedUpdateDistance = updateDistance;
+        storedRenderDistance = renderDistance;
 
         finderHash = new FinderHash();
 
@@ -77,7 +77,7 @@ public class ChunkMan {
     public static @NonNull Chunk chunkFromCoordinates(int posX, int posY) {
         Chunk target = finderHash.getChunkByCoordinate(posX, posY);
         if (target == null) {
-            target = new Chunk(posX / CHUNK_SIZE, posY / CHUNK_SIZE);
+            target = new Chunk(posX / chunkSize, posY / chunkSize);
             addChunk(target);
         }
         return target;
@@ -142,7 +142,7 @@ public class ChunkMan {
 
     /**
      * Update all Chunks (and in turn the GameObjects contained in them)
-     * in range of the UPDATE_DISTANCE from the specified Chunk
+     * in range of the updateDistance from the specified Chunk
      */
     public static void updateByChunk() {
         // renderMan hasn't initialized yet
@@ -152,12 +152,12 @@ public class ChunkMan {
 
         // selecting chunks to update
         List<Chunk> chunksToUpdate;
-        if (storedChunk == lastStoredChunk && storedUpdateDistance == UPDATE_DISTANCE) {
+        if (storedChunk == lastStoredChunk && storedUpdateDistance == updateDistance) {
             chunksToUpdate = storedUpdateChunks;
         } else {
-            chunksToUpdate = finderHash.getChunksInReach(storedChunk, UPDATE_DISTANCE);
+            chunksToUpdate = finderHash.getChunksInReach(storedChunk, updateDistance);
             storedUpdateChunks = chunksToUpdate;
-            storedUpdateDistance = UPDATE_DISTANCE;
+            storedUpdateDistance = updateDistance;
         }
         lastStoredChunk = storedChunk;
 
@@ -173,25 +173,28 @@ public class ChunkMan {
 
     /**
      * Render all Chunks (and in turn the GameObjects contained in them)
-     * in range of the UPDATE_DISTANCE from the specified Chunk
+     * in range of the updateDistance from the specified Chunk
      *
      * @param g2
      * @param target
      * @param renderHitboxes
-     * @param renderActiveChunks
+     * @param renderChunkBorders
      */
-    public static void setRenderDataByChunk(@NonNull Graphics2D g2, @NonNull Chunk target, boolean renderHitboxes, boolean renderActiveChunks) {
+    public static void renderByChunk(@NonNull Graphics2D g2, @NonNull Chunk target, boolean renderHitboxes, boolean renderChunkBorders) {
         List<Chunk> chunksToRender;
-        if (storedChunk == target && storedRenderDistance == RENDER_DISTANCE) {
+        if (storedChunk == target && storedRenderDistance == renderDistance) {
             chunksToRender = storedRenderChunks;
         } else {
-            chunksToRender = finderHash.getChunksInReach(target, RENDER_DISTANCE);
+            chunksToRender = finderHash.getChunksInReach(target, renderDistance);
             storedRenderChunks = chunksToRender;
             storedChunk = target;
-            storedRenderDistance = RENDER_DISTANCE;
+            storedRenderDistance = renderDistance;
         }
-        // go through each target and setRenderData objects in them
-        for (Chunk currentChunk : chunksToRender) currentChunk.setRenderData(g2, renderHitboxes, renderActiveChunks);
+        // go through each target and renderChunk objects in them
+        for (Chunk currentChunk : chunksToRender) {
+            currentChunk.renderChunk(g2, renderHitboxes);
+            if (renderChunkBorders) currentChunk.renderBorder(g2);
+        }
     }
 
     /**

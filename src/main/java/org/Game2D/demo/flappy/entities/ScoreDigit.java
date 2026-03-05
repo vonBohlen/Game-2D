@@ -43,7 +43,7 @@ public class ScoreDigit extends Entity {
     }
 
     public void setPositionX(int posX) {
-        hitBox.x = posX;
+        hitbox.x = posX;
     }
 
     public void updateTxt(Image txt) {

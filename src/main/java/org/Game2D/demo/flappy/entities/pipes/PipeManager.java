@@ -81,9 +81,9 @@ public class PipeManager extends Entity {
         }
 
         for(PipeTop pipe : tops){
-            if(pipe.hitBox.x < 0 - pipe.hitBox.getWidth()){
+            if(pipe.hitbox.x < 0 - pipe.hitbox.getWidth()){
 
-                int newX = pipe.hitBox.x + neededPipes * distancePipes;
+                int newX = pipe.hitbox.x + neededPipes * distancePipes;
                 int newY = posY + this.random;
                 pipe.setPosition(newX, newY);
 
@@ -96,10 +96,10 @@ public class PipeManager extends Entity {
     private void setDefaultAlt(){
 
         for(PipeTop top : tops){
-            top.setPosition(top.hitBox.x, top.hitBox.y + 1000);
+            top.setPosition(top.hitbox.x, top.hitbox.y + 1000);
         }
         for(PipeBelow below : belows){
-            below.setPosition(below.hitBox.x, below.hitBox.y + 1000);
+            below.setPosition(below.hitbox.x, below.hitbox.y + 1000);
         }
 
         this.posX = DataHand.renderLoop.getWidth() / 2;

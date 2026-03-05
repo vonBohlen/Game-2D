@@ -147,22 +147,22 @@ public class GameLoop implements Runnable {
 
         Chunk chunk = ChunkMan.getChunkFromObject(object);
 
-        ConcurrentHashMap<UUID, GameObject> objectCache = new ConcurrentHashMap<>(chunk.objectsByLayer.get(object.LAYER_ID));
+        ConcurrentHashMap<UUID, GameObject> objectCache = new ConcurrentHashMap<>(chunk.objectsByLayer.get(object.layerID));
 
         // TODO: Replace by only loading adjacent chunks in the direction in which the GameObject is moving
-        objectCache.putAll(ChunkMan.getAdjacentChunk(chunk, Directions.TOP).getLayer(object.LAYER_ID));
-        objectCache.putAll(ChunkMan.getAdjacentChunk(chunk, Directions.TOP_LEFT).getLayer(object.LAYER_ID));
-        objectCache.putAll(ChunkMan.getAdjacentChunk(chunk, Directions.LEFT).getLayer(object.LAYER_ID));
-        objectCache.putAll(ChunkMan.getAdjacentChunk(chunk, Directions.BOTTOM_LEFT).getLayer(object.LAYER_ID));
-        objectCache.putAll(ChunkMan.getAdjacentChunk(chunk, Directions.BOTTOM).getLayer(object.LAYER_ID));
-        objectCache.putAll(ChunkMan.getAdjacentChunk(chunk, Directions.TOP_RIGHT).getLayer(object.LAYER_ID));
-        objectCache.putAll(ChunkMan.getAdjacentChunk(chunk, Directions.RIGHT).getLayer(object.LAYER_ID));
-        objectCache.putAll(ChunkMan.getAdjacentChunk(chunk, Directions.BOTTOM_RIGHT).getLayer(object.LAYER_ID));
+        objectCache.putAll(ChunkMan.getAdjacentChunk(chunk, Directions.TOP).getLayer(object.layerID));
+        objectCache.putAll(ChunkMan.getAdjacentChunk(chunk, Directions.TOP_LEFT).getLayer(object.layerID));
+        objectCache.putAll(ChunkMan.getAdjacentChunk(chunk, Directions.LEFT).getLayer(object.layerID));
+        objectCache.putAll(ChunkMan.getAdjacentChunk(chunk, Directions.BOTTOM_LEFT).getLayer(object.layerID));
+        objectCache.putAll(ChunkMan.getAdjacentChunk(chunk, Directions.BOTTOM).getLayer(object.layerID));
+        objectCache.putAll(ChunkMan.getAdjacentChunk(chunk, Directions.TOP_RIGHT).getLayer(object.layerID));
+        objectCache.putAll(ChunkMan.getAdjacentChunk(chunk, Directions.RIGHT).getLayer(object.layerID));
+        objectCache.putAll(ChunkMan.getAdjacentChunk(chunk, Directions.BOTTOM_RIGHT).getLayer(object.layerID));
 
         AtomicReference<GameObject> collisionCache = new AtomicReference<>();
 
         objectCache.forEachValue(256, current -> {
-            if (current.collisionEnabled && !current.equals(object) && position.intersects(current.hitBox)) collisionCache.set(current);
+            if (current.collisionEnabled && !current.equals(object) && position.intersects(current.hitbox)) collisionCache.set(current);
         });
 
         return collisionCache.get();

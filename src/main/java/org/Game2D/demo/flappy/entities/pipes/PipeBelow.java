@@ -29,6 +29,6 @@ public class PipeBelow extends Entity {
     }
 
     public void adjustFiller(){
-        filler.adjust(this.hitBox.x, this.hitBox.y, true);
+        filler.adjust(this.hitbox.x, this.hitbox.y, true);
     }
 }

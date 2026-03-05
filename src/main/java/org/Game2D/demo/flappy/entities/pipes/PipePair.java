@@ -42,11 +42,11 @@ public class PipePair extends Entity {
     @Override
     public void update() {
         try {
-            if (top.hitBox.x < 0 - top.hitBox.getWidth()) {
+            if (top.hitbox.x < 0 - top.hitbox.getWidth()) {
                 teleport();
                 updatedScore = false;
             }
-            if(top.hitBox.x + top.hitBox.width/2 < Bird.getBirdPosition() && !updatedScore){
+            if(top.hitbox.x + top.hitbox.width/2 < Bird.getBirdPosition() && !updatedScore){
                 updatedScore = true;
                 ScoreDisplay.upScore();
                 Bird.remainder += 0.1;
@@ -56,7 +56,7 @@ public class PipePair extends Entity {
     }
 
     private void teleport(){
-        int newX = top.hitBox.x + PipeHandler.pipesNum * PipeHandler.distancePipes;
+        int newX = top.hitbox.x + PipeHandler.pipesNum * PipeHandler.distancePipes;
         int y = PipeHandler.getRndY();
         top.setPosition(newX, y, true);
         below.setPosition(newX, y - space - 612, true);
