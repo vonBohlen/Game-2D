@@ -14,6 +14,7 @@ import org.Game2D.engine.graphics.Camera;
 import org.Game2D.engine.objects.GameObject;
 
 import java.awt.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.UUID;
@@ -26,7 +27,7 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * The Chunk class is part of the global collision system and stores GameObject in layers.
  */
-public class Chunk {
+public class Chunk implements Serializable {
 
     /**
      * Identifier to enable easy differentiation between Chunks.
