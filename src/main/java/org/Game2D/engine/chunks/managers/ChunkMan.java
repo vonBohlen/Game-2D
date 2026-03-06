@@ -206,4 +206,8 @@ public class ChunkMan {
         storedRenderChunks = new ArrayList<>();
     }
 
+    public static HashMap<GameObject, Chunk> getObjectStorage() {
+        return objectStorage;
+    }
+
 }
