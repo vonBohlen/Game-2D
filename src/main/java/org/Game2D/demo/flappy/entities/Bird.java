@@ -11,6 +11,7 @@ package org.Game2D.demo.flappy.entities;
 import org.Game2D.demo.flappy.FlappyBird;
 import org.Game2D.engine.data.runtime.DataHand;
 import org.Game2D.engine.data.disk.assets.AssetMan;
+import org.Game2D.engine.graphics.Texture;
 import org.Game2D.engine.objects.advanced.Entity;
 import org.Game2D.engine.objects.loops.GameLoop;
 
@@ -24,10 +25,11 @@ public class Bird extends Entity {
     double passedTime; //at 60 targetTPS it is around 1.6
     long lastTime;
 
-
     final Image txtMid = AssetMan.loadAsset("flappy_assets/bird/yellowbird-midflap.png");
     final Image txtUp = AssetMan.loadAsset("flappy_assets/bird/yellowbird-upflap.png");
     final Image txtDown = AssetMan.loadAsset("flappy_assets/bird/yellowbird-downflap.png");
+
+    private final Texture texture = new Texture(0, 0, txtMid);
 
     public static boolean gameOver = false;
     public static int speed = 10;
@@ -38,7 +40,9 @@ public class Bird extends Entity {
     public Bird(Image txt) {
 
         //bird gets placed at one half of the height and one third of the width
-        super(true, new Rectangle(DataHand.renderLoop.getWidth() / 5, DataHand.renderLoop.getHeight() / 2, 44, 24), 2, txt);
+        super(true, new Rectangle(DataHand.renderLoop.getWidth() / 5, DataHand.renderLoop.getHeight() / 2, 44, 24), 2);
+
+        addTexture("bird", texture);
 
         //ideal time between two ticks
         this.passedTime = 1 / (double) GameLoop.TARGET_TPS;
@@ -67,13 +71,13 @@ public class Bird extends Entity {
 
         //setting the midflap texture
         if(this.velo <= 2 && this.velo >= -2){
-            this.texture = this.txtMid;
+            this.texture.image = this.txtMid;
         }
         else if(this.velo > 2){
-            this.texture = this.txtUp;
+            this.texture.image = this.txtUp;
         }
         else if(this.velo < -2){
-            this.texture = this.txtDown;
+            this.texture.image = this.txtDown;
         }
 
         if(!gameOver) {
@@ -104,7 +108,7 @@ public class Bird extends Entity {
 
     @Override
     public void renderObject(Graphics2D g2) {
-        g2.drawImage(texture, getScreenCoordinateX(-12), getScreenCoordinateY(-6), getCustomScreenSpace(64), getCustomScreenSpace(48), null);
+        g2.drawImage(texture.image, getScreenCoordinateX(-12), getScreenCoordinateY(-6), getCustomScreenSpace(64), getCustomScreenSpace(48), null);
     }
 
     private void setDefault(){

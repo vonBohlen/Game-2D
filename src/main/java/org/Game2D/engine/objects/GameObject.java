@@ -12,9 +12,13 @@ import lombok.NonNull;
 import org.Game2D.engine.events.events.GameObjectEvents;
 import org.Game2D.engine.graphics.Camera;
 import org.Game2D.engine.data.disk.assets.AssetMan;
+import org.Game2D.engine.graphics.Texture;
 
+import javax.annotation.Nullable;
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * The GameObject class provides the fundamental data structure and key functionality to all GameObjects within the engine.
@@ -32,12 +36,9 @@ public abstract class GameObject {
     @NonNull public Rectangle hitbox; // TODO: Create custom Hitbox class
     public int layerID; // TODO: Move into HitBox
 
-    // Texture
-    @NonNull public Image texture = AssetMan.loadAsset("default.png");
-
-    // Render offset
-    public int renderOffsetX = 0;
-    public int renderOffsetY = 0;
+    // Textures
+    public static final Texture PLACEHOLDER = new Texture(0, 0, AssetMan.loadAsset("default.png"));
+    private final ConcurrentHashMap<String, Texture> textures = new ConcurrentHashMap<>();
 
     /**
      * Initializes all fields within the class.
@@ -73,12 +74,13 @@ public abstract class GameObject {
      * @param hitbox Hitbox for the GameObject
      * @param layerID Additional hitbox data for the layer of the GameObject
      * @param texture Texture for the GameObject
+     * @param textureID ID for the texture
      */
-    public GameObject(boolean renderEnabled, boolean collisionEnabled, @NonNull Rectangle hitbox, int layerID, @NonNull Image texture) {
+    public GameObject(boolean renderEnabled, boolean collisionEnabled, @NonNull Rectangle hitbox, int layerID, @NonNull Texture texture, @NonNull String textureID) {
 
         init(renderEnabled, collisionEnabled, hitbox, layerID);
 
-        this.texture = texture;
+        textures.put(textureID, texture);
 
     }
 
@@ -94,6 +96,8 @@ public abstract class GameObject {
 
         init(renderEnabled, collisionEnabled, hitbox, layerID);
 
+        textures.put("PLACEHOLDER", PLACEHOLDER);
+
     }
 
     /**
@@ -108,7 +112,9 @@ public abstract class GameObject {
      */
     public void renderObject(Graphics2D g2){
 
-        g2.drawImage(texture, getScreenCoordinateX() + renderOffsetX, getScreenCoordinateY() + renderOffsetY, getScreenSpaceWidth(), getScreenSpaceHeight(), null);
+        textures.forEachValue(Integer.MAX_VALUE, texture -> {
+            g2.drawImage(texture.image, getScreenCoordinateX() + texture.offsetX, getScreenCoordinateY() + texture.offsetY, getScreenSpaceWidth(), getScreenSpaceHeight(), null);
+        });
 
     }
 
@@ -145,6 +151,26 @@ public abstract class GameObject {
     }
     protected int getCustomScreenSpace(int value){
         return (int)(value * Camera.pixelsPerUnit);
+    }
+
+    public void addTexture(String id, Texture texture) {
+        textures.put(id, texture);
+        textures.remove("PLACEHOLDER");
+    }
+
+    public @Nullable Texture getTexture(String id) {
+        return textures.get(id);
+    }
+
+    public ArrayList<Texture> getTextures() {
+        ArrayList<Texture> allTextures = new ArrayList<>();
+        textures.forEachValue(Integer.MAX_VALUE, allTextures::add);
+        return allTextures;
+    }
+
+    public void removeTexture(String id) {
+        if (textures.size() <= 1) textures.put("PLACEHOLDER", PLACEHOLDER);
+        textures.remove(id);
     }
 
     /**

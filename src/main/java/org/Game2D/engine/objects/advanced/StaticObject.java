@@ -9,6 +9,7 @@
 package org.Game2D.engine.objects.advanced;
 
 import lombok.NonNull;
+import org.Game2D.engine.graphics.Texture;
 import org.Game2D.engine.objects.GameObject;
 
 import java.awt.*;
@@ -26,10 +27,11 @@ public abstract class StaticObject extends GameObject {
      * @param hitbox Hitbox for the GameObject
      * @param layerID Additional hitbox data for the layer of the GameObject
      * @param texture Texture for the GameObject
+     * @param textureID ID for the texture
      */
-    public StaticObject(boolean renderEnabled, boolean collisionEnabled, @NonNull Rectangle hitbox, int layerID, @NonNull Image texture) {
+    public StaticObject(boolean renderEnabled, boolean collisionEnabled, @NonNull Rectangle hitbox, int layerID, @NonNull Texture texture, @NonNull String textureID) {
 
-        super(renderEnabled, collisionEnabled, hitbox, layerID, texture);
+        super(renderEnabled, collisionEnabled, hitbox, layerID, texture, textureID);
 
     }
 
@@ -54,10 +56,11 @@ public abstract class StaticObject extends GameObject {
      * @param hitbox Hitbox for the GameObject
      * @param layerID Additional hitbox data for the layer of the GameObject
      * @param texture Texture for the GameObject
+     * @param textureID ID for the texture
      */
-    public StaticObject(boolean collisionEnabled, @NonNull Rectangle hitbox, int layerID, @NonNull Image texture) {
+    public StaticObject(boolean collisionEnabled, @NonNull Rectangle hitbox, int layerID, @NonNull Texture texture, @NonNull String textureID) {
 
-        super(true, collisionEnabled, hitbox, layerID, texture);
+        super(true, collisionEnabled, hitbox, layerID, texture, textureID);
 
     }
 

@@ -8,6 +8,7 @@
 
 package org.Game2D.demo.flappy;
 
+import lombok.Getter;
 import org.Game2D.demo.flappy.entities.ScoreDigit;
 import org.Game2D.engine.data.runtime.DataHand;
 import org.Game2D.engine.data.disk.assets.AssetMan;
@@ -18,6 +19,7 @@ import java.util.List;
 
 public class ScoreDisplay {
 
+    @Getter
     private static int score = 0;
 
 
@@ -101,10 +103,6 @@ public class ScoreDisplay {
         score++;
 
         HighScoreDisplay.checkHighScore(score);
-    }
-
-    public static int getScore() {
-        return score;
     }
 
     public static void reset() {

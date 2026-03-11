@@ -36,9 +36,7 @@ public class Chunk {
     /**
      * X and Y coordinates of the Chunk.
      */
-    public final int
-            POS_X,
-            POS_Y;
+    public final int POS_X, POS_Y;
 
     /**
      * HashMap of object layers, witch contain the GameObjects stored in the Chunk.

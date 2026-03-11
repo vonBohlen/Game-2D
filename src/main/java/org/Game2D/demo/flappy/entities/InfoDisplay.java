@@ -6,6 +6,7 @@ package org.Game2D.demo.flappy.entities;
 
 import org.Game2D.engine.data.runtime.DataHand;
 import org.Game2D.engine.data.disk.assets.AssetMan;
+import org.Game2D.engine.graphics.Texture;
 import org.Game2D.engine.objects.advanced.Entity;
 
 import java.awt.*;
@@ -16,10 +17,13 @@ public class InfoDisplay extends Entity {
     int counter = 60;
     final Image messageTxt = AssetMan.loadAsset("flappy_assets/ui/message.png");
     final Image gameoverTxt = AssetMan.loadAsset("flappy_assets/ui/gameover.png");
+    private final Texture texture = new Texture(0, 0, messageTxt);
 
     public InfoDisplay() {
 
         super(false, false, new Rectangle(DataHand.renderLoop.getWidth() / 2, DataHand.renderLoop.getHeight() / 2, 0, 0), 4);
+
+        addTexture("info_display", texture);
 
     }
 
@@ -46,13 +50,13 @@ public class InfoDisplay extends Entity {
         int posX = DataHand.renderLoop.getWidth() / 2;
         int posY = DataHand.renderLoop.getHeight() / 2;
 
-        if (texture == messageTxt) {
+        if (texture.image == messageTxt) {
             posX -= 92;
             posY -= 133;
             hitbox.width = 184;
             hitbox.height = 267;
         }
-        else if (texture == gameoverTxt) {
+        else if (texture.image == gameoverTxt) {
             posX -= 96;
             posY -= 21;
             hitbox.width = 192;
@@ -63,16 +67,18 @@ public class InfoDisplay extends Entity {
     }
 
     public void showMessage() {
-        texture = messageTxt;
+        texture.image = messageTxt;
         setPosition();
+        renderEnabled = true;
     }
 
     public void showGameover() {
-        texture = gameoverTxt;
+        texture.image = gameoverTxt;
         setPosition();
+        renderEnabled = true;
     }
 
     public void clearDisplay() {
-        texture = null;
+        renderEnabled = false;
     }
 }

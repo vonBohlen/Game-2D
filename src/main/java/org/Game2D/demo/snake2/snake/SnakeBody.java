@@ -8,7 +8,7 @@ import java.awt.*;
 public class SnakeBody extends Entity {
 
     public SnakeBody(boolean collisionEnabled, @NonNull Rectangle hitbox, int objectLayer, @NonNull Image texture) {
-        super(collisionEnabled, hitbox, objectLayer, texture);
+        super(collisionEnabled, hitbox, objectLayer);
     }
 
     @Override

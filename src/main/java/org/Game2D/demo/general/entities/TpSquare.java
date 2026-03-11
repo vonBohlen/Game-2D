@@ -5,6 +5,7 @@
 package org.Game2D.demo.general.entities;
 
 import org.Game2D.engine.data.runtime.DataHand;
+import org.Game2D.engine.graphics.Texture;
 import org.Game2D.engine.objects.advanced.Entity;
 import org.Game2D.engine.objects.loops.GameLoop;
 
@@ -14,7 +15,7 @@ import java.util.Random;
 public class TpSquare extends Entity {
 
     public TpSquare( Rectangle hb, Image txt) {
-        super(true, hb, 0, txt);
+        super(true, hb, 0);
     }
 
     public void update() {

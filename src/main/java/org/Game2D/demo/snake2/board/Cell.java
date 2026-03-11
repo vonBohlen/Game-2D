@@ -8,7 +8,7 @@ import java.awt.*;
 public class Cell extends StaticObject {
 
     public Cell(@NonNull Rectangle hitbox, int objectLayer, @NonNull Image texture) {
-        super(false, hitbox, objectLayer, texture);
+        super(false, hitbox, objectLayer);
     }
 
 }
