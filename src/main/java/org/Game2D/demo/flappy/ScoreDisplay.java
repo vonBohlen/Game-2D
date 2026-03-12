@@ -23,7 +23,7 @@ public class ScoreDisplay {
     private static int score = 0;
 
 
-    public static final List<Image> numbers = AssetMan.loadAssets(new String[]{
+    public static final List<Image> numbers = AssetMan.getAssets(new String[]{
             "flappy_assets/numbers/1.png",
             "flappy_assets/numbers/2.png",
             "flappy_assets/numbers/3.png",

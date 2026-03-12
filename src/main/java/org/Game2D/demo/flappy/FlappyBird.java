@@ -33,10 +33,10 @@ public class FlappyBird {
         int screenHeight = DataHand.renderLoop.getHeight();
         int screenWidth = DataHand.renderLoop.getWidth();
 
-        Image texture = AssetMan.loadAsset("default.png");
-        Image blueTxt = AssetMan.loadAsset("flappy_assets/background/blue.png");
-        Image backgroundTxt = AssetMan.loadAsset("flappy_assets/background/background-day.png");
-        Image baseTxt = AssetMan.loadAsset("flappy_assets/background/base.png");
+        Image texture = AssetMan.getAsset("default.png");
+        Image blueTxt = AssetMan.getAsset("flappy_assets/background/blue.png");
+        Image backgroundTxt = AssetMan.getAsset("flappy_assets/background/background-day.png");
+        Image baseTxt = AssetMan.getAsset("flappy_assets/background/base.png");
 
         //Init background
         for (int i = 0; i <= screenWidth / 288; i++) {

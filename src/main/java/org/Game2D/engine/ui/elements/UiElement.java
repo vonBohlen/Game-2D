@@ -27,7 +27,7 @@ public abstract class UiElement {
     @NonNull Rectangle dimensions;
 
     // Texture
-    @NonNull public Image texture = AssetMan.loadAsset("default.png");
+    @NonNull public Image texture = AssetMan.getAsset("default.png");
 
     // Render offset
     public int renderOffsetX = 0;

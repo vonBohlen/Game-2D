@@ -15,8 +15,8 @@ public class InfoDisplay extends Entity {
 
     boolean lastOver = true;
     int counter = 60;
-    final Image messageTxt = AssetMan.loadAsset("flappy_assets/ui/message.png");
-    final Image gameoverTxt = AssetMan.loadAsset("flappy_assets/ui/gameover.png");
+    final Image messageTxt = AssetMan.getAsset("flappy_assets/ui/message.png");
+    final Image gameoverTxt = AssetMan.getAsset("flappy_assets/ui/gameover.png");
     private final Texture texture = new Texture(0, 0, messageTxt);
 
     public InfoDisplay() {

@@ -37,7 +37,7 @@ public abstract class GameObject {
     public int layerID; // TODO: Move into HitBox
 
     // Textures
-    public static final Texture PLACEHOLDER = new Texture(0, 0, AssetMan.loadAsset("default.png"));
+    public static final Texture PLACEHOLDER = new Texture(0, 0, AssetMan.getAsset("default.png"));
     private final ConcurrentHashMap<String, Texture> textures = new ConcurrentHashMap<>();
 
     /**

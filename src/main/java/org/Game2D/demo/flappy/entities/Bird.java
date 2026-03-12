@@ -25,9 +25,9 @@ public class Bird extends Entity {
     double passedTime; //at 60 targetTPS it is around 1.6
     long lastTime;
 
-    final Image txtMid = AssetMan.loadAsset("flappy_assets/bird/yellowbird-midflap.png");
-    final Image txtUp = AssetMan.loadAsset("flappy_assets/bird/yellowbird-upflap.png");
-    final Image txtDown = AssetMan.loadAsset("flappy_assets/bird/yellowbird-downflap.png");
+    final Image txtMid = AssetMan.getAsset("flappy_assets/bird/yellowbird-midflap.png");
+    final Image txtUp = AssetMan.getAsset("flappy_assets/bird/yellowbird-upflap.png");
+    final Image txtDown = AssetMan.getAsset("flappy_assets/bird/yellowbird-downflap.png");
 
     private final Texture texture = new Texture(0, 0, txtMid);
 

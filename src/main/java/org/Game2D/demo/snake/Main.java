@@ -25,8 +25,8 @@ public class Main {
         int screenWidth = DataHand.renderLoop.getWidth();
         int screenHeight = DataHand.renderLoop.getHeight();
 
-        Image white = AssetMan.loadAsset("snake_assets/white10.png");
-        Image black = AssetMan.loadAsset("snake_assets/black10.png");
+        Image white = AssetMan.getAsset("snake_assets/white10.png");
+        Image black = AssetMan.getAsset("snake_assets/black10.png");
 
         //Instantiate a new game
         Game game = new Game(new Schnake(generate_random_starting_pos()), new Board(boardSize, boardSize));
