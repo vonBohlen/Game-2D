@@ -9,7 +9,7 @@
 package org.Game2D.engine.ui.elements;
 
 import lombok.NonNull;
-import org.Game2D.engine.data.disk.assets.AssetMan;
+import org.Game2D.engine.data.disk.assets.AssetManager;
 import org.Game2D.engine.events.events.UiElementEvents;
 
 import java.awt.*;
@@ -27,7 +27,7 @@ public abstract class UiElement {
     @NonNull Rectangle dimensions;
 
     // Texture
-    @NonNull public Image texture = AssetMan.getAsset("default.png");
+    @NonNull public Image texture = AssetManager.getAsset("default.png");
 
     // Render offset
     public int renderOffsetX = 0;

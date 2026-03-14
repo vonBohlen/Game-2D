@@ -5,7 +5,7 @@
 package org.Game2D.demo.flappy.entities.pipes;
 
 import org.Game2D.demo.flappy.entities.Bird;
-import org.Game2D.engine.data.disk.assets.AssetMan;
+import org.Game2D.engine.data.disk.assets.AssetManager;
 import org.Game2D.engine.graphics.Texture;
 import org.Game2D.engine.objects.advanced.Entity;
 
@@ -15,7 +15,7 @@ public class PipeBelow extends Entity {
 
     final PipeFiller filler;
     public PipeBelow(int x, int y) {
-        super(true, new Rectangle(x, y, 104, 628), 2, new Texture(0, 0, AssetMan.getAsset("flappy_assets/pipe/pipe-green-upside-down.png")), "pipe_below");
+        super(true, new Rectangle(x, y, 104, 628), 2, new Texture(0, 0, AssetManager.getAsset("flappy_assets/pipe/pipe-green-upside-down.png")), "pipe_below");
         filler = new PipeFiller(x, y, true);
     }
 

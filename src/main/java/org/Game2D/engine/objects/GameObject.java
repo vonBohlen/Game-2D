@@ -11,7 +11,7 @@ package org.Game2D.engine.objects;
 import lombok.NonNull;
 import org.Game2D.engine.events.events.GameObjectEvents;
 import org.Game2D.engine.graphics.Camera;
-import org.Game2D.engine.data.disk.assets.AssetMan;
+import org.Game2D.engine.data.disk.assets.AssetManager;
 import org.Game2D.engine.graphics.Texture;
 
 import javax.annotation.Nullable;
@@ -37,7 +37,7 @@ public abstract class GameObject {
     public int layerID; // TODO: Move into HitBox
 
     // Textures
-    public static final Texture PLACEHOLDER = new Texture(0, 0, AssetMan.getAsset("default.png"));
+    public static final Texture PLACEHOLDER = new Texture(0, 0, AssetManager.getAsset("default.png"));
     private final ConcurrentHashMap<String, Texture> textures = new ConcurrentHashMap<>();
 
     /**

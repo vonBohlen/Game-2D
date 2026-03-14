@@ -5,7 +5,7 @@
 package org.Game2D.demo.flappy.entities;
 
 import org.Game2D.engine.data.runtime.DataHand;
-import org.Game2D.engine.data.disk.assets.AssetMan;
+import org.Game2D.engine.data.disk.assets.AssetManager;
 import org.Game2D.engine.graphics.Texture;
 import org.Game2D.engine.objects.advanced.Entity;
 
@@ -15,8 +15,8 @@ public class InfoDisplay extends Entity {
 
     boolean lastOver = true;
     int counter = 60;
-    final Image messageTxt = AssetMan.getAsset("flappy_assets/ui/message.png");
-    final Image gameoverTxt = AssetMan.getAsset("flappy_assets/ui/gameover.png");
+    final Image messageTxt = AssetManager.getAsset("flappy_assets/ui/message.png");
+    final Image gameoverTxt = AssetManager.getAsset("flappy_assets/ui/gameover.png");
     private final Texture texture = new Texture(0, 0, messageTxt);
 
     public InfoDisplay() {

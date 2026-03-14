@@ -9,8 +9,8 @@
 package org.Game2D.demo.flappy.entities;
 
 import org.Game2D.demo.flappy.FlappyBird;
+import org.Game2D.engine.data.disk.assets.AssetManager;
 import org.Game2D.engine.data.runtime.DataHand;
-import org.Game2D.engine.data.disk.assets.AssetMan;
 import org.Game2D.engine.graphics.Texture;
 import org.Game2D.engine.objects.advanced.Entity;
 import org.Game2D.engine.objects.loops.GameLoop;
@@ -25,9 +25,9 @@ public class Bird extends Entity {
     double passedTime; //at 60 targetTPS it is around 1.6
     long lastTime;
 
-    final Image txtMid = AssetMan.getAsset("flappy_assets/bird/yellowbird-midflap.png");
-    final Image txtUp = AssetMan.getAsset("flappy_assets/bird/yellowbird-upflap.png");
-    final Image txtDown = AssetMan.getAsset("flappy_assets/bird/yellowbird-downflap.png");
+    final Image txtMid = AssetManager.getAsset("flappy_assets/bird/yellowbird-midflap.png");
+    final Image txtUp = AssetManager.getAsset("flappy_assets/bird/yellowbird-upflap.png");
+    final Image txtDown = AssetManager.getAsset("flappy_assets/bird/yellowbird-downflap.png");
 
     private final Texture texture = new Texture(0, 0, txtMid);
 

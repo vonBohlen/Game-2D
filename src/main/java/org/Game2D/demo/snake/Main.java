@@ -8,9 +8,9 @@ import org.Game2D.demo.snake.logic.Board;
 import org.Game2D.demo.snake.logic.Cell;
 import org.Game2D.demo.snake.logic.Game;
 import org.Game2D.demo.snake.logic.Schnake;
+import org.Game2D.engine.data.disk.assets.AssetManager;
 import org.Game2D.engine.data.runtime.DataHand;
 import org.Game2D.engine.data.runtime.Instance;
-import org.Game2D.engine.data.disk.assets.AssetMan;
 
 import java.awt.*;
 
@@ -25,8 +25,8 @@ public class Main {
         int screenWidth = DataHand.renderLoop.getWidth();
         int screenHeight = DataHand.renderLoop.getHeight();
 
-        Image white = AssetMan.getAsset("snake_assets/white10.png");
-        Image black = AssetMan.getAsset("snake_assets/black10.png");
+        Image white = AssetManager.getAsset("snake_assets/white10.png");
+        Image black = AssetManager.getAsset("snake_assets/black10.png");
 
         //Instantiate a new game
         Game game = new Game(new Schnake(generate_random_starting_pos()), new Board(boardSize, boardSize));

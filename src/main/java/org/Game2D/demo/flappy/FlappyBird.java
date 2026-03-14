@@ -13,9 +13,9 @@ import org.Game2D.demo.flappy.entities.InfoDisplay;
 import org.Game2D.demo.flappy.entities.pipes.PipeHandler;
 import org.Game2D.demo.flappy.objects.BackgroundObject;
 import org.Game2D.demo.flappy.objects.BaseObject;
+import org.Game2D.engine.data.disk.assets.AssetManager;
 import org.Game2D.engine.data.runtime.DataHand;
 import org.Game2D.engine.data.runtime.Instance;
-import org.Game2D.engine.data.disk.assets.AssetMan;
 
 import java.awt.*;
 
@@ -33,10 +33,10 @@ public class FlappyBird {
         int screenHeight = DataHand.renderLoop.getHeight();
         int screenWidth = DataHand.renderLoop.getWidth();
 
-        Image texture = AssetMan.getAsset("default.png");
-        Image blueTxt = AssetMan.getAsset("flappy_assets/background/blue.png");
-        Image backgroundTxt = AssetMan.getAsset("flappy_assets/background/background-day.png");
-        Image baseTxt = AssetMan.getAsset("flappy_assets/background/base.png");
+        Image texture = AssetManager.getAsset("default.png");
+        Image blueTxt = AssetManager.getAsset("flappy_assets/background/blue.png");
+        Image backgroundTxt = AssetManager.getAsset("flappy_assets/background/background-day.png");
+        Image baseTxt = AssetManager.getAsset("flappy_assets/background/base.png");
 
         //Init background
         for (int i = 0; i <= screenWidth / 288; i++) {

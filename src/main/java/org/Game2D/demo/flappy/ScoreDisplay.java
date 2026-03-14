@@ -10,8 +10,8 @@ package org.Game2D.demo.flappy;
 
 import lombok.Getter;
 import org.Game2D.demo.flappy.entities.ScoreDigit;
+import org.Game2D.engine.data.disk.assets.AssetManager;
 import org.Game2D.engine.data.runtime.DataHand;
-import org.Game2D.engine.data.disk.assets.AssetMan;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -23,7 +23,7 @@ public class ScoreDisplay {
     private static int score = 0;
 
 
-    public static final List<Image> numbers = AssetMan.getAssets(new String[]{
+    public static final List<Image> numbers = AssetManager.getAssets(new String[]{
             "flappy_assets/numbers/1.png",
             "flappy_assets/numbers/2.png",
             "flappy_assets/numbers/3.png",
