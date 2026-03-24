@@ -15,6 +15,7 @@ import org.Game2D.engine.chunks.utils.data.Directions;
 import org.Game2D.engine.data.disk.conf.ConfProvider;
 import org.Game2D.engine.objects.GameObject;
 import org.Game2D.tools.debug.DebugScreen;
+import org.Game2D.tools.debug.DebugScreenReplacement;
 
 import java.awt.*;
 import java.util.UUID;
@@ -28,7 +29,10 @@ import java.util.concurrent.atomic.AtomicReference;
  */
 public class GameLoop implements Runnable {
 
-    public static int TARGET_TPS = 60;
+    public static int targetTPS = 60;
+    public static int tps = 0;
+
+    public static double tickTime = 0D;
 
     @Getter
     private static int gameTick = 0;
@@ -50,27 +54,27 @@ public class GameLoop implements Runnable {
      */
     public void startGameLoop() {
 
-        TARGET_TPS = ConfProvider.getConfValueAsInt("game2d.game_loop.target_tps");
+        targetTPS = ConfProvider.getConfValueAsInt("game2d.game_loop.target_tps");
 
         actionThread = new Thread(this);
         actionThread.start();
     }
 
     /**
-     * Times the updating of GameObjects and calculating TARGET_TPS
+     * Times the updating of GameObjects and calculating targetTPS
      */
     @Override
     public void run() {
         while (actionThread != null && !exit) {
 
-            double updateInterval = (double) 1000000000 / TARGET_TPS;
+            double updateInterval = (double) 1000000000 / targetTPS;
             double delta = 0;
             long lastTime = System.nanoTime();
             long currentTime;
             long timer = 0;
             int updateCount = 0;
             long startTime;
-            long tickTime;
+            double tickTime;
 
             while (run) {
                 currentTime = System.nanoTime();
@@ -86,19 +90,21 @@ public class GameLoop implements Runnable {
                     update();
                     tickTime = System.nanoTime() - startTime;
 
-                    DebugScreen.updateTickTime(tickTime);
+                    //DebugScreen.updateTickTime(tickTime);
+                    GameLoop.tickTime = tickTime / 1_000_000D;
 
                     delta--;
                     updateCount++;
                 }
 
                 if (timer >= 1000000000) {
-                    DebugScreen.updateTPS(updateCount);
+                    //DebugScreen.updateTPS(updateCount);
+                    tps = updateCount;
                     updateCount = 0;
                     timer = 0;
                 }
 
-                if (gameTick >= TARGET_TPS) {
+                if (gameTick >= targetTPS) {
                     gameTick = 0;
                 }
 

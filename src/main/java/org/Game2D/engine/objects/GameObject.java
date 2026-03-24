@@ -101,7 +101,7 @@ public abstract class GameObject {
     }
 
     /**
-     * Gets called by the GameLoop according to TARGET_TPS, and can therefor be overridden to manipulate the GameObject.
+     * Gets called by the GameLoop according to targetTPS, and can therefor be overridden to manipulate the GameObject.
      */
     public abstract void update();
 

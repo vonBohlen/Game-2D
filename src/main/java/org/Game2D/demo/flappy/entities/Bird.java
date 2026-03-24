@@ -45,7 +45,7 @@ public class Bird extends Entity {
         addTexture("bird", texture);
 
         //ideal time between two ticks
-        this.passedTime = 1 / (double) GameLoop.TARGET_TPS;
+        this.passedTime = 1 / (double) GameLoop.targetTPS;
 
         lastTime = System.nanoTime();
     }

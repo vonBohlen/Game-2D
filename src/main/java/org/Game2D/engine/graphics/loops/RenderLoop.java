@@ -13,6 +13,7 @@ import org.Game2D.engine.data.runtime.DataHand;
 import org.Game2D.engine.graphics.Camera;
 import org.Game2D.engine.data.disk.conf.ConfProvider;
 import org.Game2D.tools.debug.DebugScreen;
+import org.Game2D.tools.debug.DebugScreenReplacement;
 
 import javax.swing.*;
 import java.awt.*;
@@ -29,7 +30,10 @@ public class RenderLoop extends JPanel implements Runnable {
     private boolean exit = false;
     private boolean run = true;
 
-    public static int TARGET_FPS = 0;
+    public static int targetFPS = 0;
+    public static int fps = 0;
+
+    public static double frameTime = 0D;
 
     // Only for effects - lazy initialized
     private BufferedImage effectBuffer;
@@ -73,7 +77,7 @@ public class RenderLoop extends JPanel implements Runnable {
      */
     public void startRenderLoop() {
 
-        TARGET_FPS = ConfProvider.getConfValueAsInt("game2d.graphics.target_fps");
+        targetFPS = ConfProvider.getConfValueAsInt("game2d.graphics.target_fps");
 
         renderThread = new Thread(this);
         renderThread.start();
@@ -87,7 +91,7 @@ public class RenderLoop extends JPanel implements Runnable {
     public void run() {
         if (renderThread == null) return;
 
-        double drawInterval = (double) 1000000000 / TARGET_FPS;
+        double drawInterval = (double) 1000000000 / targetFPS;
         double delta = 0;
         long lastTime = System.nanoTime();
         long currentTime;
@@ -108,14 +112,15 @@ public class RenderLoop extends JPanel implements Runnable {
                 repaint(); // Swing handles the buffering internally
 
                 frameTime = System.nanoTime() - startTime;
-                DebugScreen.updateFrameTime(frameTime);
+                //DebugScreen.updateFrameTime(frameTime);
+                RenderLoop.frameTime = frameTime / 1_000_000D;
 
                 delta--;
                 drawCount++;
             }
 
             if (timer >= 1000000000) {
-                DebugScreen.updateFPS(drawCount);
+                fps = drawCount;
                 drawCount = 0;
                 timer = 0;
             }
@@ -179,7 +184,8 @@ public class RenderLoop extends JPanel implements Runnable {
         // Draw each object within rendering distance
         ChunkMan.renderByChunk(g2, Camera.renderUpdate(), renderHitBoxes, renderChunkBorders);
 
-        DebugScreen.draw(g2);
+        //DebugScreen.draw(g2);
+        DebugScreenReplacement.updateDebugParameters(g2);
     }
 
     /**
@@ -215,7 +221,8 @@ public class RenderLoop extends JPanel implements Runnable {
         // Draw each object within rendering distance
         ChunkMan.renderByChunk(bufferG2, Camera.renderUpdate(), renderHitBoxes, renderChunkBorders);
 
-        DebugScreen.draw(bufferG2);
+        //DebugScreen.draw(bufferG2);
+        DebugScreenReplacement.updateDebugParameters(bufferG2);
         bufferG2.dispose();
 
         // Apply effect if not type 0 (no effect)

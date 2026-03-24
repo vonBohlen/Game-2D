@@ -20,6 +20,7 @@ import org.Game2D.engine.data.disk.conf.ConfProvider;
 import org.Game2D.engine.io.user.KeyHand;
 import org.Game2D.engine.objects.loops.GameLoop;
 import org.Game2D.tools.debug.DebugScreen;
+import org.Game2D.tools.debug.DebugScreenReplacement;
 
 import javax.swing.*;
 import java.awt.*;
@@ -71,7 +72,7 @@ public class Instance {
         DataHand.audioLoop = new AudioLoop();
 
         DataHand.renderLoop.initializeCamera();
-
+        DebugScreenReplacement.addDefaultDebugParameters();
     }
 
     /**

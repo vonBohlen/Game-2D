@@ -18,10 +18,10 @@ import java.awt.*;
 public class DebugScreen {
 
     private static int FPS = 0;
-    private static long FRAME_TIME = 0;
+    private static double FRAME_TIME = 0;
 
     private static int TPS = 0;
-    private static long TICK_TIME = 0;
+    private static double TICK_TIME = 0;
 
     public static boolean HARDWARE_ACCELERATION = false;
 
@@ -32,9 +32,9 @@ public class DebugScreen {
         FPS = fps;
     }
 
-    public static void updateFrameTime(long frameTime) {
+    public static void updateFrameTime(double frameTime) {
         if (frameTime == FRAME_TIME) return;
-        FRAME_TIME = frameTime;
+        FRAME_TIME = frameTime / 1_000_000D;
     }
 
     public static void updateTPS(int tps) {
@@ -42,9 +42,9 @@ public class DebugScreen {
         TPS = tps;
     }
 
-    public static void updateTickTime(long tickTime) {
+    public static void updateTickTime(double tickTime) {
         if (tickTime == TICK_TIME) return;
-        TICK_TIME = tickTime;
+        TICK_TIME = tickTime / 1_000_000D;
     }
 
     private static String printPressedKeys() {
@@ -64,11 +64,11 @@ public class DebugScreen {
         if (ConfProvider.getConfValueAsBool("game2d.debug.tools.render_debug_screen")) {
             g2.setColor(Color.RED);
 
-            g2.drawString(String.format("TARGET_FPS=%s", FPS), 20, 20);
-            g2.drawString(String.format("Frame_time_ns=%s", FRAME_TIME), 20, 35);
+            g2.drawString(String.format("FPS=%s", FPS), 20, 20);
+            g2.drawString(String.format("Frame_time_ms=%s", FRAME_TIME), 20, 35);
 
-            g2.drawString(String.format("TARGET_TPS=%s", TPS), 20, 50);
-            g2.drawString(String.format("Tick_time_ns=%s", TICK_TIME), 20, 65);
+            g2.drawString(String.format("TPS=%s", TPS), 20, 50);
+            g2.drawString(String.format("Tick_time_ms=%s", TICK_TIME), 20, 65);
 
             g2.setColor(Color.YELLOW);
 
