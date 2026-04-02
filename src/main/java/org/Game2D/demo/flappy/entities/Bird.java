@@ -9,6 +9,7 @@
 package org.Game2D.demo.flappy.entities;
 
 import org.Game2D.demo.flappy.FlappyBird;
+import org.Game2D.demo.flappy.entities.pipes.PipeHandler;
 import org.Game2D.engine.data.disk.assets.AssetManager;
 import org.Game2D.engine.data.runtime.DataHand;
 import org.Game2D.engine.graphics.Texture;
@@ -29,7 +30,9 @@ public class Bird extends Entity {
     final Image txtUp = AssetManager.getAsset("flappy_assets/bird/yellowbird-upflap.png");
     final Image txtDown = AssetManager.getAsset("flappy_assets/bird/yellowbird-downflap.png");
 
-    private final Texture texture = new Texture(0, 0, txtMid);
+    private final PipeHandler pipeHandler;
+
+    private final Texture texture;
 
     public static boolean gameOver = false;
     public static int speed = 10;
@@ -37,17 +40,22 @@ public class Bird extends Entity {
     //with more time the bird(the pipes) move faster but the movement speed is an int
     public static double remainder = 0.0;
 
-    public Bird(Image txt) {
+    public Bird(Image txt, PipeHandler ph) {
 
         //bird gets placed at one half of the height and one third of the width
         super(true, new Rectangle(DataHand.renderLoop.getWidth() / 5, DataHand.renderLoop.getHeight() / 2, 44, 24), 2);
 
+        texture = new Texture(0, 0, txtMid);
         addTexture("bird", texture);
+
+        pipeHandler = ph;
 
         //ideal time between two ticks
         this.passedTime = 1 / (double) GameLoop.targetTPS;
 
         lastTime = System.nanoTime();
+
+        register();
     }
 
     private void updatePosition() {
@@ -96,9 +104,11 @@ public class Bird extends Entity {
         if(!gameOver) {
             updatePosition();
         }
-        else if (DataHand.keyHand.keyPressed_SPACE){
+        else  if(DataHand.keyHand.keyPressed_SPACE){
             setDefault();
+            pipeHandler.resetAll();
             speed = 10;
+            gameOver = false;
         }
     }
 
@@ -107,7 +117,7 @@ public class Bird extends Entity {
     }
 
     @Override
-    public void renderObject(Graphics2D g2) {
+    public void render(Graphics2D g2) {
         g2.drawImage(texture.image, getScreenCoordinateX(-12), getScreenCoordinateY(-6), getCustomScreenSpace(64), getCustomScreenSpace(48), null);
     }
 

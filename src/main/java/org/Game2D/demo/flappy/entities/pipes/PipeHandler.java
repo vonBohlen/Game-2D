@@ -5,7 +5,6 @@
 package org.Game2D.demo.flappy.entities.pipes;
 
 import org.Game2D.demo.flappy.ScoreDisplay;
-import org.Game2D.demo.flappy.entities.Bird;
 import org.Game2D.engine.data.runtime.DataHand;
 import org.Game2D.engine.objects.advanced.Entity;
 
@@ -32,6 +31,7 @@ public class PipeHandler extends Entity {
     public PipeHandler(){
         super(false, false, new Rectangle(0,0), -1);
         initialisePipes();
+        register();
     }
 
     void initialisePipes(){
@@ -64,13 +64,13 @@ public class PipeHandler extends Entity {
     public void update() {
         //only used for resetting the game
         random = DataHand.renderLoop.getHeight() / 2 + 150;
-        if(Bird.gameOver && DataHand.keyHand.keyPressed_SPACE){
-            for(int i = pairs.size() - 1; i >= 0; i--){
-                pairs.get(i).reset();
-            }
-            ScoreDisplay.reset();
-            Bird.gameOver = false;
+    }
+
+    public void resetAll(){
+        for(int i = pairs.size() - 1; i >= 0; i--){
+            pairs.get(i).reset();
         }
+        ScoreDisplay.reset();
     }
 
 }

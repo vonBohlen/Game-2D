@@ -21,6 +21,7 @@ import org.Game2D.engine.io.user.KeyHand;
 import org.Game2D.engine.objects.loops.GameLoop;
 import org.Game2D.tools.debug.DebugScreen;
 import org.Game2D.tools.debug.DebugScreenReplacement;
+import org.Game2D.tools.debug.parameters.ColorDebugParameter;
 
 import javax.swing.*;
 import java.awt.*;

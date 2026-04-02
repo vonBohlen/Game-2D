@@ -24,6 +24,8 @@ public class KeyHand implements KeyListener {
     public boolean keyPressed_SPACE = false;
     public boolean keyPressed_ESC = false;
 
+    private final ThreadLocal<StringBuilder> stringBuilderCache = ThreadLocal.withInitial(() -> new StringBuilder(64));
+
     // Ignore the typed key since we are only interested
     // in which keys are currently pressed, not which character
 
@@ -60,5 +62,19 @@ public class KeyHand implements KeyListener {
             case KeyEvent.VK_ESCAPE -> keyPressed_ESC = false;
         }
     }
+
+    public String getPressedKeysAsString() {
+        StringBuilder sb = stringBuilderCache.get();
+        sb.setLength(0);
+        if (keyPressed_A) sb.append(" A");
+        if (keyPressed_D) sb.append( " D");
+        if (keyPressed_S) sb.append(" S");
+        if (keyPressed_W) sb.append(" W");
+        if (keyPressed_SPACE) sb.append(" SPACE");
+        if (keyPressed_ESC) sb.append(" ESC");
+        sb.replace(0, 1, "");
+        return sb.toString();
+    }
+
 
 }

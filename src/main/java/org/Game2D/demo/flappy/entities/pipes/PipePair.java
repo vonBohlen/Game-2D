@@ -29,6 +29,7 @@ public class PipePair extends Entity {
         top = new PipeTop(x, y);
         //Pipe is 612 pixels tall
         below = new PipeBelow(x, y - space - 612);
+        register();
     }
 
     public void reset(){

@@ -56,14 +56,6 @@ public abstract class GameObject {
         this.hitbox = hitbox;
         this.layerID = layerID;
 
-        // Call object creation event
-        GameObjectEvents.callEvent(
-                handler ->
-                        handler.handelObjectCreationEvent(
-                                this
-                        )
-        );
-
     }
 
     /**
@@ -106,11 +98,11 @@ public abstract class GameObject {
     public abstract void update();
 
     /**
-     * Adds the GameObjects's renderObject data to the provided Graphics2D.
+     * Adds the GameObjects's render data to the provided Graphics2D.
      *
-     * @param g2 Java.awt Graphics2D, to add renderObject data to
+     * @param g2 Java.awt Graphics2D, to add render data to
      */
-    public void renderObject(Graphics2D g2){
+    public void render(Graphics2D g2){
 
         textures.forEachValue(Integer.MAX_VALUE, texture -> {
             g2.drawImage(texture.image, getScreenCoordinateX() + texture.offsetX, getScreenCoordinateY() + texture.offsetY, getScreenSpaceWidth(), getScreenSpaceHeight(), null);
@@ -119,9 +111,9 @@ public abstract class GameObject {
     }
 
     /**
-     * Adds the GameObjects's hitbox renderObject data to the provided Graphics.
+     * Adds the GameObjects's hitbox render data to the provided Graphics.
      *
-     * @param g Java.awt Graphics, to add renderObject data to
+     * @param g Java.awt Graphics, to add render data to
      */
     public void renderHitbox(Graphics g){
 
@@ -173,10 +165,20 @@ public abstract class GameObject {
         textures.remove(id);
     }
 
+    public void register() {
+        // Call object creation event
+        GameObjectEvents.callEvent(
+                handler ->
+                        handler.handelObjectCreationEvent(
+                                this
+                        )
+        );
+    }
+
     /**
      * Removes the GameObject from the engine.
      */
-    public void delete() {
+    public void unregister() {
 
         // Call objec deletion event
         GameObjectEvents.callEvent(

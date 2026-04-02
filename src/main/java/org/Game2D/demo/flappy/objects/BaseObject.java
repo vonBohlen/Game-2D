@@ -17,6 +17,7 @@ public class BaseObject extends StaticObject {
 
     public BaseObject(Rectangle hb, boolean collision, Image txt) {
         super(collision, hb, 3, new Texture(0, 0, txt), "base");
+        register();
     }
 
 }

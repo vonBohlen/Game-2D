@@ -16,6 +16,7 @@ import org.Game2D.engine.objects.GameObject;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -42,13 +43,6 @@ public class Chunk {
      * HashMap of object layers, witch contain the GameObjects stored in the Chunk.
      */
     public final ConcurrentHashMap<Integer, ConcurrentHashMap<UUID, GameObject>> objectsByLayer = new ConcurrentHashMap<>();
-
-    /**
-     * Update and render times of all GameObjects within the Chunk.
-     */
-    public final ConcurrentHashMap<GameObject, Long>
-            updateTimes = new ConcurrentHashMap<>(),
-            renderTimes = new ConcurrentHashMap<>();
 
     /**
      * Create a new Chunk with the specified coordinates
@@ -117,16 +111,13 @@ public class Chunk {
         objectsByLayer.forEachKey(Integer.MAX_VALUE, keys::add);
         Collections.sort(keys);
         for (Integer key : keys) {
-            if (key != null && objectsByLayer.containsKey(key)) {
-                    objectsByLayer.get(key).forEachValue(Integer.MAX_VALUE, object -> {
-                        updateTimes.remove(object);
-                        long start = System.nanoTime();
-                        object.update();
-                        updateTimes.put(object, start - System.nanoTime());
-                    });
+            if (objectsByLayer.containsKey(key)) {
+                for (Map.Entry<UUID, GameObject> entry : objectsByLayer.get(key).entrySet()) {
+                    entry.getValue().update();
                 }
             }
         }
+    }
 
     /**
      * Render the GameObjects contained within the Chunk
@@ -140,18 +131,16 @@ public class Chunk {
         ArrayList<Integer> keys = new ArrayList<>();
         objectsByLayer.forEachKey(Integer.MAX_VALUE, keys::add);
         Collections.sort(keys);
+        GameObject object;
         for (Integer key : keys) {
-            if (key != null && objectsByLayer.containsKey(key)) {
-                objectsByLayer.get(key).forEachValue(Integer.MAX_VALUE, object -> {
-                    renderTimes.remove(object);
-                    long start = System.nanoTime();
-                    if (object.renderEnabled) object.renderObject(g2);
+            if (objectsByLayer.containsKey(key)) {
+                for (Map.Entry<UUID, GameObject> entry : objectsByLayer.get(key).entrySet()) {
+                    object = entry.getValue();
+                    if (object.renderEnabled) object.render(g2);
                     if (renderHitBoxes) object.renderHitbox(g2);
-                    renderTimes.put(object, start - System.nanoTime());
-                });
+                }
             }
         }
-
     }
 
     /**
@@ -161,26 +150,16 @@ public class Chunk {
      */
     public void renderBorder(@NonNull Graphics2D g2) {
 
-        if (!objectsByLayer.isEmpty()) {
-            g2.setColor(new Color(150, 100, 200));
-            g2.draw3DRect(
-                    (int) (POS_X * ChunkMan.chunkSize * Camera.pixelsPerUnit) - Camera.getScreenSpacePosX(),
-                    (int) (POS_Y * ChunkMan.chunkSize * Camera.pixelsPerUnit) - Camera.getScreenSpacePosY(),
-                    (int) (ChunkMan.chunkSize * Camera.pixelsPerUnit),
-                    (int) (ChunkMan.chunkSize * Camera.pixelsPerUnit),
-                    false
-            );
-        }
-        else {
-            g2.setColor(new Color(0, 150, 200));
-            g2.draw3DRect(
-                    (int) (POS_X * ChunkMan.chunkSize * Camera.pixelsPerUnit) - Camera.getScreenSpacePosX(),
-                    (int) (POS_Y * ChunkMan.chunkSize * Camera.pixelsPerUnit) - Camera.getScreenSpacePosY(),
-                    (int) (ChunkMan.chunkSize * Camera.pixelsPerUnit),
-                    (int) (ChunkMan.chunkSize * Camera.pixelsPerUnit),
-                    false
-            );
-        }
+        if (!objectsByLayer.isEmpty()) g2.setColor(new Color(150, 100, 200));
+        else g2.setColor(new Color(0, 150, 200));
+
+        g2.draw3DRect(
+                (int) (POS_X * ChunkMan.chunkSize * Camera.pixelsPerUnit) - Camera.getScreenSpacePosX(),
+                (int) (POS_Y * ChunkMan.chunkSize * Camera.pixelsPerUnit) - Camera.getScreenSpacePosY(),
+                (int) (ChunkMan.chunkSize * Camera.pixelsPerUnit),
+                (int) (ChunkMan.chunkSize * Camera.pixelsPerUnit),
+                false
+        );
 
     }
 

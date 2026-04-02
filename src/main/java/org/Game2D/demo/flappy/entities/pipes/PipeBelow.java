@@ -17,6 +17,7 @@ public class PipeBelow extends Entity {
     public PipeBelow(int x, int y) {
         super(true, new Rectangle(x, y, 104, 628), 2, new Texture(0, 0, AssetManager.getAsset("flappy_assets/pipe/pipe-green-upside-down.png")), "pipe_below");
         filler = new PipeFiller(x, y, true);
+        register();
     }
 
     @Override

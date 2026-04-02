@@ -17,6 +17,7 @@ public class PipeTop extends Entity {
     public PipeTop(int x, int y) {
         super(true, new Rectangle(x, y, 104, 612), 2, new Texture(0, 0, AssetManager.getAsset("flappy_assets/pipe/pipe-green.png")), "pipe_top");
         filler = new PipeFiller(x, y, false);
+        register();
     }
 
     @Override

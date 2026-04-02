@@ -17,5 +17,6 @@ public class BackgroundObject extends StaticObject {
 
     public BackgroundObject(Rectangle hb, boolean collision, Image txt) {
         super(collision, hb, 0, new Texture(0, 0, txt), "background");
+        register();
     }
 }

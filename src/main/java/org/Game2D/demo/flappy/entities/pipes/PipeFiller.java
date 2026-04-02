@@ -16,6 +16,7 @@ public class PipeFiller extends Entity {
 
     public PipeFiller(int x, int y, boolean belowPipe) {
         super(true, new Rectangle(x, belowPipe ? 0 : y + 612, 104, belowPipe ? y : DataHand.renderLoop.getHeight() - (y + 612)), 2, new Texture(0, 0, AssetManager.getAsset("flappy_assets/pipe/pipe-green-filler.png")), "pipe_filler");
+        register();
     }
 
     @Override

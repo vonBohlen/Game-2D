@@ -18,6 +18,7 @@ import org.Game2D.tools.debug.DebugScreen;
 import org.Game2D.tools.debug.DebugScreenReplacement;
 
 import java.awt.*;
+import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicReference;
@@ -165,13 +166,14 @@ public class GameLoop implements Runnable {
         objectCache.putAll(ChunkMan.getAdjacentChunk(chunk, Directions.RIGHT).getLayer(object.layerID));
         objectCache.putAll(ChunkMan.getAdjacentChunk(chunk, Directions.BOTTOM_RIGHT).getLayer(object.layerID));
 
-        AtomicReference<GameObject> collisionCache = new AtomicReference<>();
+        GameObject current;
 
-        objectCache.forEachValue(256, current -> {
-            if (current.collisionEnabled && !current.equals(object) && position.intersects(current.hitbox)) collisionCache.set(current);
-        });
+        for (Map.Entry<UUID, GameObject> entry : objectCache.entrySet()) {
+            current = entry.getValue();
+            if (current.collisionEnabled && !current.equals(object) && position.intersects(current.hitbox)) return current;
+        }
 
-        return collisionCache.get();
+        return null;
     }
 
     /**

@@ -21,6 +21,7 @@ public class ScoreDigit extends Entity {
     public ScoreDigit(Rectangle hb) {
         super(false, hb, 4);
         addTexture("digit", texture);
+        register();
     }
 
     @Override
@@ -49,7 +50,7 @@ public class ScoreDigit extends Entity {
     }
 
     public void remove() {
-        delete();
+        unregister();
     }
 
 }

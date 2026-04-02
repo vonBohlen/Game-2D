@@ -17,14 +17,16 @@ public class InfoDisplay extends Entity {
     int counter = 60;
     final Image messageTxt = AssetManager.getAsset("flappy_assets/ui/message.png");
     final Image gameoverTxt = AssetManager.getAsset("flappy_assets/ui/gameover.png");
-    private final Texture texture = new Texture(0, 0, messageTxt);
+    private final Texture texture;
 
     public InfoDisplay() {
 
         super(false, false, new Rectangle(DataHand.renderLoop.getWidth() / 2, DataHand.renderLoop.getHeight() / 2, 0, 0), 4);
 
+        texture = new Texture(0, 0, messageTxt);
         addTexture("info_display", texture);
 
+        register();
     }
 
     @Override
@@ -67,12 +69,14 @@ public class InfoDisplay extends Entity {
     }
 
     public void showMessage() {
+       //if(texture == null) return;
         texture.image = messageTxt;
         setPosition();
         renderEnabled = true;
     }
 
     public void showGameover() {
+       // if(texture == null) return;
         texture.image = gameoverTxt;
         setPosition();
         renderEnabled = true;

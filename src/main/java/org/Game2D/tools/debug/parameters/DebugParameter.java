@@ -1,4 +1,4 @@
-package org.Game2D.tools.debug;
+package org.Game2D.tools.debug.parameters;
 
 import java.awt.*;
 
