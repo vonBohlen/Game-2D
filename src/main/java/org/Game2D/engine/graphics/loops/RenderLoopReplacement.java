@@ -1,11 +1,14 @@
 package org.Game2D.engine.graphics.loops;
 
+import org.Game2D.engine.chunks.managers.ChunkMan;
 import org.Game2D.engine.data.disk.conf.ConfProvider;
 import org.Game2D.engine.graphics.Camera;
+import org.Game2D.engine.graphics.CameraReplacement;
 import org.Game2D.engine.graphics.opengl.GLFWManager;
 import org.Game2D.engine.graphics.opengl.Window;
 import org.Game2D.tools.debug.DebugScreen;
 
+import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -22,7 +25,7 @@ public class RenderLoopReplacement implements Runnable {
 
     public Window window;
 
-    public final ConcurrentHashMap<UUID, Camera> cameras = new ConcurrentHashMap<>(10);
+    public final ConcurrentHashMap<UUID, CameraReplacement> cameras = new ConcurrentHashMap<>(10);
 
     public void initialize() {
         GLFWManager.initGLFW();
@@ -90,9 +93,11 @@ public class RenderLoopReplacement implements Runnable {
     }
 
     private void renderFramePerCamera() {
-//        cameras.forEachValue(camera -> {
-//
-//        });
+        boolean renderHitBoxes = ConfProvider.getConfValueAsBool("game2d.debug.graphics.render_hitboxes");
+        boolean renderChunkBorders = ConfProvider.getConfValueAsBool("game2d.debug.graphics.render_chunk_borders");
+        for (Map.Entry<UUID, CameraReplacement> entry : cameras.entrySet()) {
+            //ChunkMan.setRenderDataByChunk(entry.getValue().getViewportChunk(), renderHitBoxes, renderChunkBorders);
+        }
     }
 
 }
