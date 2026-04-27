@@ -190,9 +190,9 @@ public class ChunkMan {
             storedChunk = target;
             storedRenderDistance = renderDistance;
         }
-        // go through each target and renderChunk objects in them
+        // go through each target and render objects in them
         for (Chunk currentChunk : chunksToRender) {
-            currentChunk.renderChunk(g2, renderHitboxes);
+            currentChunk.render(g2, renderHitboxes);
             if (renderChunkBorders) currentChunk.renderBorder(g2);
         }
     }

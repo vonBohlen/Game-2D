@@ -9,6 +9,8 @@
 package org.Game2D.engine.objects;
 
 import lombok.NonNull;
+import org.Game2D.engine.chunks.Chunk;
+import org.Game2D.engine.chunks.managers.ChunkMan;
 import org.Game2D.engine.events.events.GameObjectEvents;
 import org.Game2D.engine.graphics.Camera;
 import org.Game2D.engine.data.disk.assets.AssetManager;
@@ -90,6 +92,16 @@ public abstract class GameObject {
 
         textures.put("PLACEHOLDER", PLACEHOLDER);
 
+    }
+
+    public void changeLayer(int layerID) {
+        Chunk chunk = ChunkMan.getChunkFromObject(this);
+        if (chunk != null) {
+            chunk.removeGameObject(this);
+            this.layerID = layerID;
+            chunk.addGameObject(this);
+        }
+        else this.layerID = layerID;
     }
 
     /**

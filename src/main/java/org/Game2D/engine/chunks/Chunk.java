@@ -125,7 +125,7 @@ public class Chunk {
      * @param g2 Graphics instance to render to
      * @param renderHitBoxes Render the hitboxes of the GameObjects
      */
-    public void renderChunk(@NonNull Graphics2D g2, boolean renderHitBoxes) {
+    public void render(@NonNull Graphics2D g2, boolean renderHitBoxes) {
 
         g2.setColor(new Color(0, 200, 50));
         ArrayList<Integer> keys = new ArrayList<>();
