@@ -11,17 +11,13 @@ package org.Game2D.engine.objects.loops;
 import lombok.Getter;
 import org.Game2D.engine.chunks.Chunk;
 import org.Game2D.engine.chunks.managers.ChunkMan;
-import org.Game2D.engine.chunks.utils.data.Directions;
 import org.Game2D.engine.data.disk.conf.ConfProvider;
 import org.Game2D.engine.objects.GameObject;
-import org.Game2D.tools.debug.DebugScreen;
-import org.Game2D.tools.debug.DebugScreenReplacement;
 
 import java.awt.*;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * GameLoop<br>
@@ -150,21 +146,21 @@ public class GameLoop implements Runnable {
      */
     public static GameObject checkCollision(GameObject object, Rectangle position) {
 
-        // TODO: Replace method once chunk system is complete
-
         Chunk chunk = ChunkMan.getChunkFromObject(object);
 
-        ConcurrentHashMap<UUID, GameObject> objectCache = new ConcurrentHashMap<>(chunk.objectsByLayer.get(object.layerID));
+        ConcurrentHashMap<UUID, GameObject> objectCache = new ConcurrentHashMap<>(chunk.getLayer(object.getLayerID()));
 
-        // TODO: Replace by only loading adjacent chunks in the direction in which the GameObject is moving
-        objectCache.putAll(ChunkMan.getAdjacentChunk(chunk, Directions.TOP).getLayer(object.layerID));
-        objectCache.putAll(ChunkMan.getAdjacentChunk(chunk, Directions.TOP_LEFT).getLayer(object.layerID));
-        objectCache.putAll(ChunkMan.getAdjacentChunk(chunk, Directions.LEFT).getLayer(object.layerID));
-        objectCache.putAll(ChunkMan.getAdjacentChunk(chunk, Directions.BOTTOM_LEFT).getLayer(object.layerID));
-        objectCache.putAll(ChunkMan.getAdjacentChunk(chunk, Directions.BOTTOM).getLayer(object.layerID));
-        objectCache.putAll(ChunkMan.getAdjacentChunk(chunk, Directions.TOP_RIGHT).getLayer(object.layerID));
-        objectCache.putAll(ChunkMan.getAdjacentChunk(chunk, Directions.RIGHT).getLayer(object.layerID));
-        objectCache.putAll(ChunkMan.getAdjacentChunk(chunk, Directions.BOTTOM_RIGHT).getLayer(object.layerID));
+        int posX, posY;
+
+        if (position.x - object.hitbox.x > 0) posX = (position.x + object.hitbox.width) / ChunkMan.chunkSize;
+        else posX = position.x / ChunkMan.chunkSize;
+
+        if (position.y - object.hitbox.y > 0) posY = (position.y + object.hitbox.height) / ChunkMan.chunkSize;
+        else posY = position.y / ChunkMan.chunkSize;
+
+        if (chunk.POS_X != posX || chunk.POS_Y != posY) {
+            objectCache.putAll(ChunkMan.chunkFromChunkCoordinates(posX, posY).getLayer(object.getLayerID()));
+        }
 
         GameObject current;
 

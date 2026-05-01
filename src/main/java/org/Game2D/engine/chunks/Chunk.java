@@ -74,13 +74,13 @@ public class Chunk {
      */
     public void addGameObject(@NonNull GameObject object) {
 
-        if (objectsByLayer.containsKey(object.layerID)) {
-                objectsByLayer.get(object.layerID).put(object.UUID, object);
+        if (objectsByLayer.containsKey(object.getLayerID())) {
+                objectsByLayer.get(object.getLayerID()).put(object.UUID, object);
         }
         else {
             ConcurrentHashMap<UUID, GameObject> layer  = new ConcurrentHashMap<>();
             layer.put(object.UUID, object);
-            objectsByLayer.put(object.layerID, layer);
+            objectsByLayer.put(object.getLayerID(), layer);
         }
 
         ChunkMan.registerObject(object, this);
@@ -93,10 +93,10 @@ public class Chunk {
      */
     public void removeGameObject(@NonNull GameObject object) {
 
-        if (objectsByLayer.containsKey(object.layerID)) {
-            objectsByLayer.get(object.layerID).remove(object.UUID);
-            if (objectsByLayer.get(object.layerID).isEmpty()) {
-                objectsByLayer.remove(object.layerID);
+        if (objectsByLayer.containsKey(object.getLayerID())) {
+            objectsByLayer.get(object.getLayerID()).remove(object.UUID);
+            if (objectsByLayer.get(object.getLayerID()).isEmpty()) {
+                objectsByLayer.remove(object.getLayerID());
             }
         }
 

@@ -90,6 +90,10 @@ public class FinderHash {
         chunkPos = new ConcurrentHashMap<>();
     }
 
+    public Chunk getChunkByChunkCoordinate(int posX, int posY) {
+        return chunkPos.get(getIndex(posX, posY));
+    }
+
     /**
      * Retrieve the Chunk in which the specified coordinates lie by looking up the
      * unique index of the pair of coordinates in the HashMap

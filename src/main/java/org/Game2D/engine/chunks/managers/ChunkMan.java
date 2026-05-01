@@ -66,6 +66,15 @@ public class ChunkMan {
 
     }
 
+    public static @NonNull Chunk chunkFromChunkCoordinates(int posX, int posY) {
+        Chunk target = finderHash.getChunkByChunkCoordinate(posX, posY);
+        if (target == null) {
+            target = new Chunk(posX, posY);
+            addChunk(target);
+        }
+        return target;
+    }
+
     /**
      * Check if a Chunk with given global coordinates exists,
      * and if not, create a new one at the given coordinates

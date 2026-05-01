@@ -8,6 +8,7 @@
 
 package org.Game2D.engine.objects;
 
+import lombok.Getter;
 import lombok.NonNull;
 import org.Game2D.engine.chunks.Chunk;
 import org.Game2D.engine.chunks.managers.ChunkMan;
@@ -35,8 +36,10 @@ public abstract class GameObject {
     public boolean collisionEnabled;
 
     // Hitbox
-    @NonNull public Rectangle hitbox; // TODO: Create custom Hitbox class
-    public int layerID; // TODO: Move into HitBox
+    @NonNull
+    public Rectangle hitbox; // TODO: Create custom Hitbox class
+    @Getter
+    private int layerID; // TODO: Move into HitBox
 
     // Textures
     public static final Texture PLACEHOLDER = new Texture(0, 0, AssetManager.getAsset("default.png"));
