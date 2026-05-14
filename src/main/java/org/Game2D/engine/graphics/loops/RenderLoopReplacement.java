@@ -29,13 +29,11 @@ public class RenderLoopReplacement implements Runnable {
     public final ConcurrentHashMap<UUID, CameraReplacement> cameras = new ConcurrentHashMap<>(10);
 
     public void initialize() {
-        GLFWManager.initGLFW();
-        window = new Window("test");
     }
 
 
     public void start() {
-        if (!GLFWManager.isGLFW_INIT() || window == null) return;
+       // if (!GLFWManager.isGLFW_INIT() || window == null) return;
 
         TARGET_FPS = 60; //ConfProvider.getConfValueAsInt("game2d.graphics.target_fps");
 
@@ -55,6 +53,9 @@ public class RenderLoopReplacement implements Runnable {
         int drawCount = 0;
         long startTime;
         long frameTime;
+
+        GLFWManager.initGLFW();
+        window = new Window("test");
 
         GL.createCapabilities();
 
@@ -105,8 +106,8 @@ public class RenderLoopReplacement implements Runnable {
     }
 
     private void renderFramePerCamera() {
-        boolean renderHitBoxes = ConfProvider.getConfValueAsBool("game2d.debug.graphics.render_hitboxes");
-        boolean renderChunkBorders = ConfProvider.getConfValueAsBool("game2d.debug.graphics.render_chunk_borders");
+        //boolean renderHitBoxes = ConfProvider.getConfValueAsBool("game2d.debug.graphics.render_hitboxes");
+        //boolean renderChunkBorders = ConfProvider.getConfValueAsBool("game2d.debug.graphics.render_chunk_borders");
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 //        for (Map.Entry<UUID, CameraReplacement> entry : cameras.entrySet()) {
 //            //ChunkMan.setRenderDataByChunk(entry.getValue().getViewportChunk(), renderHitBoxes, renderChunkBorders);

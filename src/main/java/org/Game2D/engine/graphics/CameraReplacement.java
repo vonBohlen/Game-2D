@@ -57,8 +57,8 @@ public class CameraReplacement {
 
     private void syncPositionToTrackingObject() {
         if (trackingObject == null) return;
-        x = trackingObject.hitBox.x;
-        y = trackingObject.hitBox.y;
+        x = trackingObject.hitbox.x;
+        y = trackingObject.hitbox.y;
     }
 
     public void updateViewportDimensions(double height){
