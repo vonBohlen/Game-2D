@@ -1,3 +1,5 @@
+import org.gradle.internal.os.OperatingSystem
+
 plugins {
 
     id("java")
@@ -11,7 +13,14 @@ group = "org.Game2D"
 version = "1.0.0"
 
 val lwjglVersion = "3.4.1"
-val lwjglNatives = "natives-linux"
+
+//TODO: load all natives to ensure plattform compatibility
+val lwjglNatives = when (OperatingSystem.current()) {
+    OperatingSystem.LINUX   -> "natives-linux"
+    OperatingSystem.MAC_OS  -> "natives-macos"
+    OperatingSystem.WINDOWS -> "natives-windows"
+    else -> throw GradleException("Betriebssystem wird nicht unterstützt.")
+}
 
 java {
 

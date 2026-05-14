@@ -10,6 +10,7 @@ import org.lwjgl.opengl.GL;
 
 import java.awt.image.BufferedImage;
 import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -20,7 +21,7 @@ public class RenderLoopReplacement implements Runnable {
 
     public final UUID UUID = java.util.UUID.randomUUID();
 
-    public static int TARGET_FPS = 0;
+    public static int TARGET_FPS = 1;
 
     private Thread renderThread;
 
@@ -32,27 +33,22 @@ public class RenderLoopReplacement implements Runnable {
     public final ConcurrentHashMap<UUID, CameraReplacement> cameras = new ConcurrentHashMap<>(10);
 
     private ByteBuffer buffer;
+    private BufferedImage image;
     public void initialize() {
-        BufferedImage image = (BufferedImage) AssetManager.getAsset("flappy_assets/bird/yellowbird-midflap.png");
-        buffer = ByteBuffer.allocate(image.getWidth()*image.getHeight()*4);
+        image = (BufferedImage) AssetManager.getAsset("flappy_assets/bird/yellowbird-midflap.png");
+        buffer = ByteBuffer.allocateDirect(image.getWidth() * image.getHeight() * 4).order(ByteOrder.nativeOrder());
 
-        byte[] bufferArray = new byte[image.getWidth()*image.getHeight()*4];
         int[] imageArray = new int[image.getWidth()*image.getHeight()];
         image.getRGB(0,0, image.getWidth(), image.getHeight(), imageArray, 0, image.getWidth());
 
         for(int i = 0; i < imageArray.length; i++){
-            byte r = (byte)(imageArray[i] & 0x00000011);
-            byte g = (byte)((imageArray[i] & 0x00001100) >> 8);
-            byte b = (byte)((imageArray[i] & 0x00110000) >> 16);
-            byte a = (byte)((imageArray[i] & 0x11000000) >> 24);
-
-            bufferArray[4 * i] = r;
-            bufferArray[4 * i + 1] = g;
-            bufferArray[4 * i + 2] = b;
-            bufferArray[4 * i + 3] = a;
+            buffer.put((byte) ((imageArray[i] >> 16) & 0xFF));
+            buffer.put((byte) ((imageArray[i] >> 8) & 0xFF));
+            buffer.put((byte) (imageArray[i] & 0xFF));
+            buffer.put((byte) ((imageArray[i] >> 24) & 0xFF));
         }
 
-        buffer.put(bufferArray);
+        buffer.flip();
     }
 
 
@@ -88,6 +84,8 @@ public class RenderLoopReplacement implements Runnable {
         glOrtho(0.0, 640, 320, 0.0, -1.0, 1.0);
         glMatrixMode(GL_MODELVIEW);
 
+        int textureID = glGenTextures();
+        glBindTexture(GL_TEXTURE_2D, textureID);
 
         // Set the clear color
         glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
@@ -136,20 +134,9 @@ public class RenderLoopReplacement implements Runnable {
 //        for (Map.Entry<UUID, CameraReplacement> entry : cameras.entrySet()) {
 //            //ChunkMan.setRenderDataByChunk(entry.getValue().getViewportChunk(), renderHitBoxes, renderChunkBorders);
 //        }
-        float r = 0.75f, g = 0.25f, b = 0;
-        float dc = 0.01f;
-        r += dc;
-        g += dc;
-        glClearColor(r, g, b, 0.0f);
 
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image.getWidth(), image.getHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, buffer);
 
-        glBegin(GL_POLYGON);
-        glColor3f(r,g,0.5f);
-        glVertex2i(100, 100);
-        glVertex2i(100, 200);
-        //glColor3f(1,0.5f,0);
-        glVertex2i(200, 200);
-        glVertex2i(200, 100);
         glEnd();
         glFlush();
 
