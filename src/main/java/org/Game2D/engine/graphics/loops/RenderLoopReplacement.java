@@ -1,5 +1,6 @@
 package org.Game2D.engine.graphics.loops;
 
+import org.Game2D.engine.data.disk.assets.AssetManager;
 import org.Game2D.engine.data.disk.conf.ConfProvider;
 import org.Game2D.engine.graphics.CameraReplacement;
 import org.Game2D.engine.graphics.GLFWManager;
@@ -7,6 +8,8 @@ import org.Game2D.engine.graphics.Window;
 import org.Game2D.tools.debug.DebugScreen;
 import org.lwjgl.opengl.GL;
 
+import java.awt.image.BufferedImage;
+import java.nio.ByteBuffer;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -28,7 +31,11 @@ public class RenderLoopReplacement implements Runnable {
 
     public final ConcurrentHashMap<UUID, CameraReplacement> cameras = new ConcurrentHashMap<>(10);
 
+    private ByteBuffer buffer;
     public void initialize() {
+        BufferedImage image = (BufferedImage) AssetManager.getAsset("flappy_assets/bird/yellowbird-midflap.png");
+        buffer = ByteBuffer.allocate(image.getWidth()*image.getHeight()*4);
+        //buffer.put(image.)
     }
 
 
