@@ -1,4 +1,4 @@
-package org.Game2D.engine.graphics.opengl;
+package org.Game2D.engine.graphics;
 
 import lombok.Getter;
 import org.lwjgl.BufferUtils;
@@ -52,6 +52,16 @@ public class Window {
 
         init();
         center();
+    }
+
+    public void show() {
+        if (!GLFWManager.isGLFW_INIT()) return;
+        glfwShowWindow(windowID);
+    }
+
+    public void hide() {
+        if (!GLFWManager.isGLFW_INIT()) return;
+        glfwHideWindow(windowID);
     }
 
     public void setTitle(String name) {

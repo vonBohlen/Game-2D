@@ -1,16 +1,17 @@
 package org.Game2D.engine.graphics.loops;
 
-import org.Game2D.engine.chunks.managers.ChunkMan;
 import org.Game2D.engine.data.disk.conf.ConfProvider;
-import org.Game2D.engine.graphics.Camera;
 import org.Game2D.engine.graphics.CameraReplacement;
-import org.Game2D.engine.graphics.opengl.GLFWManager;
-import org.Game2D.engine.graphics.opengl.Window;
+import org.Game2D.engine.graphics.GLFWManager;
+import org.Game2D.engine.graphics.Window;
 import org.Game2D.tools.debug.DebugScreen;
+import org.lwjgl.opengl.GL;
 
-import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
+
+import static org.lwjgl.glfw.GLFW.*;
+import static org.lwjgl.opengl.GL11.*;
 
 public class RenderLoopReplacement implements Runnable {
 
@@ -36,7 +37,7 @@ public class RenderLoopReplacement implements Runnable {
     public void start() {
         if (!GLFWManager.isGLFW_INIT() || window == null) return;
 
-        TARGET_FPS = ConfProvider.getConfValueAsInt("game2d.graphics.target_fps");
+        TARGET_FPS = 60; //ConfProvider.getConfValueAsInt("game2d.graphics.target_fps");
 
         renderThread = new Thread(this);
         renderThread.start();
@@ -55,7 +56,18 @@ public class RenderLoopReplacement implements Runnable {
         long startTime;
         long frameTime;
 
-        while (!exit) {
+        GL.createCapabilities();
+
+        glMatrixMode(GL_PROJECTION);
+        glLoadIdentity();
+        glOrtho(0.0, 640, 320, 0.0, -1.0, 1.0);
+        glMatrixMode(GL_MODELVIEW);
+
+
+        // Set the clear color
+        glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+
+        while (!exit && !glfwWindowShouldClose(window.getWindowID())) {
             currentTime = System.nanoTime();
             delta += (currentTime - lastTime) / drawInterval;
             timer += (currentTime - lastTime);
@@ -95,9 +107,32 @@ public class RenderLoopReplacement implements Runnable {
     private void renderFramePerCamera() {
         boolean renderHitBoxes = ConfProvider.getConfValueAsBool("game2d.debug.graphics.render_hitboxes");
         boolean renderChunkBorders = ConfProvider.getConfValueAsBool("game2d.debug.graphics.render_chunk_borders");
-        for (Map.Entry<UUID, CameraReplacement> entry : cameras.entrySet()) {
-            //ChunkMan.setRenderDataByChunk(entry.getValue().getViewportChunk(), renderHitBoxes, renderChunkBorders);
-        }
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+//        for (Map.Entry<UUID, CameraReplacement> entry : cameras.entrySet()) {
+//            //ChunkMan.setRenderDataByChunk(entry.getValue().getViewportChunk(), renderHitBoxes, renderChunkBorders);
+//        }
+        float r = 0.75f, g = 0.25f, b = 0;
+        float dc = 0.01f;
+        r += dc;
+        g += dc;
+        glClearColor(r, g, b, 0.0f);
+
+
+        glBegin(GL_POLYGON);
+        glColor3f(r,g,0.5f);
+        glVertex2i(100, 100);
+        glVertex2i(100, 200);
+        //glColor3f(1,0.5f,0);
+        glVertex2i(200, 200);
+        glVertex2i(200, 100);
+        glEnd();
+        glFlush();
+
+        glfwSwapBuffers(window.getWindowID()); // swap the color buffers
+
+        // Poll for window events. The key callback above will only be
+        // invoked during this call.
+        glfwPollEvents();
     }
 
 }

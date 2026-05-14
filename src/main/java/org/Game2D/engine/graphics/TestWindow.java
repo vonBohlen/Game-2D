@@ -1,4 +1,4 @@
-package org.Game2D.engine.graphics.opengl;
+package org.Game2D.engine.graphics;
 
 import org.lwjgl.Version;
 import org.lwjgl.glfw.GLFWErrorCallback;

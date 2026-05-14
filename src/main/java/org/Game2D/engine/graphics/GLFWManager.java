@@ -1,4 +1,4 @@
-package org.Game2D.engine.graphics.opengl;
+package org.Game2D.engine.graphics;
 
 import lombok.Getter;
 import org.lwjgl.glfw.GLFWErrorCallback;
