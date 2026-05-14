@@ -35,7 +35,24 @@ public class RenderLoopReplacement implements Runnable {
     public void initialize() {
         BufferedImage image = (BufferedImage) AssetManager.getAsset("flappy_assets/bird/yellowbird-midflap.png");
         buffer = ByteBuffer.allocate(image.getWidth()*image.getHeight()*4);
-        //buffer.put(image.)
+
+        byte[] bufferArray = new byte[image.getWidth()*image.getHeight()*4];
+        int[] imageArray = new int[image.getWidth()*image.getHeight()];
+        image.getRGB(0,0, image.getWidth(), image.getHeight(), imageArray, 0, image.getWidth());
+
+        for(int i = 0; i < imageArray.length; i++){
+            byte r = (byte)(imageArray[i] & 0x00000011);
+            byte g = (byte)((imageArray[i] & 0x00001100) >> 8);
+            byte b = (byte)((imageArray[i] & 0x00110000) >> 16);
+            byte a = (byte)((imageArray[i] & 0x11000000) >> 24);
+
+            bufferArray[4 * i] = r;
+            bufferArray[4 * i + 1] = g;
+            bufferArray[4 * i + 2] = b;
+            bufferArray[4 * i + 3] = a;
+        }
+
+        buffer.put(bufferArray);
     }
 
 
