@@ -19,7 +19,7 @@ public class Main {
 
     public static void main(String[] args) {
         //Engine Boilerplate
-        Instance instance = new Instance(null);
+        Instance instance = new Instance();
         instance.start("Snake");
 
         int screenWidth = DataHand.renderLoop.getWidth();

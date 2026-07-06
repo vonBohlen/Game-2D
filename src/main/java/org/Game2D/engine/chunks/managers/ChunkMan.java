@@ -12,7 +12,7 @@ import lombok.NonNull;
 import org.Game2D.engine.chunks.Chunk;
 import org.Game2D.engine.chunks.utils.data.Directions;
 import org.Game2D.engine.chunks.utils.math.FinderHash;
-import org.Game2D.engine.data.disk.conf.ConfProvider;
+import org.Game2D.engine.data.disk.conf.ConfManager;
 import org.Game2D.engine.objects.GameObject;
 
 import java.awt.*;
@@ -52,9 +52,9 @@ public class ChunkMan {
      */
     public static void initialize() {
 
-        chunkSize = ConfProvider.getConfValueAsInt("game2d.chunks.chunk_size");
-        updateDistance = ConfProvider.getConfValueAsInt("game2d.game_loop.update_distance");
-        renderDistance = ConfProvider.getConfValueAsInt("game2d.graphics.render_distance");
+        chunkSize = ConfManager.getConfValueAsInt("game2d.chunks.chunk_size");
+        updateDistance = ConfManager.getConfValueAsInt("game2d.game_loop.update_distance");
+        renderDistance = ConfManager.getConfValueAsInt("game2d.graphics.render_distance");
 
         storedUpdateDistance = updateDistance;
         storedRenderDistance = renderDistance;

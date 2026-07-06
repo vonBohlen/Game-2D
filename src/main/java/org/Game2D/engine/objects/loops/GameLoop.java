@@ -11,7 +11,7 @@ package org.Game2D.engine.objects.loops;
 import lombok.Getter;
 import org.Game2D.engine.chunks.Chunk;
 import org.Game2D.engine.chunks.managers.ChunkMan;
-import org.Game2D.engine.data.disk.conf.ConfProvider;
+import org.Game2D.engine.data.disk.conf.ConfManager;
 import org.Game2D.engine.objects.GameObject;
 
 import java.awt.*;
@@ -51,7 +51,7 @@ public class GameLoop implements Runnable {
      */
     public void startGameLoop() {
 
-        targetTPS = ConfProvider.getConfValueAsInt("game2d.game_loop.target_tps");
+        targetTPS = ConfManager.getConfValueAsInt("game2d.game_loop.target_tps");
 
         actionThread = new Thread(this);
         actionThread.start();

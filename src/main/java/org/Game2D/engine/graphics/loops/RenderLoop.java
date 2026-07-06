@@ -9,11 +9,10 @@
 package org.Game2D.engine.graphics.loops;
 
 import org.Game2D.engine.chunks.managers.ChunkMan;
+import org.Game2D.engine.data.disk.conf.ConfManager;
 import org.Game2D.engine.data.runtime.DataHand;
 import org.Game2D.engine.graphics.Camera;
-import org.Game2D.engine.data.disk.conf.ConfProvider;
 import org.Game2D.tools.debug.DebugScreen;
-import org.Game2D.tools.debug.DebugScreenReplacement;
 
 import javax.swing.*;
 import java.awt.*;
@@ -77,7 +76,7 @@ public class RenderLoop extends JPanel implements Runnable {
      */
     public void startRenderLoop() {
 
-        targetFPS = ConfProvider.getConfValueAsInt("game2d.graphics.target_fps");
+        targetFPS = ConfManager.getConfValueAsInt("game2d.graphics.target_fps");
 
         renderThread = new Thread(this);
         renderThread.start();
@@ -150,7 +149,7 @@ public class RenderLoop extends JPanel implements Runnable {
         boolean useEffects = false;
         int effectType = 0;
         try {
-            String effectConfig = ConfProvider.getConfValue("game2d.graphics.render_effects");
+            String effectConfig = ConfManager.getConfValue("game2d.graphics.render_effects");
             if (effectConfig != null && !effectConfig.equals("0")) {
                 useEffects = true;
                 effectType = Integer.parseInt(effectConfig);
@@ -170,8 +169,8 @@ public class RenderLoop extends JPanel implements Runnable {
      * Direct rendering without effects (standard mode)
      */
     private void renderDirect(Graphics g) {
-        boolean renderHitBoxes = ConfProvider.getConfValueAsBool("game2d.debug.graphics.render_hitboxes");
-        boolean renderChunkBorders = ConfProvider.getConfValueAsBool("game2d.debug.graphics.render_chunk_borders");
+        boolean renderHitBoxes = ConfManager.getConfValueAsBool("game2d.debug.graphics.render_hitboxes");
+        boolean renderChunkBorders = ConfManager.getConfValueAsBool("game2d.debug.graphics.render_chunk_borders");
 
         Graphics2D g2 = (Graphics2D) g;
         g2.setRenderingHints(RENDERING_HINTS);
@@ -185,15 +184,15 @@ public class RenderLoop extends JPanel implements Runnable {
         ChunkMan.renderByChunk(g2, Camera.renderUpdate(), renderHitBoxes, renderChunkBorders);
 
         //DebugScreen.draw(g2);
-        DebugScreenReplacement.updateDebugParameters(g2);
+        DebugScreen.updateDebugParameters(g2);
     }
 
     /**
      * Rendering with visual effects (only when needed)
      */
     private void renderWithEffects(Graphics g, int effectType) {
-        boolean renderHitBoxes = ConfProvider.getConfValueAsBool("game2d.debug.graphics.render_hitboxes");
-        boolean renderChunkBorders = ConfProvider.getConfValueAsBool("game2d.debug.graphics.render_chunk_borders");
+        boolean renderHitBoxes = ConfManager.getConfValueAsBool("game2d.debug.graphics.render_hitboxes");
+        boolean renderChunkBorders = ConfManager.getConfValueAsBool("game2d.debug.graphics.render_chunk_borders");
 
         // Create/update effect buffer only when needed
         if (effectBuffer == null ||
@@ -222,7 +221,7 @@ public class RenderLoop extends JPanel implements Runnable {
         ChunkMan.renderByChunk(bufferG2, Camera.renderUpdate(), renderHitBoxes, renderChunkBorders);
 
         //DebugScreen.draw(bufferG2);
-        DebugScreenReplacement.updateDebugParameters(bufferG2);
+        DebugScreen.updateDebugParameters(bufferG2);
         bufferG2.dispose();
 
         // Apply effect if not type 0 (no effect)

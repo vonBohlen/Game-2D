@@ -1,12 +1,11 @@
 package org.Game2D.engine.graphics.loops;
 
 import org.Game2D.engine.data.disk.assets.AssetManager;
-import org.Game2D.engine.data.disk.conf.ConfProvider;
 import org.Game2D.engine.graphics.CameraReplacement;
 import org.Game2D.engine.graphics.GLFWManager;
 import org.Game2D.engine.graphics.Window;
-import org.Game2D.tools.debug.DebugScreen;
 import org.lwjgl.opengl.GL;
+import org.lwjgl.opengl.GL11;
 
 import java.awt.image.BufferedImage;
 import java.nio.ByteBuffer;
@@ -102,14 +101,12 @@ public class RenderLoopReplacement implements Runnable {
                 renderFramePerCamera();
 
                 frameTime = System.nanoTime() - startTime;
-                DebugScreen.updateFrameTime(frameTime);
 
                 delta--;
                 drawCount++;
             }
 
             if (timer >= 1000000000) {
-                DebugScreen.updateFPS(drawCount);
                 drawCount = 0;
                 timer = 0;
             }
@@ -135,6 +132,7 @@ public class RenderLoopReplacement implements Runnable {
 //            //ChunkMan.setRenderDataByChunk(entry.getValue().getViewportChunk(), renderHitBoxes, renderChunkBorders);
 //        }
 
+        glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_LINEAR);
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image.getWidth(), image.getHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, buffer);
 
         glEnd();

@@ -27,7 +27,7 @@ public class FlappyBird {
 
     public static void main(String[] args) {
 
-        instance = new Instance(null);
+        instance = new Instance();
         instance.start("Flappy bird");
 
         int screenHeight = DataHand.renderLoop.getHeight();

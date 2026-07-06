@@ -1,85 +1,83 @@
-/**
- * /tools/debug/DebugScreen.java
- *
- * DESCRIPTION
- *
- * Copyright (C) 2026 Christian von Bohlen
- */
-
 package org.Game2D.tools.debug;
 
 import org.Game2D.engine.chunks.managers.ChunkMan;
 import org.Game2D.engine.data.runtime.DataHand;
-import org.Game2D.engine.data.disk.conf.ConfProvider;
-import org.Game2D.engine.io.user.KeyHand;
+import org.Game2D.engine.graphics.loops.RenderLoop;
+import org.Game2D.engine.objects.loops.GameLoop;
+import org.Game2D.tools.debug.parameters.ColorDebugParameter;
+import org.Game2D.tools.debug.parameters.DebugParameter;
 
 import java.awt.*;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class DebugScreen {
 
-    private static int FPS = 0;
-    private static double FRAME_TIME = 0;
+    private static final int START_X = 20;
+    private static final int START_Y = 20;
+    private static final int LINE_HEIGHT = 15;
 
-    private static int TPS = 0;
-    private static double TICK_TIME = 0;
+    private static final CopyOnWriteArrayList<String> parameterOrder = new CopyOnWriteArrayList<>();
+    private static final ConcurrentHashMap<String, DebugParameter> debugParameters = new ConcurrentHashMap<>();
 
-    public static boolean HARDWARE_ACCELERATION = false;
-
-    private  static KeyHand keyhand = null;
-
-    public static void updateFPS(int fps) {
-        if (fps == FPS) return;
-        FPS = fps;
+    public static void addDebugParameter(String name, DebugParameter parameter) {
+        if (name == null || parameter == null) throw new IllegalArgumentException("Name and parameter cant be null");
+        debugParameters.put(name, parameter);
+        parameterOrder.add(name);
     }
 
-    public static void updateFrameTime(double frameTime) {
-        if (frameTime == FRAME_TIME) return;
-        FRAME_TIME = frameTime / 1_000_000D;
-    }
-
-    public static void updateTPS(int tps) {
-        if (tps == TPS) return;
-        TPS = tps;
-    }
-
-    public static void updateTickTime(double tickTime) {
-        if (tickTime == TICK_TIME) return;
-        TICK_TIME = tickTime / 1_000_000D;
-    }
-
-    private static String printPressedKeys() {
-        if (keyhand == null) keyhand = DataHand.keyHand;
-        String pressedKeys = "";
-        if (keyhand.keyPressed_A) pressedKeys += " A";
-        if (keyhand.keyPressed_D) pressedKeys += " D";
-        if (keyhand.keyPressed_S) pressedKeys += " S";
-        if (keyhand.keyPressed_W) pressedKeys += " W";
-        if (keyhand.keyPressed_SPACE) pressedKeys += " SPACE";
-        if (keyhand.keyPressed_ESC) pressedKeys += " ESC";
-        pressedKeys = pressedKeys.replaceFirst(" ", "");
-        return  pressedKeys;
-    }
-
-    public static void draw(Graphics2D g2) {
-        if (ConfProvider.getConfValueAsBool("game2d.debug.tools.render_debug_screen")) {
-            g2.setColor(Color.RED);
-
-            g2.drawString(String.format("FPS=%s", FPS), 20, 20);
-            g2.drawString(String.format("Frame_time_ms=%s", FRAME_TIME), 20, 35);
-
-            g2.drawString(String.format("TPS=%s", TPS), 20, 50);
-            g2.drawString(String.format("Tick_time_ms=%s", TICK_TIME), 20, 65);
-
-            g2.setColor(Color.YELLOW);
-
-            g2.drawString(String.format("Objects=%s", ChunkMan.getTotalObjectCount()), 20, 80);
-
-            g2.setColor(Color.BLUE);
-
-            g2.drawString(String.format("Keys_pressed=%S", printPressedKeys()), 20, 95);
-
-            g2.drawString(String.format("Hardware_acceleration=%b", HARDWARE_ACCELERATION) , 20, 110);
+    public static void addDebugParameters(Map<String, DebugParameter> parameters) {
+        if (parameters != null) {
+            parameters.forEach(DebugScreen::addDebugParameter);
         }
     }
+
+    public static void addDefaultDebugParameters() {
+        addDebugParameter("FPS", new ColorDebugParameter(Color.red,
+                (name, g2) -> {return name + "=" + RenderLoop.fps;}
+        ));
+
+        addDebugParameter("Frame_time_ms", new ColorDebugParameter(Color.red,
+                (name, g2) -> {return name + "=" + RenderLoop.frameTime;}
+        ));
+
+        addDebugParameter("TPS", new ColorDebugParameter(Color.red,
+                (name, g2) -> {return name + "=" + GameLoop.tps;}
+        ));
+
+        addDebugParameter("Tick_time_ms", new ColorDebugParameter(Color.red,
+                (name, g2) -> {return name + "=" + GameLoop.tickTime;}
+        ));
+
+        addDebugParameter("Objects", new ColorDebugParameter(Color.yellow,
+                (name, g2) -> {return name + "=" + ChunkMan.getTotalObjectCount();}
+        ));
+
+        addDebugParameter("Keys_pressed", new ColorDebugParameter(Color.BLUE,
+                (name, g2) -> {return name + "=" + DataHand.keyHand.getPressedKeysAsString();}
+        ));
+    }
+
+    public static void updateParameterColor(String name, Color color) {
+        DebugParameter parameter = debugParameters.get(name);
+        if (parameter instanceof ColorDebugParameter colorDebugParameter) {
+            colorDebugParameter.updateColor(color);
+        }
+    }
+
+    public static void updateDebugParameters(Graphics2D g2) {
+        if (g2 == null || debugParameters.isEmpty()) return;
+        int y = START_Y;
+        for (String name : parameterOrder) {
+            DebugParameter parameter = debugParameters.get(name);
+            g2.setColor(Color.white);
+            String result = parameter.updateParameter(name, g2);
+            g2.drawString(result, START_X, y);
+            y += LINE_HEIGHT;
+        }
+    }
+
+
 
 }

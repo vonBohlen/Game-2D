@@ -9,7 +9,7 @@ public class Snake {
 
     public static void main(String[] args) {
 
-        instance = new Instance(null);
+        instance = new Instance();
         instance.start("Snake");
 
     }
